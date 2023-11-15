@@ -1,5 +1,6 @@
 <script>
     import Button from "../button/Button.svelte";
+    import BigHeader from "$lib/components/misc/BigHeader.svelte";
 
     let closeModal = function (evt) {
         if(document.querySelector('.grey_wrapper') && !evt.target.classList.contains('.about_modal') ) {
@@ -24,7 +25,7 @@
 </script>
 
 <section class="about_wrapper">
-    <h1 class="about_header">О нас</h1>
+    <BigHeader textContent="О нас" />
     <div class="about_text_wrapper">
         <p class="about_text"><b>ДОМИК</b> для бездомных поросят - это проект помощи морским свинкам, попавшим в беду.</p>
         <p class="about_text">Если Вы нашли свинку и не знаете, что с ней делать, -- обратитесь к нам!</p>
@@ -39,7 +40,7 @@
             </a>
             нашего сайты Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
 <!--        <p class="about_text about_text__warning">Мы <b>НЕ</b> собираем деньги на лечение и содержание! Мы не выкупаем свинок с <em>"Авито"</em> и других подобных площадок.</p>-->
-        <img class='about_home_icon' src="src/lib/img/svg/home.svg">
+        <img class='about_home_icon' src="src/lib/img/svg/home.svg" alt="Маленький домик">
         <div class="button_wrapper">
             <Button title="Подробнее" isLight onclick={showModal} />
         </div>
@@ -49,13 +50,6 @@
 
     .about_wrapper {
         padding: 40px 80px 10px;
-    }
-
-    .about_header {
-        margin-bottom: 40px;
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 36px;
     }
 
     .about_text_wrapper {
