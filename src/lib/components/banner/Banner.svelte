@@ -5,10 +5,11 @@
 <div class="promo-container">
 <!--    <img src="src/lib/img/svg/big-pig-with-texts.svg" alt="Большая морская свинка" width="" height="">-->
     <ul class="option-list">
-        <ItemLink text="Ищут дом"/>
-        <ItemLink text="Новости" href="/news"/>
-        <ItemLink text="Выпускники"/>
-        <ItemLink text="Полезные статьи"/>
+        <ItemLink text="Ищут дом" icon="list-icon-light-blue.png"/>
+        <ItemLink text="Новости" href="/news" icon="list-icon-light-brown.png"/>
+        <ItemLink text="Выпускники" icon="list-icon-green.png"/>
+        <ItemLink text="Полезные статьи" icon="list-icon-grey.png"/>
+        <ItemLink text="Оставить свинку нам"/>
     </ul>
 </div>
 
@@ -19,7 +20,7 @@
         height: 600px;
         position: relative;
         display: flex;
-        background: #F6B5D3 url('src/lib/img/svg/banner_background.svg') no-repeat;
+        background: #F9EEE1 url('src/lib/img/svg/banner_background.svg') no-repeat;
     }
 
     .option-list {

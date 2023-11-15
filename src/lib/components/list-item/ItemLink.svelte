@@ -1,9 +1,11 @@
 <script>
     export let text = '';
     export let href = '/';
+    export let icon = 'list-icon-pink.png';
+    let background_icon_url = "url('src/lib/img/" + icon + "')";
 </script>
 
-<li class="option-item">
+<li class="option-item" style="--background_url: {background_icon_url}">
     <a class="option-item-link" {href}>
         {text}
     </a>
@@ -11,12 +13,22 @@
 
 <style>
     .option-item {
-        padding: 20px 80px;
+        position: relative;
+        padding: 17px 80px;
         background-color: #FFFFFF;
         text-align: center;
-        border-radius: 50px;
+        /*border-radius: 50px;*/
         box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.58);
+    }
 
+    .option-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 60px;
+        height: 60px;
+        background-image: var(--background_url);
     }
 
     .option-item:hover {
