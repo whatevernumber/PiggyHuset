@@ -1,10 +1,11 @@
 <script>
     import PigCard from "../pig-card/PigCard.svelte";
     import Button from "../button/Button.svelte";
+    import BigHeader from "$lib/components/misc/BigHeader.svelte";
 </script>
 
 <section class="looking_for_home">
-    <h2 class="looking_for_home_header"> Ищут дом</h2>
+    <BigHeader textContent="Ищут дом" />
     <div class="looking_for_home_wrapper">
         <PigCard />
         <PigCard />
@@ -18,15 +19,6 @@
     .looking_for_home {
         margin: 40px auto;
         padding: 0 80px;
-    }
-
-    .looking_for_home_header {
-        margin-bottom: 40px;
-        font-size: 36px;
-        font-weight: 700;
-        line-height: 115%;
-        text-align: center;
-        text-transform: uppercase;
     }
 
     .looking_for_home_wrapper {
