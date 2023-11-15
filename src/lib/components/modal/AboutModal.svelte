@@ -1,5 +1,5 @@
 <script>
-    import Button from "../misc/button/Button.svelte";
+    import ButtonWithIcons from "../button/ButtonWithIcons.svelte";
 
     let closeModal = function () {
         let modal = document.querySelector('.about_modal');
@@ -41,7 +41,7 @@
                 Подробнее о том, что необходимо <span class="house_name">"ДОМИКУ"</span>, вы можете узнать в нашем сообществе <a class="modal_link" href="vk.com">ВК</a>.
             </p>
         </div>
-        <Button title="Написать нам" background_color="#F6B5D3" text_color="#333333" isModal/>
+        <ButtonWithIcons title="Написать нам" background_color="#E1EDCE" text_color="#333333" isModal/>
         <div class="close-button" on:click={closeModal}>
             <span hidden>
                 закрыть
@@ -54,11 +54,13 @@
 
     .about_modal {
         position: absolute;
+        text-align: center;
         top: 80%;
         right: 35%;
         background-color: #FFFFFF;
         padding: 15px 25px;
         width: 550px;
+        min-height: 680px;
         border: 1px solid rgba(0, 0, 0, 0.10);
     }
 
@@ -71,7 +73,7 @@
     }
 
     .about_modal_text {
-        margin-bottom: 20px;
+        margin-bottom: 50px;
         font-size: 18px;
         font-weight: 400;
         line-height: 130%; /* 23.4px */
