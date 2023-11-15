@@ -1,6 +1,6 @@
 <script>
-    import Button from "../button/Button.svelte";
-    import BigHeader from "$lib/components/misc/BigHeader.svelte";
+    import Button from "../misc/button/Button.svelte";
+    import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
 
     let closeModal = function (evt) {
         if(document.querySelector('.grey_wrapper') && !evt.target.classList.contains('.about_modal') ) {

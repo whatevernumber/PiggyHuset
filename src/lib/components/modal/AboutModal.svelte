@@ -1,5 +1,5 @@
 <script>
-    import Button from "../button/Button.svelte";
+    import Button from "../misc/button/Button.svelte";
 
     let closeModal = function () {
         let modal = document.querySelector('.about_modal');

@@ -1,7 +1,7 @@
 <script>
-    import PigCard from "../pig-card/PigCard.svelte";
-    import Button from "../button/Button.svelte";
-    import BigHeader from "$lib/components/misc/BigHeader.svelte";
+    import PigCard from "../cards/pig-card/PigCard.svelte";
+    import Button from "../misc/button/Button.svelte";
+    import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
 </script>
 
 <section class="looking_for_home">
