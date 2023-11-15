@@ -1,5 +1,10 @@
+<script>
+    export let picture = 'kb-pig.png';
+    export let src = '/src/lib/img/' + picture;
+</script>
+
 <div class="graduated_card">
-    <img src="/src/lib/img/pig_card_photo.png" alt="Изображение выпускника">
+    <img {src} alt="Изображение выпускника">
     <p class="graduated_name">
         <a href="#">Финик</a>
     </p>

@@ -4,11 +4,10 @@
     export let text_color = '#D97544';
     export let href;
     export let isLight = false;
-    export let isModal = false;
     export let onclick;
 </script>
 
-<a class="button" {href} style="--background_color: {background_color}; --text-color: {text_color}" class:button-light={isLight} class:button-modal={isModal}
+<a class="button" {href} style="--background_color: {background_color}; --text-color: {text_color}" class:button-light={isLight}
         on:click={onclick}
     >
     {title}
@@ -53,23 +52,6 @@
         background-color: var(--background_color);
         color: #F6B5D3;
         text-decoration: underline;
-    }
-
-    .button-modal {
-        padding: 15px 10px;
-        color: #333333;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 140%;
-    }
-
-    .button-modal:hover {
-        background-color: #E1EDCE;
-    }
-
-    .button-modal:active {
-        background-color: #88aa4d;
     }
 
 </style>
