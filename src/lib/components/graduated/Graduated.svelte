@@ -1,7 +1,7 @@
 <script>
-    import Button from "../button/Button.svelte";
-    import GraduatedCard from "../graduate-card/GraduatedCard.svelte";
-    import BigHeader from "$lib/components/misc/BigHeader.svelte";
+    import Button from "../misc/button/Button.svelte";
+    import GraduatedCard from "../cards/graduate-card/GraduatedCard.svelte";
+    import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
 </script>
 
 <section class="graduated">

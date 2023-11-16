@@ -1,13 +1,13 @@
 <div class="pig_card">
     <div class="pig_card_header">
-        <a class="pig_card_image" href="/">
+        <a class="pig_card_image" href="/static">
             <img class="pig_avatar" src="/src/lib/img/svg/pig_card_avatar.svg" width="60" height="60">
         </a>
         <p class="pig_name">
-            <a class="pig_card_pig_name" href="/">Финик</a>
+            <a class="pig_card_pig_name" href="/static">Финик</a>
         </p>
     </div>
-    <img class="house_icon" src="src/lib/img/svg/home.svg">
+    <img class="house_icon" src="../../../img/svg/home.svg">
     <div>
         <p class="pig_descriotion">
             ФИНИКИ-СВИНИКИ-КУШАЛИ-БЛИНИКИ
