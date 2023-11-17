@@ -3,9 +3,8 @@
 </script>
 
 <div class="promo-container">
-<!--    <img src="src/lib/img/svg/big-pig-with-texts.svg" alt="Большая морская свинка" width="" height="">-->
     <ul class="option-list">
-        <ItemLink text="Ищут дом" icon="list-icon-light-blue.png"/>
+        <ItemLink text="Ищут дом" href="/articles/" icon="list-icon-light-blue.png"/>
         <ItemLink text="Новости" href="/news" icon="list-icon-light-brown.png"/>
         <ItemLink text="Выпускники" icon="list-icon-green.png"/>
         <ItemLink text="Полезные статьи" icon="list-icon-grey.png"/>

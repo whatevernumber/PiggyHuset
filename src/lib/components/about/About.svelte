@@ -2,6 +2,7 @@
     import Button from "../misc/button/Button.svelte";
     import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
 
+    // Скрыть модальное окно
     let closeModal = function (evt) {
         if(document.querySelector('.grey_wrapper') && !evt.target.classList.contains('.about_modal') ) {
             let modal = document.querySelector('.about_modal');
@@ -12,6 +13,7 @@
         }
     }
 
+    // Показать модальное окно
     function showModal(evt) {
             evt.stopPropagation();
             let modal = document.querySelector('.about_modal');
