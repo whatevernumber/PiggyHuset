@@ -7,9 +7,9 @@
             <a class="pig_card_pig_name" href="/static">Финик</a>
         </p>
     </div>
-    <img class="house_icon" src="../../../img/svg/home.svg">
+    <img class="house_icon" src="/src/lib/img/svg/home.svg">
     <div>
-        <p class="pig_descriotion">
+        <p class="pig_description">
             ФИНИКИ-СВИНИКИ-КУШАЛИ-БЛИНИКИ
         </p>
     </div>
