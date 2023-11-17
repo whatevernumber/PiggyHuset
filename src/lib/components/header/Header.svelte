@@ -7,7 +7,7 @@
     {#if admin}
         <div class="logo-wrapper">
             <a href="/">
-                <img class="logo" src="src/lib/img/svg/logo-256.svg" alt="Иконка Сообщества Домик" width="256" height="58">
+                <img class="logo" src="/src/lib/img/svg/logo-256.svg" alt="Иконка Сообщества Домик" width="256" height="58">
             </a>
         </div>
         <nav class="navigation navigation-admin">
@@ -15,11 +15,11 @@
                 <p class="navigation-home">
                     Личный кабинет администратора
                 </p>
-                <img class="admin-icon" src="src/lib/img/svg/admin-home.svg" alt="Иконка домика" width="57" height="50">
+                <img class="admin-icon" src="/src/lib/img/svg/admin-home.svg" alt="Иконка домика" width="57" height="50">
             </a>
         </nav>
     {:else if current === '/'}
-        <img class="warning-icon" src="src/lib/img/svg/info-button-svgrepo-com 1.svg" alt="Иконка предупреждение" width="49" height="49">
+        <img class="warning-icon" src="/src/lib/img/svg/info-button-svgrepo-com 1.svg" alt="Иконка предупреждение" width="49" height="49">
         <p class="warning-text">
             ВНИМАНИЕ! Мы не принимаем денежные средства! Если вы хотите помочь, напишите нам в
             <span class="vk-green">
@@ -29,7 +29,7 @@
     {:else }
         <div class="logo-wrapper">
             <a href="/">
-                <img class="logo" src="src/lib/img/svg/logo-256.svg"  alt="Иконка Сообщества Домик" width="256" height="58">
+                <img class="logo" src="/src/lib/img/svg/logo-256.svg"  alt="Иконка Сообщества Домик" width="256" height="58">
             </a>
         </div>
         <nav class="navigation">
@@ -37,7 +37,7 @@
                     <p class='navigation-home'>
                         Главная
                     </p>
-                    <img class="logo-home" src="src/lib/img/svg/home.svg"  alt="Иконка личного кабинета" width="57" height="49">
+                    <img class="logo-home" src="/src/lib/img/svg/home.svg"  alt="Иконка личного кабинета" width="57" height="49">
                 </a>
         </nav>
     { /if}
