@@ -1,6 +1,6 @@
 <script>
-    import Button from "../misc/button/Button.svelte";
-    import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
+    import Button from "$lib/components/misc/button/Button.svelte";
+    import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
 
     // Скрыть модальное окно
     let closeModal = function (evt) {
