@@ -1,6 +1,6 @@
 <script>
 
-import ButtonWithIcons from "../button/ButtonWithIcons.svelte";
+import ButtonWithIcons from "../misc/button/ButtonWithIcons.svelte";
 
     let closeModal = function () {
         let modal = document.querySelector('.about_modal');

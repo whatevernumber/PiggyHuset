@@ -4,7 +4,7 @@
 </script>
 
 <div class="graduated_card">
-    <img {src} alt="Изображение выпускника">
+    <img {src} width="248" height="261" alt="Изображение выпускника">
     <p class="graduated_name">
         <a href="#">Финик</a>
     </p>
