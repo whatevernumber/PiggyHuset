@@ -1,7 +1,8 @@
 <script>
     import SmolButton from "$lib/components/misc/button/SmolButton.svelte";
 
-    export let article = [];
+    export let article = {};
+
     export let image = article.image ?? article.type;
 </script>
 
@@ -10,7 +11,10 @@
     <div class="wrapper">
         <h3 class="card-title">{article.title}</h3>
         <p class="card-description">{article.text}</p>
-        <SmolButton title="Подробнее" />
+        <div class="bottom-line">
+            <time datetime="18-11-2023 21:20">18 ноября 2023 21:20</time>
+            <SmolButton title="Подробнее" />
+        </div>
     </div>
 </article>
 
@@ -30,6 +34,10 @@
         justify-content: space-around;
     }
 
+    img {
+        object-fit: cover;
+    }
+
     .card-title {
         padding: 0;
         font-size: 24px;
@@ -40,5 +48,16 @@
         font-size: 16px;
         line-height: 140%;
         color: #333333;
+    }
+
+    .bottom-line {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    time {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.5);
+        align-self: flex-end;
     }
 </style>
