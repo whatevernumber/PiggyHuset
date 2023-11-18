@@ -1,27 +1,44 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
-	import PigProfile from '../../../lib/components/cards/pig-profile-card/PigProfile.svelte';
-	import PhotoList from '../../../lib/components/photo-list/PhotoList.svelte';
-	import PhotoCard from '../../../lib/components/photo-card/PhotoCard.svelte';
+	import CardDescription from '../../../lib/components/cards/CardDescription.svelte';
+	import CardPhoto from '../../../lib/components/cards/CardPhoto.svelte';
+	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
+
+	let additional_photos = true;
 </script>
 
 <div class="article_wrapper">
-	<Article>
-		<PigProfile/>
-		<PhotoList>
-			<PhotoCard />
-			<PhotoCard />
-			<PhotoCard />
-			<PhotoCard />
-		</PhotoList>
+	<Article class_name="article_news">
+		<div class="wrapper">
+			<CardPhoto pic = 'article-pig.png'/>
+			<CardDescription article article_class="profile_article" header="Статья" description="Что-то очень полезное и интересное"/>
+		</div>
+		{#if additional_photos}
+			<div class="photo-wrapper">
+				<PhotoCard />
+				<PhotoCard />
+				<PhotoCard />
+			</div>
+		{/if}
 	</Article>
 </div>
 
 <style>
-	.article_wrapper {
-      max-width: 1089px;
-      margin: 54px auto;
-      position: relative;
-	}
+    .article_wrapper {
+        max-width: 600px;
+        margin: 54px auto;
+        position: relative;
+    }
+
+		.wrapper {
+				display: flex;
+				column-gap: 15px;
+		}
+
+		.photo-wrapper {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+		}
 
 </style>
