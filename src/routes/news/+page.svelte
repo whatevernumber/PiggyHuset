@@ -1,11 +1,23 @@
-<div>
-    <h1>
-        Привет!
-    </h1>
-</div>
+<script>
+    import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
 
-<style>
-    div {
-        min-height: 100%;
-    }
-</style>
+    const data = [
+        {
+            type: 'waiting',
+            title: 'Свиник',
+            text: 'Ищет самые лучшие ручки на свете',
+        },
+        {
+            type: 'ready',
+            title: 'Новость о свинике',
+            text: 'Свиник пролечил носик и готов искать новый дом',
+        },
+        {
+            type: 'other-news',
+            title: 'Календари, брелки и квилты',
+            text: 'Ждут своих покупателей! Вся прибыль пойдёт на покрытие лечения постояльцев Домика.',
+        },
+    ];
+</script>
+
+<CatalogPage pageTitle="Новости" {data} />

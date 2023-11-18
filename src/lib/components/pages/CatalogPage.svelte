@@ -6,6 +6,7 @@
     export let pageTitle = '';
     export let data = [];
 
+    // стандартный текст и картинка для карточек свинок, ищущих дом
     data.map((article) => {
         if (!article.text) {
             article.text = 'Ищет самые лучшие ручки на свете';
@@ -13,11 +14,12 @@
         if (!article.type) {
             article.type = 'ready';
         }
-    })
+    });
 </script>
 
 <section>
     <div class="section-wrapper">
+
         <BigHeader textContent="{pageTitle}" position="left"/>
 
         <CardList>
