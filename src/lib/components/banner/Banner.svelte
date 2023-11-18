@@ -4,10 +4,10 @@
 
 <div class="promo-container">
     <ul class="option-list">
-        <ItemLink text="Ищут дом" href="/articles/" icon="list-icon-light-blue.png"/>
+        <ItemLink text="Ищут дом" href="/looking-for-home" icon="list-icon-light-blue.png"/>
         <ItemLink text="Новости" href="/news" icon="list-icon-light-brown.png"/>
-        <ItemLink text="Выпускники" icon="list-icon-green.png"/>
-        <ItemLink text="Полезные статьи" icon="list-icon-grey.png"/>
+        <ItemLink text="Выпускники" href="/graduates" icon="list-icon-green.png"/>
+        <ItemLink text="Полезные статьи" href="/news" icon="list-icon-grey.png"/>
         <ItemLink text="Оставить свинку нам"/>
     </ul>
 </div>
