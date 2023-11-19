@@ -1,8 +1,8 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
-	import PigProfile from '../../../lib/components/cards/pig-profile-card/PigProfile.svelte';
-	import PhotoList from '../../../lib/components/photo-list/PhotoList.svelte';
-	import PhotoCard from '../../../lib/components/photo-card/PhotoCard.svelte';
+	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
+	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
+	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 </script>
 
 <div class="article_wrapper">
