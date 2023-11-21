@@ -17,7 +17,9 @@
     }
 
     .footer {
+        width: 100%;
         height: 80px;
+        margin-top: auto;
         background-color: #F6B5D3;
         display:flex;
         justify-content: space-between;
