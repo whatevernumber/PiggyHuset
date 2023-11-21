@@ -46,6 +46,7 @@
 <style>
 
     header {
+        min-width: calc(100% - 20px);
         padding-left: 10px;
         padding-right: 10px;
         height: 80px;
