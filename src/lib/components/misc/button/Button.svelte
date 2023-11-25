@@ -30,7 +30,6 @@
 
     .button:hover {
         background-color: #EF8653;
-        box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.14) inset;
     }
 
     .button:active {
@@ -43,7 +42,6 @@
 
     .button-light:hover {
         background-color: var(--background_color);
-        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) inset;
         color: #D97544;
         text-decoration: underline;
     }

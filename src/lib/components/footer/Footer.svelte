@@ -17,9 +17,10 @@
     }
 
     .footer {
-        width: 100%;
+        width: calc(100% - 10px);
         height: 80px;
         margin-top: auto;
+        padding-right: 10px;
         background-color: #F6B5D3;
         display:flex;
         justify-content: space-between;

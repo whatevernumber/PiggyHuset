@@ -1,6 +1,6 @@
 <script>
     export let current = '/main';
-    export let admin = false;
+    export let admin = true;
 </script>
 
 <header>
@@ -47,8 +47,7 @@
 
     header {
         min-width: calc(100% - 20px);
-        padding-left: 10px;
-        padding-right: 10px;
+        padding: 0 10px;
         height: 80px;
         display: flex;
         background-color: #FFFFFF;
