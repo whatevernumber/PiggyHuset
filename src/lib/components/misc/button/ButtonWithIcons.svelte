@@ -6,6 +6,7 @@
     export let icon = 'button-icon-happy-pig.png';
     let background_img = "url('src/lib/img/" + icon + "')";
     export let onclick;
+    export let border = false;
 </script>
 
 <a class="button" {href} style="--background_color: {background_color}; --background_img: {background_img};
@@ -18,7 +19,7 @@
 
     .button {
         position: relative;
-        padding: 17px 20px;
+        padding: 17.3px 80px;
         max-width: 180px;
         text-align: center;
         text-transform: uppercase;
@@ -28,6 +29,7 @@
         line-height: 140%;
         color: var(--text-color);
         background-color: var(--background_color);
+        border: 1px solid #F6B5D3;
     }
 
     .button:hover {
@@ -44,7 +46,7 @@
         width: 60px;
         height: 60px;
         top: 0;
-        left: -55px;
+        left: 0;
         background-image: var(--background_img);
     }
 
@@ -54,7 +56,7 @@
         width: 60px;
         height: 60px;
         top: 0;
-        right: -55px;
+        right: 0;
         background-image: var(--background_img);
     }
 

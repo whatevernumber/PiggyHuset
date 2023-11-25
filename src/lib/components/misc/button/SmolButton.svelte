@@ -20,7 +20,6 @@
 
     .button:hover {
         background-color: #EF8653;
-        box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.14) inset;
     }
 
     .button:active {
@@ -42,6 +41,11 @@
     .super-smol-button {
         max-width: 82px;
         padding: 4px 10px;
+    }
+
+    .smol-grey {
+        padding: 5px 5px;
+        background-color: #adadad;
     }
 
 </style>

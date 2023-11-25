@@ -23,4 +23,15 @@
       width: 600px;
 	}
 
+	.article_post {
+      padding: 19px 40px;
+			justify-content: normal;
+	}
+
+	.article_request {
+			width: 400px;
+			padding: 19px 40px;
+      justify-content: normal;
+	}
+
 </style>

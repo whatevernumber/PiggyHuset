@@ -1,3 +1,7 @@
+<script>
+    import EditButton from '../../misc/button/EditButton.svelte';
+</script>
+
 <div class="pig_card">
     <div class="pig_card_header">
         <a class="pig_card_image" href="/static">
@@ -7,12 +11,19 @@
             <a class="pig_card_pig_name" href="/static">Финик</a>
         </p>
     </div>
+    {#if !true}
     <img class="house_icon" src="/src/lib/img/svg/home.svg">
+    {/if}
     <div>
         <p class="pig_description">
             ФИНИКИ-СВИНИКИ-КУШАЛИ-БЛИНИКИ
         </p>
     </div>
+    {#if true}
+    <div class="edit_button_wrapper">
+        <EditButton />
+    </div>
+    {/if}
 </div>
 
 <style>
@@ -46,6 +57,10 @@
         position: absolute;
         top: 9%;
         right: 3%;
+
+    }
+
+    .edit_button_wrapper {
 
     }
 </style>
