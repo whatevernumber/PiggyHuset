@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <ul class="list">
     <slot />
 </ul>
