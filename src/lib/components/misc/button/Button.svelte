@@ -2,7 +2,7 @@
     export let title = 'кнопка';
     export let background_color = '#FFFFFF';
     export let text_color = '#D97544';
-    export let href;
+    export let href = null;
     export let isLight = false;
     export let onclick;
 </script>

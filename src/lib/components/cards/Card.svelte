@@ -3,7 +3,7 @@
 
     export let article = {};
 
-    export let image = article.image ?? article.type;
+    $: image = article.image ?? article.type;
 </script>
 
 <article>
