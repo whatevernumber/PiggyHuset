@@ -6,7 +6,7 @@
 
 	export let header = 'Свиник ищет дом';
 	export let description = 'Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник';
-	export let graduated = false;
+	export let graduated = true;
 	export let graduated_pic = "found-home.png";
 	export let article_class = "";
 	export let article = false;
@@ -18,7 +18,7 @@
 	<ArticleHeader text={header} />
 	<ArticleText text={description} />
 	{#if graduated}
-		<PhotoCard width="110px" height="110px" alt="Морская свинка в домике" profile_pic = {graduated_pic} />
+		<PhotoCard width="110px" height="110px" alt="Морская свинка в домике" pic = {graduated_pic} />
 	{:else if !article}
 		<SmolButton className = "smol-but-long-button" title="Связаться с куратором" />
 	{/if}
@@ -32,7 +32,4 @@
         row-gap: 50px;
     }
 
-    .profile_article {
-        min-width: 300px;
-    }
 </style>

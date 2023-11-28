@@ -14,16 +14,18 @@
 
     .input-file span {
         width: 100px;
+				min-height: 26px;
         display: inline-block;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 12px;
         vertical-align: middle;
         color: #FFFFFF;
         text-align: center;
         border-radius: 4px;
         background-color: #EF8653;
-        line-height: 22px;
+        line-height: 26px;
         padding: 5px 10px;
+				text-transform: uppercase;
     }
 
     .input-file input[type=file] {

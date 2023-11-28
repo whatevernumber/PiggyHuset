@@ -8,6 +8,9 @@
 <div class="article_wrapper">
 	<Article>
 		<PigProfile header="Нашел дом" graduated description="Финик-Свиник уехал в Мурманск и нашёл там 'Тёплый дом' и много-много друзей" />
+		<div class="date">
+			<datetime>Graduated: Today at 18:15</datetime>
+		</div>
 		<PhotoList>
 			<PhotoCard />
 			<PhotoCard />
@@ -24,4 +27,9 @@
         position: relative;
     }
 
+    .date {
+        align-self: flex-end;
+        font-style: italic;
+        color: #adadad;
+    }
 </style>

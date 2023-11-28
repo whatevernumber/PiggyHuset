@@ -1,10 +1,10 @@
 <script>
-    export let className = 'smol-button';
+    export let class_name = 'smol-button';
     export let title = 'кнопка';
     export let href = null;
 </script>
 
-<a class="button {className}" {href}>
+<a class="button {class_name}" {href}>
     {title}
 </a>
 

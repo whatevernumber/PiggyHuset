@@ -4,7 +4,7 @@
 
 	export let header = 'Свиник ищет дом';
 	export let description = 'Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник';
-	export let graduated = false;
+	export let graduated = true;
 	export let profile_pic = "temp-pig-profile-photo.png";
 	export let graduated_pic = "found-home.png";
 	export let article_class = "";
@@ -13,8 +13,8 @@
 </script>
 
 <div class='profile_wrapper'>
-	<CardPhoto {header} {profile_pic} {admin} }/>
-	<CardDescription {description} {graduated} {graduated_pic} {article_class}/>
+	<CardPhoto {profile_pic} {admin} }/>
+	<CardDescription {header} {description} {graduated} {graduated_pic} {article_class}/>
 </div>
 
 <style>

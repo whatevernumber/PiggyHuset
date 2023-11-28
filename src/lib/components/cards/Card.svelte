@@ -1,7 +1,9 @@
 <script>
     import SmolButton from "$lib/components/misc/button/SmolButton.svelte";
+    import EditButton from '../misc/button/EditButton.svelte';
 
     export let article = {};
+    export let admin = false;
 
     $: image = article.image ?? article.type;
 </script>
@@ -9,7 +11,15 @@
 <article>
     <img src="/img/{image}.jpeg" width="250" height="250" alt="Фотография свинки">
     <div class="wrapper">
-        <h3 class="card-title">{article.title}</h3>
+        <div class='header_wrapper'>
+            <h3 class="card-title">{article.title}</h3>
+            {#if admin}
+            <div class='button_wrapper'>
+                <EditButton button_name='edit' />
+                <EditButton button_name='delete' />
+            </div>
+            {/if}
+        </div>
         <p class="card-description">{article.text}</p>
         <div class="bottom-line">
             <time datetime="18-11-2023 21:20">18 ноября 2023 21:20</time>
@@ -59,5 +69,16 @@
         font-size: 14px;
         color: rgba(0, 0, 0, 0.5);
         align-self: flex-end;
+    }
+
+    .header_wrapper {
+        display: flex;
+    }
+
+    .button_wrapper {
+        margin-left: auto;
+        display: flex;
+        max-width: 100px;
+        column-gap: 5px;
     }
 </style>

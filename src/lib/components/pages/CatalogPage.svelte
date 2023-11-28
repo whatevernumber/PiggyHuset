@@ -5,6 +5,7 @@
 
     export let pageTitle = '';
     export let data = [];
+    export let admin = false;
 
     // стандартный текст и картинка для карточек свинок, ищущих дом
     data.map((article) => {
@@ -25,7 +26,7 @@
         <CardList>
             {#each data as article}
                 <li>
-                    <Card {article}/>
+                    <Card {article} {admin} />
                 </li>
             {/each}
         </CardList>
