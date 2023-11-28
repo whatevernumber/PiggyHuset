@@ -8,6 +8,9 @@
 <div class="article_wrapper">
 	<Article>
 		<PigProfile header="Новость о Свинике" description="Свиник съел все мясные таблетки и теперь здоров"/>
+		<div class="date">
+			<datetime>Today at 18:15</datetime>
+		</div>
 		<PhotoList>
 			<PhotoCard />
 			<PhotoCard />
@@ -23,4 +26,10 @@
         margin: 54px auto;
         position: relative;
     }
+
+		.date {
+				align-self: flex-end;
+				font-style: italic;
+				color: #adadad;
+		}
 </style>

@@ -1,15 +1,15 @@
 <script>
-    import TurnInForm from "$lib/components/forms/TurnInForm.svelte";
+	import AddPigForm from '$lib/components/forms/AddPigForm.svelte';
 </script>
 
 <section class="container">
-    <TurnInForm />
+	<AddPigForm />
 </section>
 
 <style>
     .container {
         min-height: 100%;
-        margin: auto;
+        margin:auto;
         background: url("/img/main-bg.png") no-repeat;
         background-size: cover;
         display: flex;

@@ -13,6 +13,9 @@
 			<CardPhoto pic = 'article-pig.png'/>
 			<CardDescription article article_class="profile_article" header="Статья" description="Что-то очень полезное и интересное"/>
 		</div>
+		<div class="date">
+			<datetime>Today at 18:15</datetime>
+		</div>
 		{#if additional_photos}
 			<div class="photo-wrapper">
 				<PhotoCard />
@@ -41,4 +44,9 @@
 				justify-content: space-between;
 		}
 
+    .date {
+        align-self: flex-end;
+        font-style: italic;
+        color: #adadad;
+    }
 </style>

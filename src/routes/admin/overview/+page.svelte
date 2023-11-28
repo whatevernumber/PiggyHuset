@@ -1,9 +1,12 @@
 <script>
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
     import Button from "$lib/components/misc/button/Button.svelte";
+    import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
     let adminLogin = false;
     $: tab = 'pigs';
+    $: action = "Добавить свинку";
+
     let data = [{
         title: 'Свиник',
         type: 'ready',
@@ -34,9 +37,11 @@
                         title: 'Пиник',
                         type: 'ready',
                     },];
+                action = "Добавить свинку";
                 break;
             case 'news':
                 data = [{text: 'none', type: 'none'}];
+                action = "Добавить новость";
                 break;
             case 'articles':
                 data = [
@@ -62,6 +67,7 @@
                         type: 'article',
                     },
                 ];
+                action = "Добавить статью";
                 break;
             case 'graduates':
                 data = [{
@@ -109,15 +115,19 @@
             </li>
         </ul>
     </nav>
+    {#if tab !== 'graduates'}
+    <div class="button_wrapper">
+        <SmolButton title={action} />
+    </div>
+    {/if}
 </section>
-
-<CatalogPage {data} />
+<CatalogPage {data} admin = true />
 
 <style>
     .nav-header {
-        justify-self: center;
-        width: 25%;
+        align-self: center;
         margin-top: 2%;
+        position: relative;
     }
 
     .nav-list {
@@ -128,5 +138,11 @@
 
     .nav-item {
         cursor: pointer;
+    }
+
+    .button_wrapper {
+        position: absolute;
+        right: 6%;
+        bottom: -50%;
     }
 </style>

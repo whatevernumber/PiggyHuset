@@ -23,9 +23,10 @@
 			position: absolute;
 			bottom: 10%;
 			display: flex;
-			min-width: 597px;
-			max-width: 597px;
-			min-height: 258px;
+			padding: 20px 20px;
+			min-width: 517px;
+			max-width: 557px;
+			min-height: 218px;
 			background-color: #FFFFFF;
   }
 

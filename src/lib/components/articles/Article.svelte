@@ -11,7 +11,7 @@
 	.article {
 			width: 1000px;
 			min-height: 604px;
-			padding: 19px 70px 40px 19px;
+			padding: 19px 40px;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
@@ -24,13 +24,11 @@
 	}
 
 	.article_post {
-      padding: 19px 40px;
 			justify-content: normal;
 	}
 
 	.article_request {
 			width: 400px;
-			padding: 19px 40px;
       justify-content: normal;
 	}
 

@@ -8,6 +8,9 @@
 <div class="article_wrapper">
 	<Article>
 		<PigProfile />
+		<div class="date">
+			<datetime>Today at 18:15</datetime>
+		</div>
 		<PhotoList>
 			<PhotoCard />
 			<PhotoCard />
@@ -24,4 +27,9 @@
         position: relative;
     }
 
+    .date {
+        align-self: flex-end;
+        font-style: italic;
+        color: #adadad;
+    }
 </style>

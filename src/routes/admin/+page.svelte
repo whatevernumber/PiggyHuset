@@ -24,10 +24,6 @@
 			align-items: center;
 	}
 
-	.article_wrapper {
-			margin: auto;
-	}
-
 	.form_wrapper {
       margin: auto;
 			max-width: 200px;
