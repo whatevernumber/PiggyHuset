@@ -1,5 +1,5 @@
 <script>
-    import EditButton from '$lig/components/misc/button/EditButton.svelte';
+    import EditButton from '$lib/components/misc/button/EditButton.svelte';
 </script>
 
 <div class="pig_card">
@@ -16,7 +16,7 @@
     {/if}
     <div>
         <p class="pig_description">
-            ФИНИКИ-СВИНИКИ-КУШАЛИ-БЛИНИКИ
+            Описание морской свинки.
         </p>
     </div>
     {#if true}
