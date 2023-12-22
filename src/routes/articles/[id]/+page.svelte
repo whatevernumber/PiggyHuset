@@ -1,7 +1,7 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
-	import CardDescription from '../../../lib/components/cards/CardDescription.svelte';
-	import CardPhoto from '../../../lib/components/cards/CardPhoto.svelte';
+	import CardDescription from '$lib/components/cards/CardDescription.svelte';
+	import CardPhoto from '$lib/components/cards/CardPhoto.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 
 	let additional_photos = true;

@@ -4,17 +4,16 @@
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
-	export let header = 'Свиник ищет дом';
-	export let description = 'Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник';
-	export let graduated = true;
-	export let graduated_pic = "found-home.png";
-	export let article_class = "";
+	export let header;
+	export let description;
+	export let graduated;
+	export let graduated_pic;
 	export let article = false;
 
 	export let admin = true;
 </script>
 
-<div class="profile_description {article_class}">
+<div class="profile_description">
 	<ArticleHeader text={header} />
 	<ArticleText text={description} />
 	{#if graduated}
