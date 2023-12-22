@@ -3,7 +3,7 @@
     import CardList from "$lib/components/lists/CardList.svelte";
     import Card from "$lib/components/cards/Card.svelte";
 
-    export let pageTitle = '';
+    export let pageTitle;
     export let data = [];
     export let admin = false;
 

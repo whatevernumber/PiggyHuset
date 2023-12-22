@@ -1,6 +1,7 @@
 <script>
 	export let button_name;
 </script>
+
 <a class="button">
 	<div class='wrapper'>
 		{#if button_name === 'edit'}
@@ -18,22 +19,23 @@
 <style>
 
 	.button {
-			max-width: 40px;
-			max-height: 26px;
-			padding: 4px 10px;
-			background-color: #d97544;
+		max-width: 40px;
+		max-height: 26px;
+		padding: 4px 10px;
+		background-color: #d97544;
 	}
 
 	.button:hover {
-      background-color: #EF8653;
-  }
+		background-color: #EF8653;
+	}
 
-  .button:active {
-      background-color: #B25F36;
-  }
+	.button:active {
+		background-color: #B25F36;
+	}
 
 	.wrapper {
-      text-align: center;
-			vertical-align: baseline;
+		text-align: center;
+		vertical-align: baseline;
 	}
+
 </style>

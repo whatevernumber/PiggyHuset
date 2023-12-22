@@ -1,11 +1,10 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
 	import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
-	import TextArea from '../../../lib/components/misc/form-elements/TextArea.svelte';
-	import SubmitButton from '../../../lib/components/misc/form-elements/SubmitButton.svelte';
-	import CardPhoto from '../../../lib/components/cards/CardPhoto.svelte';
+	import TextArea from '$lib/components/misc/form-elements/TextArea.svelte';
+	import SubmitButton from '$lib/components/misc/form-elements/SubmitButton.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
-	import FileInput from '../../../lib/components/misc/form-elements/FileInput.svelte';
+	import FileInput from '$lib/components/misc/form-elements/FileInput.svelte';
 </script>
 
 <div class="article_wrapper">
@@ -42,26 +41,26 @@
 	}
 
 	.form-wrapper {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			row-gap: 15px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 15px;
 	}
 
 	.photo-area {
-			width: 800px;
-			display: flex;
-			column-gap: 30px;
-			align-items: center;
+		width: 800px;
+		display: flex;
+		column-gap: 30px;
+		align-items: center;
 	}
 
 	.photo-uploaded {
-			max-width: 600px;
-			text-align: center;
-			margin-left: auto;
+		max-width: 600px;
+		text-align: center;
+		margin-left: auto;
 	}
 
 	.uploaded-text {
-			margin-bottom: 10px;
+		margin-bottom: 10px;
 	}
 </style>

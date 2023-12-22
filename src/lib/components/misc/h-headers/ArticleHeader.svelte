@@ -1,5 +1,5 @@
 <script>
-	export let text = "";
+	export let text;
 	export let size = '24px';
 </script>
 
@@ -9,13 +9,13 @@
 
 <style>
 	.article_header {
-			margin: 0;
-			padding: 0;
-      font-size: var(--font-size);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 130%;
-			text-align: center;
-			text-transform: uppercase;
+		margin: 0;
+		padding: 0;
+		font-size: var(--font-size);
+	  	font-style: normal;
+	  	font-weight: 700;
+	  	line-height: 130%;
+		text-align: center;
+		text-transform: uppercase;
 	}
 </style>

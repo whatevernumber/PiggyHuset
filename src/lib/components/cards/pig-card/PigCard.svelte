@@ -11,7 +11,7 @@
             <a class="pig_card_pig_name" href="/static">Финик</a>
         </p>
     </div>
-    {#if !true}
+    {#if true}
     <img class="house_icon" src="/src/lib/img/svg/home.svg">
     {/if}
     <div>
@@ -57,10 +57,6 @@
         position: absolute;
         top: 9%;
         right: 3%;
-
-    }
-
-    .edit_button_wrapper {
 
     }
 </style>

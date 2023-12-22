@@ -1,7 +1,7 @@
 <script>
     export let class_name = 'smol-button';
-    export let title = 'кнопка';
-    export let href = null;
+    export let title = 'Кнопка';
+    export let href;
 </script>
 
 <a class="button {class_name}" {href}>

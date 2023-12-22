@@ -14,7 +14,7 @@
 
     .input-file span {
         width: 100px;
-				min-height: 26px;
+		min-height: 26px;
         display: inline-block;
         cursor: pointer;
         font-size: 12px;
@@ -25,7 +25,7 @@
         background-color: #EF8653;
         line-height: 26px;
         padding: 5px 10px;
-				text-transform: uppercase;
+		text-transform: uppercase;
     }
 
     .input-file input[type=file] {

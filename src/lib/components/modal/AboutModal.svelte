@@ -1,6 +1,6 @@
 <script>
 
-import ButtonWithIcons from "../misc/button/ButtonWithIcons.svelte";
+import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte";
 
     let closeModal = function () {
         let modal = document.querySelector('.about_modal');
@@ -8,8 +8,6 @@ import ButtonWithIcons from "../misc/button/ButtonWithIcons.svelte";
         modal.classList.add('modal_closed');
         wrapper.classList.remove('grey_wrapper');
     };
-
-
 </script>
 
 <section class="about_modal modal_closed">

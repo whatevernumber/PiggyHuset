@@ -14,6 +14,7 @@
 </section>
 
 <style>
+
     .looking_for_home {
         margin: 40px auto;
         padding: 0 80px;

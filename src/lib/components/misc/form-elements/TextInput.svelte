@@ -1,11 +1,11 @@
 <script>
 	export let name = "text_input";
 	export let class_name = "text_input"
-	export let header = "";
+	export let header
 	export let placeholder = "Текст";
 	export let width = '780px';
 	export let type = 'text';
-	export let required = '';
+	export let required = false;
 </script>
 
 <label>
@@ -17,7 +17,7 @@
 
 <style>
 	label {
-			position: relative;
+		position: relative;
 	}
 
 	.text_input {
@@ -32,10 +32,8 @@
 	}
 
 	.input_header {
-			position: absolute;
-			left: -80px;
-			top: 10px;
-	}
-
-
+		position: absolute;
+		left: -80px;
+		top: 10px;
+}
 </style>

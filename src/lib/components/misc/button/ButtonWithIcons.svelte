@@ -4,14 +4,15 @@
     export let background_color;
     export let text_color;
     export let icon = 'button-icon-happy-pig.png';
-    let background_img = "url('src/lib/img/" + icon + "')";
     export let onclick;
     export let border = false;
+
+    let background_img = "url('src/lib/img/" + icon + "')";
 </script>
 
 <a class="button" {href} style="--background_color: {background_color}; --background_img: {background_img};
-                        --text-color: {text_color}"
-                        on:click={onclick}>
+    --text-color: {text_color}"
+            on:click={onclick}>
     {title}
 </a>
 

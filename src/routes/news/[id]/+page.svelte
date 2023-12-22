@@ -27,9 +27,9 @@
         position: relative;
     }
 
-		.date {
-				align-self: flex-end;
-				font-style: italic;
-				color: #adadad;
-		}
+	.date {
+		align-self: flex-end;
+		font-style: italic;
+		color: #adadad;
+	}
 </style>

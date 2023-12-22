@@ -1,12 +1,12 @@
 <script>
-	import CardPhoto from '../CardPhoto.svelte';
-	import CardDescription from '../CardDescription.svelte';
+	import CardPhoto from '$lib/components/cards/CardPhoto.svelte';
+	import CardDescription from '$lib/components/cards/CardDescription.svelte';
 
 	export let header = 'Новости о Финике';
 	export let description = 'Тем чьи сердца не остыли от холода. Вселенная дарит чудо!\n' +
 				'В жизни маленького Финика последние дни творятся сплошные чудеса! ' +
 				'Финика уже очень ждут в новом доме! И мы очень надеемся, что у Рыжего солнышка появятся новые друзья. Следите за новостями!)';
-	export let graduated = true;
+	export let graduated = false;
 	export let profile_pic = "temp-pig-profile-photo.png";
 	export let graduated_pic = "found-home.png";
 
@@ -20,7 +20,7 @@
 
 <style>
 	.profile_wrapper {
-			display: flex;
-			column-gap: 29px;
+		display: flex;
+		column-gap: 29px;
 	}
 </style>

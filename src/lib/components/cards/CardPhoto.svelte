@@ -12,7 +12,7 @@
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton title="Редактировать" />
-			<SmolButton className = "super-smol-button" title="Удалить" />
+			<SmolButton class_name = "super-smol-button" title="Удалить" />
 		</div>
 	{/if}
 </div>
@@ -21,8 +21,7 @@
 
     .profile_buttons {
         display: flex;
-        min-width: 260px;
-				max-width: 270px;
+		max-width: 270px;
         justify-content: space-between;
     }
 </style>

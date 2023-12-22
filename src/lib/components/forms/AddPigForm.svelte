@@ -1,5 +1,4 @@
 <script>
-	import FormSubmitButton from "$lib/components/misc/button/FormSubmitButton.svelte";
 	import SubmitButton from '$lib/components/misc/form-elements/SubmitButton.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import FileInput from '$lib/components/misc/form-elements/FileInput.svelte';
@@ -51,7 +50,7 @@
 
 <style>
     .form-section {
-				width: 600px;
+		width: 600px;
         max-width: 600px;
         padding: 20px 40px;
         display: flex;
@@ -83,12 +82,12 @@
         width: 100%;
         display: flex;
         align-items: center;
-				justify-content: space-between;
+		justify-content: space-between;
     }
 
-		.button {
-			justify-content: flex-end;
-		}
+	.button {
+		justify-content: flex-end;
+	}
 
     .form-label {
         text-transform: uppercase;
@@ -115,7 +114,7 @@
     .turn-in-form textarea {
         flex-grow: 2;
         max-width: 566px;
-				min-width: 566px;
+		min-width: 566px;
         min-height: 180px;
         max-height: 250px;
         padding: 10px;
@@ -129,18 +128,18 @@
     }
 
     .photo_preview {
-				display: flex;
-				column-gap: 10px;
-				flex-wrap: wrap;
-				padding: 5px 13px;
+		display: flex;
+		column-gap: 10px;
+		flex-wrap: wrap;
+		padding: 5px 13px;
 		}
 
-		.animal-health-set {
-				flex-direction: column;
-		}
+	.animal-health-set {
+		flex-direction: column;
+	}
 
-		.label-pig-name {
-				flex-basis: 70px;
-		}
+	.label-pig-name {
+		flex-basis: 70px;
+	}
 
 </style>

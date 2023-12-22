@@ -99,7 +99,6 @@
         margin-left: 1%;
         padding-top: 7px;
         justify-self: flex-start;
-
     }
 
 </style>

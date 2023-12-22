@@ -20,7 +20,6 @@
 <AboutModal />
 
 <style>
-
     .landing_main_wrapper {
         max-width: 1280px;
         margin: 0 auto;
