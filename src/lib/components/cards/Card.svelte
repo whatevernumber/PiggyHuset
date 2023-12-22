@@ -1,6 +1,6 @@
 <script>
     import SmolButton from "$lib/components/misc/button/SmolButton.svelte";
-    import EditButton from '../misc/button/EditButton.svelte';
+    import EditButton from "$lib/components/misc/button/EditButton.svelte";
 
     export let article = {};
     export let admin = false;
