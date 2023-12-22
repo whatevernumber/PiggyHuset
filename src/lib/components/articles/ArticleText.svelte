@@ -7,9 +7,9 @@
 
 <style>
 	.article_text {
-      font-size: 14px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 400;
-      line-height: 130%;
+      line-height: 150%;
 	}
 </style>

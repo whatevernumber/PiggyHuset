@@ -9,7 +9,7 @@
 	<Article>
 		<PigProfile />
 		<div class="date">
-			<datetime>Today at 18:15</datetime>
+			<datetime>Сегодня в 18:15</datetime>
 		</div>
 		<PhotoList>
 			<PhotoCard />

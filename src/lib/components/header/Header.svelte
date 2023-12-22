@@ -1,6 +1,6 @@
 <script>
     export let current = '/main';
-    export let admin = true;
+    export let admin = false;
 </script>
 
 <header>

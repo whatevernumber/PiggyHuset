@@ -2,19 +2,20 @@
 	import CardPhoto from '../CardPhoto.svelte';
 	import CardDescription from '../CardDescription.svelte';
 
-	export let header = 'Свиник ищет дом';
-	export let description = 'Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник Вот тако свиник';
+	export let header = 'Новости о Финике';
+	export let description = 'Тем чьи сердца не остыли от холода. Вселенная дарит чудо!\n' +
+				'В жизни маленького Финика последние дни творятся сплошные чудеса! ' +
+				'Финика уже очень ждут в новом доме! И мы очень надеемся, что у Рыжего солнышка появятся новые друзья. Следите за новостями!)';
 	export let graduated = true;
 	export let profile_pic = "temp-pig-profile-photo.png";
 	export let graduated_pic = "found-home.png";
-	export let article_class = "";
 
 	let admin = true;
 </script>
 
 <div class='profile_wrapper'>
 	<CardPhoto {profile_pic} {admin} }/>
-	<CardDescription {header} {description} {graduated} {graduated_pic} {article_class}/>
+	<CardDescription {header} {description} {graduated} {graduated_pic}/>
 </div>
 
 <style>

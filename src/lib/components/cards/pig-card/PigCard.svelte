@@ -1,5 +1,5 @@
 <script>
-    import EditButton from '../../misc/button/EditButton.svelte';
+    import EditButton from '$lig/components/misc/button/EditButton.svelte';
 </script>
 
 <div class="pig_card">

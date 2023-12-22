@@ -4,15 +4,20 @@
 
     export let article = {};
     export let admin = false;
+    export let id = 1;
 
     $: image = article.image ?? article.type;
 </script>
 
 <article>
-    <img src="/img/{image}.jpeg" width="250" height="250" alt="Фотография свинки">
+    <a href="/looking-for-home/{id}">
+        <img src="/img/{image}.jpeg" width="250" height="250" alt="Фотография свинки">
+    </a>
     <div class="wrapper">
         <div class='header_wrapper'>
-            <h3 class="card-title">{article.title}</h3>
+            <a href="/looking-for-home/{id}">
+                <h3 class="card-title">{article.title}</h3>
+            </a>
             {#if admin}
             <div class='button_wrapper'>
                 <EditButton button_name='edit' />

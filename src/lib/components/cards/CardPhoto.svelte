@@ -21,7 +21,8 @@
 
     .profile_buttons {
         display: flex;
-        max-width: 240px;
+        min-width: 260px;
+				max-width: 270px;
         justify-content: space-between;
     }
 </style>
