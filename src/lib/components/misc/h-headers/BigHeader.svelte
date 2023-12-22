@@ -1,6 +1,6 @@
 <script>
-    export let textContent = '';
-    export let className = '';
+    export let textContent;
+    export let className;
     export let position = 'center';
 </script>
 

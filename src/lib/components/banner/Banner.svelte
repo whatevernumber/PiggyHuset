@@ -1,5 +1,5 @@
 <script>
-    import ItemLink from "../list-item/ItemLink.svelte";
+    import ItemLink from "$lib/components/list-item/ItemLink.svelte";
 </script>
 
 <div class="promo-container">
@@ -24,9 +24,7 @@
 
     .option-list {
         padding: 0;
-        margin: 0;
-        margin-left: auto;
-        margin-right: 5%;
+        margin: 0 5% 0 auto;
         list-style: none;
         align-self: center;
         display: flex;

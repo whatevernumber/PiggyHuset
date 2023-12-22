@@ -1,5 +1,5 @@
 <script>
-    export let title = 'кнопка';
+    export let title = 'Кнопка';
     export let background_color = '#FFFFFF';
     export let text_color = '#D97544';
     export let href = null;
@@ -8,8 +8,7 @@
 </script>
 
 <a class="button" {href} style="--background_color: {background_color}; --text-color: {text_color}" class:button-light={isLight}
-        on:click={onclick}
-    >
+        on:click={onclick}>
     {title}
 </a>
 

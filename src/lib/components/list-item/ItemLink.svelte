@@ -1,5 +1,5 @@
 <script>
-    export let text = '';
+    export let text;
     export let href = '/';
     export let icon = 'list-icon-pink.png';
     let background_icon_url = "url('src/lib/img/" + icon + "')";
@@ -18,7 +18,6 @@
         padding: 17px 50px;
         background-color: #FFFFFF;
         text-align: center;
-        /*border-radius: 50px;*/
     }
 
     .option-item::before {

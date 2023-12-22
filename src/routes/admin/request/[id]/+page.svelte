@@ -55,23 +55,23 @@
         position: relative;
     }
 
-		.request_header {
-				color: #EF8653;
-				font-size: 16px;
-				font-weight: bold;
-		}
-		.pig_card {
-				display: flex;
-				flex-direction: column;
-				row-gap: 15px;
-		}
+	.request_header {
+		color: #EF8653;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.pig_card {
+		display: flex;
+		flex-direction: column;
+		row-gap: 15px;
+	}
 
-		.photo_header {
-				margin-bottom: 20px;
-		}
+	.photo_header {
+		margin-bottom: 20px;
+	}
 
-		.button_wrapper {
-				text-align: center;
-		}
+	.button_wrapper {
+		text-align: center;
+	}
 
 </style>

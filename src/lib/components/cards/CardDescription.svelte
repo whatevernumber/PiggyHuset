@@ -19,7 +19,7 @@
 	{#if graduated}
 		<PhotoCard width="110px" height="110px" alt="Морская свинка в домике" pic = {graduated_pic} />
 	{:else if !article}
-		<SmolButton className = "smol-but-long-button" title="Связаться с куратором" />
+		<SmolButton class_name = "smol-but-long-button" title="Связаться с куратором" />
 	{/if}
 </div>
 
@@ -30,5 +30,4 @@
         flex-direction: column;
         row-gap: 50px;
     }
-
 </style>

@@ -121,7 +121,6 @@
     .turn-in-form input::placeholder,
     .turn-in-form textarea::placeholder {
         color: rgba(51, 51, 51, 0.7);
-        /*text-transform: uppercase;*/
         font-weight: 400;
         font-size: 16px;
     }

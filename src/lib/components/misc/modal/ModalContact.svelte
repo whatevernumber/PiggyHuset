@@ -1,14 +1,14 @@
 <script>
-	import ButtonWithIcons from '../button/ButtonWithIcons.svelte';
+	import ButtonWithIcons from '$lib/components/misc/button/ButtonWithIcons.svelte';
 
 	export let curator = 'Домик Рыси';
 	export let success = true;
 
 	let color = '#E1EDCE';
+
 	if (!success) {
 		color = "#F6B5D3";
 	}
-
 </script>
 
 <div class="modal_wrapper">

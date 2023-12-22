@@ -1,6 +1,6 @@
 <script>
     import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
-    import GraduatedCard from '../cards/graduate-card/GraduatedCard.svelte';
+    import GraduatedCard from '$lib/components/cards/graduate-card/GraduatedCard.svelte';
     import Button from '$lib/components/misc/button/Button.svelte';
 </script>
 

@@ -1,7 +1,7 @@
 <script>
-	import EditButton from '../misc/button/EditButton.svelte';
+	import EditButton from '$lib/components/misc/button/EditButton.svelte';
 
-	export let text = '';
+	export let text;
 	export let href = '/';
 	export let icon = 'list-icon-pink.png';
 	export let icon_name = 'edit';
@@ -11,14 +11,15 @@
 	<li class="option-item">
 		{text}
 	</li>
-	<EditButton class_name={icon_name} />
+	<EditButton button_name={icon_name} />
 </a>
 
 <style>
 
-	.option-item-link {
-			display: flex;
-			column-gap: 15px;
-			font-size: 24px;
-	}
+.option-item-link {
+    display: flex;
+    column-gap: 15px;
+    font-size: 24px;
+}
+
 </style>

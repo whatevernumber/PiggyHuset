@@ -1,6 +1,6 @@
 <script>
     import Button from "$lib/components/misc/button/Button.svelte";
-    import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
+    import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
 
     // Скрыть модальное окно
     let closeModal = function (evt) {
@@ -41,8 +41,7 @@
             <em>статьи</em>
             </a>
             нашего сайты Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
-<!--        <p class="about_text about_text__warning">Мы <b>НЕ</b> собираем деньги на лечение и содержание! Мы не выкупаем свинок с <em>"Авито"</em> и других подобных площадок.</p>-->
-        <img class='about_home_icon' src="src/lib/img/svg/home.svg" alt="Маленький домик">
+            <img class='about_home_icon' src="src/lib/img/svg/home.svg" alt="Маленький домик">
         <div class="button_wrapper">
             <Button title="Подробнее" isLight onclick={showModal} />
         </div>
@@ -74,9 +73,6 @@
         right: 3%;
     }
 
-    .about_text__warning {
-        color: #D97544;
-    }
 
     .button_wrapper {
         margin-top: 30px;

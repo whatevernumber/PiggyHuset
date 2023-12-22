@@ -2,7 +2,7 @@
 	import TextInput from '$lib/components/misc/form-elements/TextInput.svelte';
 	import SubmitButton from '$lib/components/misc/form-elements/SubmitButton.svelte';
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
-	import ModalOkay from '../../lib/components/misc/modal/ModalOkay.svelte';
+	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 </script>
 
 <div class="form_wrapper">
@@ -17,15 +17,15 @@
 
 <style>
 	.login_form {
-			margin-top: 15px;
-			display: flex;
-			flex-direction: column;
-			row-gap: 25px;
-			align-items: center;
+		margin-top: 15px;
+		display: flex;
+		flex-direction: column;
+		row-gap: 25px;
+		align-items: center;
 	}
 
 	.form_wrapper {
-      margin: auto;
-			max-width: 200px;
+      	margin: auto;
+		max-width: 200px;
 	}
 </style>
