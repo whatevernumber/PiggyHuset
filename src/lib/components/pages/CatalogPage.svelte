@@ -3,7 +3,7 @@
     import CardList from "$lib/components/lists/CardList.svelte";
     import Card from "$lib/components/cards/Card.svelte";
 
-    export let pageTitle;
+    export let page_title;
     export let data = [];
     export let admin = false;
 
@@ -21,7 +21,7 @@
 <section>
     <div class="section-wrapper">
 
-        <BigHeader textContent="{pageTitle}" position="left"/>
+        <BigHeader text_content="{page_title}" position="left"/>
 
         <CardList>
             {#each data as article}

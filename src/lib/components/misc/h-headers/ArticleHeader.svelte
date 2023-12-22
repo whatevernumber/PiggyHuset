@@ -1,5 +1,5 @@
 <script>
-	export let text;
+	export let text = 'Заголовок';
 	export let size = '24px';
 </script>
 

@@ -21,7 +21,7 @@
     </div>
     {#if true}
     <div class="edit_button_wrapper">
-        <EditButton />
+        <EditButton button_name='edit' />
     </div>
     {/if}
 </div>

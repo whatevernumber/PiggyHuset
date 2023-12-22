@@ -25,9 +25,10 @@
 
 <style>
     .profile_description {
-        min-width: 740px;
         display: flex;
         flex-direction: column;
+		flex-grow: 1;
         row-gap: 50px;
     }
+
 </style>
