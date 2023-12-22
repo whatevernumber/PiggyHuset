@@ -59,6 +59,10 @@
         line-height: 130%;
     }
 
+    .card-title:hover {
+        color: #d97544;
+    }
+
     .card-description {
         font-size: 16px;
         line-height: 140%;

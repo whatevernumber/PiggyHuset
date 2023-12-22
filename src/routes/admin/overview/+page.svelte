@@ -3,7 +3,7 @@
     import Button from "$lib/components/misc/button/Button.svelte";
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
-    let adminLogin = false;
+    let admin = false;
     $: tab = 'pigs';
     $: action = "Добавить свинку";
 
@@ -121,7 +121,7 @@
     </div>
     {/if}
 </section>
-<CatalogPage {data} admin = true />
+<CatalogPage {data} page_title='Список публикаций' admin />
 
 <style>
     .nav-header {

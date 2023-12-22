@@ -11,7 +11,7 @@
 	<Article class_name="article_news">
 		<div class="wrapper">
 			<CardPhoto pic ='article-pig.png' />
-			<CardDescription article article_class="profile_article" header="Статья" description="Что-то очень полезное и интересное" />
+			<CardDescription article header="Статья" description="Что-то очень полезное и интересное" />
 		</div>
 		<div class="date">
 			<datetime>Today at 18:15</datetime>
