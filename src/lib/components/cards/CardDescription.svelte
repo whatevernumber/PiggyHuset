@@ -3,6 +3,7 @@
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
+	import EditButton from '$lib/components/misc/button/EditButton.svelte';
 
 	export let header;
 	export let description;
@@ -21,6 +22,12 @@
 	{:else if !article}
 		<SmolButton class_name = "smol-but-long-button" title="Связаться с куратором" />
 	{/if}
+	{#if admin}
+		<div class='admin_tools'>
+			<EditButton button_name='edit' />
+			<EditButton button_name='delete' />
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -30,5 +37,11 @@
 		flex-grow: 1;
         row-gap: 50px;
     }
+
+	.admin_tools {
+		display: flex;
+		column-gap: 10px;
+		align-self: flex-end;
+	}
 
 </style>
