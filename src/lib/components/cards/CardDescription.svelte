@@ -18,15 +18,9 @@
 	<ArticleHeader text={header} />
 	<ArticleText text={description} />
 	{#if graduated}
-		<PhotoCard width="110px" height="110px" alt="Морская свинка в домике" pic = {graduated_pic} />
+		<PhotoCard width="110px" height="110px" alt="Морская свинка в домике" pic = {graduated_pic} admin />
 	{:else if !article}
 		<SmolButton class_name = "smol-but-long-button" title="Связаться с куратором" />
-	{/if}
-	{#if admin}
-		<div class='admin_tools'>
-			<EditButton button_name='edit' />
-			<EditButton button_name='delete' />
-		</div>
 	{/if}
 </div>
 
@@ -37,11 +31,4 @@
 		flex-grow: 1;
         row-gap: 50px;
     }
-
-	.admin_tools {
-		display: flex;
-		column-gap: 10px;
-		align-self: flex-end;
-	}
-
 </style>
