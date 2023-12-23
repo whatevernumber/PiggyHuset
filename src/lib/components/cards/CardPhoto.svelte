@@ -4,7 +4,7 @@
 
 	export let header = 'Свиник ищет дом';
 	export let pic = "temp-pig-profile-photo.png";
-	export let admin = true;
+	export let admin;
 </script>
 
 <div>
