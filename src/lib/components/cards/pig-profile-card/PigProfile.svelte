@@ -9,13 +9,14 @@
 	export let graduated = false;
 	export let profile_pic = "temp-pig-profile-photo.png";
 	export let graduated_pic = "found-home.png";
+	export let article = false;
 
-	let admin = true;
+	export let admin;
 </script>
 
 <div class='profile_wrapper'>
 	<CardPhoto {profile_pic} {admin} }/>
-	<CardDescription {header} {description} {graduated} {graduated_pic}/>
+	<CardDescription {header} {description} {graduated} {graduated_pic} {article}/>
 </div>
 
 <style>

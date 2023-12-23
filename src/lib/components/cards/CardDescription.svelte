@@ -11,7 +11,7 @@
 	export let graduated_pic;
 	export let article = false;
 
-	export let admin = true;
+	export let admin;
 </script>
 
 <div class="profile_description">

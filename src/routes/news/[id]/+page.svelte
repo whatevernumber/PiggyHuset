@@ -7,7 +7,7 @@
 
 <div class="article_wrapper">
 	<Article>
-		<PigProfile header="Новость о Свинике" description="Свиник съел все мясные таблетки и теперь здоров"/>
+		<PigProfile article header="Новость о Свинике" description="Свиник съел все мясные таблетки и теперь здоров"/>
 		<div class="date">
 			<datetime>Today at 18:15</datetime>
 		</div>
