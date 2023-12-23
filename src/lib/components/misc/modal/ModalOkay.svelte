@@ -28,7 +28,7 @@
 		max-width: 557px;
 		min-height: 218px;
 		background-color: #FFFFFF;
-  }
+	}
 
 	.border_wrapper {
 		padding: 10px 10px;

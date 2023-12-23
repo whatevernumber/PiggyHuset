@@ -7,9 +7,9 @@
 <section class="graduated">
     <BigHeader textContent="Наши выпускники" />
     <div class="graduated_cards_wrapper">
-        <GraduatedCard />
-        <GraduatedCard />
-        <GraduatedCard />
+        <GraduatedCard name='Финик' />
+        <GraduatedCard name='Блиник' />
+        <GraduatedCard name='Сопливик' />
     </div>
     <Button title="Посмотреть всех" background_color="#D97544" text_color="#FFFFFF" />
 </section>

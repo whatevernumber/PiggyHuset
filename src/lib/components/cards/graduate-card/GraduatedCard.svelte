@@ -1,4 +1,5 @@
 <script>
+    export let name;
     export let picture = 'kb-pig.png';
     export let src = '/src/lib/img/' + picture;
 </script>
@@ -6,7 +7,7 @@
 <div class="graduated_card">
     <img {src} width="248" height="261" alt="Изображение выпускника">
     <p class="graduated_name">
-        <a href="#">Финик</a>
+        <a href="#">{name}</a>
     </p>
 </div>
 
