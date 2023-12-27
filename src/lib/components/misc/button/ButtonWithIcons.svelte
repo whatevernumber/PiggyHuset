@@ -1,4 +1,5 @@
 <script>
+    export let class_name = '';
     export let title;
     export let href;
     export let background_color;
@@ -7,17 +8,16 @@
     export let onclick;
     export let border = false;
 
-    let background_img = "url('src/lib/img/" + icon + "')";
+    let background_img = "url('../src/lib/img/" + icon + "')";
 </script>
 
-<a class="button" {href} style="--background_color: {background_color}; --background_img: {background_img};
+<a class="button {class_name}" {href} style="--background_color: {background_color}; --background_img: {background_img};
     --text-color: {text_color}"
             on:click={onclick}>
     {title}
 </a>
 
 <style>
-
     .button {
         position: relative;
         padding: 17.3px 80px;
@@ -31,6 +31,7 @@
         color: var(--text-color);
         background-color: var(--background_color);
         border: 1px solid #F6B5D3;
+        cursor: pointer;
     }
 
     .button:hover {
@@ -38,7 +39,7 @@
     }
 
     .button:active {
-        background-color: #88aa4d;
+        background-color: #d97544;
     }
 
     .button::before {

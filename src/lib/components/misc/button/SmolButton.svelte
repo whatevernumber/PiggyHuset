@@ -2,9 +2,10 @@
     export let class_name = 'smol-button';
     export let title = 'Кнопка';
     export let href;
+    export let clickHandler;
 </script>
 
-<a class="button {class_name}" {href}>
+<a class="button {class_name}" {href} on:click={clickHandler}>
     {title}
 </a>
 
