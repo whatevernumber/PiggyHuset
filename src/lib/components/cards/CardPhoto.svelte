@@ -3,12 +3,12 @@
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
 	export let header = 'Свиник ищет дом';
-	export let pic = "temp-pig-profile-photo.png";
+	export let profile_pic = "temp-pig-profile-photo.png";
 	export let admin = true;
 </script>
 
 <div>
-	<PhotoCard width="240" height="244" {pic} />
+	<PhotoCard width="240" height="244" pic={profile_pic} />
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton title="Редактировать" />

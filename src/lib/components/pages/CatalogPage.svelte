@@ -4,8 +4,14 @@
     import Card from "$lib/components/cards/Card.svelte";
 
     export let page_title;
+
     export let data = [];
+
     export let admin = false;
+
+    export let category;
+
+    export let buttonText;
 
     // стандартный текст и картинка для карточек свинок, ищущих дом
     data.map((article) => {
@@ -26,7 +32,7 @@
         <CardList>
             {#each data as article}
                 <li>
-                    <Card {article} {admin} />
+                    <Card {article} {category} title={buttonText} {admin} />
                 </li>
             {/each}
         </CardList>

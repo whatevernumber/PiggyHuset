@@ -1,29 +1,13 @@
 <script>
     import Button from "$lib/components/misc/button/Button.svelte";
     import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
-
-    // Скрыть модальное окно
-    let closeModal = function (evt) {
-        if(document.querySelector('.grey_wrapper') && !evt.target.classList.contains('.about_modal') ) {
-            let modal = document.querySelector('.about_modal');
-            let wrapper = document.querySelector('.landing_main_wrapper');
-            modal.classList.add('modal_closed');
-            wrapper.classList.remove('grey_wrapper');
-            wrapper.removeEventListener('click', closeModal)
-        }
-    }
+    import {showModal} from "$lib/components/utils/func.js";
 
     // Показать модальное окно
-    function showModal(evt) {
-            evt.stopPropagation();
-            let modal = document.querySelector('.about_modal');
-            let wrapper = document.querySelector('.landing_main_wrapper');
-            modal.classList.remove('modal_closed');
-            wrapper.classList.add('grey_wrapper');
-            modal.scrollIntoView({block: "center"});
-            wrapper.addEventListener('click', closeModal)
-        }
-
+    const handle = (evt) => {
+        showModal(evt, 'about_modal');
+        evt.target.removeEventListener('click', handle);
+    }
 </script>
 
 <section class="about_wrapper">
@@ -36,17 +20,15 @@
             <a href="https://vk.com">"ВК".</a>
         </p>
         <br>
-        <p class="about_text">В разделе
-            <a href="/">
-            <em>статьи</em>
-            </a>
-            нашего сайты Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
-            <img class='about_home_icon' src="src/lib/img/svg/home.svg" alt="Маленький домик">
+        <p class="about_text">
+            В разделе <a href="/"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
+        <img class='about_home_icon' src="src/lib/img/svg/home.svg" alt="Маленький домик">
         <div class="button_wrapper">
-            <Button title="Подробнее" isLight onclick={showModal} />
+            <Button title="Подробнее" isLight onclick={handle} />
         </div>
     </div>
 </section>
+
 <style>
 
     .about_wrapper {
@@ -66,13 +48,11 @@
         line-height: 35px;
     }
 
-
     .about_home_icon {
         position: absolute;
         top: 4%;
         right: 3%;
     }
-
 
     .button_wrapper {
         margin-top: 30px;

@@ -6,11 +6,11 @@
 <section class="looking_for_home">
     <BigHeader textContent="Ищут дом" />
     <div class="looking_for_home_wrapper">
-        <a href="#">
+        <a href="/looking-for-home">
             <img class="looking_for_home_img" src="/src/lib/img/looking-for-home.png" width="450px" height="450px" alt="Морская свинка ищет дом">
         </a>
     </div>
-    <Button title="Ищут дом" background_color="#D97544" text_color="#FFFFFF" />
+    <Button href="/looking-for-home" title="Ищут дом" background_color="#D97544" text_color="#FFFFFF" />
 </section>
 
 <style>

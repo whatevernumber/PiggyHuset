@@ -7,7 +7,7 @@
 				'В жизни маленького Финика последние дни творятся сплошные чудеса! ' +
 				'Финика уже очень ждут в новом доме! И мы очень надеемся, что у Рыжего солнышка появятся новые друзья. Следите за новостями!)';
 	export let graduated = false;
-	export let profile_pic = "temp-pig-profile-photo.png";
+	export let profile_pic = "kb-pig.png";
 	export let graduated_pic = "found-home.png";
 	export let article = false;
 
