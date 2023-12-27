@@ -11,7 +11,7 @@
 </svelte:head>
 
 <Banner />
-<div class="landing_main_wrapper">
+<div class="landing_main_wrapper main_wrapper">
 	<About />
 	<LookingForHouse />
 	<Graduated />

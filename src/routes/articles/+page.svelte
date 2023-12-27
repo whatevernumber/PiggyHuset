@@ -4,26 +4,22 @@
     const data = [
         {
             title: 'Полезная статья',
-            text: 'Как вытирать носики',
+            text: 'Как вытирать носиков',
             type: 'article',
         },{
             title: 'Полезная статья',
-            text: 'Как похудеть крупы',
+            text: 'Как худеть крупов',
             type: 'article',
         },{
             title: 'Полезная статья',
-            text: 'Как поить маслом',
+            text: 'Как постричь когтев и не умереть',
             type: 'article',
         },{
             title: 'Полезная статья',
-            text: 'Как постричь когти и не умереть',
-            type: 'article',
-        },{
-            title: 'Полезная статья',
-            text: 'Как сдуться',
+            text: 'Как сдуть животиков',
             type: 'article',
         },
     ];
 </script>
 
-<CatalogPage {data} />
+<CatalogPage {data} buttonText="Читать материал" />
