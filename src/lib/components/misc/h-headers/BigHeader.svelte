@@ -1,11 +1,11 @@
 <script>
-    export let text_content = 'Заголовок';
+    export let textContent = 'Заголовок';
     export let class_name;
     export let position = 'center';
 </script>
 
 <h2 class="{class_name}" style="--position: {position}">
-    {text_content}
+    {textContent}
 </h2>
 
 <style>

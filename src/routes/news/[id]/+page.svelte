@@ -3,6 +3,16 @@
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
+	import {showModal} from "$lib/components/utils/func.js";
+
+	let src = '';
+
+	// осуществляет открытие модального окна с просмотром фото, по которому кликнули
+	export let photoClickHandler = (evt) => {
+		showModal(evt, 'photo-view-modal');
+		evt.target.removeEventListener('click', showModal);
+		src = evt.target.src;
+	};
 </script>
 
 <div class="article_wrapper">
@@ -12,7 +22,7 @@
 			<datetime>Today at 18:15</datetime>
 		</div>
 		<PhotoList>
-			<PhotoCard />
+			<PhotoCard clickHandler={photoClickHandler} />
 			<PhotoCard />
 			<PhotoCard />
 			<PhotoCard />

@@ -5,6 +5,9 @@
     export let article = {};
     export let admin = false;
     export let id = 1;
+    export let category = 'looking-for-home';
+
+    export let title = 'Подробнее';
 
     $: image = article.image ?? article.type;
 </script>
@@ -15,20 +18,20 @@
     </a>
     <div class="wrapper">
         <div class='header_wrapper'>
-            <a href="/looking-for-home/{id}">
+            <a href="/{category}/{id}">
                 <h3 class="card-title">{article.title}</h3>
             </a>
-            {#if admin}
+        {#if admin}
             <div class='button_wrapper'>
                 <EditButton button_name='edit' />
                 <EditButton button_name='delete' />
             </div>
-            {/if}
+        {/if}
         </div>
         <p class="card-description">{article.text}</p>
         <div class="bottom-line">
             <time datetime="18-11-2023 21:20">18 ноября 2023 21:20</time>
-            <SmolButton title="Подробнее" />
+            <SmolButton {title} />
         </div>
     </div>
 </article>

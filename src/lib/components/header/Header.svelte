@@ -11,7 +11,7 @@
             </a>
         </div>
         <nav class="navigation navigation-admin">
-            <a href="/" class="nav-link">
+            <a href="/admin/overview" class="nav-link">
                 <p class="navigation-home">
                     Личный кабинет администратора
                 </p>

@@ -1,17 +1,12 @@
 <script>
 
 import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte";
+import {closeModal} from "$lib/components/utils/func.js";
 
-    let closeModal = function () {
-        let modal = document.querySelector('.about_modal');
-        let wrapper = document.querySelector('.landing_main_wrapper');
-        modal.classList.add('modal_closed');
-        wrapper.classList.remove('grey_wrapper');
-    };
 </script>
 
-<section class="about_modal modal_closed">
-    <div class="about_modal_wrapper">
+<section class="about_modal modal modal_closed">
+    <div class="about_modal_wrapper modal_wrapper">
         <h3 class="about_header">О нас</h3>
         <div class="about_modal_text">
             <p class="modal_text">
@@ -41,11 +36,11 @@ import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte"
             </p>
         </div>
         <ButtonWithIcons title="Написать нам" background_color="#E1EDCE" text_color="#333333" isModal/>
-        <div class="close-button" on:click={closeModal}>
+        <button class="close-button" on:click={closeModal} aria-roledescription="Закрыть окно с информацией">
             <span hidden>
                 закрыть
             </span>
-        </div>
+        </button>
     </div>
 </section>
 
@@ -92,10 +87,6 @@ import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte"
         text-decoration: underline;
     }
 
-    .modal_closed {
-        display: none;
-    }
-
     .last_text {
         margin: 0;
     }
@@ -114,7 +105,8 @@ import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte"
         height: 35px;
         top: -2.5%;
         right: -15%;
-        background: url('../src/lib/img/x.png') no-repeat;
+        background: url('$lib/img/x.png') no-repeat;
+        border: none;
     }
 
     .close-button:hover {

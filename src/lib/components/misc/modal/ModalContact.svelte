@@ -4,33 +4,33 @@
 	export let curator = 'Домик Рыси';
 	export let success = true;
 
-	let color = '#E1EDCE';
+	let color = "#E1EDCE";
 
 	if (!success) {
 		color = "#F6B5D3";
 	}
 </script>
 
-<div class="modal_wrapper">
-	<div class="border_wrapper" style='--border_color: {color}'>
-		<p class='message'>Куратор Домика - {curator}. Пожалуйста, напишите в нашу группу ВК.</p>
-		<ButtonWithIcons title='Хорошо' icon='success-pig.png' />
+<div class="modal_closed modal_wrapper modal">
+	<div class="border_wrapper" style="--border_color: {color}">
+		<p class='message'>Куратор свинки - {curator}. <br> Пожалуйста, напишите в нашу группу ВК.</p>
+		<ButtonWithIcons class_name="close-button" title='Хорошо' icon='success-pig.png' />
 	</div>
 </div>
 
 <style>
-    .modal_wrapper {
-        position: absolute;
-        bottom: 10%;
+	.modal {
+		position: absolute;
+		bottom: 45%;
+		padding: 25px;
+		left: 50%;
         display: flex;
-        min-width: 597px;
         max-width: 597px;
-        min-height: 258px;
-        background-color: #FFFFFF;
+        background-color: #F0F8FF;
+		transform: translateX(-50%);
     }
 
     .border_wrapper {
-        padding: 10px 10px;
         margin: auto;
         display: flex;
         flex-direction: column;
@@ -45,10 +45,11 @@
     }
 
     .message {
-        font-size: 14px;
+        font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
         text-transform: uppercase;
+		color: #333333;
     }
 </style>
