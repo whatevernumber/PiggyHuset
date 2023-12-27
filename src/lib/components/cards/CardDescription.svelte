@@ -28,12 +28,6 @@
 	{:else if !isArticle}
 		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" clickHandler={clickHandler} />
 	{/if}
-	{#if admin}
-		<div class='admin_tools'>
-			<EditButton button_name='edit' />
-			<EditButton button_name='delete' />
-		</div>
-	{/if}
 </div>
 
 <style>
@@ -43,11 +37,4 @@
 		flex-grow: 1;
         row-gap: 50px;
     }
-
-	.admin_tools {
-		display: flex;
-		column-gap: 10px;
-		align-self: flex-end;
-	}
-
 </style>

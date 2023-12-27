@@ -3,8 +3,9 @@
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
 	export let header = 'Свиник ищет дом';
+
 	export let profile_pic = "temp-pig-profile-photo.png";
-	export let admin = true;
+	export let admin;
 </script>
 
 <div>
@@ -18,10 +19,9 @@
 </div>
 
 <style>
-
-    .profile_buttons {
-        display: flex;
-		max-width: 270px;
-        justify-content: space-between;
-    }
+  .profile_buttons {
+      display: flex;
+      max-width: 270px;
+      justify-content: space-between;
+  }
 </style>
