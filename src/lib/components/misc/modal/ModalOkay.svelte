@@ -1,5 +1,6 @@
 <script>
 	import ButtonWithIcons from '$lib/components/misc/button/ButtonWithIcons.svelte';
+	import {showModal} from "$lib/components/utils/func.js";
 
 	export let desc = 'Пост успешно создан! Произошла ошибка, попробуйте ещё раз позднее';
 	export let success = true;
@@ -14,7 +15,7 @@
 <div class="modal_wrapper">
 	<div class="border_wrapper" style='--border_color: {color}'>
 		<p class='message'>{desc}</p>
-		<ButtonWithIcons title='Хорошо' icon='success-pig.png' />
+		<ButtonWithIcons title='Хорошо' icon='success-pig.png' on:click={showModal} />
 	</div>
 </div>
 
