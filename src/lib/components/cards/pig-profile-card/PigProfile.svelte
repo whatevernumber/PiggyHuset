@@ -8,7 +8,6 @@
 				'Финика уже очень ждут в новом доме! И мы очень надеемся, что у Рыжего солнышка появятся новые друзья. Следите за новостями!)';
 	export let graduated = false;
 	export let profile_pic = "kb-pig.png";
-	export let graduated_pic = "found-home.png";
 	export let article = false;
 
 	export let admin;
@@ -16,7 +15,7 @@
 
 <div class='profile_wrapper'>
 	<CardPhoto {profile_pic} {admin} }/>
-	<CardDescription {header} {description} {graduated} {graduated_pic} {article}/>
+	<CardDescription {header} {description} {graduated} {article}/>
 </div>
 
 <style>
