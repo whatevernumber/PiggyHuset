@@ -32,6 +32,7 @@
         background-color: var(--background_color);
         border: 1px solid #F6B5D3;
         cursor: pointer;
+        user-select: none;
     }
 
     .button:hover {

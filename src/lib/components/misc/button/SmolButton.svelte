@@ -17,6 +17,7 @@
         text-transform: uppercase;
         background-color: #D97544;
         color: #FFFFFF;
+        user-select: none;
     }
 
     .button:hover {

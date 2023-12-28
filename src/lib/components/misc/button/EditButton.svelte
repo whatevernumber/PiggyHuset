@@ -23,6 +23,7 @@
 		max-height: 26px;
 		padding: 4px 10px;
 		background-color: #d97544;
+		user-select: none;
 	}
 
 	.button:hover {
