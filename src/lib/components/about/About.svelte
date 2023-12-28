@@ -11,7 +11,7 @@
 </script>
 
 <section class="about_wrapper">
-    <BigHeader textContent="О нас" />
+    <BigHeader text_content="О нас" />
     <div class="about_text_wrapper">
         <p class="about_text"><b>ДОМИК</b> для бездомных поросят - это проект помощи морским свинкам, попавшим в беду.</p>
         <p class="about_text">Если Вы нашли свинку и не знаете, что с ней делать, -- обратитесь к нам!</p>
@@ -24,7 +24,7 @@
             В разделе <a href="/"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
         <img class='about_home_icon' src="src/lib/img/svg/home.svg" alt="Маленький домик">
         <div class="button_wrapper">
-            <Button title="Подробнее" isLight onclick={handle} />
+            <Button title="Подробнее" is_light onclick={handle} />
         </div>
     </div>
 </section>

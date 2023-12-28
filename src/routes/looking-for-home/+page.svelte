@@ -17,4 +17,4 @@
     ];
 </script>
 
-<CatalogPage pageTitle="Ищут дом" {data} />
+<CatalogPage page_title="Ищут дом" {data} />

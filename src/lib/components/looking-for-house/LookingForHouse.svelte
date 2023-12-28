@@ -1,15 +1,14 @@
 <script>
     import Button from '$lib/components/misc/button/Button.svelte';
     import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
+    import {Splide, SplideSlide} from "@splidejs/svelte-splide";
+    import '@splidejs/svelte-splide/css/splide.min.css';
+    import PhotoList from "$lib/components/photo-list/PhotoList.svelte";
 </script>
 
 <section class="looking_for_home">
-    <BigHeader textContent="Ищут дом" />
-    <div class="looking_for_home_wrapper">
-        <a href="/looking-for-home">
-            <img class="looking_for_home_img" src="/src/lib/img/looking-for-home.png" width="450px" height="450px" alt="Морская свинка ищет дом">
-        </a>
-    </div>
+    <BigHeader text_content="Ищут дом" />
+    <PhotoList quantity="16" autoplay="{true}" first_slide="looking-for-home.png" no_border />
     <Button href="/looking-for-home" title="Ищут дом" background_color="#D97544" text_color="#FFFFFF" />
 </section>
 

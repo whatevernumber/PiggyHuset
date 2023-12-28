@@ -3,11 +3,11 @@
     export let background_color = '#FFFFFF';
     export let text_color = '#D97544';
     export let href = null;
-    export let isLight = false;
+    export let is_light = false;
     export let onclick;
 </script>
 
-<a class="button" {href} style="--background_color: {background_color}; --text-color: {text_color}" class:button-light={isLight}
+<a class="button" {href} style="--background_color: {background_color}; --text-color: {text_color}" class:button-light={is_light}
         on:click={onclick}>
     {title}
 </a>
@@ -25,6 +25,7 @@
         font-weight: 700;
         background-color: var(--background_color);
         color: var(--text-color);
+        user-select: none;
     }
 
     .button:hover {

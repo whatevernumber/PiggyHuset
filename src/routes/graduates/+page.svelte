@@ -29,4 +29,4 @@
     ];
 </script>
 
-<CatalogPage {data} />
+<CatalogPage category="graduates" page_title="Выпускники Домика" {data} />
