@@ -53,11 +53,11 @@
 	</Splide>
 
 	<Splide id="thumb-splide" options="{thumb_options}" bind:this={slider}>
-		<SplideSlide>
 			{#if (first_slide)}
-				<img src="/src/lib/img/{first_slide}" width="200" height="200">
+				<SplideSlide>
+					<img src="/src/lib/img/{first_slide}" width="200" height="200">
+				</SplideSlide>
 			{/if}
-		</SplideSlide>
 		{#each {length: quantity} as item}
 			<SplideSlide>
 				<PhotoCard {src} />
