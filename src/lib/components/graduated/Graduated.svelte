@@ -5,7 +5,7 @@
 </script>
 
 <section class="graduated">
-    <BigHeader textContent="Наши выпускники" />
+    <BigHeader text_content="Наши выпускники" />
     <div class="graduated_cards_wrapper">
         <GraduatedCard name='Финик' />
         <GraduatedCard name='Блиник' />

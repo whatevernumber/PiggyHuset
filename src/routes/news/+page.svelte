@@ -20,4 +20,4 @@
     ];
 </script>
 
-<CatalogPage category="news" pageTitle="Новости" {data} />
+<CatalogPage category="news" page_title="Новости" {data} />

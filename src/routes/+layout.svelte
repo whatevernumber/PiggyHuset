@@ -7,6 +7,6 @@ import Footer from "$lib/components/footer/Footer.svelte";
 $: url = $page.url.pathname
 </script>
 
-<Header current = {url} />
+<Header current={url} />
 <slot/>
 <Footer />

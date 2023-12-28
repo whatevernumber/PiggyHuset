@@ -4,7 +4,7 @@
 </script>
 
 <section class="looking_for_home">
-    <BigHeader textContent="Ищут дом" />
+    <BigHeader text_content="Ищут дом" />
     <div class="looking_for_home_wrapper">
         <a href="/looking-for-home">
             <img class="looking_for_home_img" src="/src/lib/img/looking-for-home.png" width="450px" height="450px" alt="Морская свинка ищет дом">
