@@ -4,11 +4,12 @@
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import {showModal} from "$lib/components/utils/func.js";
+	import ModalPhotoView from "$lib/components/misc/modal/ModalPhotoView.svelte";
 
 	let src = '';
 
 	// осуществляет открытие модального окна с просмотром фото, по которому кликнули
-	export let photoClickHandler = (evt) => {
+	const photoClickHandler = (evt) => {
 		showModal(evt, 'photo-view-modal');
 		evt.target.removeEventListener('click', showModal);
 		src = evt.target.src;
@@ -23,12 +24,14 @@
 		</div>
 		<PhotoList>
 			<PhotoCard clickHandler={photoClickHandler} />
-			<PhotoCard />
-			<PhotoCard />
-			<PhotoCard />
+			<PhotoCard clickHandler={photoClickHandler} />
+			<PhotoCard clickHandler={photoClickHandler} />
+			<PhotoCard clickHandler={photoClickHandler} />
 		</PhotoList>
 	</Article>
 </div>
+
+<ModalPhotoView {src} />
 
 <style>
     .article_wrapper {
