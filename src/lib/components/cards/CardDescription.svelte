@@ -9,10 +9,10 @@
 	export let header;
 	export let description;
 	export let graduated = false;
-	export let graduated_pic = '';
-	export let isArticle = false;
+	export let graduated_pic = 'found-home.png';
+	export let article = false;
 
-	export let admin;
+	export let admin = true;
 
 	const clickHandler = (evt) => {
 		showModal(evt);
@@ -24,8 +24,8 @@
 	<ArticleHeader text={header} />
 	<ArticleText text={description} />
 	{#if graduated}
-		<PhotoCard width="110px" height="110px" alt="Морская свинка в домике" pic={graduated_pic} />
-	{:else if !isArticle}
+		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" pic={graduated_pic} />
+	{:else if admin && !article}
 		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" clickHandler={clickHandler} />
 	{/if}
 </div>
