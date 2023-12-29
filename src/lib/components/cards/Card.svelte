@@ -4,21 +4,20 @@
 
     export let article = {};
     export let admin = false;
-    export let id = 1;
     export let category = 'looking-for-home';
-
+    export let href = `/${category}/${article.id}`;
     export let title = 'Подробнее';
 
     $: image = article.image ?? article.type;
 </script>
 
 <article>
-    <a href="/looking-for-home/{id}">
+    <a {href}>
         <img src="/img/{image}.jpeg" width="250" height="250" alt="Фотография свинки">
     </a>
     <div class="wrapper">
         <div class='header_wrapper'>
-            <a href="/{category}/{id}">
+            <a {href}>
                 <h3 class="card-title">{article.title}</h3>
             </a>
         {#if admin}
@@ -31,7 +30,7 @@
         <p class="card-description">{article.text}</p>
         <div class="bottom-line">
             <time datetime="18-11-2023 21:20">18 ноября 2023 21:20</time>
-            <SmolButton {title} />
+            <SmolButton {title} {href} />
         </div>
     </div>
 </article>
