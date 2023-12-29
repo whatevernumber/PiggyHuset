@@ -8,6 +8,10 @@
 	import TextInput from '$lib/components/misc/form-elements/TextInput.svelte';
 </script>
 
+<svelte:head>
+	<title>Добавить новую статью</title>
+</svelte:head>
+
 <div class="article_wrapper">
 	<Article class_name="article_post" >
 		<BigHeader textContent = "Новая статья"/>

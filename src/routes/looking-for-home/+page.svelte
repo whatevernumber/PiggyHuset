@@ -20,4 +20,8 @@
     ];
 </script>
 
+<svelte:head>
+	<title>Ищут дом</title>
+</svelte:head>
+
 <CatalogPage page_title="Ищут дом" {data} />

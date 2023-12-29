@@ -11,6 +11,10 @@
 	export let phone = 4;
 </script>
 
+<svelte:head>
+	<title>Запрос на передачу свинки</title>
+</svelte:head>
+
 <div class="article_wrapper">
 	<Article class_name="article_request">
 		<ArticleHeader text="Новый запрос" />

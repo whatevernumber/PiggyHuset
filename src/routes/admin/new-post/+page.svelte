@@ -7,6 +7,10 @@
 	import FileInput from '$lib/components/misc/form-elements/FileInput.svelte';
 </script>
 
+<svelte:head>
+	<title>Добавить новый пост</title>
+</svelte:head>
+
 <div class="article_wrapper">
 	<Article class_name="article_post">
 			<BigHeader textContent = "Новый пост"/>
