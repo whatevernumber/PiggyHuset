@@ -20,4 +20,8 @@
     ];
 </script>
 
+<svelte:head>
+	<title>Новости</title>
+</svelte:head>
+
 <CatalogPage category="news" page_title="Новости" {data} />
