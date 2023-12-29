@@ -5,6 +5,11 @@
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 </script>
 
+<svelte:head>
+	<title>Логин</title>
+</svelte:head>
+
+
 <div class="form_wrapper">
 	<ArticleHeader size="16px" text="Вход в кабинет" />
 	<form method="post" name="login_form" class="login_form">

@@ -98,6 +98,10 @@
     };
 </script>
 
+<svelte:head>
+    <title>Личный кабинет администратора</title>
+</svelte:head>
+
 <section class="nav-header">
     <nav class="navigation">
         <ul class="nav-list">

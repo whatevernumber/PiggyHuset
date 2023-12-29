@@ -2,6 +2,10 @@
     import TurnInForm from "$lib/components/forms/TurnInForm.svelte";
 </script>
 
+<svelte:head>
+    <title>Отдать Свинку</title>
+</svelte:head>
+
 <section class="container">
     <TurnInForm />
 </section>
