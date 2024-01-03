@@ -6,19 +6,20 @@
     export let admin = false;
     export let category = 'looking-for-home';
     export let href = `/${category}/${article.id}`;
-    export let title = 'Подробнее';
+    export let button_text = 'Подробнее';
+    export let placeholder_image = 'ready';
 
-    $: image = article.image ?? article.type;
+    $: image = article.main_photo ? article.main_photo : placeholder_image;
 </script>
 
 <article>
     <a {href}>
-        <img src="/img/{image}.jpeg" width="250" height="250" alt="Фотография свинки">
+        <img src="https://perpl.the-nepodarok.repl.co/web/img/{image}.jpg" width="250" height="250" alt="Фотография свинки">
     </a>
     <div class="wrapper">
         <div class='header_wrapper'>
             <a {href}>
-                <h3 class="card-title">{article.title}</h3>
+                <h3 class="card-title">{article.name ?? article.title}</h3>
             </a>
         {#if admin}
             <div class='button_wrapper'>
@@ -27,10 +28,10 @@
             </div>
         {/if}
         </div>
-        <p class="card-description">{article.text}</p>
+        <p class="card-description">{article.description ?? article.text}</p>
         <div class="bottom-line">
-            <time datetime="18-11-2023 21:20">18 ноября 2023 21:20</time>
-            <SmolButton {title} {href} />
+            <time datetime="{article.datetime}">{article.datetime}</time>
+            <SmolButton title={button_text} {href} />
         </div>
     </div>
 </article>

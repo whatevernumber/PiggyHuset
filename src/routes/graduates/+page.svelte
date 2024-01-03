@@ -1,7 +1,8 @@
 <script>
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
+	import {onMount} from "svelte";
 
-    const data = [
+    let data = [
         {
             id: 1,
             title: 'Финик',
@@ -31,6 +32,16 @@
             type: 'graduate',
         },
     ];
+
+	onMount(() => {
+		fetch('https://perpl.the-nepodarok.repl.co/web/pigs/graduated')
+			.then((response) => {
+				if (response.ok) {
+					return response.json()
+				}
+			})
+			.then(json => data = json)
+	});
 </script>
 
 <svelte:head>
