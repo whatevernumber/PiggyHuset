@@ -26,4 +26,8 @@
     ];
 </script>
 
+<svelte:head>
+	<title>Статьи Домика</title>
+</svelte:head>
+
 <CatalogPage {data} category="articles" buttonText="Читать материал" />

@@ -5,7 +5,12 @@
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 
 	let additional_photos = true;
+	let header = 'Статья о Финике';
 </script>
+
+<svelte:head>
+	<title>{header}</title>
+</svelte:head>
 
 <div class="article_wrapper">
 	<Article class_name="article_news">
