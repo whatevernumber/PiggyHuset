@@ -3,22 +3,21 @@
  * @param evt Событие клика (приходит из on:click)
  */
 const closeModal = function (evt) {
-    // все фоновые элементы
-    const blurred = document.querySelectorAll('.blur');
-
     // открытое модальное окно
     const modal = document.querySelector('.modal_opened');
-
-    // кнопка закрытия модального окна
-    const close_button = modal.querySelector('.close-button');
 
     // проверяет, находится ли событие внутри модального окна
     const in_modal = modal.contains(evt.target);
 
+    const close_button = modal.querySelector('.close-button');
+
     if (!in_modal || evt.target === close_button) {
         modal.classList.add('modal_closed');
         modal.classList.remove('modal_opened');
+
+        const blurred = document.querySelectorAll('.blur'); // все фоновые элементы
         blurred.forEach((item) => item.classList.remove('blur'));
+
         close_button.removeEventListener('click', closeModal);
         document.removeEventListener('click', closeModal);
     }
@@ -37,7 +36,7 @@ const showModal = function (evt, modalClass = 'modal') {
     const outer_area = document.querySelectorAll(`.main-container > div:not(.${modalClass})`);
 
     // поиск кнопки закрытия
-    const closeButton = modal_view.querySelector('.close-button') ?? null;
+    const close_button = modal_view.querySelector('.close-button') ?? null;
 
     modal_view.classList.remove('modal_closed');
     modal_view.classList.add('modal_opened');
@@ -50,7 +49,7 @@ const showModal = function (evt, modalClass = 'modal') {
 
     // определение способов закрытия модального окна
     document.addEventListener('click', closeModal);
-    closeButton?.addEventListener('click', closeModal);
+    close_button?.addEventListener('click', closeModal);
 }
 
 export { closeModal, showModal };

@@ -3,18 +3,22 @@
 
     const data = [
         {
+            id: 1,
             title: 'Полезная статья',
             text: 'Как вытирать носиков',
             type: 'article',
         },{
+            id: 2,
             title: 'Полезная статья',
             text: 'Как худеть крупов',
             type: 'article',
         },{
+            id: 3,
             title: 'Полезная статья',
             text: 'Как постричь когтев и не умереть',
             type: 'article',
         },{
+            id: 4,
             title: 'Полезная статья',
             text: 'Как сдуть животиков',
             type: 'article',
@@ -26,4 +30,4 @@
 	<title>Статьи Домика</title>
 </svelte:head>
 
-<CatalogPage {data} buttonText="Читать материал" />
+<CatalogPage {data} category="articles" buttonText="Читать материал" />
