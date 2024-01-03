@@ -35,10 +35,10 @@
             })
             .then(json => data = json)
     });
-
 </script>
 
 <svelte:head>
-    <title>Статьи Домика</title>
+	<title>Статьи Домика</title>
 </svelte:head>
+
 <CatalogPage {data} category="articles" page_title="Полезные статьи" button_text="Читать материал" />
