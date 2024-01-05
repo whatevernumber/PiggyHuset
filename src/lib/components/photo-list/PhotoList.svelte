@@ -5,15 +5,20 @@
 	import {Splide, SplideSlide} from "@splidejs/svelte-splide";
 	import '@splidejs/svelte-splide/css/splide.min.css';
 
-	export let quantity = 10;
 	export let autoplay = false;
-	export let first_slide = '';
+	export let first_slide;
+	export let photos;
+
+	let temp_address = 'https://8393e96b-2841-4ffe-93df-baf53fa0b998-00-2174wtn3teowp.riker.replit.dev/web/img/'
 
 	export let no_border = false;
 
 	let splide = Splide;
 	let slider = SplideSlide;
-	let src = '/src/lib/img/pig-in-a-hat.jpeg';
+
+	if (!photos) {
+		photos = [{ image: '/src/lib/img/pig-in-a-hat.jpeg'} ];
+	}
 
 	const main_options = {
 		type: 'loop',
@@ -42,12 +47,12 @@
 	<Splide id="main-carousel" options="{main_options}" bind:this={splide}>
 		{#if (first_slide)}
 			<SplideSlide>
-				<PhotoView src="/src/lib/img/{first_slide}" no_border />
+				<PhotoView src="{temp_address + first_slide + '.jpg'}" no_border />
 			</SplideSlide>
 		{/if}
-		{#each {length: quantity} as item}
+		{#each photos as item}
 			<SplideSlide>
-				<PhotoView {src} {no_border} />
+				<PhotoView src={temp_address + item.image + '.jpg'} {no_border} />
 			</SplideSlide>
 		{/each}
 	</Splide>
@@ -55,12 +60,12 @@
 	<Splide id="thumb-splide" options="{thumb_options}" bind:this={slider}>
 			{#if (first_slide)}
 				<SplideSlide>
-					<img src="/src/lib/img/{first_slide}" width="200" height="200">
+					<img src="{temp_address + first_slide + '.jpg'}" width="200" height="200">
 				</SplideSlide>
 			{/if}
-		{#each {length: quantity} as item}
+		{#each photos as item}
 			<SplideSlide>
-				<PhotoCard {src} />
+				<PhotoCard pic={item.image} />
 			</SplideSlide>
 		{/each}
 	</Splide>
