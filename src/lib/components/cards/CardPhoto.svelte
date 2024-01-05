@@ -3,7 +3,6 @@
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
 	export let header = 'Свиник ищет дом';
-
 	export let profile_pic = "temp-pig-profile-photo.png";
 	export let admin;
 </script>

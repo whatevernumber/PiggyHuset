@@ -4,11 +4,13 @@
     import {Splide, SplideSlide} from "@splidejs/svelte-splide";
     import '@splidejs/svelte-splide/css/splide.min.css';
     import PhotoList from "$lib/components/photo-list/PhotoList.svelte";
+
+    let data;
 </script>
 
 <section class="looking_for_home">
     <BigHeader text_content="Ищут дом" />
-    <PhotoList quantity="16" autoplay="{true}" first_slide="looking-for-home.png" no_border />
+    <PhotoList autoplay="{true}" no_border />
     <Button href="/looking-for-home" title="Ищут дом" background_color="#D97544" text_color="#FFFFFF" />
 </section>
 

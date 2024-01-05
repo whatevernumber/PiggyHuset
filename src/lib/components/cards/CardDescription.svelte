@@ -11,7 +11,7 @@
 	export let graduated = false;
 	export let graduated_pic = 'found-home.png';
 	export let article = false;
-
+	export let age;
 	export let admin = true;
 
 	const clickHandler = (evt) => {
@@ -22,6 +22,9 @@
 
 <div class="profile_description">
 	<ArticleHeader text={header} />
+	{#if age}
+		<p>Возраст: {age}</p>
+	{/if}
 	<ArticleText text={description} />
 	{#if graduated}
 		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" pic={graduated_pic} />
