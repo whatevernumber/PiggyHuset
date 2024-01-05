@@ -14,9 +14,9 @@
 
 	export let admin = true;
 
-	const clickHandler = (evt) => {
+	const click_handler = (evt) => {
 		showModal(evt);
-		evt.target.removeEventListener('click', clickHandler);
+		evt.target.removeEventListener('click', click_handler);
 	}
 </script>
 
@@ -26,7 +26,7 @@
 	{#if graduated}
 		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" pic={graduated_pic} />
 	{:else if admin && !article}
-		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" clickHandler={clickHandler} />
+		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" {click_handler} />
 	{/if}
 </div>
 

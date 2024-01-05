@@ -14,12 +14,12 @@
     export let button_text;
 
     // стандартный текст и картинка для карточек свинок, ищущих дом
-    data.map((article) => {
-        if (!article.text) {
-            article.text = 'Ищет самые лучшие ручки на свете';
+    data.map((data) => {
+        if (!data.text) {
+            data.text = 'Ищет самые лучшие ручки на свете';
         }
-        if (!article.type) {
-            article.type = 'ready';
+        if (!data.type) {
+            data.type = 'ready';
         }
     });
 </script>
@@ -32,7 +32,7 @@
         <CardList>
             {#each data as article}
                 <li>
-                    <Card {article} {category} title={button_text} {admin} />
+                    <Card {article} {category} {button_text} {admin} />
                 </li>
             {/each}
         </CardList>

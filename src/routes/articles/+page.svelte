@@ -1,7 +1,8 @@
 <script>
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
+    import {onMount} from "svelte";
 
-    const data = [
+    let data = [
         {
             id: 1,
             title: 'Полезная статья',
@@ -24,10 +25,20 @@
             type: 'article',
         },
     ];
+
+    onMount( () => {
+        fetch('https://perpl.the-nepodarok.repl.co/web/articles')
+            .then((response) => {
+                if (response.ok) {
+                    return response.json()
+                }
+            })
+            .then(json => data = json)
+    });
 </script>
 
 <svelte:head>
 	<title>Статьи Домика</title>
 </svelte:head>
 
-<CatalogPage {data} category="articles" buttonText="Читать материал" />
+<CatalogPage {data} category="articles" page_title="Полезные статьи" button_text="Читать материал" />
