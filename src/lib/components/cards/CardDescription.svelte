@@ -3,16 +3,16 @@
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
-	import EditButton from '$lib/components/misc/button/EditButton.svelte';
 	import {showModal} from "$lib/components/utils/func.js";
 
 	export let header;
 	export let description;
-	export let graduated = false;
-	export let graduated_pic = 'found-home.png';
-	export let article = false;
+	export let graduated;
+	export let graduated_pic;
+	export let article;
 	export let age;
-	export let admin = true;
+	export let author;
+	export let admin;
 
 	const click_handler = (evt) => {
 		showModal(evt);
@@ -25,9 +25,12 @@
 	{#if age}
 		<p>Возраст: {age}</p>
 	{/if}
+	{#if author}
+		<p>Автор статьи: {author}</p>
+	{/if}
 	<ArticleText text={description} />
 	{#if graduated}
-		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" pic={graduated_pic} />
+		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" picture={graduated_pic} photo_type='graduated' />
 	{:else if admin && !article}
 		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" {click_handler} />
 	{/if}

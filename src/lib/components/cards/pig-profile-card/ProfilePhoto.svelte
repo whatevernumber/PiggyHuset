@@ -2,13 +2,13 @@
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
-	export let header = 'Свиник ищет дом';
-	export let profile_pic = "temp-pig-profile-photo.png";
+	export let pic;
 	export let admin;
+	export let photo_type;
 </script>
 
 <div>
-	<PhotoCard width="240" height="244" pic={profile_pic} />
+	<PhotoCard width="240" height="244" {pic} {photo_type} />
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton title="Редактировать" />
