@@ -9,7 +9,9 @@
         article: 'article-pig.png',
         profile: 'temp-pig-profile-photo.png',
         kb_pig: 'kb-pig.png',
-        graduated: 'found-home.png'
+        graduated: 'found-home.png',
+        ready: 'ready.jpg',
+        temp_pig: 'temp-pig-profile-photo.png',
     }
 
     if (pic) {

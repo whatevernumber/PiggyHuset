@@ -30,7 +30,7 @@
 	{/if}
 	<ArticleText text={description} />
 	{#if graduated}
-		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" picture={graduated_pic} photo_type='graduated' />
+		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" photo_type='graduated' />
 	{:else if admin && !article}
 		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" {click_handler} />
 	{/if}

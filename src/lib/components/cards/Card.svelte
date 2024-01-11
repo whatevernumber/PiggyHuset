@@ -1,20 +1,21 @@
 <script>
     import SmolButton from "$lib/components/misc/button/SmolButton.svelte";
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
+    import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 
     export let article = {};
     export let admin = false;
     export let category = 'looking-for-home';
     export let href = `/${category}/${article.id}`;
     export let button_text = 'Подробнее';
-    export let placeholder_image = 'ready';
+    export let default_picture;
 
-    $: image = article.main_photo ? article.main_photo : placeholder_image;
+    $: image = article.main_photo;
 </script>
 
 <article>
     <a {href}>
-        <img src="https://perpl.the-nepodarok.repl.co/web/img/{image}.jpg" width="250" height="250" alt="Фотография свинки">
+        <PhotoCard pic={image} photo_type={default_picture} width='250' height='250' alt='Фотография свинки' />
     </a>
     <div class="wrapper">
         <div class='header_wrapper'>
