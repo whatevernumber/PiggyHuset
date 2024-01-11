@@ -50,4 +50,4 @@
 	<title>Выпускники Домика</title>
 </svelte:head>
 
-<CatalogPage category="graduates" page_title="Выпускники Домика" {data} />
+<CatalogPage {default_picture} category="graduates" page_title="Выпускники Домика" {data} />

@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>404</title>
+</svelte:head>
+
 <section>
     <h1 class="extra-big-header">
         Упс!

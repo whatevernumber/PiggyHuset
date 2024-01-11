@@ -1,4 +1,11 @@
+<script context="module">
+    import { dayjs } from "svelte-time"
+    import "dayjs/locale/ru";
+    dayjs.locale('ru')
+</script>
+
 <script>
+    import Time from "svelte-time";
     import SmolButton from "$lib/components/misc/button/SmolButton.svelte";
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
@@ -31,7 +38,7 @@
         </div>
         <p class="card-description">{article.description ?? article.text}</p>
         <div class="bottom-line">
-            <time datetime="{article.datetime}">{article.datetime}</time>
+            <Time relative timestamp={article.datetime} />
             <SmolButton title={button_text} {href} />
         </div>
     </div>

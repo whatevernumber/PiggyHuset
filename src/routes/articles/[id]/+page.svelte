@@ -13,6 +13,9 @@
 	let header = article.title;
 	let description = article.text;
 	let pic = article.main_photo;
+	let date = article.datetime;
+
+	console.log(article)
 </script>
 
 <svelte:head>
@@ -20,7 +23,7 @@
 </svelte:head>
 
 <div class="article_wrapper">
-	<Article class_name="article_news">
+	<Article class_name="article_news" {date}>
 		<div class="wrapper">
 			<PhotoCard {pic} {photo_type} />
 			<CardDescription article {header} {description} {author} />

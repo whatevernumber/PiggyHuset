@@ -9,6 +9,7 @@
 	let news = data.news;
 	let header = news.title;
 	let description = news.text;
+	let date = news.datetime;
 
 </script>
 
@@ -16,7 +17,7 @@
 	<title>{header}</title>
 </svelte:head>
 
-<Article>
+<Article {date}>
 	<PigProfile article {header} {photo_type} {description} />
 	{#if news.photos.length}
 	<PhotoList photos={news.photos} />
