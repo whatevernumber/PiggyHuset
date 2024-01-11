@@ -19,4 +19,4 @@
 	<title>Ищут дом</title>
 </svelte:head>
 
-<CatalogPage category="looking-for-home" type="ready" page_title="Ищут дом" {data} />
+<CatalogPage category="looking-for-home" page_title="Ищут дом" {data} />
