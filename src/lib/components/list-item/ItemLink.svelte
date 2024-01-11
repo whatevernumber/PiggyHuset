@@ -2,7 +2,7 @@
     export let text;
     export let href = '/';
     export let icon = 'list-icon-pink.png';
-    let background_icon_url = "url('./src/lib/img/" + icon + "')";
+    let background_icon_url = "url('/src/lib/img/" + icon + "')";
 </script>
 
 <a class="option-item-link" {href}>

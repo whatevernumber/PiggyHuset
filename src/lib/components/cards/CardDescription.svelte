@@ -30,7 +30,9 @@
 	{/if}
 	<ArticleText text={description} />
 	{#if graduated}
+	<div class='graduated_image'>
 		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" photo_type='graduated' />
+	</div>
 	{:else if admin && !article}
 		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" {click_handler} />
 	{/if}
@@ -43,4 +45,8 @@
 		flex-grow: 1;
         row-gap: 50px;
     }
+
+	.graduated_image {
+	justify-self: flex-start;
+	}
 </style>

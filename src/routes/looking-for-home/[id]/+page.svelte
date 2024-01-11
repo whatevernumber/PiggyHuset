@@ -14,13 +14,14 @@
 	let age = pig.age;
 	let graduated = pig.graduated;
 	let description = pig.description;
+	let date = pig.datetime;
 </script>
 
 <svelte:head>
 	<title>{pig.name ?? 'Свинка'}</title>
 </svelte:head>
 
-<Article>
+<Article {date}>
 	<PigProfile {description} {graduated} {pic} {header} {age} {photo_type} />
 
 	{#if pig.photos.length > 1}
