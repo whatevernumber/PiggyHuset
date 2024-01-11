@@ -6,9 +6,9 @@
 
 <script>
 	import Time from "svelte-time";
-
-	export let class_name;
 	export let date;
+	export let class_name;
+	export let date_description = 'Опубликовано';
 </script>
 
 <div class="article_wrapper">
