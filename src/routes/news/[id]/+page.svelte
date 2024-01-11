@@ -18,7 +18,7 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile article {header} {photo_type} {description} />
+	<PigProfile article type="news" {header} {photo_type} {description} />
 	{#if news.photos.length}
 	<PhotoList photos={news.photos} />
 	{/if}

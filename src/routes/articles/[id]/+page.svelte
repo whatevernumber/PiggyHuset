@@ -6,16 +6,11 @@
 
 	export let data;
 
-	let photo_type = 'article';
-
-	let article = data.article;
-	let author = article.author;
-	let header = article.title;
-	let description = article.text;
-	let pic = article.main_photo;
-	let date = article.datetime;
-
-	console.log(article)
+	const article = data.article;
+	const pic = article.main_photo;
+	const header = article.title;
+	const description = article.text;
+	const author = article.author;
 </script>
 
 <svelte:head>
@@ -23,9 +18,9 @@
 </svelte:head>
 
 <div class="article_wrapper">
-	<Article class_name="article_news" {date}>
+	<Article class_name="article_news" date="{article.datetime}">
 		<div class="wrapper">
-			<PhotoCard {pic} {photo_type} />
+			<PhotoCard {pic} type="article" />
 			<CardDescription article {header} {description} {author} />
 		</div>
 		{#if article.photos.length}

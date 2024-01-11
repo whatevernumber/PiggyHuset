@@ -1,12 +1,12 @@
 <script>
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
 	import {onMount} from "svelte";
+	import {_REMOTE_SERVER} from "$env/static/public";
 
-	let default_picture = 'temp_pig';
 	let data;
 
 	onMount( () => {
-		fetch('https://8393e96b-2841-4ffe-93df-baf53fa0b998-00-2174wtn3teowp.riker.replit.dev/web/pigs')
+		fetch(_REMOTE_SERVER + '/pigs')
 			.then((response) => {
 				if (response.ok) {
 					return response.json()
@@ -19,4 +19,4 @@
 	<title>Ищут дом</title>
 </svelte:head>
 
-<CatalogPage {default_picture} page_title="Ищут дом" {data} />
+<CatalogPage category="looking-for-home" page_title="Ищут дом" {data} />

@@ -2,8 +2,6 @@
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
     import {onMount} from "svelte";
 
-	let default_picture = 'article';
-
     // let data = [
     //     {
     //         id: 1,
@@ -47,4 +45,4 @@
 	<title>Статьи Домика</title>
 </svelte:head>
 
-<CatalogPage {data} {default_picture} category="articles" page_title="Полезные статьи" button_text="Читать материал" />
+<CatalogPage {data} type="article" category="articles" page_title="Полезные статьи" button_text="Читать материал" />

@@ -4,11 +4,11 @@
 
 	export let pic;
 	export let admin;
-	export let photo_type;
+	export let type;
 </script>
 
 <div>
-	<PhotoCard width="240" height="244" {pic} {photo_type} />
+	<PhotoCard width="240" height="244" {pic} {type} />
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton title="Редактировать" />

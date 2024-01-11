@@ -4,15 +4,11 @@
     import Card from "$lib/components/cards/Card.svelte";
 
     export let page_title;
-
     export let data = [];
-
     export let admin = false;
-
     export let category;
-
     export let button_text;
-    export let default_picture;
+    export let type;
 
     // стандартный текст и картинка для карточек свинок, ищущих дом
     data.map((data) => {
@@ -33,7 +29,7 @@
         <CardList>
             {#each data as article}
                 <li>
-                    <Card {article} {default_picture} {category} {button_text} {admin} />
+                    <Card {article} {type} {category} {button_text} {admin} />
                 </li>
             {/each}
         </CardList>

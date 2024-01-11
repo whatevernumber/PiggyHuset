@@ -20,4 +20,4 @@
 	<title>Новости</title>
 </svelte:head>
 
-<CatalogPage {default_picture} category="news" page_title="Новости" {data} />
+<CatalogPage {default_picture} type="news" category="news" page_title="Новости" {data} />

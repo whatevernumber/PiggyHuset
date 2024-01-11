@@ -4,12 +4,15 @@
 	import {onMount} from "svelte";
 	import {Splide, SplideSlide} from "@splidejs/svelte-splide";
 	import '@splidejs/svelte-splide/css/splide.min.css';
+	import {fade} from "svelte/transition";
+	import {_REMOTE_SERVER} from "$env/static/public";
 
 	export let autoplay = false;
-	export let first_slide;
+	export let first_slide = false;
+	export let linked = false;
 	export let photos;
 
-	let temp_address = 'https://8393e96b-2841-4ffe-93df-baf53fa0b998-00-2174wtn3teowp.riker.replit.dev/web/img/'
+	let temp_address = _REMOTE_SERVER + '/img/';
 
 	export let no_border = false;
 
@@ -17,7 +20,7 @@
 	let slider = SplideSlide;
 
 	if (!photos) {
-		photos = [{ image: '/src/lib/img/pig-in-a-hat.jpeg'} ];
+		photos = [{ image: '../src/lib/img/pig-in-a-hat.jpeg' }];
 	}
 
 	const main_options = {
@@ -25,7 +28,7 @@
 		perPage: 1,
 		perMove: 1,
 		pagination: false,
-		height: 520,
+		height: 520
 	};
 
 	const thumb_options = {
@@ -33,7 +36,8 @@
 		fixedWidth: 250,
 		focus: 'center',
 		isNavigation: true,
-		autoplay: {autoplay}
+		autoplay: {autoplay},
+		arrows: false
 	};
 
 	onMount( () => {
@@ -43,7 +47,7 @@
 	});
 </script>
 
-<div class="splide-wrapper">
+<div class="splide-wrapper" transition:fade>
 	<Splide id="main-carousel" options="{main_options}" bind:this={splide}>
 		{#if (first_slide)}
 			<SplideSlide>
@@ -52,7 +56,13 @@
 		{/if}
 		{#each photos as item}
 			<SplideSlide>
-				<PhotoView src={temp_address + item.image + '.jpg'} {no_border} />
+				{#if linked}
+				<a href="/looking-for-home/{item.id}">
+					<PhotoView src={temp_address + item.image + '.jpg'} {no_border} {linked} />
+				</a>
+				{:else}
+				<PhotoView src={temp_address + item.image + '.jpg'} {no_border} {linked} />
+				{/if}
 			</SplideSlide>
 		{/each}
 	</Splide>
