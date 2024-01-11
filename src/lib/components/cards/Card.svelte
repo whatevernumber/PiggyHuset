@@ -8,14 +8,14 @@
     export let category = 'looking-for-home';
     export let href = `/${category}/${article.id}`;
     export let button_text = 'Подробнее';
-    export let default_picture;
+    export let type;
 
-    $: image = article.main_photo;
+    $: image = article.main_photo ?? null;
 </script>
 
 <article>
     <a {href}>
-        <PhotoCard pic={image} photo_type={default_picture} width='250' height='250' alt='Фотография свинки' />
+        <PhotoCard pic={image} {type} width='250' height='250' alt='Фотография свинки' />
     </a>
     <div class="wrapper">
         <div class='header_wrapper'>
