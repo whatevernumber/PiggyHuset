@@ -15,7 +15,9 @@
 	<article class="article {class_name}">
 		<slot />
 		<div class="date">
-			<Time timestamp={date} />
+			<p class="date-description">
+				{date_description}: <Time timestamp={date} format="DD MMMM YYYY г." />
+			</p>
 		</div>
 	</article>
 </div>
