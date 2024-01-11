@@ -107,6 +107,14 @@
 		transition-duration: 320ms;
 	}
 
+	.splide:only-child .splide__pagination {
+		display: none;
+	}
+
+	.splide:not(.is-overflow) .splide__pagination {
+		display: flex;
+	}
+
 	#thumb-splide .splide__arrow--prev {
 		left: -2.5em;
 	}
@@ -122,5 +130,11 @@
 	.splide__slide .image-wrapper:hover {
 		filter: brightness(90%);
 		transition-duration: 120ms;
+	}
+
+	.splide__slide img {
+		width: 100%;
+		object-fit: cover;
+		object-position: left;
 	}
 </style>
