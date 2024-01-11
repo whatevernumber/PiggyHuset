@@ -2,29 +2,11 @@
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
 	import {onMount} from "svelte";
 
-    let data = [
-        {
-            id: 1,
-            type: 'waiting',
-            title: 'Свиник',
-            text: 'Ищет самые лучшие ручки на свете',
-        },
-        {
-            id: 2,
-            type: 'ready',
-            title: 'Новость о свинике',
-            text: 'Свиник пролечил носик и готов искать новый дом',
-        },
-        {
-            id: 3,
-            type: 'other-news',
-            title: 'Календари, брелки и квилты',
-            text: 'Ждут своих покупателей! Вся прибыль пойдёт на покрытие лечения постояльцев Домика.',
-        },
-    ];
+	let default_picture = 'ready';
+	let data;
 
 	onMount( () => {
-		fetch('https://perpl.the-nepodarok.repl.co/web/articles')
+		fetch('https://8393e96b-2841-4ffe-93df-baf53fa0b998-00-2174wtn3teowp.riker.replit.dev/web/articles')
 			.then((response) => {
 				if (response.ok) {
 					return response.json()
@@ -38,4 +20,4 @@
 	<title>Новости</title>
 </svelte:head>
 
-<CatalogPage category="news" page_title="Новости" {data} />
+<CatalogPage {default_picture} category="news" page_title="Новости" {data} />

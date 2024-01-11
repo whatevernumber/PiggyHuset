@@ -1,11 +1,18 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
 	import CardDescription from '$lib/components/cards/CardDescription.svelte';
-	import CardPhoto from '$lib/components/cards/CardPhoto.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
+	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 
-	let additional_photos = true;
-	let header = 'Статья о Финике';
+	export let data;
+
+	let photo_type = 'article';
+
+	let article = data.article;
+	let author = article.author;
+	let header = article.title;
+	let description = article.text;
+	let pic = article.main_photo;
 </script>
 
 <svelte:head>
@@ -15,18 +22,11 @@
 <div class="article_wrapper">
 	<Article class_name="article_news">
 		<div class="wrapper">
-			<CardPhoto pic ='article-pig.png' />
-			<CardDescription article header="Статья" description="Что-то очень полезное и интересное" />
+			<PhotoCard {pic} {photo_type} />
+			<CardDescription article {header} {description} {author} />
 		</div>
-		<div class="date">
-			<datetime>Today at 18:15</datetime>
-		</div>
-		{#if additional_photos}
-			<div class="photo-wrapper">
-				<PhotoCard />
-				<PhotoCard />
-				<PhotoCard />
-			</div>
+		{#if article.photos.length}
+			<PhotoList photos={article.photos} />
 		{/if}
 	</Article>
 </div>
@@ -38,16 +38,16 @@
         position: relative;
     }
 
-		.wrapper {
-				display: flex;
-				column-gap: 15px;
-		}
+	.wrapper {
+			display: flex;
+			column-gap: 15px;
+	}
 
-		.photo-wrapper {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-		}
+	.photo-wrapper {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+	}
 
     .date {
         align-self: flex-end;

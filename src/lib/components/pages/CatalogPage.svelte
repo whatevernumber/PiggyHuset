@@ -12,6 +12,7 @@
     export let category;
 
     export let button_text;
+    export let default_picture;
 
     // стандартный текст и картинка для карточек свинок, ищущих дом
     data.map((data) => {
@@ -32,7 +33,7 @@
         <CardList>
             {#each data as article}
                 <li>
-                    <Card {article} {category} {button_text} {admin} />
+                    <Card {article} {default_picture} {category} {button_text} {admin} />
                 </li>
             {/each}
         </CardList>

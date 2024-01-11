@@ -2,26 +2,11 @@
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
 	import {onMount} from "svelte";
 
-    let data = [
-        {
-            id: 1,
-            title: 'Свиник',
-            type: 'ready',
-        },
-        {
-            id: 2,
-            title: 'Блиник',
-            type: 'ready',
-        },
-        {
-            id: 3,
-            title: 'Пиник',
-            type: 'ready',
-        },
-    ];
+	let default_picture = 'temp_pig';
+	let data;
 
 	onMount( () => {
-		fetch('https://perpl.the-nepodarok.repl.co/web/pigs')
+		fetch('https://8393e96b-2841-4ffe-93df-baf53fa0b998-00-2174wtn3teowp.riker.replit.dev/web/pigs')
 			.then((response) => {
 				if (response.ok) {
 					return response.json()
@@ -34,4 +19,4 @@
 	<title>Ищут дом</title>
 </svelte:head>
 
-<CatalogPage page_title="Ищут дом" {data} />
+<CatalogPage {default_picture} page_title="Ищут дом" {data} />

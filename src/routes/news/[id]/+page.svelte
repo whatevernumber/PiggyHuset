@@ -3,7 +3,13 @@
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 
-	let header = 'Новость о Свинике';
+	export let data;
+	let photo_type = 'kb_pig';
+
+	let news = data.news;
+	let header = news.title;
+	let description = news.text;
+
 </script>
 
 <svelte:head>
@@ -11,6 +17,8 @@
 </svelte:head>
 
 <Article>
-	<PigProfile article header description="Свиник съел все мясные таблетки и теперь здоров"/>
-	<PhotoList quantity="4" />
+	<PigProfile article {header} {photo_type} {description} />
+	{#if news.photos.length}
+	<PhotoList photos={news.photos} />
+	{/if}
 </Article>

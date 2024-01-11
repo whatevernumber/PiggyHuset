@@ -6,9 +6,14 @@
 
 	export let data;
 
+	let photo_type = 'profile';
+
 	let pig = data.pig;
-	let profile_pic = pig.main_photo ?? 'kb-pig.png';
-	let header = 'Финик';
+	let pic = pig.main_photo;
+	let header = pig.name + ' в поисках дома';
+	let age = pig.age;
+	let graduated = pig.graduated;
+	let description = pig.description;
 </script>
 
 <svelte:head>
@@ -16,13 +21,7 @@
 </svelte:head>
 
 <Article>
-
-	<PigProfile description={pig.description}
-				graduated={pig.graduated}
-				{profile_pic}
-				header={pig.name + ' в поисках дома'}
-				age={pig.age};
-	/>
+	<PigProfile {description} {graduated} {pic} {header} {age} {photo_type} />
 
 	{#if pig.photos.length}
 		<PhotoList photos={pig.photos} />

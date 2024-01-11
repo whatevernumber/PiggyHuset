@@ -3,15 +3,26 @@
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 
-	let header = 'Финик';
+	export let data;
+
+	let photo_type = 'profile';
+
+	let pig = data.pig;
+	let pic = pig.main_photo;
+	let header = pig.name + ' в поисках дома';
+	let age = pig.age;
+	let graduated = pig.graduated;
+	let description = pig.description;
 </script>
 
 <svelte:head>
 	<title>{header}</title>
 </svelte:head>
 
-
 <Article>
-	<PigProfile profile_pic="found-home.jpg" header="Нашел дом" graduated description="Финик-Свиник уехал в Мурманск и нашёл там 'Тёплый дом' и много-много друзей" />
-	<PhotoList quantity="6" />
+	<PigProfile {description} {graduated} {pic} {header} {age} {photo_type} />
+
+	{#if pig.photos.length}
+		<PhotoList photos={pig.photos} />
+	{/if}
 </Article>
