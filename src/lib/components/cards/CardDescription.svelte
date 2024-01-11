@@ -22,6 +22,11 @@
 
 <div class="profile_description">
 	<ArticleHeader text={header} />
+	{#if graduated}
+	<div class='graduated_image'>
+		<img class="graduated-icon" src="/src/lib/img/found-home.png" width="50px" height="50px" alt="Морская свинка в домике">
+	</div>
+	{/if}
 	{#if age}
 		<p>Возраст: {age}</p>
 	{/if}
@@ -29,11 +34,8 @@
 		<p>Автор статьи: {author}</p>
 	{/if}
 	<ArticleText text={description} />
-	{#if graduated}
-	<div class='graduated_image'>
-		<PhotoCard width="50px" height="50px" alt="Морская свинка в домике" photo_type='graduated' />
-	</div>
-	{:else if admin && !article}
+
+	{#if admin && !article}
 		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" {click_handler} />
 	{/if}
 </div>
@@ -46,7 +48,12 @@
         row-gap: 50px;
     }
 
+	.graduated-icon {
+		position: absolute;
+		top: 8%;
+	}
+
 	.graduated_image {
-	justify-self: flex-start;
+		justify-self: flex-start;
 	}
 </style>

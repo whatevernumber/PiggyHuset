@@ -14,7 +14,7 @@
 </script>
 
 <div class='profile_wrapper'>
-	<ProfilePhoto {pic} {admin} {photo_type} />
+	<ProfilePhoto {type} {pic} {admin} {photo_type} />
 	<CardDescription {header} {description} {graduated} {article} {age} />
 </div>
 
