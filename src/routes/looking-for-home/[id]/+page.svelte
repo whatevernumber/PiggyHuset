@@ -23,7 +23,7 @@
 <Article>
 	<PigProfile {description} {graduated} {pic} {header} {age} {photo_type} />
 
-	{#if pig.photos.length}
+	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />
 	{/if}
 </Article>

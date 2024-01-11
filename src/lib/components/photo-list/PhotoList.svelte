@@ -28,8 +28,7 @@
 		perPage: 1,
 		perMove: 1,
 		pagination: false,
-		height: 520,
-		arrows: false
+		height: 520
 	};
 
 	const thumb_options = {
@@ -37,7 +36,8 @@
 		fixedWidth: 250,
 		focus: 'center',
 		isNavigation: true,
-		autoplay: {autoplay}
+		autoplay: {autoplay},
+		arrows: false
 	};
 
 	onMount( () => {
