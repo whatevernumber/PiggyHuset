@@ -31,5 +31,19 @@
 
     .graduated_name {
         text-transform: uppercase;
+        padding: 5%;
+        background-color: #D97544;
+        text-align: center;
+    }
+
+    .graduated_name a {
+        color: #FFFFFF;
+        font-weight: 500;
+    }
+
+    .graduated_card img {
+        border: 2px dashed #D97544;
+        background-color: #f0f8ff;
+        object-fit: cover;
     }
 </style>
