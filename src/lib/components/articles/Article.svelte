@@ -1,13 +1,21 @@
+<script context="module">
+	import { dayjs } from "svelte-time"
+	import "dayjs/locale/ru";
+	dayjs.locale('ru')
+</script>
+
 <script>
+	import Time from "svelte-time";
+
 	export let class_name;
-	export let date_description = 'Опубликовано';
+	export let date;
 </script>
 
 <div class="article_wrapper">
 	<article class="article {class_name}">
 		<slot />
 		<div class="date">
-			<time>{date_description}: Сегодня в 18:15</time>
+			<Time timestamp={date} />
 		</div>
 	</article>
 </div>

@@ -31,7 +31,7 @@
 	let data;
 
     onMount( () => {
-        fetch('https://8393e96b-2841-4ffe-93df-baf53fa0b998-00-2174wtn3teowp.riker.replit.dev/web/articles')
+        fetch('https://8393e96b-2841-4ffe-93df-baf53fa0b998-00-2174wtn3teowp.riker.replit.dev/web/articles/type/1')
             .then((response) => {
                 if (response.ok) {
                     return response.json()
