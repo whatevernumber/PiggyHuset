@@ -1,3 +1,4 @@
+import { _REMOTE_SERVER } from '$env/static/public';
 import {goto} from "$app/navigation";
 
 /**
@@ -11,7 +12,7 @@ const closeModal = function (evt) {
     // проверяет, находится ли событие внутри модального окна
     const in_modal = modal.contains(evt.target);
 
-    const close_button = modal.querySelector('.close-button');
+    const close_button = modal.querySelector('.close-button') ?? null;
 
     if (!in_modal || evt.target === close_button) {
         modal.classList.add('modal_closed');
@@ -20,7 +21,7 @@ const closeModal = function (evt) {
         const blurred = document.querySelectorAll('.blur'); // все фоновые элементы
         blurred.forEach((item) => item.classList.remove('blur'));
 
-        close_button.removeEventListener('click', closeModal);
+        close_button?.removeEventListener('click', closeModal);
         document.removeEventListener('click', closeModal);
     }
 }
@@ -73,8 +74,35 @@ const randomize = (start, end, dotIndex = 0) => {
     return Number(result);
 };
 
+/**
+ * Удаление записи из БД и добавление сообщения в модальное окно
+ * @param type Тип записи | pig | article
+ * @param id ID записи
+ * @param success флаг результата
+*/
+
+async function removeData(type, id, success) {
+    let message = document.querySelector('.message');
+    message.textContent = 'Идёт удаление, подождите...';
+
+    // Прячет кнопки
+    document.querySelector('.buttons').style.visibility = 'hidden';
+    await fetch(_REMOTE_SERVER + '/' + type +'/' + id,
+        {
+            method: 'DELETE'
+        }).then((response) => {
+        if (response.ok) {
+            message.textContent = 'Удаление успешно!'
+            return success = true;
+        }
+    }).catch((e) => {
+        message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
+        return success = false;
+    });
+}
+
 const redirect = function (url, delay) {
     setTimeout(() => goto(url), delay);
 }
 
-export { closeModal, showModal, randomElements, randomize, redirect };
+export { closeModal, showModal, randomElements, randomize, redirect, removeData };

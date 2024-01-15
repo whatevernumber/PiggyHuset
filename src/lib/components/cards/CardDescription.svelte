@@ -33,10 +33,6 @@
 		<p>Автор статьи: {author}</p>
 	{/if}
 	<ArticleText text={description} />
-
-	{#if admin && !article}
-		<SmolButton class_name="smol-but-long-button" title="Связаться с куратором" {click_handler} />
-	{/if}
 </div>
 
 <style>

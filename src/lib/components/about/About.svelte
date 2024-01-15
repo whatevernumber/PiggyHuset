@@ -1,7 +1,7 @@
 <script>
     import Button from "$lib/components/misc/button/Button.svelte";
     import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
-    import {showModal} from "$lib/components/utils/func.js";
+    import {showModal, closeModal} from "$lib/components/utils/func.js";
 
     // Показать модальное окно
     const handle = (evt) => {

@@ -9,10 +9,11 @@
     import SmolButton from "$lib/components/misc/button/SmolButton.svelte";
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
+    import { showModal, removeData, closeModal } from '$lib/components/utils/func.js';
 
     /** Данные для показа в карточке **/
     export let article = {};
-    export let admin = false;
+    export let admin = true;
 
     /** Категория (для автоматического составления URL) **/
     export let category = 'looking-for-home';
@@ -22,8 +23,17 @@
     export let button_text = 'Подробнее';
     /** Тип карточки для автоматической подстановки плейсхолдер-картинки **/
     export let type;
+    export let delete_handler;
+
+    export let action;
+    export let success;
 
     $: image = article.main_photo ?? null;
+
+    const show_delete_message = (evt) => {
+        document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие <b>необратимо</b>`;
+    }
+
 </script>
 
 <article>
@@ -38,7 +48,7 @@
         {#if admin}
             <div class='button_wrapper'>
                 <EditButton button_name='edit' />
-                <EditButton button_name='delete' />
+                <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
             </div>
         {/if}
         </div>

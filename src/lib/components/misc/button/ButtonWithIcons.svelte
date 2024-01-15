@@ -8,7 +8,7 @@
     export let onclick;
     export let border = false;
 
-    let background_img = "url('../src/lib/img/" + icon + "')";
+    let background_img = "url('/src/lib/img/" + icon + "')";
 </script>
 
 <a class="button {class_name}" {href} style="--background_color: {background_color}; --background_img: {background_img};

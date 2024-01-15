@@ -50,4 +50,9 @@
         font-weight: 400;
         text-transform: uppercase;
     }
+
+    .home-link:hover {
+        color: #EF8653;
+    }
+
 </style>
