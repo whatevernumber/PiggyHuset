@@ -51,7 +51,7 @@
 	<Splide id="main-carousel" options="{main_options}" bind:this={splide}>
 		{#if (first_slide)}
 			<SplideSlide>
-				<PhotoView src="{temp_address + first_slide + '.jpg'}" no_border />
+				<PhotoView src="{first_slide}" no_border />
 			</SplideSlide>
 		{/if}
 		{#each photos as item}
@@ -70,7 +70,7 @@
 	<Splide id="thumb-splide" options="{thumb_options}" bind:this={slider}>
 			{#if (first_slide)}
 				<SplideSlide>
-					<img src="{temp_address + first_slide + '.jpg'}" width="200" height="200">
+					<img src="{first_slide}" width="200" height="200">
 				</SplideSlide>
 			{/if}
 		{#each photos as item}

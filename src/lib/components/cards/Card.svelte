@@ -10,11 +10,17 @@
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 
+    /** Данные для показа в карточке **/
     export let article = {};
     export let admin = false;
+
+    /** Категория (для автоматического составления URL) **/
     export let category = 'looking-for-home';
+
+    /** Можно задать URL вручную **/
     export let href = `/${category}/${article.id}`;
     export let button_text = 'Подробнее';
+    /** Тип карточки для автоматической подстановки плейсхолдер-картинки **/
     export let type;
 
     $: image = article.main_photo ?? null;
@@ -38,7 +44,7 @@
         </div>
         <p class="card-description">{article.description ?? article.text}</p>
         <div class="bottom-line">
-            <Time relative timestamp={article.datetime} />
+            <p class="datetime">Опубликовано: <Time relative timestamp={article.datetime} /></p>
             <SmolButton title={button_text} {href} />
         </div>
     </div>
@@ -85,8 +91,9 @@
         justify-content: space-between;
     }
 
-    time {
-        font-size: 14px;
+    .datetime {
+        font-size: 15px;
+        font-style: italic;
         color: rgba(0, 0, 0, 0.5);
         align-self: flex-end;
     }

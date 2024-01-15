@@ -1,3 +1,5 @@
+import {goto} from "$app/navigation";
+
 /**
  * Закрытие модального окна
  * @param evt Событие клика (приходит из on:click)
@@ -71,4 +73,8 @@ const randomize = (start, end, dotIndex = 0) => {
     return Number(result);
 };
 
-export { closeModal, showModal, randomElements, randomize };
+const redirect = function (url, delay) {
+    setTimeout(() => goto(url), delay);
+}
+
+export { closeModal, showModal, randomElements, randomize, redirect };

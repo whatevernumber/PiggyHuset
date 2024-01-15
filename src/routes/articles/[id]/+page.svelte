@@ -40,16 +40,4 @@
 			display: flex;
 			column-gap: 15px;
 	}
-
-	.photo-wrapper {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-	}
-
-    .date {
-        align-self: flex-end;
-        font-style: italic;
-        color: #adadad;
-    }
 </style>
