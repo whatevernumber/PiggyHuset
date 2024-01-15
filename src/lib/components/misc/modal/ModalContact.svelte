@@ -11,9 +11,9 @@
 	}
 </script>
 
-<div class="modal_closed modal_wrapper modal">
+<div class="modal modal_contact modal_closed modal_wrapper">
 	<div class="border_wrapper" style="--border_color: {color}">
-		<p class='message'>Куратор свинки - {curator}. <br> Пожалуйста, напишите в нашу группу ВК.</p>
+		<p class='message_info'>Куратор свинки - {curator}. <br> Пожалуйста, напишите в нашу группу ВК.</p>
 		<ButtonWithIcons class_name="close-button" title='Хорошо' icon='success-pig.png' />
 	</div>
 </div>

@@ -10,6 +10,7 @@
     export let type;
 	export let article;
 	export let admin;
+	export let show_delete
 </script>
 
 <div class='profile_wrapper'>

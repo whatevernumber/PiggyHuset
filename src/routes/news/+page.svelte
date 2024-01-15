@@ -1,9 +1,20 @@
 <script>
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
+	import {onMount} from "svelte";
+	import {_REMOTE_SERVER} from "$env/static/public";
 
-	export let data;
+	let default_picture = 'ready';
+	let data;
 
-	const news = data.news;
+	onMount( () => {
+		fetch(_REMOTE_SERVER + '/articles/type/2')
+			.then((response) => {
+				if (response.ok) {
+					return response.json()
+				}
+			})
+			.then(json => data = json)
+	});
 </script>
 
 <svelte:head>

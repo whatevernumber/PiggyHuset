@@ -3,8 +3,10 @@
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
 	export let pic;
-	export let admin;
+	export let admin = true;
 	export let type;
+	export let show_delete;
+
 </script>
 
 <div>
@@ -12,7 +14,7 @@
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton title="Редактировать" />
-			<SmolButton class_name = "super-smol-button" title="Удалить" />
+			<SmolButton class_name = "super-smol-button" title="Удалить" click_handler={show_delete} />
 		</div>
 	{/if}
 </div>
@@ -21,6 +23,7 @@
   .profile_buttons {
       display: flex;
       max-width: 270px;
+	  margin-top: 5px;
       justify-content: space-between;
   }
 </style>

@@ -50,4 +50,20 @@
         background-color: #adadad;
     }
 
+    .smol-red {
+        max-width: 125px;
+        padding: 5px 20px;
+        background-color: red;
+    }
+
+    .smol-red:hover {
+        background-color: rgba(255,85,22,0.87);
+    }
+
+    .close-button {
+        max-width: 125px;
+        padding: 5px 20px;
+        background-color: green;
+    }
+
 </style>
