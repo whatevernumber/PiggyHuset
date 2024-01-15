@@ -1,8 +1,9 @@
 <script>
 	export let title = 'Отправить';
+    export let on_click = null;
 </script>
 
-<button class="form-button" type="submit">{title}</button>
+<button class="form-button" type="button" on:click={on_click}>{title}</button>
 
 <style>
 	.form-button {
