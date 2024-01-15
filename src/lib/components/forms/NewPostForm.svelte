@@ -4,22 +4,19 @@
     export let title;
 
     const scheme = {
-        title: title || 'Новая статья',
-        endpoint: '/articles',
+        title: title || 'Новая публикация',
+        endpoint: '/articles/type/2',
         fields: [
             {
-                label: 'Автор',
-                name: 'author'
+                label: 'Заголовок публикации',
+                name: 'title'
             },
             {
-                label: 'Источник (ссылка)',
-                name: 'origin_link'
-            },
-            {
-                label: 'Текст статьи',
+                label: 'Текст публикации',
                 name: 'text',
                 type: 'textarea',
-                required: true
+                required: true,
+                placeholder: 'Расскажите новость'
             }
         ],
         files: {
