@@ -1,6 +1,8 @@
 <script>
     import Form from "$lib/components/forms/Form.svelte";
 
+	export let title = '';
+
     const scheme = {
         title: title || 'Новая статья',
         endpoint: '/articles',

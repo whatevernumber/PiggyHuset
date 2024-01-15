@@ -3,7 +3,9 @@
     import SubmitButton from "$lib/components/misc/form-elements/SubmitButton.svelte";
     import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
     import {_REMOTE_SERVER} from "$env/static/public";
-    import {redirect} from "$lib/components/utils/func.js";
+    import {redirect, showModal} from "$lib/components/utils/func.js";
+    import EmojiButton from '$lib/components/misc/button/EmojiButton.svelte';
+    import EmojiPicker from '$lib/components/picker/EmojiPicker.svelte';
 
     export let scheme = {};
     export let redirect_location = '/';
@@ -11,6 +13,10 @@
     let image_upload_preview = [];
 
     let errors = {};
+
+    const open_emoji = (evt) => {
+        showModal(evt, 'emoji_wrapper')
+    }
 
     const get_scheme = function* (fields) {
         for (let i = 0; i < fields.length; i++) {
@@ -106,6 +112,8 @@
                 <label class="form-label" for="animal-health">{textarea.label}</label>
                 <textarea class="form-input-field" id="animal-health" name="description" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
                 <span class="input-error-label"></span>
+                <EmojiButton onclick={open_emoji} />
+                <EmojiPicker />
             </div>
         </fieldset>
         {/if}

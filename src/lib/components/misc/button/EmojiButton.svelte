@@ -10,8 +10,8 @@
         position: absolute;
         width: 30px;
         height: 30px;
-        right: 15px;
-        bottom: 15px;
+        right: 13px;
+        bottom: 5px;
         background-image: url("/src/lib/img/smile.png");
         background-position: center;
         background-size: 18px 18px;
