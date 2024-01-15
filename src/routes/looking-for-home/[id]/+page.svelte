@@ -5,12 +5,9 @@
 	import { showModal, removeData, closeModal } from '$lib/components/utils/func.js';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 
-
 	export let data;
 	export let action;
 	export let success;
-
-	let photo_type = 'profile';
 
 	let pig = data.pig;
 	let pic = pig.main_photo;
@@ -19,11 +16,11 @@
 	let graduated = pig.graduated;
 	let description = pig.description;
 	let date = pig.datetime;
-
+	let volunteer = 'Дарья';
 
 	const show_delete = (evt) => {
 		action = 'delete';
-		document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${header}". Это действие <b>необратимо</b>`;
+		document.querySelector('.message').innerHTML = `Вы собираетесь удалить профиль "${pig.name}". Это действие <b>необратимо</b>`;
 		showModal(evt);
 		evt.target.removeEventListener('click', show_delete);
 		document.removeEventListener('click', closeModal);
@@ -46,7 +43,7 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {description} {graduated} {pic} {header} {age} {photo_type} />
+	<PigProfile {description} {graduated} {pic} {header} {age} {show_delete} {volunteer} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />

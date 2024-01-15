@@ -1,7 +1,5 @@
 <script>
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
-    import {onMount} from "svelte";
-	import {_REMOTE_SERVER} from "$env/static/public";
 
     // let data = [
     //     {
@@ -27,19 +25,9 @@
     //     },
     // ];
 
-	let data;
+	export let data;
+	let articles = data.articles;
 
-    onMount( () => {
-        fetch(_REMOTE_SERVER + '/articles/type/1')
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                }
-            })
-            .then(json => data = json)
-    });
-
-	console.log(data)
 </script>
 
 <svelte:head>
