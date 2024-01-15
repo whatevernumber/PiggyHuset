@@ -1,13 +1,14 @@
 <script>
     import TurnInForm from "$lib/components/forms/TurnInForm.svelte";
-</script>
 
+    const title = 'Отдать Свинку';
+</script>
 <svelte:head>
-    <title>Отдать Свинку</title>
+    <title>{title}</title>
 </svelte:head>
 
 <section class="container">
-    <TurnInForm />
+    <TurnInForm {title} />
 </section>
 
 <style>

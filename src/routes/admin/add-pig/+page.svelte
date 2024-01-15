@@ -7,15 +7,13 @@
 </svelte:head>
 
 <section class="container">
-	<AddPigForm />
+	<AddPigForm redirect_location="/looking-for-home" />
 </section>
 
 <style>
     .container {
         min-height: 100%;
         margin:auto;
-        background: url("/img/main-bg.png") no-repeat;
-        background-size: cover;
         display: flex;
         justify-content: center;
         align-items: center;
