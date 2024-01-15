@@ -9,22 +9,13 @@
     export let redirect_location = '/';
 
     let image_upload_preview = [];
-
     let errors = {};
 
-    const get_scheme = function* (fields) {
-        for (let i = 0; i < fields.length; i++) {
-            yield fields[i];
-        }
+    const textarea = scheme.fields.filter(field => field.type === 'textarea');
+    const fields = scheme.fields.filter(field => field !== textarea);
 
-        return field;
-    }
-
-    let generator = get_scheme(scheme.fields);
-    let field = generator.next().value;
-
-    const textarea = scheme.fields.find(field => field.type === 'textarea');
-    const bottom_fields = [...get_scheme(scheme.fields)].slice(3);
+    const top_fields = fields.slice(0, 2);
+    const bottom_fields = fields.filter(field => !top_fields.includes(field));
 
     async function sendForm () {
         const form = document.querySelector('form');
@@ -78,28 +69,23 @@
 <section class="form-section">
     <h3 class="form-header">{scheme.title}</h3>
     <form class="form-scheme" enctype="multipart/form-data">
+
+        {#if top_fields}
         <fieldset class="label-group">
-            {#if !field.done}
-                {@const required = field.required}
+            {#each top_fields as field}
+                {#if field !== textarea}
+                    {@const required = field.required}
             <div class="form-item">
                 <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
                 <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
                 <span class="input-error-label"></span>
             </div>
-            {/if}
-
-        {#if !field.done}
-            {@const field = generator.next().value}
-            {@const required = field.required}
-            <div class="form-item">
-                <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
-                <span class="input-error-label"></span>
-            </div>
-        {/if}
+                {/if}
+            {/each}
         </fieldset>
+        {/if}
 
-        {#if textarea}
+        {#each textarea as textarea}
             {@const required = textarea.required ?? false}
         <fieldset class="label-group middle-group">
             <div class="form-item animal-health-set">
@@ -108,10 +94,10 @@
                 <span class="input-error-label"></span>
             </div>
         </fieldset>
-        {/if}
+        {/each}
 
-        <fieldset class="bottom-fields">
         {#if bottom_fields}
+        <fieldset class="bottom-fields">
             {#each bottom_fields as field}
                 {@const required = field.required}
             <div class="form-item">
@@ -120,8 +106,8 @@
             </div>
             <span class="input-error-label"></span>
             {/each}
-        {/if}
         </fieldset>
+        {/if}
 
         <fieldset class="label-group">
         {#if scheme.files.file_input}
@@ -271,6 +257,10 @@
         content: '⛔';
         padding-right: 5px;
         fill: #e1edce;
+    }
+
+    .form-item:has(input[type="textarea"]) {
+        display: none;
     }
 
 </style>
