@@ -8,7 +8,6 @@
 	export let header;
 	export let description;
 	export let graduated;
-	export let graduated_pic;
 	export let article;
 	export let age;
 	export let author;
@@ -47,11 +46,6 @@
 		flex-grow: 1;
         row-gap: 50px;
     }
-
-	.graduated-icon {
-		position: absolute;
-		top: 8%;
-	}
 
 	.graduated_image {
 		justify-self: flex-start;
