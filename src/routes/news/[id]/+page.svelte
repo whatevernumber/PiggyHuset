@@ -4,12 +4,11 @@
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 
 	export let data;
-	let photo_type = 'kb_pig';
 
-	let news = data.news;
-	let header = news.title;
-	let description = news.text;
-	let date = news.datetime;
+	const news = data.news;
+	const header = news.title;
+	const description = news.text;
+	const date = news.datetime;
 
 </script>
 
@@ -18,7 +17,8 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile article type="news" {header} {photo_type} {description} />
+	<PigProfile article type="news" {header} {description} />
+
 	{#if news.photos.length}
 	<PhotoList photos={news.photos} />
 	{/if}

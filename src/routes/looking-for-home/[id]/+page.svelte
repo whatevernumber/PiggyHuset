@@ -8,13 +8,13 @@
 
 	let photo_type = 'profile';
 
-	let pig = data.pig;
-	let pic = pig.main_photo;
-	let header = pig.name + ' в поисках дома';
-	let age = pig.age;
-	let graduated = pig.graduated;
-	let description = pig.description;
-	let date = pig.datetime;
+	const pig = data.pig;
+	const pic = pig.main_photo;
+	const header = pig.name + ' в поисках дома';
+	const age = pig.age;
+	const graduated = pig.graduated;
+	const description = pig.description;
+	const date = pig.datetime;
 </script>
 
 <svelte:head>
