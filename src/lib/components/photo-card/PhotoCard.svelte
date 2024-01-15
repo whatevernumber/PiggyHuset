@@ -1,11 +1,12 @@
 <script>
     import {_REMOTE_SERVER} from "$env/static/public";
 
-    export let alt = 'Изображение';
+    export let alt = '';
 	export let pic;
 	export let width = 200;
 	export let height = 200;
     export let type = 'pig';
+    export let src = (pic && pic !== undefined) ? `${_REMOTE_SERVER}/img/${pic}.jpg` : `../src/lib/img/placeholder/${type}.png`;
 
     // let pics = {
     //     article: 'article-pig.png',
@@ -25,12 +26,16 @@
 </script>
 
 <div class="image-wrapper" aria-roledescription="Посмотреть фото">
-    <img src={pic} class="photo-card" {width} {height} {alt}>
+    <img {src} class="photo-card" {width} {height} {alt}>
 </div>
 
 <style>
     .image-wrapper {
         display: flex;
         justify-content: center;
+    }
+
+    .photo-card {
+        object-fit: cover;
     }
 </style>

@@ -10,11 +10,10 @@
     export let type;
 	export let article;
 	export let admin;
-	export let photo_type;
 </script>
 
 <div class='profile_wrapper'>
-	<ProfilePhoto {type} {pic} {admin} {photo_type} />
+	<ProfilePhoto {type} {pic} {admin} />
 	<CardDescription {header} {description} {graduated} {article} {age} />
 </div>
 
