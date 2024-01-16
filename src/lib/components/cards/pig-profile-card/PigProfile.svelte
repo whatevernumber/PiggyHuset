@@ -9,13 +9,15 @@
 	export let age;
     export let type;
 	export let article;
+	export let volunteer;
 	export let admin;
-	export let show_delete
+	export let show_delete;
+	export let show_edit;
 </script>
 
 <div class='profile_wrapper'>
-	<ProfilePhoto {type} {pic} {admin} />
-	<CardDescription {header} {description} {graduated} {article} {age} />
+	<ProfilePhoto {type} {pic} {admin} {show_delete} {show_edit} />
+	<CardDescription {header} {description} {graduated} {article} {age} {volunteer} />
 </div>
 
 <style>

@@ -8,6 +8,7 @@
 	import { showModal, removeData, closeModal } from '$lib/components/utils/func.js';
 
 	export let data;
+	let admin = true;
 
 	const article = data.article;
 	const pic = article.main_photo;
@@ -42,7 +43,6 @@
 	<title>{header}</title>
 </svelte:head>
 
-
 <Article class_name="article_news" date="{article.datetime}">
 		<div class="wrapper">
 			<div>
@@ -60,7 +60,8 @@
 			<PhotoList photos={article.photos} />
 		{/if}
 </Article>
-<div class='modal_delete modal_closed'>
+
+<div class='modal modal_delete modal_closed'>
 	<ModalOkay {action} action_handler={remove} {success} />
 </div>
 

@@ -26,9 +26,9 @@
     }
 
     .modal_closed {
-        top: 100%;
+        top: 52%;
         opacity: 0;
-        z-index: -1;
+        z-index: -4;
     }
 
 </style>

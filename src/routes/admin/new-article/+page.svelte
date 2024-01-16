@@ -1,15 +1,14 @@
 <script>
 	import NewArticleForm from "$lib/components/forms/NewArticleForm.svelte";
+
+	const title = 'Добавить новую статью';
 </script>
 
 <svelte:head>
-	<title>Добавить новую статью</title>
+	<title>{title}</title>
 </svelte:head>
 
-<div class="article_wrapper">
-	<NewArticleForm />
-</div>
-
+<NewArticleForm {title} />
 
 <style>
     .article_wrapper {

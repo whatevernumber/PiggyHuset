@@ -11,6 +11,7 @@
 	export let article;
 	export let age;
 	export let author;
+	export let volunteer;
 	export let admin;
 
 	const click_handler = (evt) => {
@@ -33,6 +34,9 @@
 		<p>Автор статьи: {author}</p>
 	{/if}
 	<ArticleText text={description} />
+	{#if volunteer}
+		<p class='volunteer'>Куратор: <b>{volunteer}</b></p>
+	{/if}
 </div>
 
 <style>
@@ -45,5 +49,11 @@
 
 	.graduated_image {
 		justify-self: flex-start;
+	}
+
+	.volunteer {
+		font-size: 14px;
+		font-style: italic;
+		align-self: flex-end;
 	}
 </style>

@@ -2,6 +2,7 @@
 	import Form from "$lib/components/forms/Form.svelte";
 
     export let redirect_location;
+	export let modal;
 
 	const scheme = {
 		title: 'Новый поросёнок',
@@ -34,4 +35,4 @@
 	};
 </script>
 
-<Form {scheme} {redirect_location} />
+<Form {scheme} {modal} {redirect_location} />

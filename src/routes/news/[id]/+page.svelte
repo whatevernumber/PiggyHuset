@@ -40,9 +40,22 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile article type="news" {header} {description} />
+	<PigProfile article type="news" {header} {description} {show_delete} />
 
 	{#if news.photos.length}
 	<PhotoList photos={news.photos} />
 	{/if}
 </Article>
+
+<div class='modal modal_closed'>
+	<ModalOkay {action} action_handler={remove} {success} />
+</div>
+
+<style>
+    .modal {
+        position: absolute;
+        top: 35%;
+        left: 30%;
+        z-index: 10;
+    }
+</style>

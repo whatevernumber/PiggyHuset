@@ -1,17 +1,21 @@
 <script>
 
-	export let onclick;
+	import {redirect, showModal} from "$lib/components/utils/func.js";
+
+	const open_emoji = (evt) => {
+		showModal(evt, 'emoji_wrapper')
+	}
 
 </script>
-<div class='emoji_button' on:click={onclick}></div>
+<div class='emoji_button' on:click={open_emoji}></div>
 
 <style>
     .emoji_button {
         position: absolute;
         width: 30px;
         height: 30px;
-        right: 15px;
-        bottom: 15px;
+        right: 13px;
+        bottom: 5px;
         background-image: url("/src/lib/img/smile.png");
         background-position: center;
         background-size: 18px 18px;

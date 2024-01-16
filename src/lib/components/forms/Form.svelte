@@ -4,13 +4,15 @@
     import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
     import {_REMOTE_SERVER} from "$env/static/public";
     import {redirect} from "$lib/components/utils/func.js";
+    import EmojiButton from '$lib/components/misc/button/EmojiButton.svelte';
+    import EmojiPicker from '$lib/components/picker/EmojiPicker.svelte';
 
     export let scheme = {};
     export let redirect_location = '/';
 
     let image_upload_preview = [];
-    let errors = {};
 
+    let errors = {};
     const textarea = scheme.fields.filter(field => field.type === 'textarea');
     const fields = scheme.fields.filter(field => field !== textarea);
 
@@ -92,10 +94,15 @@
                 <label class="form-label" for="animal-health">{textarea.label}</label>
                 <textarea class="form-input-field" id="animal-health" name="description" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
                 <span class="input-error-label"></span>
+                {#if !modal}
+                    <EmojiButton />
+                    <EmojiPicker />
+                {/if}
             </div>
         </fieldset>
         {/each}
 
+        <fieldset class="bottom-fields">
         {#if bottom_fields}
         <fieldset class="bottom-fields">
             {#each bottom_fields as field}
