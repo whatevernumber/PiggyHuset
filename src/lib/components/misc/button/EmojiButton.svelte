@@ -1,9 +1,13 @@
 <script>
 
-	export let onclick;
+	import {redirect, showModal} from "$lib/components/utils/func.js";
+
+	const open_emoji = (evt) => {
+		showModal(evt, 'emoji_wrapper')
+	}
 
 </script>
-<div class='emoji_button' on:click={onclick}></div>
+<div class='emoji_button' on:click={open_emoji}></div>
 
 <style>
     .emoji_button {
