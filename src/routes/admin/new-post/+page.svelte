@@ -1,10 +1,5 @@
 <script>
-	import Article from '$lib/components/articles/Article.svelte';
-	import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
-	import TextArea from '$lib/components/misc/form-elements/TextArea.svelte';
-	import SubmitButton from '$lib/components/misc/form-elements/SubmitButton.svelte';
-	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
-	import FileInput from '$lib/components/misc/form-elements/FileInput.svelte';
+	import NewPostForm from "$lib/components/forms/NewPostForm.svelte";
 </script>
 
 <svelte:head>
@@ -12,29 +7,7 @@
 </svelte:head>
 
 <div class="article_wrapper">
-	<Article class_name="article_post">
-			<BigHeader textContent = "Новый пост"/>
-				<form method="post" enctype="multipart/form-data">
-					<div class="form-wrapper">
-						<TextArea />
-						<div class="photo-area">
-							<FileInput />
-							{#if true}
-							<div class="photo-uploaded">
-								<p class="uploaded-text">Загруженные файлы: </p>
-								<PhotoCard width="93" height="71" />
-								<PhotoCard width="93" height="71" />
-								<PhotoCard width="93" height="71" />
-								<PhotoCard width="93" height="71" />
-								<PhotoCard width="93" height="71" />
-								<PhotoCard width="93" height="71" />
-							</div>
-							{/if}
-						</div>
-						<SubmitButton />
-					</div>
-				</form>
-	</Article>
+	<NewPostForm />
 </div>
 
 <style>
