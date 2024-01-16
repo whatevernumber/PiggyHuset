@@ -1,12 +1,13 @@
 <script>
 
-	import {redirect, showModal} from "$lib/components/utils/func.js";
+	import {showModal} from "$lib/components/utils/func.js";
 
 	const open_emoji = (evt) => {
-		showModal(evt, 'emoji_wrapper')
+		showModal(evt, 'emoji_wrapper');
 	}
 
 </script>
+
 <div class='emoji_button' on:click={open_emoji}></div>
 
 <style>
