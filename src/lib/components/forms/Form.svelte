@@ -11,10 +11,10 @@
     export let redirect_location = '/';
 
     let image_upload_preview = [];
-
     let errors = {};
+
     const textarea = scheme.fields.filter(field => field.type === 'textarea');
-    const fields = scheme.fields.filter(field => field !== textarea);
+    const fields = scheme.fields.filter(field => !textarea.includes(field));
 
     const top_fields = fields.slice(0, 2);
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
@@ -30,16 +30,17 @@
 
         if (res.ok) {
             const success = await res.json();
-            redirect(`${redirect_location}/${success.id}`, 2500);
+            redirect(`/${redirect_location}/${success.id || null}`);
         } else {
             errors = await res.json();
 
             for (const prop in errors) {
-                const field = document.querySelector(`[name=${prop}]`);
-                const label = document.querySelector(`[name=${prop}] ~ .input-error-label`);
+                const field = document.querySelector(`[input_name=${prop}]`);
+                const label = document.querySelector(`[input_name=${prop}] ~ .input-error-label`);
                 label.textContent = errors[prop];
                 console.log(errors);
                 field.classList.add('input-error');
+                field.value = '';
             }
         }
     }
@@ -91,12 +92,12 @@
             {@const required = textarea.required ?? false}
         <fieldset class="label-group middle-group">
             <div class="form-item animal-health-set">
-                <label class="form-label" for="animal-health">{textarea.label}</label>
-                <textarea class="form-input-field" id="animal-health" name="description" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
+                <label class="form-label" for="{textarea.name}">{textarea.label}</label>
+                <textarea class="form-input-field" id="{textarea.name}" name="{textarea.name}" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
                 <span class="input-error-label"></span>
-                {#if !modal}
-                    <EmojiButton />
-                    <EmojiPicker />
+                {#if textarea.emoji}
+                <EmojiButton />
+                <EmojiPicker input_name="{textarea.name}" />
                 {/if}
             </div>
         </fieldset>
@@ -109,9 +110,9 @@
                 {@const required = field.required}
             <div class="form-item">
                 <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                <input class="form-input-field blank" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                <span class="input-error-label"></span>
             </div>
-            <span class="input-error-label"></span>
             {/each}
         </fieldset>
         {/if}
@@ -241,8 +242,8 @@
         width: 75%;
     }
 
-    :global(form.form-scheme input[name].input-error),
-    :global(form.form-scheme textarea[name].input-error) {
+    :global(form.form-scheme input[input_name].input-error),
+    :global(form.form-scheme textarea[input_name].input-error) {
         outline: 2px inset #D97544;
 
         &:not(:placeholder-shown) {
@@ -264,10 +265,6 @@
         content: '⛔';
         padding-right: 5px;
         fill: #e1edce;
-    }
-
-    .form-item:has(input[type="textarea"]) {
-        display: none;
     }
 
 </style>

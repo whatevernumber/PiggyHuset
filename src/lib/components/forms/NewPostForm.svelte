@@ -16,7 +16,8 @@
                 name: 'text',
                 type: 'textarea',
                 required: true,
-                placeholder: 'Расскажите новость'
+                placeholder: 'Расскажите новость',
+                emoji: true
             }
         ],
         files: {
