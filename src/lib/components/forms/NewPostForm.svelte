@@ -9,7 +9,8 @@
         fields: [
             {
                 label: 'Заголовок публикации',
-                name: 'title'
+                name: 'title',
+                required: true
             },
             {
                 label: 'Текст публикации',
@@ -27,4 +28,4 @@
     }
 </script>
 
-<Form {scheme} />
+<Form {scheme} redirect_location="articles" />
