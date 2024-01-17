@@ -5,8 +5,20 @@
 
     const scheme = {
         title: title || 'Новая статья',
-        endpoint: '/articles',
+        endpoint: '/articles/type/1',
         fields: [
+            {
+                label: 'Заголовок статьи',
+                name: 'title',
+                required: true
+            },
+            {
+                label: 'Текст статьи',
+                name: 'text',
+                type: 'textarea',
+                required: true,
+                emoji: true
+            },
             {
                 label: 'Автор',
                 name: 'author'
@@ -15,12 +27,6 @@
                 label: 'Источник (ссылка)',
                 name: 'origin_link'
             },
-            {
-                label: 'Текст статьи',
-                name: 'text',
-                type: 'textarea',
-                required: true
-            }
         ],
         files: {
             file_input: true,
@@ -29,4 +35,4 @@
     }
 </script>
 
-<Form {scheme} />
+<Form {scheme} redirect_location="articles" />

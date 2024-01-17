@@ -15,6 +15,7 @@
     .container {
         min-height: 100%;
         margin: auto;
+        padding: 20px 0;
         background: url("/img/main-bg.png") no-repeat;
         background-size: cover;
         display: flex;

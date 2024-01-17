@@ -2,17 +2,18 @@
 	import 'emoji-picker-element';
 	import ru from 'emoji-picker-element/i18n/ru_RU.js';
 
+	export let input_name;
 	function pick (evt) {
-		let textarea = document.querySelector('#animal-health');
-		textarea.textContent = textarea.textContent + evt.detail.unicode;
+		const input_field = document.getElementById(input_name);
+		input_field.value = input_field.value + evt.detail.unicode;
 	}
 </script>
 
 <div class='emoji_wrapper modal_closed'>
-	<emoji-picker on:emoji-click={pick} i18n={ru}
+	<emoji-picker on:emoji-click={pick}
+				  i18n={ru}
 				  locale="ru"
-				  data-source='https://cdn.jsdelivr.net/npm/emoji-picker-element-data@^1/ru/emojibase/data.json'
-	/>
+				  data-source='https://cdn.jsdelivr.net/npm/emoji-picker-element-data@^1/ru/emojibase/data.json'/>
 </div>
 
 <style>

@@ -21,7 +21,8 @@
 				label: 'История свинки и состояние здоровья',
 				name: 'description',
 				type: 'textarea',
-				required: true
+				required: true,
+                emoji: true
 			},
 			{
 				label: 'Куратор',
