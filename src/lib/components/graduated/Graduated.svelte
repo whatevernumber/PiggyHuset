@@ -35,7 +35,7 @@
         {/each}
     </div>
     {/await}
-    <Button title="Посмотреть всех" background_color="#D97544" text_color="#FFFFFF" />
+    <Button href="/graduates" title="Посмотреть всех" background_color="#D97544" text_color="#FFFFFF" />
 </section>
 
 

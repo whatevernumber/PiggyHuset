@@ -8,7 +8,7 @@
     import EmojiPicker from '$lib/components/picker/EmojiPicker.svelte';
 
     export let scheme = {};
-    export let redirect_location = '/';
+    export let redirect_location;
 
     let image_upload_preview = [];
     let errors = {};
@@ -30,13 +30,13 @@
 
         if (res.ok) {
             const success = await res.json();
-            redirect(`/${redirect_location}/${success.id || null}`);
+            redirect(redirect_location ? `/${redirect_location}/${success.id || null}` : '/');
         } else {
             errors = await res.json();
 
             for (const prop in errors) {
-                const field = document.querySelector(`[input_name=${prop}]`);
-                const label = document.querySelector(`[input_name=${prop}] ~ .input-error-label`);
+                const field = document.querySelector(`[name=${prop}]`);
+                const label = document.querySelector(`[name=${prop}] ~ .input-error-label`);
                 label.textContent = errors[prop];
                 console.log(errors);
                 field.classList.add('input-error');
@@ -242,8 +242,8 @@
         width: 75%;
     }
 
-    :global(form.form-scheme input[input_name].input-error),
-    :global(form.form-scheme textarea[input_name].input-error) {
+    :global(form.form-scheme input[name].input-error),
+    :global(form.form-scheme textarea[name].input-error) {
         outline: 2px inset #D97544;
 
         &:not(:placeholder-shown) {
