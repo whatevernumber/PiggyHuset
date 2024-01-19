@@ -1,136 +1,138 @@
 <script>
-	import PhotoCard from "$lib/components/photo-card/PhotoCard.svelte";
-	import SubmitButton from "$lib/components/misc/form-elements/SubmitButton.svelte";
-	import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
-	import {_REMOTE_SERVER} from "$env/static/public";
-	import {redirect} from "$lib/components/utils/func.js";
-	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
+    import PhotoCard from "$lib/components/photo-card/PhotoCard.svelte";
+    import SubmitButton from "$lib/components/misc/form-elements/SubmitButton.svelte";
+    import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
+    import {_REMOTE_SERVER} from "$env/static/public";
+    import {redirect} from "$lib/components/utils/func.js";
+    import EmojiButton from '$lib/components/misc/button/EmojiButton.svelte';
+    import EmojiPicker from '$lib/components/picker/EmojiPicker.svelte';
 
-	export let scheme = {};
-	export let redirect_location = '/';
+    export let scheme = {};
+    export let redirect_location;
 
-	let image_upload_preview = [];
-	let errors = {};
+    let image_upload_preview = [];
+    let errors = {};
 
-	const textarea = scheme.fields.filter(field => field.type === 'textarea');
-	const fields = scheme.fields.filter(field => !textarea.includes(field));
+    const textarea = scheme.fields.filter(field => field.type === 'textarea');
+    const fields = scheme.fields.filter(field => !textarea.includes(field));
 
-	const top_fields = fields.slice(0, 2);
-	const bottom_fields = fields.filter(field => !top_fields.includes(field));
+    const top_fields = fields.slice(0, 2);
+    const bottom_fields = fields.filter(field => !top_fields.includes(field));
 
-	async function sendForm () {
-		const form = document.querySelector('form');
-		const formData = new FormData(form);
-		const res = await fetch(_REMOTE_SERVER + scheme.endpoint, {
-			method: 'POST',
-			credentials: 'include',
-			body: formData
-		});
+    async function sendForm () {
+        const form = document.querySelector('form');
+        const formData = new FormData(form);
+        const res = await fetch(_REMOTE_SERVER + scheme.endpoint, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+        });
 
-		if (res.ok) {
-			const success = await res.json();
-			redirect(`/${redirect_location}/${success.id || null}`);
-		} else {
-			errors = await res.json();
+        if (res.ok) {
+            const success = await res.json();
+            redirect(redirect_location ? `/${redirect_location}/${success.id || null}` : '/');
+        } else {
+            errors = await res.json();
 
-			for (const prop in errors) {
-				const field = document.querySelector(`[input_name=${prop}]`);
-				const label = document.querySelector(`[input_name=${prop}] ~ .input-error-label`);
-				label.textContent = errors[prop];
-				console.log(errors);
-				field.classList.add('input-error');
-				field.value = '';
-			}
-		}
-	}
+            for (const prop in errors) {
+                const field = document.querySelector(`[name=${prop}]`);
+                const label = document.querySelector(`[name=${prop}] ~ .input-error-label`);
+                label.textContent = errors[prop];
+                console.log(errors);
+                field.classList.add('input-error');
+                field.value = '';
+            }
+        }
+    }
 
-	const preview = function (evt) {
-		// очистка списка файлов
-		image_upload_preview = [];
+    const preview = function (evt) {
+        // очистка списка файлов
+        image_upload_preview = [];
 
-		const file_input = document.querySelector('input[type="file"]');
+        const file_input = document.querySelector('input[type="file"]');
 
-		// отмена показа ошибки валидации
-		if (file_input.classList.contains('input-error')) {
-			file_input.classList.remove('input-error');
-			document.querySelector('input[type="file"] ~ .input-error-label').style.display = 'none';
-		}
+        // отмена показа ошибки валидации
+        if (file_input.classList.contains('input-error')) {
+            file_input.classList.remove('input-error');
+            document.querySelector('input[type="file"] ~ .input-error-label').style.display = 'none';
+        }
 
-		// генерация URL картинок
-		for (const file of file_input.files) {
-			if (file.type.startsWith('image')) {
-				image_upload_preview.push(URL.createObjectURL(file));
-			}
-		}
+        // генерация URL картинок
+        for (const file of file_input.files) {
+            if (file.type.startsWith('image')) {
+                image_upload_preview.push(URL.createObjectURL(file));
+            }
+        }
 
-		// re-render
-		image_upload_preview = image_upload_preview;
-	}
+        // re-render
+        image_upload_preview = image_upload_preview;
+    }
 </script>
 
 <section class="form-section">
-	<h3 class="form-header">{scheme.title}</h3>
-	<form class="form-scheme" enctype="multipart/form-data">
+    <h3 class="form-header">{scheme.title}</h3>
+    <form class="form-scheme" enctype="multipart/form-data">
 
-		{#if top_fields}
-			<fieldset class="label-group">
-				{#each top_fields as field}
-					{#if field !== textarea}
-						{@const required = field.required}
-						<div class="form-item">
-							<label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-							<input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
-							<span class="input-error-label"></span>
-						</div>
-					{/if}
-				{/each}
-			</fieldset>
-		{/if}
+        {#if top_fields}
+        <fieldset class="label-group">
+            {#each top_fields as field}
+                {#if field !== textarea}
+                    {@const required = field.required}
+            <div class="form-item">
+                <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                <span class="input-error-label"></span>
+            </div>
+                {/if}
+            {/each}
+        </fieldset>
+        {/if}
 
-		{#each textarea as textarea}
-			{@const required = textarea.required ?? false}
-			<fieldset class="label-group middle-group">
-				<div class="form-item animal-health-set">
-					<label class="form-label" for="{textarea.name}">{textarea.label}</label>
-					<textarea class="form-input-field" id="{textarea.name}" name="{textarea.name}" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
-					<span class="input-error-label"></span>
-					{#if textarea.emoji}
-						<Emoji input_name={textarea.name}/>
-					{/if}
-				</div>
-			</fieldset>
-		{/each}
+        {#each textarea as textarea}
+            {@const required = textarea.required ?? false}
+        <fieldset class="label-group middle-group">
+            <div class="form-item animal-health-set">
+                <label class="form-label" for="{textarea.name}">{textarea.label}</label>
+                <textarea class="form-input-field" id="{textarea.name}" name="{textarea.name}" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
+                <span class="input-error-label"></span>
+                {#if textarea.emoji}
+                <EmojiButton />
+                <EmojiPicker input_name="{textarea.name}" />
+                {/if}
+            </div>
+        </fieldset>
+        {/each}
 
-		<fieldset class="bottom-fields">
-			{#if bottom_fields}
-				<fieldset class="bottom-fields">
-					{#each bottom_fields as field}
-						{@const required = field.required}
-						<div class="form-item">
-							<label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-							<input class="form-input-field blank" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
-							<span class="input-error-label"></span>
-						</div>
-					{/each}
-				</fieldset>
-			{/if}
+        <fieldset class="bottom-fields">
+        {#if bottom_fields}
+        <fieldset class="bottom-fields">
+            {#each bottom_fields as field}
+                {@const required = field.required}
+            <div class="form-item">
+                <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                <input class="form-input-field blank" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                <span class="input-error-label"></span>
+            </div>
+            {/each}
+        </fieldset>
+        {/if}
 
-			<fieldset class="label-group">
-				{#if scheme.files.file_input}
-					<FileInput class_name="form-input-field" name="files" multiple onchange="{preview}" />
-				{/if}
-				<div class="form-item button">
-					<SubmitButton on_click="{ sendForm }" />
-				</div>
-			</fieldset>
-			{#if image_upload_preview.length}
-				<div class="photo_preview">
-					{#each image_upload_preview as src}
-						<PhotoCard {src} width='80px' height='80px' />
-					{/each}
-				</div>
-			{/if}
-	</form>
+        <fieldset class="label-group">
+        {#if scheme.files.file_input}
+            <FileInput class_name="form-input-field" name="files" multiple onchange="{preview}" />
+        {/if}
+            <div class="form-item button">
+                <SubmitButton on_click="{ sendForm }" />
+            </div>
+        </fieldset>
+        {#if image_upload_preview.length}
+            <div class="photo_preview">
+                {#each image_upload_preview as src}
+                    <PhotoCard {src} width='80px' height='80px' />
+                {/each}
+            </div>
+        {/if}
+    </form>
 </section>
 
 <style>
@@ -240,17 +242,17 @@
         width: 75%;
     }
 
-    :global(form.form-scheme input[input_name].input-error),
-    :global(form.form-scheme textarea[input_name].input-error) {
+    :global(form.form-scheme input[name].input-error),
+    :global(form.form-scheme textarea[name].input-error) {
         outline: 2px inset #D97544;
 
-    &:not(:placeholder-shown) {
-         outline: none;
+        &:not(:placeholder-shown) {
+             outline: none;
 
-    &:not([type="file"]) ~ .input-error-label {
-         display: none;
-     }
-    }
+            &:not([type="file"]) ~ .input-error-label {
+                  display: none;
+            }
+        }
     }
 
     :global(.input-error + .input-error-label) {

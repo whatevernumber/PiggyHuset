@@ -14,7 +14,7 @@
         <img {src} width="248" height="261" alt="Изображение выпускника">
     </a>
     <p class="graduated_name">
-        <a href="{_REMOTE_SERVER + '/graduated/' + id}">{name}</a>
+        <a href="{'/graduates/' + id}">{name}</a>
     </p>
 </div>
 

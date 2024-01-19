@@ -2,7 +2,6 @@
     import Form from "$lib/components/forms/Form.svelte";
 
     export let title = '';
-    export let redirect_location;
 
     const scheme = {
         title: title || 'Форма для связи',
@@ -47,4 +46,4 @@
     }
 </script>
 
-<Form {scheme} {redirect_location} />
+<Form {scheme} />
