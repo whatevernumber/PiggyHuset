@@ -3,6 +3,8 @@
 
     export let title = '';
 
+	let modal_message = 'Запрос на передачу свинки успешно создан, ожидайте ответа администрации.';
+
     const scheme = {
         title: title || 'Форма для связи',
         description: 'Если вы хотите передать нам свою свинку, ' +
@@ -46,4 +48,4 @@
     }
 </script>
 
-<Form {scheme} />
+<Form {scheme} {modal_message} />

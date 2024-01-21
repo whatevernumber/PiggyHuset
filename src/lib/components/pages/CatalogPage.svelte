@@ -25,7 +25,7 @@
     });
 
     let new_batch = [];
-    let action = '';
+    $: action = '';
     let success;
 
     const show_delete = (evt) => {
@@ -37,6 +37,7 @@
 
     const remove = () => {
         success = removeData(category, 5);
+        console.log(success);
         if (success) {
             action = 'complete';
         } else {

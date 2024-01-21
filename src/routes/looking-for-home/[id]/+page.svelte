@@ -10,7 +10,6 @@
 	export let action;
 	export let success;
 
-
 	let pig = data.pig;
 	let pic = pig.main_photo;
 	let header = pig.name + ' в поисках дома';
@@ -55,7 +54,7 @@
 <Article {date}>
 	<PigProfile {description} {graduated} {pic} {header} {age} {show_delete} {show_edit} {volunteer} />
 
-	{#if pig.photos.length > 1}
+	{#if pig.photos.length}
 		<PhotoList photos={pig.photos} />
 	{/if}
 </Article>

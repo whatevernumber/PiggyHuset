@@ -18,9 +18,6 @@ const closeModal = function (evt) {
         modal.classList.add('modal_closed');
         modal.classList.remove('modal_opened');
 
-        const blurred = document.querySelectorAll('.blur'); // все фоновые элементы
-        blurred.forEach((item) => item.classList.remove('blur'));
-
         close_button?.removeEventListener('click', closeModal);
         document.removeEventListener('click', closeModal);
     }
@@ -43,9 +40,6 @@ const showModal = function (evt, modalClass = 'modal') {
 
     modal_view.classList.remove('modal_closed');
     modal_view.classList.add('modal_opened');
-
-    // блюр всех фоновых элементов
-    outer_area.forEach((item) => item.classList.add('blur'));
 
     // скролл по центру окошка
     modal_view.scrollIntoView({block: "center"});

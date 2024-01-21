@@ -2,6 +2,7 @@
     import Form from "$lib/components/forms/Form.svelte";
 
     export let title;
+	let modal_message = 'Новая запись успешно добавлена';
 
     const scheme = {
         title: title || 'Новая статья',
@@ -35,4 +36,4 @@
     }
 </script>
 
-<Form {scheme} redirect_location="articles" />
+<Form {scheme} {modal_message} redirect_location="articles" />

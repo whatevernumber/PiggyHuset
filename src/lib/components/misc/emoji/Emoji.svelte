@@ -11,7 +11,7 @@
 </script>
 
 <div class='emoji_button'></div>
-<div class='emoji_wrapper modal_closed'>
+<div class='emoji_wrapper'>
 	<emoji-picker on:emoji-click={pick}
 				  i18n={ru}
 				  locale="ru"

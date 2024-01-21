@@ -9,13 +9,41 @@
     export let border = false;
 
     let background_img = "url('/src/lib/img/" + icon + "')";
+
+    function hover() {
+        const images = document.querySelectorAll('.animate_pig');
+        images.forEach((image) => image.setAttribute('src', '/src/lib/img/modal_hover.gif'))
+    }
+
+    function unhover() {
+        const images = document.querySelectorAll('.animate_pig');
+        images.forEach((image) => image.setAttribute('src', '/src/lib/img/modal_unhover.gif'))
+    }
+
+    function wheek() {
+        const images = document.querySelectorAll('.animate_pig');
+        images.forEach((image) => image.setAttribute('src', '/src/lib/img/modal_click.gif'))
+    }
+
+    function handle () {
+        setTimeout(onclick, 600);
+    }
+
 </script>
 
-<a class="button {class_name}" {href} style="--background_color: {background_color}; --background_img: {background_img};
-    --text-color: {text_color}"
-            on:click={onclick}>
-    {title}
-</a>
+<div class='button_container'>
+    <a class="button {class_name}" {href} style="--background_color: {background_color}; --background_img: {background_img};
+        --text-color: {text_color}"
+                on:click={handle} on:click={wheek}
+                on:mouseover={hover} on:mouseout={unhover} >
+        {title}
+    </a>
+
+    {#if class_name.includes('modal_button')}
+        <img class='animate_pig image_right' width='60px' height='60px' src='/src/lib/img/modal_okay_main.jpg'>
+        <img class='animate_pig image_left' width='60px' height='60px' src='/src/lib/img/modal_okay_main.jpg'>
+    {/if}
+</div>
 
 <style>
     .button {
@@ -43,7 +71,7 @@
         background-color: #d97544;
     }
 
-    .button::before {
+    .button:before {
         content: '';
         position: absolute;
         width: 60px;
@@ -63,4 +91,33 @@
         background-image: var(--background_img);
     }
 
+    .modal_button:before {
+        background-image: url('/src/lib/img/modal_okay.png');
+    }
+
+    .modal_button:after {
+        background-image: url('/src/lib/img/modal_okay.png');
+    }
+
+    .modal_button:active:before, .modal_button:active:after {
+        background-image: url('/src/lib/img/modal_click.gif');
+        background-size: contain;
+    }
+    .button_container {
+        position: relative;
+    }
+
+    .animate_pig {
+        position: absolute;
+    }
+
+    .image_left {
+        top: -17.5px;
+        left: 1px;
+    }
+
+    .image_right {
+        top: -17.5px;
+        right: 1px;
+    }
 </style>
