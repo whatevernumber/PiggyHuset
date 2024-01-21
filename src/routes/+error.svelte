@@ -1,5 +1,9 @@
+<script>
+    import {page} from "$app/stores";
+</script>
+
 <svelte:head>
-    <title>404</title>
+    <title>Упс! Ошибка {$page.status}</title>
 </svelte:head>
 
 <section>
@@ -8,7 +12,7 @@
     </h1>
 
     <p>
-        Такой страницы не существует!
+        <b>({$page.status}) {$page.error.message}</b>: Такой страницы не существует или что-то пошло не так!
     </p>
 
     <img class="error-image" src="/img/error.jpeg" width="350" height="350" alt="Пиксельное изображение свинки">
@@ -53,6 +57,10 @@
 
     .home-link:hover {
         color: #EF8653;
+    }
+
+    p {
+        font-size: 18px;
     }
 
 </style>

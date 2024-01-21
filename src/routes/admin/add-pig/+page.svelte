@@ -7,7 +7,7 @@
 </svelte:head>
 
 <section class="container">
-	<AddPigForm redirect_location="/looking-for-home" />
+	<AddPigForm redirect_location="looking-for-home" />
 </section>
 
 <style>
