@@ -83,23 +83,17 @@ export const randomize = (start, end, dotIndex = 0) => {
 */
 async function removeData(category, id) {
     let success;
-    let message = document.querySelector('.message');
-    message.textContent = 'Идёт удаление, подождите...';
 
     const server_location = /article|news/.test(category) ? 'articles' : 'pigs';
 
-    // Прячет кнопки
-    document.querySelector('.buttons').style.visibility = 'hidden';
     await fetch(_REMOTE_SERVER + '/' + server_location +'/' + id,
         {
             method: 'DELETE'
         }).then((response) => {
         if (response.ok) {
-            message.textContent = 'Удаление успешно!';
             success = true;
         }
     }).catch((e) => {
-        message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
         success = false;
     });
 

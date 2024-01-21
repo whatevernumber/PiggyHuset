@@ -25,8 +25,8 @@
         images.forEach((image) => image.setAttribute('src', '/src/lib/img/modal_click.gif'))
     }
 
-    function handle () {
-        setTimeout(onclick, 600);
+    function handle (evt) {
+        setTimeout(() => {onclick(evt)}, 600);
     }
 
 </script>

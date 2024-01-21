@@ -2,6 +2,8 @@
 	import ButtonWithIcons from '$lib/components/misc/button/ButtonWithIcons.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import { closeModal } from '$lib/components/utils/func.js';
+	import { invalidate, invalidateAll } from '$app/navigation';
+
 
 	export let desc = '';
 	export let success;
@@ -27,6 +29,11 @@
 		action = 'delete';
 	}
 
+	const update = (evt) => {
+		invalidateAll();
+		closeModal(evt);
+	}
+
 </script>
 
 <div class="modal modal_wrapper">
@@ -38,7 +45,7 @@
 				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle} />
 			</div>
 		{:else if (action === 'complete') }
-			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={handle} />
+			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={update} />
 		{:else if action === 'fail' }
 			<ButtonWithIcons class_name="close-button modal_button" title='Понятно' onclick={reload} />
 		{:else if action === 'sent'}

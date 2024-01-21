@@ -4,7 +4,6 @@
     import Card from "$lib/components/cards/Card.svelte";
     import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
-    import {_REMOTE_SERVER} from "$env/static/public";
     import {onMount} from "svelte";
 
     export let admin;
@@ -25,7 +24,7 @@
     });
 
     let new_batch = [];
-    $: action = '';
+    let action = '';
     let success;
 
     const show_delete = (evt) => {
@@ -35,13 +34,17 @@
         document.removeEventListener('click', closeModal);
     }
 
-    const remove = () => {
-        success = removeData(category, 5);
-        console.log(success);
+    async function remove (id, evt) {
+        let message = document.querySelector('.message');
+        message.textContent = 'Идёт удаление, подождите...';
+
+        success = await removeData(category, id);
         if (success) {
             action = 'complete';
+            message.textContent = 'Удаление успешно!';
         } else {
             action = 'fail';
+            message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
         }
     }
 
