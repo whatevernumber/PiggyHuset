@@ -2,27 +2,30 @@
     import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
     import CardList from "$lib/components/lists/CardList.svelte";
     import Card from "$lib/components/cards/Card.svelte";
-    import { showModal, removeData, closeModal } from '$lib/components/utils/func.js';
+    import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
+    import {_REMOTE_SERVER} from "$env/static/public";
+    import {onMount} from "svelte";
 
-    export let page_title;
-    export let data = [];
-    export let admin = true;
-    export let category;
-    export let button_text;
-    export let type;
+    export let admin;
+    export let button_text; // Текст кнопки
+    export let category; // Категория (для автоматического составления URL)
+    export let data = {};
+    export let default_text = 'Ищет самые лучшие ручки на свете';
+    export let page_title = ''; // Заголовок страницы каталога
+    export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
 
-    // стандартный текст и картинка для карточек свинок, ищущих дом
-    data.map((data) => {
+    let data_array = data.payload;
+
+    // стандартный текст для карточек
+    data_array.map((data) => {
         if (!data.text) {
-            data.text = 'Ищет самые лучшие ручки на свете';
-        }
-        if (!data.type) {
-            data.type = 'ready';
+            data.text = default_text;
         }
     });
 
-    let action;
+    let new_batch = [];
+    let action = '';
     let success;
 
     const show_delete = (evt) => {
@@ -33,8 +36,7 @@
     }
 
     const remove = () => {
-        removeData('article', 5, success);
-
+        success = removeData(category, 5);
         if (success) {
             action = 'complete';
         } else {
@@ -42,15 +44,30 @@
         }
     }
 
+    onMount(
+        () => document.addEventListener('scroll', async function () {
+            const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
+            if (bottom_reached) {
+                new_batch = await load_more(data, category);
+            }
+        })
+    )
+
+    // реактивное обновление списка
+    $: data_array = new_batch ? [
+        ...data_array,
+        ...new_batch
+    ] : data_array;
+
 </script>
 <div>
-    <section>
+    <section id="catalog">
         <div class="section-wrapper">
 
             <BigHeader text_content="{page_title}" position="left"/>
 
             <CardList>
-                {#each data as article}
+                {#each data_array as article}
                     <li>
                         <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} />
                     </li>
