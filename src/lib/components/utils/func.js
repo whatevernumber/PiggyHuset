@@ -59,7 +59,14 @@ function randomElements (array, n) {
     return array.sort(() => .5 - Math.random()).slice(0, n);
 }
 
-const randomize = (start, end, dotIndex = 0) => {
+/**
+ * Получить случайное число в заданном диапозоне
+ * @param start
+ * @param end
+ * @param dotIndex
+ * @return {number|string}
+ */
+export const randomize = (start, end, dotIndex = 0) => {
 
     if (start < 0 || end < 0) {
         return 'Отрицательное число!';
@@ -75,34 +82,85 @@ const randomize = (start, end, dotIndex = 0) => {
 };
 
 /**
- * Удаление записи из БД и добавление сообщения в модальное окно
- * @param type Тип записи | pig | article
+ * Отправка запроса на удаление записи из БД с показом соответствующего сообщения в модальном окне
+ * @param category Тип записи | pig | article
  * @param id ID записи
  * @param success флаг результата
 */
-
-async function removeData(type, id, success) {
+async function removeData(category, id) {
+    let success;
     let message = document.querySelector('.message');
     message.textContent = 'Идёт удаление, подождите...';
 
+    const server_location = /article|news/.test(category) ? 'articles' : 'pigs';
+
     // Прячет кнопки
     document.querySelector('.buttons').style.visibility = 'hidden';
-    await fetch(_REMOTE_SERVER + '/' + type +'/' + id,
+    await fetch(_REMOTE_SERVER + '/' + server_location +'/' + id,
         {
             method: 'DELETE'
         }).then((response) => {
         if (response.ok) {
-            message.textContent = 'Удаление успешно!'
-            return success = true;
+            message.textContent = 'Удаление успешно!';
+            success = true;
         }
     }).catch((e) => {
         message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
-        return success = false;
+        success = false;
     });
+
+    return success;
 }
 
-const redirect = function (url, delay) {
+/**
+ * Перенаправление на указанный адрес спустя указанное время;
+ * впоследствии лучше использовать для этих целей встроенный свелтовский throw redirect
+ * @param url
+ * @param delay
+ */
+export const redirect = function (url, delay) {
     setTimeout(() => goto(url), delay);
 }
 
-export { closeModal, showModal, randomElements, randomize, redirect, removeData };
+/**
+ * Подгрузка постраничных данных
+ * @param data Данные с сервера
+ * @param category Категория данных
+ * @return Promise Возвращаются только контентные данные (без информации о странице и т.д.); значение получить через вызов с await
+ */
+export const load_more = async function (data, category) {
+    /* При первоначальной загрузке первая партия данных уже загружена,
+        поэтому подгрузку следует начинать сразу со второй */
+    if (data.pagination.page <= 1) {
+        data.pagination.page = 2;
+    }
+
+    /* Подгрузка останавливается при достижении последней партии */
+    if (data.pagination.page <= data.pagination.pageCount) {
+
+        // Определение адреса подгрузки данных
+        let server_location;
+        switch (category) {
+            default:
+                server_location = 'pigs';
+                break;
+            case 'graduates':
+                server_location = 'pigs/graduated';
+                break;
+            case 'articles':
+                server_location = 'articles/type/1';
+                break;
+            case 'news':
+                server_location = 'articles/type/2';
+                break;
+        }
+
+        const url = `${_REMOTE_SERVER}/${server_location}?page=${data.pagination.page++}`;
+        const response = await fetch(url);
+        const batch = await response.json();
+
+        return batch.payload;
+    }
+}
+
+export { closeModal, showModal, randomElements, removeData };

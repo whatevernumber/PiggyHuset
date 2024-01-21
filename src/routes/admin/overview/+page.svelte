@@ -3,97 +3,32 @@
     import Button from "$lib/components/misc/button/Button.svelte";
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
+    export let data;
     let admin = false;
-    $: tab = 'pigs';
-    $: action = "Добавить свинку";
 
-    let data = [{
-        title: 'Свиник',
-        type: 'ready',
-    },
-        {
-            title: 'Блиник',
-            type: 'ready',
-        },
-        {
-            title: 'Пиник',
-            type: 'ready',
-        },];
+    let tab = 'pigs';
+    let action = ["Добавить свинку", '/admin/add-pig'];
+    let header = 'свинок';
 
+    $: array = data[tab];
     const switchTabs = function (newtab) {
-        data = [];
         tab = newtab;
+
         switch (tab) {
             case 'pigs':
-                data = [{
-                    title: 'Свиник',
-                    type: 'ready',
-                },
-                    {
-                        title: 'Блиник',
-                        type: 'ready',
-                    },
-                    {
-                        title: 'Пиник',
-                        type: 'ready',
-                    },];
-                action = "Добавить свинку";
+                header = 'свинок';
+                action = ['Добавить свинку', '/admin/add-pig'];
                 break;
             case 'news':
-                data = [{text: 'none', type: 'none'}];
-                action = "Добавить новость";
+                header = 'публикаций';
+                action = ['Добавить новость', '/admin/new-post'];
                 break;
             case 'articles':
-                data = [
-                    {
-                        title: 'Полезная статья',
-                        text: 'Как вытирать носики',
-                        type: 'article',
-                    },{
-                        title: 'Полезная статья',
-                        text: 'Как похудеть крупы',
-                        type: 'article',
-                    },{
-                        title: 'Полезная статья',
-                        text: 'Как поить маслом',
-                        type: 'article',
-                    },{
-                        title: 'Полезная статья',
-                        text: 'Как постричь когти и не умереть',
-                        type: 'article',
-                    },{
-                        title: 'Полезная статья',
-                        text: 'Как сдуться',
-                        type: 'article',
-                    },
-                ];
-                action = "Добавить статью";
+                header = 'статей';
+                action = ['Добавить статью', '/admin/new-article'];
                 break;
             case 'graduates':
-                data = [{
-                    title: 'Финик',
-                    text: 'Переехал в Мурманск',
-                    image: 'IMG_0695',
-                    type: 'graduate',
-                },
-                    {
-                        title: 'Шанс',
-                        text: 'На радуге',
-                        image: 'FqAKtTrJP58',
-                        type: 'graduate',
-                    },
-                    {
-                        title: 'Йогурт',
-                        text: 'Более ста фотографий из нового дома со всех сторон в карточке',
-                        image: 'yoghurt',
-                        type: 'graduate',
-                    },
-                    {
-                        title: 'Эй',
-                        text: 'Нашёл дом',
-                        image: 'in-the-farm',
-                        type: 'graduate',
-                    }];
+                header = 'выпускников';
         }
     };
 </script>
@@ -121,11 +56,11 @@
     </nav>
     {#if tab !== 'graduates'}
     <div class="button_wrapper">
-        <SmolButton title={action} />
+        <SmolButton title={action[0]} href="{action[1]}" />
     </div>
     {/if}
 </section>
-<CatalogPage {data} page_title='Список публикаций' admin />
+<CatalogPage data="{array}" page_title="{'Список ' + header}" admin />
 
 <style>
     .nav-header {
