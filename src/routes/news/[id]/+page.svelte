@@ -1,9 +1,11 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
-	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
-	import { showModal, removeData, closeModal } from '$lib/components/utils/func.js';
+	import { showModal, removeData, closeModal, redirect } from '$lib/components/utils/func.js';
+	import CardDescription from '$lib/components/cards/CardDescription.svelte';
+	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
+	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 
 	export let data;
 
@@ -14,22 +16,31 @@
 
 	let action;
 	let success;
+	let admin = true;
 
 	const show_delete = (evt) => {
 		action = 'delete';
-		document.querySelector('.message').innerHTML = `Вы собираетесь удалить статью "${header}". Это действие <b>необратимо</b>`;
-		showModal(evt);
+		document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${news.title}". Это действие <b>необратимо</b>`;
+		showModal(evt, 'modal_delete');
 		evt.target.removeEventListener('click', show_delete);
 		document.removeEventListener('click', closeModal);
 	}
 
-	const remove = () => {
-		removeData('article', news.id, success);
+	const redirect_after_success = () => {
+		redirect('/news', 300);
+	}
 
+	async function remove () {
+		let message = document.querySelector('.message');
+		message.textContent = 'Идёт удаление, подождите...';
+
+		success = await removeData('articles', news.id);
 		if (success) {
-			action = 'complete';
+			action = 'card_delete';
+			message.textContent = 'Удаление успешно!';
 		} else {
 			action = 'fail';
+			message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
 		}
 	}
 
@@ -40,18 +51,41 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile article type="news" {header} {description} {show_delete} />
+	<div class="wrapper">
+		<div>
+			<PhotoCard pic={news.main_photo} type="article" />
+			{#if admin}
+				<div class="profile_buttons">
+					<SmolButton class_name="super-smol-button" title="Изменить" />
+					<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
+				</div>
+			{/if}
+		</div>
+		<CardDescription article {header} {description} />
+	</div>
 
 	{#if news.photos.length}
 	<PhotoList photos={news.photos} />
 	{/if}
 </Article>
 
-<div class='modal modal_closed'>
-	<ModalOkay {action} action_handler={remove} {success} />
+<div class='modal modal_delete modal_closed'>
+	<ModalOkay {action} action_handler={remove} {success} redirect={redirect_after_success} />
 </div>
 
 <style>
+    .wrapper {
+        display: flex;
+        column-gap: 15px;
+    }
+
+    .profile_buttons {
+        display: flex;
+        max-width: 200px;
+        margin-top: 5px;
+        justify-content: space-between;
+    }
+
     .modal {
         position: absolute;
         top: 35%;

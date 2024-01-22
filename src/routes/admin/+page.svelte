@@ -17,6 +17,8 @@
 		<TextInput width="300px" required='required' name="password" placeholder="" type="password" header="Пароль"/>
 		<SubmitButton title='Войти' />
 	</form>
+</div>
+<div class='modal modal_closed'>
 	<ModalOkay />
 </div>
 

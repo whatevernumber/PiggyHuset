@@ -3,6 +3,8 @@
 
     export let title;
 
+	let modal_message = 'Пост успешно создан.';
+
     const scheme = {
         title: title || 'Новая публикация',
         endpoint: '/articles/type/2',
@@ -28,4 +30,4 @@
     }
 </script>
 
-<Form {scheme} redirect_location="articles" />
+<Form {scheme} {modal_message} redirect_location="articles" />

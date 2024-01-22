@@ -10,13 +10,14 @@
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 
-    export let admin = true;
+    export let admin;
     export let article = {}; // Данные для показа в карточке
-    export let category = 'looking-for-home'; // Категория (для автоматического составления URL)
+    export let category; // Категория (для автоматического составления URL)
     export let href = `/${category}/${article.id}`; // Можно задать URL вручную
     export let button_text = 'Подробнее'; // Текст кнопки
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let delete_handler;
+    export let id;
 
     export let action;
     export let success;
@@ -24,6 +25,7 @@
     $: image = article.main_photo ?? null;
 
     const show_delete_message = () => {
+        id = article.id;
         document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие <b>необратимо</b>`;
     }
 </script>
@@ -40,7 +42,9 @@
         {#if admin}
             <div class='button_wrapper'>
                 <EditButton button_name='edit' />
+                {#if (category !== 'looking-for-home' && category !== 'graduates' && category !== 'pigs')}
                 <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
+                {/if}
             </div>
         {/if}
         </div>

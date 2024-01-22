@@ -35,7 +35,7 @@
     }
 
     .option-item:active {
-        background-color: #88AA4D;
+        background-color: #b0bd9a;
     }
 
     .option-item:active .option-item-link {

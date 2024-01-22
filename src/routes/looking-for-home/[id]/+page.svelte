@@ -2,16 +2,14 @@
 	import Article from '$lib/components/articles/Article.svelte';
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
-	import { showModal, removeData, closeModal } from '$lib/components/utils/func.js';
+	import { showModal, closeModal } from '$lib/components/utils/func.js';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
-	import ModalForm from '$lib/components/misc/modal/ModalForm.svelte';
 
 	export let data;
 	export let action;
-	export let success;
-
 
 	let pig = data.pig;
+	let pig_id = pig.id;
 	let pic = pig.main_photo;
 	let header = pig.name + ' в поисках дома';
 	let age = pig.age;
@@ -22,30 +20,13 @@
 
 	let modal = false;
 
-	const show_delete = (evt) => {
-		action = 'delete';
-		document.querySelector('.message').innerHTML = `Вы собираетесь удалить профиль "${pig.name}". Это действие <b>необратимо</b>`;
-		showModal(evt, 'modal_delete');
-		evt.target.removeEventListener('click', show_delete);
-		document.removeEventListener('click', closeModal);
-	}
-
 	const show_edit = (evt) => {
 		showModal(evt, 'modal_edit');
 		evt.target.removeEventListener('click', show_edit);
 		document.removeEventListener('click', closeModal);
 	}
 
-	const remove = () => {
-		removeData('article', pig.id, success);
-
-		if (success) {
-			action = 'complete';
-		} else {
-			action = 'fail';
-		}
-	}
-
+	console.log(pig);
 </script>
 
 <svelte:head>
@@ -53,7 +34,7 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {description} {graduated} {pic} {header} {age} {show_delete} {show_edit} {volunteer} />
+	<PigProfile {description} {graduated} {pic} {header} {age} {show_edit} {volunteer} id={pig_id} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />
@@ -61,11 +42,10 @@
 </Article>
 
 <div class='modal modal_delete modal_closed'>
-	<ModalOkay {action} action_handler={remove} {success} />
+	<ModalOkay {action} />
 </div>
 
 <div class='modal modal_edit modal_closed'>
-	<ModalForm type='pig' {modal} />
 	<button class="close-button" on:click={closeModal} aria-roledescription="Закрыть окно с формой">
             <span hidden>
                 закрыть

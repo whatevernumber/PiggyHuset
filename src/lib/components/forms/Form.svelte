@@ -1,14 +1,19 @@
 <script>
-    import PhotoCard from "$lib/components/photo-card/PhotoCard.svelte";
-    import SubmitButton from "$lib/components/misc/form-elements/SubmitButton.svelte";
-    import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
-    import {_REMOTE_SERVER} from "$env/static/public";
-    import {redirect} from "$lib/components/utils/func.js";
-    import EmojiButton from '$lib/components/misc/button/EmojiButton.svelte';
-    import EmojiPicker from '$lib/components/picker/EmojiPicker.svelte';
+	import PhotoCard from "$lib/components/photo-card/PhotoCard.svelte";
+	import SubmitButton from "$lib/components/misc/form-elements/SubmitButton.svelte";
+	import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
+	import {_REMOTE_SERVER} from "$env/static/public";
+	import {redirect} from "$lib/components/utils/func.js";
+	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
+    import { createEventDispatcher, tick } from 'svelte';
+    import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 
-    export let scheme = {};
-    export let redirect_location;
+	export let scheme = {};
+	export let redirect_location;
+    export let modal_message;
+    console.log('modal');
+
+	let success;
 
     let image_upload_preview = [];
     let errors = {};
@@ -18,6 +23,18 @@
 
     const top_fields = fields.slice(0, 2);
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
+
+    const handle = () => {
+        redirect(redirect_location ? `/${redirect_location}/${success.id || null}` : '/')
+    }
+
+    const show_modal = () => {
+        let modal = document.querySelector('.modal_closed');
+        modal.classList.remove('modal_closed');
+        modal.classList.add('modal_opened');
+    }
+
+    const dispatch = createEventDispatcher();
 
     async function sendForm () {
         const form = document.querySelector('form');
@@ -29,8 +46,12 @@
         });
 
         if (res.ok) {
-            const success = await res.json();
-            redirect(redirect_location ? `/${redirect_location}/${success.id || null}` : '/');
+            success = await res.json();
+
+            if(success.id) {
+                show_modal();
+            }
+
         } else {
             errors = await res.json();
 
@@ -69,73 +90,86 @@
     }
 </script>
 
-<section class="form-section">
-    <h3 class="form-header">{scheme.title}</h3>
-    <form class="form-scheme" enctype="multipart/form-data">
+<div class='form-container'>
+    <section class="form-section">
+        <h3 class="form-header">{scheme.title}</h3>
+        <form class="form-scheme" enctype="multipart/form-data">
 
-        {#if top_fields}
-        <fieldset class="label-group">
-            {#each top_fields as field}
-                {#if field !== textarea}
-                    {@const required = field.required}
-            <div class="form-item">
-                <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
-                <span class="input-error-label"></span>
-            </div>
-                {/if}
-            {/each}
-        </fieldset>
-        {/if}
-
-        {#each textarea as textarea}
-            {@const required = textarea.required ?? false}
-        <fieldset class="label-group middle-group">
-            <div class="form-item animal-health-set">
-                <label class="form-label" for="{textarea.name}">{textarea.label}</label>
-                <textarea class="form-input-field" id="{textarea.name}" name="{textarea.name}" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
-                <span class="input-error-label"></span>
-                {#if textarea.emoji}
-                <EmojiButton />
-                <EmojiPicker input_name="{textarea.name}" />
-                {/if}
-            </div>
-        </fieldset>
-        {/each}
-
-        <fieldset class="bottom-fields">
-        {#if bottom_fields}
-        <fieldset class="bottom-fields">
-            {#each bottom_fields as field}
-                {@const required = field.required}
-            <div class="form-item">
-                <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                <input class="form-input-field blank" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
-                <span class="input-error-label"></span>
-            </div>
-            {/each}
-        </fieldset>
-        {/if}
-
-        <fieldset class="label-group">
-        {#if scheme.files.file_input}
-            <FileInput class_name="form-input-field" name="files" multiple onchange="{preview}" />
-        {/if}
-            <div class="form-item button">
-                <SubmitButton on_click="{ sendForm }" />
-            </div>
-        </fieldset>
-        {#if image_upload_preview.length}
-            <div class="photo_preview">
-                {#each image_upload_preview as src}
-                    <PhotoCard {src} width='80px' height='80px' />
+            {#if top_fields}
+            <fieldset class="label-group">
+                {#each top_fields as field}
+                    {#if field !== textarea}
+                        {@const required = field.required}
+                <div class="form-item">
+                    <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                    <span class="input-error-label"></span>
+                </div>
+                    {/if}
                 {/each}
-            </div>
-        {/if}
-    </form>
-</section>
+            </fieldset>
+            {/if}
+
+            {#each textarea as textarea}
+                {@const required = textarea.required ?? false}
+            <fieldset class="label-group middle-group">
+                <div class="form-item animal-health-set">
+                    <label class="form-label" for="{textarea.name}">{textarea.label}</label>
+                    <textarea class="form-input-field" id="{textarea.name}" name="{textarea.name}" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
+                    <span class="input-error-label"></span>
+                    {#if textarea.emoji}
+                    <Emoji input_name={textarea.name} />
+                    {/if}
+                </div>
+            </fieldset>
+            {/each}
+
+            {#if bottom_fields}
+            <fieldset class="bottom-fields">
+                {#each bottom_fields as field}
+                    {@const required = field.required}
+                <div class="form-item">
+                    <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                    <input class="form-input-field blank" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                    <span class="input-error-label"></span>
+                </div>
+                {/each}
+            </fieldset>
+            {/if}
+
+            <fieldset class="label-group">
+            {#if scheme.files.file_input}
+                <FileInput class_name="form-input-field" name="files" multiple onchange="{preview}" />
+            {/if}
+                <div class="form-item button">
+                    <SubmitButton on_click="{ sendForm }" />
+                </div>
+            </fieldset>
+            {#if image_upload_preview.length}
+                <div class="photo_preview">
+                    {#each image_upload_preview as src}
+                        <PhotoCard {src} width='80px' height='80px' />
+                    {/each}
+                </div>
+            {/if}
+        </form>
+    </section>
+</div>
+
+<div class='modal modal_closed'>
+    <ModalOkay desc={modal_message} sent_handle={handle} success=true action='sent'/>
+</div>
 
 <style>
+
+    .form-container {
+        min-height: 100%;
+        margin:auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .form-section {
         width: 600px;
         max-width: 600px;
@@ -265,6 +299,13 @@
         content: '⛔';
         padding-right: 5px;
         fill: #e1edce;
+    }
+
+    .modal {
+        position: absolute;
+        top: 35%;
+        left: 35%;
+        z-index: 10;
     }
 
 </style>

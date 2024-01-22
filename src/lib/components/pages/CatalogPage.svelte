@@ -4,8 +4,9 @@
     import Card from "$lib/components/cards/Card.svelte";
     import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
-    import {_REMOTE_SERVER} from "$env/static/public";
     import {onMount} from "svelte";
+    import { invalidate, invalidateAll } from '$app/navigation';
+    import { _REMOTE_SERVER } from '$env/static/public';
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -16,7 +17,11 @@
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
 
     let data_array = data.payload;
+    let action_id;
 
+    $: hrhr = data_array;
+
+    console.log(data_array)
     // стандартный текст для карточек
     data_array.map((data) => {
         if (!data.text) {
@@ -35,12 +40,21 @@
         document.removeEventListener('click', closeModal);
     }
 
-    const remove = () => {
-        success = removeData(category, 5);
+    async function remove () {
+        let message = document.querySelector('.message');
+        message.textContent = 'Идёт удаление, подождите...';
+
+        success = await removeData(category, action_id);
         if (success) {
             action = 'complete';
+            const index = data_array.findIndex(a => a.id === action_id);
+            data_array.splice(index, 1);
+            data_array = data_array;
+            message.textContent = 'Удаление успешно!';
+
         } else {
             action = 'fail';
+            message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
         }
     }
 
@@ -67,9 +81,9 @@
             <BigHeader text_content="{page_title}" position="left"/>
 
             <CardList>
-                {#each data_array as article}
+                {#each hrhr as article}
                     <li>
-                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} />
+                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id}/>
                     </li>
                 {/each}
             </CardList>

@@ -7,6 +7,7 @@
 	export let type;
 	export let show_delete;
 	export let show_edit;
+	export let removable;
 
 </script>
 
@@ -15,7 +16,9 @@
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton title="Редактировать" click_handler={show_edit} />
+			{#if removable}
 			<SmolButton class_name = "super-smol-button" title="Удалить" click_handler={show_delete} />
+			{/if}
 		</div>
 	{/if}
 </div>

@@ -2,13 +2,16 @@
 	import ButtonWithIcons from '$lib/components/misc/button/ButtonWithIcons.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import { closeModal } from '$lib/components/utils/func.js';
+	import { invalidate, invalidateAll } from '$app/navigation';
+
 
 	export let desc = '';
 	export let success;
 
 	export let action;
 	export let action_handler;
-	export let deny_action;
+	export let redirect;
+	export let sent_handle;
 
 	let color = '#E1EDCE';
 
@@ -25,6 +28,10 @@
 		action = 'delete';
 	}
 
+	const update = (evt) => {
+		closeModal(evt);
+	}
+
 </script>
 
 <div class="modal modal_wrapper">
@@ -35,10 +42,14 @@
 				<SmolButton class_name="smol-red" title='Удалить' click_handler={action_handler} />
 				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle} />
 			</div>
-		{:else if action === 'complete' }
-			<ButtonWithIcons class_name="close-button" title='Хорошо' icon='success-pig.png' onclick={handle} />
+		{:else if (action === 'complete') }
+			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={update} />
+		{:else if (action === 'card_delete') }
+			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={redirect} />
 		{:else if action === 'fail' }
-			<ButtonWithIcons class_name="close-button" title='Понятно' onclick={reload} />
+			<ButtonWithIcons class_name="close-button modal_button" title='Понятно' onclick={reload} />
+		{:else if action === 'sent'}
+			<ButtonWithIcons class_name="modal_button" title='Отлично' onclick={sent_handle} />
 		{/if}
 	</div>
 </div>
@@ -70,6 +81,7 @@
 	}
 
 	.message {
+		margin-bottom: 15px;
 		font-size: 14px;
 		font-style: normal;
 		font-weight: 400;

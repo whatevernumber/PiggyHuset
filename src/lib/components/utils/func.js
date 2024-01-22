@@ -18,9 +18,6 @@ const closeModal = function (evt) {
         modal.classList.add('modal_closed');
         modal.classList.remove('modal_opened');
 
-        const blurred = document.querySelectorAll('.blur'); // все фоновые элементы
-        blurred.forEach((item) => item.classList.remove('blur'));
-
         close_button?.removeEventListener('click', closeModal);
         document.removeEventListener('click', closeModal);
     }
@@ -43,9 +40,6 @@ const showModal = function (evt, modalClass = 'modal') {
 
     modal_view.classList.remove('modal_closed');
     modal_view.classList.add('modal_opened');
-
-    // блюр всех фоновых элементов
-    outer_area.forEach((item) => item.classList.add('blur'));
 
     // скролл по центру окошка
     modal_view.scrollIntoView({block: "center"});
@@ -85,27 +79,21 @@ export const randomize = (start, end, dotIndex = 0) => {
  * Отправка запроса на удаление записи из БД с показом соответствующего сообщения в модальном окне
  * @param category Тип записи | pig | article
  * @param id ID записи
- * @param success флаг результата
+ * @return {boolean} success флаг результата
 */
 async function removeData(category, id) {
     let success;
-    let message = document.querySelector('.message');
-    message.textContent = 'Идёт удаление, подождите...';
 
     const server_location = /article|news/.test(category) ? 'articles' : 'pigs';
 
-    // Прячет кнопки
-    document.querySelector('.buttons').style.visibility = 'hidden';
     await fetch(_REMOTE_SERVER + '/' + server_location +'/' + id,
         {
             method: 'DELETE'
         }).then((response) => {
         if (response.ok) {
-            message.textContent = 'Удаление успешно!';
             success = true;
         }
     }).catch((e) => {
-        message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
         success = false;
     });
 

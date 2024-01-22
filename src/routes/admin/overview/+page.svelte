@@ -4,7 +4,7 @@
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
     export let data;
-    let admin = false;
+    let admin = true;
 
     let tab = 'pigs';
     let action = ["Добавить свинку", '/admin/add-pig'];
@@ -31,6 +31,8 @@
                 header = 'выпускников';
         }
     };
+
+    console.log(tab);
 </script>
 
 <svelte:head>
@@ -60,7 +62,7 @@
     </div>
     {/if}
 </section>
-<CatalogPage data="{array}" page_title="{'Список ' + header}" admin />
+<CatalogPage data="{array}" page_title="{'Список ' + header}" category={tab} admin />
 
 <style>
     .nav-header {
