@@ -5,8 +5,6 @@
     import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import {onMount} from "svelte";
-    import { invalidate, invalidateAll } from '$app/navigation';
-    import { _REMOTE_SERVER } from '$env/static/public';
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -18,8 +16,6 @@
 
     let data_array = data.payload;
     let action_id;
-
-    $: hrhr = data_array;
 
     console.log(data_array)
     // стандартный текст для карточек
@@ -81,7 +77,7 @@
             <BigHeader text_content="{page_title}" position="left"/>
 
             <CardList>
-                {#each hrhr as article}
+                {#each data_array as article}
                     <li>
                         <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id}/>
                     </li>

@@ -2,8 +2,6 @@
 	import ButtonWithIcons from '$lib/components/misc/button/ButtonWithIcons.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import { closeModal } from '$lib/components/utils/func.js';
-	import { invalidate, invalidateAll } from '$app/navigation';
-
 
 	export let desc = '';
 	export let success;
