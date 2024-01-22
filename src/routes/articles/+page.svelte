@@ -34,4 +34,4 @@
 	<title>Статьи Домика</title>
 </svelte:head>
 
-<CatalogPage data="{articles}" type="article" category="articles" page_title="Полезные статьи" button_text="Читать материал" admin='true' />
+<CatalogPage data="{articles}" type="article" category="articles" page_title="Полезные статьи" button_text="Читать материал" />

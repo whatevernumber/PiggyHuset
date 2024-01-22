@@ -19,8 +19,6 @@
     export let delete_handler;
     export let id;
 
-    console.log(category !== 'graduates')
-
     export let action;
     export let success;
 
@@ -28,7 +26,6 @@
 
     const show_delete_message = () => {
         id = article.id;
-        console.log(id)
         document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие <b>необратимо</b>`;
     }
 </script>

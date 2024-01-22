@@ -29,7 +29,6 @@
 	}
 
 	const update = (evt) => {
-		invalidateAll();
 		closeModal(evt);
 	}
 

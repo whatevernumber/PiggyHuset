@@ -5,6 +5,8 @@
     import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import {onMount} from "svelte";
+    import { invalidate, invalidateAll } from '$app/navigation';
+    import { _REMOTE_SERVER } from '$env/static/public';
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -16,6 +18,8 @@
 
     let data_array = data.payload;
     let action_id;
+
+    $: hrhr = data_array;
 
     console.log(data_array)
     // стандартный текст для карточек
@@ -43,6 +47,9 @@
         success = await removeData(category, action_id);
         if (success) {
             action = 'complete';
+            const index = data_array.findIndex(a => a.id === action_id);
+            data_array.splice(index, 1);
+            data_array = data_array;
             message.textContent = 'Удаление успешно!';
 
         } else {
@@ -74,7 +81,7 @@
             <BigHeader text_content="{page_title}" position="left"/>
 
             <CardList>
-                {#each data_array as article}
+                {#each hrhr as article}
                     <li>
                         <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id}/>
                     </li>
