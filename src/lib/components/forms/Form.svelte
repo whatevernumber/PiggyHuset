@@ -9,7 +9,7 @@
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 
 	export let scheme = {};
-	export let redirect_location = '/';
+	export let redirect_location;
     export let modal_message;
     console.log('modal');
 

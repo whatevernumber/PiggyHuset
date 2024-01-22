@@ -79,7 +79,7 @@ export const randomize = (start, end, dotIndex = 0) => {
  * Отправка запроса на удаление записи из БД с показом соответствующего сообщения в модальном окне
  * @param category Тип записи | pig | article
  * @param id ID записи
- * @param success флаг результата
+ * @return {boolean} success флаг результата
 */
 async function removeData(category, id) {
     let success;

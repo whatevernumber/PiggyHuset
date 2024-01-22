@@ -13,7 +13,6 @@
 	export let redirect;
 	export let sent_handle;
 
-
 	let color = '#E1EDCE';
 
 	if (!success) {
@@ -46,6 +45,8 @@
 			</div>
 		{:else if (action === 'complete') }
 			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={update} />
+		{:else if (action === 'card_delete') }
+			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={redirect} />
 		{:else if action === 'fail' }
 			<ButtonWithIcons class_name="close-button modal_button" title='Понятно' onclick={reload} />
 		{:else if action === 'sent'}

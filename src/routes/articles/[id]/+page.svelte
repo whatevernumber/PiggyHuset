@@ -5,7 +5,7 @@
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
-	import { showModal, removeData, closeModal } from '$lib/components/utils/func.js';
+	import { showModal, removeData, closeModal, redirect } from '$lib/components/utils/func.js';
 
 	export let data;
 	let admin = true;
@@ -21,19 +21,27 @@
 
 	const show_delete = (evt) => {
 		action = 'delete';
-		document.querySelector('.message').innerHTML = `Вы собираетесь удалить статью "${header}". Это действие <b>необратимо</b>`;
+		document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${article.title}". Это действие <b>необратимо</b>`;
 		showModal(evt, 'modal_delete');
 		evt.target.removeEventListener('click', show_delete);
 		document.removeEventListener('click', closeModal);
 	}
 
-	const remove = () => {
-		removeData('article', article.id, success);
+	const redirect_after_success = () => {
+		redirect('/articles', 300);
+	}
 
+	async function remove () {
+		let message = document.querySelector('.message');
+		message.textContent = 'Идёт удаление, подождите...';
+
+		success = await removeData('articles', article.id);
 		if (success) {
-			action = 'complete';
+			action = 'card_delete';
+			message.textContent = 'Удаление успешно!';
 		} else {
 			action = 'fail';
+			message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
 		}
 	}
 
@@ -62,7 +70,7 @@
 </Article>
 
 <div class='modal modal_delete modal_closed'>
-	<ModalOkay {action} action_handler={remove} {success} />
+	<ModalOkay {action} action_handler={remove} {success} redirect={redirect_after_success} />
 </div>
 
 <style>
@@ -71,18 +79,6 @@
 			display: flex;
 			column-gap: 15px;
 	}
-
-	.photo-wrapper {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-	}
-
-    .date {
-        align-self: flex-end;
-        font-style: italic;
-        color: #adadad;
-    }
 
     .profile_buttons {
         display: flex;

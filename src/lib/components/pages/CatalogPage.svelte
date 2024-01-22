@@ -15,7 +15,9 @@
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
 
     let data_array = data.payload;
+    let action_id;
 
+    console.log(data_array)
     // стандартный текст для карточек
     data_array.map((data) => {
         if (!data.text) {
@@ -34,14 +36,15 @@
         document.removeEventListener('click', closeModal);
     }
 
-    async function remove (id, evt) {
+    async function remove () {
         let message = document.querySelector('.message');
         message.textContent = 'Идёт удаление, подождите...';
 
-        success = await removeData(category, id);
+        success = await removeData(category, action_id);
         if (success) {
             action = 'complete';
             message.textContent = 'Удаление успешно!';
+
         } else {
             action = 'fail';
             message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
@@ -73,7 +76,7 @@
             <CardList>
                 {#each data_array as article}
                     <li>
-                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} />
+                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id}/>
                     </li>
                 {/each}
             </CardList>
