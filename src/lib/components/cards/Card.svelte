@@ -42,7 +42,7 @@
         {#if admin}
             <div class='button_wrapper'>
                 <EditButton button_name='edit' />
-                {#if (category !== 'looking-for-home' && category !== 'graduates' && category !== 'pigs')}
+                {#if !(/pigs|graduates/.test(category))}
                 <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
                 {/if}
             </div>
