@@ -13,12 +13,12 @@
 	export let volunteer;
 	export let admin;
 	export let show_delete;
-	export let show_edit;
+	export let redirect_to_edit;
 	export let removable;
 </script>
 
 <div class='profile_wrapper'>
-	<ProfilePhoto {type} {pic} {admin} {show_delete} {show_edit} {removable}/>
+	<ProfilePhoto {type} {pic} {admin} {show_delete} {redirect_to_edit} {removable}/>
 	<CardDescription {header} {description} {graduated} {article} {age} {volunteer} {id}/>
 </div>
 

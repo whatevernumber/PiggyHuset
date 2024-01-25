@@ -2,12 +2,13 @@
 	import Form from "$lib/components/forms/Form.svelte";
 
 	export let modal;
+	export let title = 'Новый поросёнок';
 
 	let redirect_location = "looking-for-home";
-	let modal_message = 'Новая свинка успешно добавлена.';
+	let modal_message = 'Запись опубликована';
 
 	const scheme = {
-		title: 'Новый поросёнок',
+		title: title,
 		endpoint: '/pigs',
 		fields: [
 			{

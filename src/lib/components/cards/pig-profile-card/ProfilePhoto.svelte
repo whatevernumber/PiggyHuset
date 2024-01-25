@@ -6,7 +6,7 @@
 	export let admin = true;
 	export let type;
 	export let show_delete;
-	export let show_edit;
+	export let redirect_to_edit;
 	export let removable;
 
 </script>
@@ -15,7 +15,7 @@
 	<PhotoCard width="240" height="244" {pic} {type} />
 	{#if admin}
 		<div class="profile_buttons">
-			<SmolButton title="Редактировать" click_handler={show_edit} />
+			<SmolButton title="Редактировать" click_handler={redirect_to_edit} />
 			{#if removable}
 			<SmolButton class_name = "super-smol-button" title="Удалить" click_handler={show_delete} />
 			{/if}

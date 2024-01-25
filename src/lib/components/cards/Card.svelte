@@ -9,6 +9,7 @@
     import SmolButton from "$lib/components/misc/button/SmolButton.svelte";
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
+    import { redirect } from '$lib/components/utils/func.js';
 
     export let admin;
     export let article = {}; // Данные для показа в карточке
@@ -23,11 +24,25 @@
     export let success;
 
     $: image = article.main_photo ?? null;
+    id = article.id;
 
     const show_delete_message = () => {
-        id = article.id;
         document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие <b>необратимо</b>`;
     }
+
+    const redirect_to_edit = () => {
+
+        console.log(type);
+
+        if (type === 'pigs' || 'graduates') {
+            type = 'pig';
+        } else {
+            type = 'article';
+        }
+
+        redirect('/admin/edit/' + type + '/' + id, 250);
+    }
+
 </script>
 
 <article>
@@ -41,7 +56,7 @@
             </a>
         {#if admin}
             <div class='button_wrapper'>
-                <EditButton button_name='edit' />
+                <EditButton button_name='edit'  click_handler={redirect_to_edit}/>
                 {#if !(/pigs|graduates/.test(category))}
                 <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
                 {/if}
