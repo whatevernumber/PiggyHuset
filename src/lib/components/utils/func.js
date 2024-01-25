@@ -50,7 +50,7 @@ const showModal = function (evt, modalClass = 'modal') {
 }
 
 function randomElements (array, n) {
-    return array.sort(() => .5 - Math.random()).slice(0, n);
+    return array.sort(() => randomize(0,1)).slice(0, n);
 }
 
 /**
@@ -79,7 +79,7 @@ export const randomize = (start, end, dotIndex = 0) => {
  * Отправка запроса на удаление записи из БД с показом соответствующего сообщения в модальном окне
  * @param category Тип записи | pig | article
  * @param id ID записи
- * @return {boolean} success флаг результата
+ * @return {boolean} флаг результата
 */
 async function removeData(category, id) {
     let success;
