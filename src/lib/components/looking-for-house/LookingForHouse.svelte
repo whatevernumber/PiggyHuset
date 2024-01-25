@@ -8,27 +8,26 @@
     let pigs = [];
     let photos = [];
     let showPhotos = false;
+
+    const request = fetch(_REMOTE_SERVER + '/pigs')
+        .then((response) => {
+            if (response.ok) {
+                return response.json()
+            }
+        });
+
     async function initFetch () {
-        fetch(_REMOTE_SERVER + '/pigs')
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                }
-            })
-            .then(json => pigs = json)
+        request.then(json => pigs = json.payload)
             .then(
-                (list) => {
-                    list.map(
-                        (pig) => {
-                            if (pig.main_photo) {
-                                photos.push({
-                                    'id': pig.id,
-                                    'image': pig.main_photo,
-                                })
-                            }
+                () => pigs.map((pig) => {
+                        if (pig.main_photo) {
+                            photos.push({
+                                'id': pig.id,
+                                'image': pig.main_photo,
+                            })
                         }
-                    )
-                }
+                    }
+                )
             )
             .then(() => showPhotos = true)
             .catch((any) => {})

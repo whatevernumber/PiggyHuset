@@ -6,15 +6,17 @@
     import {randomElements} from "$lib/components/utils/func.js";
 
     let graduates = [];
+
+    const request = fetch(_REMOTE_SERVER + '/pigs/graduated')
+        .then((response) => {
+            if (response.ok) {
+                return response.json()
+            }
+        });
+
     async function initFetch () {
-        fetch(_REMOTE_SERVER + '/pigs/graduated')
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                }
-            })
-            .then(json => graduates = randomElements(json, 3))
-        .catch((any) => {})
+        request.then(json => graduates = randomElements(json.payload, 3))
+            .catch((any) => {})
     }
 </script>
 

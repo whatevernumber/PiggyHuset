@@ -5,15 +5,18 @@
     export let href = null;
     export let is_light = false;
     export let onclick;
+
+    export let class_name;
 </script>
 
-<a class="button" {href} style="--background_color: {background_color}; --text-color: {text_color}" class:button-light={is_light}
-        on:click={onclick}>
+<a class="button {class_name}" class:button-light={is_light} {href}
+   on:click={onclick}
+   style="--background_color: {background_color}; --text-color: {text_color}"
+   tabindex="0">
     {title}
 </a>
 
 <style>
-
     .button {
         margin: 0 auto;
         display: block;
@@ -28,16 +31,24 @@
         user-select: none;
     }
 
-    .button:hover {
-        background-color: #EF8653;
-    }
-
     .button:active {
         background-color: #B25F36;
+        color: #e1edce;
     }
 
     .button-light {
         text-transform: none;
+    }
+
+    .button:hover {
+        outline: none;
+        margin: -2px 0;
+        border-top: solid 2px var(--text-color);
+        border-bottom: solid 2px var(--text-color);
+    }
+
+    .button.-active:focus {
+        border-color: #f6b5d3;
     }
 
     .button-light:hover {
@@ -50,6 +61,11 @@
         background-color: var(--background_color);
         color: #F6B5D3;
         text-decoration: underline;
+    }
+
+    .-active {
+        color: var(--background_color);
+        background-color: var(--text-color);
     }
 
 </style>

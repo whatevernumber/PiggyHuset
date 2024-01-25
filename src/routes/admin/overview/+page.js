@@ -8,9 +8,9 @@ export async function load({ fetch }) {
     const graduates = await fetch(`${_REMOTE_SERVER}/pigs/graduated`);
 
     return {
-        pigs: pigs.json(),
-        news: news.json(),
-        articles: articles.json(),
-        graduates: graduates.json()
+        pigs: await pigs.json(),
+        news: await news.json(),
+        articles: await articles.json(),
+        graduates: await graduates.json()
     };
 }

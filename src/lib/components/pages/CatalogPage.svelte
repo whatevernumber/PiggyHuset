@@ -16,15 +16,6 @@
 
     let data_array = data.payload;
     let action_id;
-
-    console.log(data_array)
-    // стандартный текст для карточек
-    data_array.map((data) => {
-        if (!data.text) {
-            data.text = default_text;
-        }
-    });
-
     let new_batch = [];
     let action = '';
     let success;

@@ -18,7 +18,6 @@
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let delete_handler;
     export let id;
-
     export let action;
     export let success;
 
