@@ -23,15 +23,16 @@
     export let success;
 
     $: image = article.main_photo ?? null;
-    id = article.id;
 
     const show_delete_message = () => {
+        // для получения значения конкретной карточки
+        id = article.id;
         document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие <b>необратимо</b>`;
     }
 
     const redirect_to_edit = () => {
-
-        console.log(type);
+        // для получения значения конкретной карточки
+        id = article.id;
 
         if (type === 'pigs' || 'graduates') {
             type = 'pig';
@@ -56,7 +57,7 @@
         {#if admin}
             <div class='button_wrapper'>
                 <EditButton button_name='edit'  click_handler={redirect_to_edit}/>
-                {#if !(/pigs|graduates/.test(category))}
+                {#if !(/looking-for-home|graduates/.test(category))}
                 <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
                 {/if}
             </div>
