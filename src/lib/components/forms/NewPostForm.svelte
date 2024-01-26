@@ -3,7 +3,7 @@
 
     export let title;
 
-	let modal_message = 'Пост успешно создан.';
+	let modal_message = 'Пост опубликован.';
 
     const scheme = {
         title: title || 'Новая публикация',

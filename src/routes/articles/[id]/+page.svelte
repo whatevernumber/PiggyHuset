@@ -31,6 +31,10 @@
 		redirect('/articles', 300);
 	}
 
+	const redirect_to_edit = () => {
+		redirect('/admin/edit/article/' + article.id, 250);
+	}
+
 	async function remove () {
 		let message = document.querySelector('.message');
 		message.textContent = 'Идёт удаление, подождите...';
@@ -57,7 +61,7 @@
 				<PhotoCard {pic} type="article" />
 				{#if admin}
 				<div class="profile_buttons">
-					<SmolButton class_name="super-smol-button" title="Изменить" />
+					<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
 					<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
 				</div>
 				{/if}

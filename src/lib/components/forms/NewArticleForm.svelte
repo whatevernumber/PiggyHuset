@@ -2,7 +2,7 @@
     import Form from "$lib/components/forms/Form.svelte";
 
     export let title;
-	let modal_message = 'Новая запись успешно добавлена';
+	let modal_message = 'Запись опубликована';
 
     const scheme = {
         title: title || 'Новая статья',
