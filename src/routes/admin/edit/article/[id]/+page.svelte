@@ -8,7 +8,8 @@
 
 	let article = data.article;
 	let type = article.type;
-	console.log(article);
+	let method = 'PATCH';
+	let endpoint = '/article/' + article.id;
 
 	onMount(() =>
 	{
@@ -23,15 +24,9 @@
 			article_link.value = article.origin_link;
 		}
 
-
-		let file_input = document.querySelector("input[type='file']");
-
 		article_title.value = article.title;
 		article_text.value = article.text;
 
-		// let container = new DataTransfer();
-		// container.files = pig.photos;
-		// file_input = container.files;
 	});
 
 	const title = "Редактировать публикацию";
@@ -43,7 +38,7 @@
 </svelte:head>
 
 {#if type === '1'}
-<NewArticleForm {title} />
+<NewArticleForm {title} {method} {endpoint} />
 {:else}
-<NewPostForm {title} />
+<NewPostForm {title} {method} {endpoint} />
 {/if}

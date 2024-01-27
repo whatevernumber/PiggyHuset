@@ -11,6 +11,7 @@
 	export let scheme = {};
 	export let redirect_location;
     export let modal_message;
+    export let method = 'POST';
     console.log('modal');
 
 	let success;
@@ -40,7 +41,7 @@
         const form = document.querySelector('form');
         const formData = new FormData(form);
         const res = await fetch(_REMOTE_SERVER + scheme.endpoint, {
-            method: 'POST',
+            method: method,
             credentials: 'include',
             body: formData
         });

@@ -10,7 +10,6 @@
     export let button_text; // Текст кнопки
     export let category; // Категория (для автоматического составления URL)
     export let data = {};
-    export let default_text = 'Ищет самые лучшие ручки на свете';
     export let page_title = ''; // Заголовок страницы каталога
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
 
@@ -25,6 +24,7 @@
         showModal(evt);
         evt.target.removeEventListener('click', show_delete);
         document.removeEventListener('click', closeModal);
+
     }
 
     async function remove () {
