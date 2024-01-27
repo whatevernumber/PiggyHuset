@@ -3,13 +3,15 @@
 
 	export let modal;
 	export let title = 'Новый поросёнок';
+	export let method;
+	export let endpoint = '/pigs';
 
 	let redirect_location = "looking-for-home";
 	let modal_message = 'Запись опубликована';
 
 	const scheme = {
 		title: title,
-		endpoint: '/pigs',
+		endpoint: endpoint,
 		fields: [
 			{
 				label: 'Имя',
@@ -39,4 +41,4 @@
 	};
 </script>
 
-<Form {scheme} {modal_message} {modal} {redirect_location} />
+<Form {scheme} {modal_message} {modal} {redirect_location} {method} />

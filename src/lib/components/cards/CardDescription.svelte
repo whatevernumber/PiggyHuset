@@ -1,8 +1,6 @@
 <script>
-	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
-	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import {showModal, redirect} from "$lib/components/utils/func.js";
 	import { _REMOTE_SERVER } from '$env/static/public';
 
@@ -11,12 +9,9 @@
 	export let graduated;
 	export let age;
 	export let author;
-	export let volunteer;
 	export let admin = true;
 	export let id;
 	export let article;
-
-	console.log(graduated);
 
 	const click_handler = (evt) => {
 		showModal(evt);
@@ -49,7 +44,7 @@
 	<div class='checkbox'>
 		<label class='graduated_checkbox'>
 			<input type='checkbox' name='graduated' on:click={graduatePig}>
-			<span class='checkbox_message'>Нашёл дом</span>
+			<span class='checkbox_message'>Дом найден?</span>
 		</label>
 	</div>
 	{/if}
@@ -60,9 +55,6 @@
 		<p>Автор статьи: {author}</p>
 	{/if}
 	<ArticleText text={description} />
-	{#if volunteer}
-		<p class='volunteer'>Куратор: <b>{volunteer}</b></p>
-	{/if}
 </div>
 
 <style>
@@ -75,12 +67,6 @@
 
 	.graduated_image {
 		justify-self: flex-start;
-	}
-
-	.volunteer {
-		font-size: 14px;
-		font-style: italic;
-		align-self: flex-end;
 	}
 
 	.graduated_checkbox {

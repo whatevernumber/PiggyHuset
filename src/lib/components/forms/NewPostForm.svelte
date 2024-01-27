@@ -2,12 +2,14 @@
     import Form from "$lib/components/forms/Form.svelte";
 
     export let title;
+	export let method;
+	export let endpoint = '/articles/type/2';
 
 	let modal_message = 'Пост опубликован.';
 
     const scheme = {
         title: title || 'Новая публикация',
-        endpoint: '/articles/type/2',
+        endpoint: endpoint,
         fields: [
             {
                 label: 'Заголовок публикации',
@@ -30,4 +32,4 @@
     }
 </script>
 
-<Form {scheme} {modal_message} redirect_location="articles" />
+<Form {scheme} {modal_message} {method} redirect_location="articles" />

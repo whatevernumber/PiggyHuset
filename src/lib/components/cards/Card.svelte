@@ -25,16 +25,18 @@
     $: image = article.main_photo ?? null;
 
     const show_delete_message = () => {
-        // для получения значения конкретной карточки
+
+        // для получения id-значения конкретной карточки
         id = article.id;
         document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие <b>необратимо</b>`;
     }
 
     const redirect_to_edit = () => {
-        // для получения значения конкретной карточки
+
+        // для получения id-значения конкретной карточки
         id = article.id;
 
-        if (type === 'pigs' || 'graduates') {
+        if (type === 'pig' || type === 'ready') {
             type = 'pig';
         } else {
             type = 'article';
