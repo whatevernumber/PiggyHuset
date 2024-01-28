@@ -4,6 +4,8 @@
     export let title;
 	export let method;
 	export let endpoint = '/articles/type/1';
+	export let old_photos;
+	export let is_editing;
 	let modal_message = 'Запись опубликована';
 
     const scheme = {
@@ -38,4 +40,4 @@
     }
 </script>
 
-<Form {scheme} {modal_message} {method} redirect_location="articles" />
+<Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="articles" />

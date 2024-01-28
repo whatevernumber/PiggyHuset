@@ -50,7 +50,7 @@
 <Article {date}>
 	<PigProfile {description} {graduated} {pic} {header} {age} {type} {redirect_to_edit} />
 
-	{#if pig.photos.length}
+	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />
 	{/if}
 </Article>
