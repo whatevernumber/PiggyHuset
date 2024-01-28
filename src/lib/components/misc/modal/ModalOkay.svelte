@@ -10,17 +10,15 @@
 	export let action_handler;
 	export let redirect;
 	export let sent_handle;
+	export let handle_cancel = (evt) => {
+		closeModal(evt);
+	};
 
 	let color = '#E1EDCE';
 
 	if (!success) {
 		color = "#F6B5D3";
 	}
-
-	const handle = (evt) => {
-		closeModal(evt);
-	}
-
 	const reload = (evt) => {
 		closeModal(evt);
 		action = 'delete';
@@ -38,7 +36,7 @@
 		{#if action === 'delete'}
 			<div class='buttons'>
 				<SmolButton class_name="smol-red" title='Удалить' click_handler={action_handler} />
-				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle} />
+				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle_cancel} />
 			</div>
 		{:else if (action === 'complete') }
 			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={update} />

@@ -12,6 +12,7 @@
     export let data = {};
     export let page_title = ''; // Заголовок страницы каталога
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
+    export let modal_opened; // Флаг для открытия оверлея
 
     let data_array = data.payload;
     let action_id;
@@ -25,6 +26,14 @@
         evt.target.removeEventListener('click', show_delete);
         document.removeEventListener('click', closeModal);
 
+        modal_opened = true;
+    }
+
+    // Обработка действия кнопки "отменить" при удалении
+    const handle_cancel = (evt) => {
+        closeModal(evt);
+
+        modal_opened = false;
     }
 
     async function remove () {
@@ -79,7 +88,7 @@
 </div>
 
 <div class='modal modal_closed'>
-    <ModalOkay {action} {success} action_handler={remove}/>
+    <ModalOkay {action} {success} {handle_cancel} action_handler={remove}/>
 </div>
 
 <style>
@@ -98,9 +107,27 @@
         position: fixed;
         top: 35%;
         left: 30%;
+        z-index: 3;
     }
 
     .modal_closed {
+        display: none;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+        z-index: 1;
+    }
+
+    .hidden {
         display: none;
     }
 </style>

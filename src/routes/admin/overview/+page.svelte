@@ -2,6 +2,7 @@
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
     import Button from "$lib/components/misc/button/Button.svelte";
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
+    import Overlay from '$lib/components/misc/overlay/Overlay.svelte'
 
     export let data;
     let admin = true;
@@ -11,6 +12,8 @@
     let header = 'свинок';
     let type = 'pig';
     $: array = data[tab];
+
+    let modal_opened = false; // Флаг для показа оверлея;
 
     const switchTabs = function (newtab) {
         tab = newtab;
@@ -34,6 +37,7 @@
                 type = 'ready';
         }
     };
+
 </script>
 
 <svelte:head>
@@ -65,8 +69,12 @@
 </section>
 
 {#key tab}
-<CatalogPage data="{array}" page_title="{'Список ' + header}" category={tab === 'pigs' ? 'looking-for-home' : tab} {type} admin />
+<CatalogPage data="{array}" page_title="{'Список ' + header}" category={tab === 'pigs' ? 'looking-for-home' : tab} {type} admin bind:modal_opened={modal_opened}/>
 {/key}
+
+{#if modal_opened}
+    <Overlay />
+{/if}
 
 <style>
     .nav-header {

@@ -36,9 +36,9 @@
         // для получения id-значения конкретной карточки
         id = article.id;
 
-        if (type === 'pig' || type === 'ready') {
+        if (type === 'ready') {
             type = 'pig';
-        } else {
+        } else if (type === 'news') {
             type = 'article';
         }
 
@@ -72,6 +72,7 @@
         </div>
     </div>
 </article>
+<div class='hidden overlay'></div>
 
 <style>
     article {
@@ -131,4 +132,5 @@
         max-width: 100px;
         column-gap: 5px;
     }
+
 </style>
