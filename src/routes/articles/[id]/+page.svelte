@@ -82,7 +82,7 @@
 			</div>
 			<CardDescription article {header} {description} {author} />
 		</div>
-		{#if article.photos.length}
+		{#if article.photos.length > 1}
 			<PhotoList photos={article.photos} />
 		{/if}
 </Article>
