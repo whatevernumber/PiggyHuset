@@ -8,7 +8,8 @@
 
 
 	let article = data.article;
-	let type = article.type;
+	let type = article.type_id;
+
 	let method = 'PATCH';
 	let endpoint = '/articles/' + article.id;
 
@@ -53,9 +54,9 @@
 </svelte:head>
 
 {#if type === '1'}
-<NewArticleForm {title} {method} {endpoint} />
+<NewArticleForm {title} {method} {endpoint} {old_photos} is_editing />
 {:else}
-<NewPostForm {title} {method} {endpoint} />
+<NewPostForm {title} {method} {endpoint} {old_photos} is_editing />
 {/if}
 
 {#if photos.length}

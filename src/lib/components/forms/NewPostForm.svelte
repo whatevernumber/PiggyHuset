@@ -3,6 +3,8 @@
 
     export let title;
 	export let method;
+	export let old_photos;
+	export let is_editing;
 	export let endpoint = '/articles/type/2';
 
 	let modal_message = 'Пост опубликован.';
@@ -32,4 +34,4 @@
     }
 </script>
 
-<Form {scheme} {modal_message} {method} redirect_location="articles" />
+<Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="articles" />
