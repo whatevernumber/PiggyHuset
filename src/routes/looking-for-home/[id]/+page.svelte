@@ -16,7 +16,6 @@
 	let graduated = pig.graduated;
 	let description = pig.description;
 	let date = pig.datetime;
-	let volunteer = 'Дарья';
 
 	let modal = false;
 
@@ -34,7 +33,7 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {description} {graduated} {pic} {header} {age} {show_edit} {volunteer} id={pig_id} />
+	<PigProfile {description} {graduated} {pic} {header} {age} {show_edit} id={pig_id} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />

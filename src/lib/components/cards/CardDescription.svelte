@@ -1,8 +1,6 @@
 <script>
-	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
-	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import {showModal, redirect} from "$lib/components/utils/func.js";
 	import { _REMOTE_SERVER } from '$env/static/public';
 
@@ -11,7 +9,7 @@
 	export let graduated;
 	export let age;
 	export let author;
-	export let volunteer;
+	export let overseer = false;
 	export let admin = true;
 	export let id;
 	export let article;
@@ -60,8 +58,8 @@
 		<p>Автор статьи: {author}</p>
 	{/if}
 	<ArticleText text={description} />
-	{#if volunteer}
-		<p class='volunteer'>Куратор: <b>{volunteer}</b></p>
+	{#if overseer}
+		<p class='volunteer'>Куратор: <b>{overseer}</b></p>
 	{/if}
 </div>
 
