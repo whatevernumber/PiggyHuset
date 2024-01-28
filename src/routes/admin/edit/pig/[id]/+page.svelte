@@ -4,6 +4,7 @@
 	import { _REMOTE_SERVER } from '$env/static/public';
 
 	export let data;
+
 	let pig = data.pig;
 	let title = `Профиль ${pig.name}`
 	let method = 'PATCH';
