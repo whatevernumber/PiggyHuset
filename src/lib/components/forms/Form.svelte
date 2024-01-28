@@ -5,13 +5,15 @@
 	import {_REMOTE_SERVER} from "$env/static/public";
 	import {redirect} from "$lib/components/utils/func.js";
 	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
-    import { createEventDispatcher, tick } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 
 	export let scheme = {};
 	export let redirect_location;
     export let modal_message;
     export let method = 'POST';
+    export let is_editing;
+    export let old_photos;
     console.log('modal');
 
 	let success;
@@ -140,7 +142,7 @@
 
             <fieldset class="label-group">
             {#if scheme.files.file_input}
-                <FileInput class_name="form-input-field" name="files" multiple onchange="{preview}" />
+                <FileInput class_name="form-input-field" name="files[]" multiple onchange="{preview}" />
             {/if}
                 <div class="form-item button">
                     <SubmitButton on_click="{ sendForm }" />
@@ -152,6 +154,9 @@
                         <PhotoCard {src} width='80px' height='80px' />
                     {/each}
                 </div>
+            {/if}
+            {#if is_editing}
+                <input type='hidden' class='uploaded_photos' name='old_photos' bind:value={old_photos}/>
             {/if}
         </form>
     </section>

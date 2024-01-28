@@ -7,6 +7,8 @@
 	export let height = 200;
     export let type = 'pig';
     export let src = (pic && pic !== undefined) ? `${_REMOTE_SERVER}/img/${pic}.jpg` : `../src/lib/img/placeholder/${type}.png`;
+    export let is_form = false;
+    export let click_handler;
 
     // let pics = {
     //     article: 'article-pig.png',
@@ -17,25 +19,62 @@
     //     temp: 'temp-pig-profile-photo.png',
     // }
 
-    if (pic && pic !== undefined) {
-        pic = _REMOTE_SERVER + '/img/' + pic + '.jpg';
-    } else {
-        pic = '../src/lib/img/placeholder/' + type + '.png';
+    // if (pic && pic !== undefined) {
+    //     pic = _REMOTE_SERVER + '/img/' + pic + '.jpg';
+    // } else {
+    //     pic = '../src/lib/img/placeholder/' + type + '.png';
+    // }
+
+    const delete_handler = () => {
+        console.log(pic);
+        pic = pic;
+        click_handler(pic);
     }
+
 
 </script>
 
-<div class="image-wrapper" aria-roledescription="Посмотреть фото">
-    <img {src} class="photo-card" {width} {height} {alt}>
+<div class="wrapper" aria-roledescription="Посмотреть фото">
+    <div class='image_wrapper'>
+        <img {src} class="photo-card" {width} {height} {alt}>
+        {#if is_form}
+            <div class='cancel_button' on:click={delete_handler}></div>
+        {/if}
+    </div>
 </div>
 
 <style>
-    .image-wrapper {
+    .wrapper {
         display: flex;
         justify-content: center;
+        flex-grow: revert;
+    }
+
+    .image_wrapper {
+        position: relative;
     }
 
     .photo-card {
         object-fit: cover;
     }
+    .cancel_button {
+        width: 20px;
+        height: 20px;
+        top: 0;
+        right: -20px;
+        background-image: url("/src/lib/img/x.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+    }
+
+    .cancel_button:hover {
+        width: 25px;
+        height: 28px;
+        right: -17px;
+        background-image: url("/src/lib/img/x.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
 </style>

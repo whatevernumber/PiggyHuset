@@ -4,7 +4,9 @@
 	export let modal;
 	export let title = 'Новый поросёнок';
 	export let method;
+	export let is_editing;
 	export let endpoint = '/pigs';
+	export let old_photos;
 
 	let redirect_location = "looking-for-home";
 	let modal_message = 'Запись опубликована';
@@ -41,4 +43,4 @@
 	};
 </script>
 
-<Form {scheme} {modal_message} {modal} {redirect_location} {method} />
+<Form {scheme} {modal_message} {modal} {redirect_location} {method} {is_editing} {old_photos} />
