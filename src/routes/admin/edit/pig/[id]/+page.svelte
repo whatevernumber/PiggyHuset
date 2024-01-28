@@ -15,7 +15,6 @@
 		let pig_name = document.querySelector("[name = 'name']");
 		let pig_age = document.querySelector("[name = 'age']");
 		let pig_description = document.querySelector("[name = 'description']");
-		let pig_overseer = document.querySelector("[name = 'overseer']");
 
 		pig_name.value = pig.name;
 		pig_age.value = pig.age;
