@@ -52,7 +52,8 @@
 
 <style>
 	.modal_wrapper {
-		bottom: 10%;
+		bottom: 40%;
+        position: fixed;
 		display: flex;
 		padding: 20px 20px;
 		min-width: 517px;
