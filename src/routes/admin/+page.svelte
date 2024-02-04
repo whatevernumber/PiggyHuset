@@ -35,6 +35,9 @@
 				field.classList.add('input-error');
 				field.value = '';
 			}
+
+			const password_field = document.querySelector(`[name='password']`);
+			password_field.value = '';
 		}
 	}
 
