@@ -22,7 +22,7 @@
 	const show_delete = (evt) => {
 		action = 'delete';
 		document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${news.title}". Это действие <b>необратимо</b>`;
-		showModal(evt, 'modal_delete');
+		showModal(evt, 'modal_closed');
 		evt.target.removeEventListener('click', show_delete);
 		document.removeEventListener('click', closeModal);
 
@@ -89,7 +89,7 @@
 
 <Overlay class_name='hidden' />
 
-<div class='modal modal_delete modal_closed'>
+<div class='modal modal_closed'>
 	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} />
 </div>
 
@@ -130,4 +130,20 @@
         display: none;
     }
 
+	@media (max-width: 1001px) {
+		.wrapper {
+			flex-direction: column;
+			row-gap: 10px;
+            margin-top: 10px;
+        }
+
+		.profile_buttons {
+			justify-self: center;
+			margin: 5px auto;
+		}
+
+        .modal {
+            left: 0;
+        }
+	}
 </style>

@@ -101,4 +101,13 @@
         justify-self: flex-start;
     }
 
+    @media (max-width: 1001px) {
+        .navigation-home {
+            visibility: hidden;
+        }
+
+        .warning-text {
+            font-size: 12px;
+        }
+    }
 </style>

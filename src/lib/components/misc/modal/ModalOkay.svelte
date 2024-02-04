@@ -20,6 +20,11 @@
 		color = "#F6B5D3";
 	}
 	const reload = (evt) => {
+
+		// Снятие оверлея при ошибке
+		let overlay = document.querySelector('.overlay');
+		overlay.style.display = 'none';
+
 		closeModal(evt);
 		action = 'delete';
 	}
@@ -51,8 +56,10 @@
 </div>
 
 <style>
+
 	.modal_wrapper {
-		bottom: 10%;
+		bottom: 40%;
+        position: fixed;
 		display: flex;
 		padding: 20px 20px;
 		min-width: 517px;
@@ -90,4 +97,13 @@
 		min-width: 300px;
 		justify-content: space-around;
 	}
+
+    @media (max-width: 1001px) {
+        .modal_wrapper {
+            min-width: 100%;
+			padding: 0;
+            max-width: 250px;
+            min-height: 0;
+        }
+    }
 </style>

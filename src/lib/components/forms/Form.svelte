@@ -14,7 +14,6 @@
     export let method = 'POST';
     export let is_editing;
     export let old_photos;
-    console.log('modal');
 
 	let success;
 
@@ -140,7 +139,7 @@
             </fieldset>
             {/if}
 
-            <fieldset class="label-group">
+            <fieldset class="label-group file-fieldset">
             {#if scheme.files.file_input}
                 <FileInput class_name="form-input-field" name="files[]" multiple onchange="{preview}" />
             {/if}
@@ -312,6 +311,45 @@
         top: 35%;
         left: 35%;
         z-index: 10;
+    }
+
+    @media (max-width: 1001px) {
+
+        .form-header {
+            text-align: center;
+        }
+
+        .form-section {
+            width: 100%;
+            height: 100%;
+            background-color: #F0F8FF;
+            padding: 5px 0;
+        }
+
+        .form-scheme textarea {
+            flex-grow: 2;
+            max-width: 88%;
+            min-width:  88%;
+            min-height: 300px;
+            max-height: 500px;
+            padding: 10px;
+        }
+
+        fieldset {
+            border: none;
+            display: flex;
+            row-gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .file-fieldset {
+            flex-wrap: nowrap;
+        }
+
+        .modal {
+            left: 0;
+        }
     }
 
 </style>

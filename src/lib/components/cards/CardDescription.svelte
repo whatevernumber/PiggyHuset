@@ -58,6 +58,7 @@
 </div>
 
 <style>
+
     .profile_description {
         display: flex;
         flex-direction: column;
@@ -119,4 +120,12 @@
 		font-size: 18px;
 		font-weight: bold;
 	}
+
+    @media (max-width: 1000px) {
+        .profile_description {
+            flex-direction: column;
+            padding: 0 20px;
+            row-gap: 10px;
+        }
+    }
 </style>

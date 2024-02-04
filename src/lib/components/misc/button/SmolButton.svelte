@@ -31,7 +31,7 @@
     .smol-button {
         align-self: flex-end;
         max-width: 125px;
-        padding: 5px 20px;
+        padding: 2px 20px;
     }
 
     .smol-but-long-button {

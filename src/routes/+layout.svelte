@@ -8,5 +8,5 @@ $: url = $page.url.pathname
 </script>
 
 <Header current={url} />
-<slot/>
+	<slot/>
 <Footer />

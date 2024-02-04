@@ -16,7 +16,6 @@
 	let graduated = pig.graduated;
 	let description = pig.description;
 	let date = pig.datetime;
-	let volunteer = 'Дарья';
 
 	let modal = false;
 
@@ -30,7 +29,6 @@
 		redirect('/admin/edit/pig/' + pig.id);
 	}
 
-	console.log(pig);
 </script>
 
 <svelte:head>
@@ -38,23 +36,15 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {description} {graduated} {pic} {header} {age} {redirect_to_edit} {volunteer} id={pig_id} />
+	<PigProfile {description} {graduated} {pic} {header} {age} {redirect_to_edit} id={pig_id} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />
 	{/if}
 </Article>
 
-<div class='modal modal_delete modal_closed'>
+<div class='modal modal_closed'>
 	<ModalOkay {action} />
-</div>
-
-<div class='modal modal_edit modal_closed'>
-	<button class="close-button" on:click={closeModal} aria-roledescription="Закрыть окно с формой">
-            <span hidden>
-                закрыть
-            </span>
-	</button>
 </div>
 
 <style>
@@ -79,4 +69,10 @@
         scale: 1.2;
         transition: 0.5s;
     }
+
+	@media (max-width: 1001px) {
+        .modal {
+            left: 0;
+        }
+	}
 </style>

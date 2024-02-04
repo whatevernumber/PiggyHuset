@@ -24,6 +24,15 @@
 
     $: image = article.main_photo ?? null;
 
+    let window_width = 0;
+    let date_word = '';
+
+    $: if (window_width < 1000 && window_width !== 0) {
+        date_word = '';
+    } else {
+        date_word = 'Опубликовано: '
+    }
+
     const show_delete_message = () => {
 
         // для получения id-значения конкретной карточки
@@ -47,6 +56,7 @@
 
 </script>
 
+<svelte:window bind:innerWidth={window_width} />
 <article>
     <a {href}>
         <PhotoCard pic={image} {type} width='250' height='250' alt='Фотография свинки' />
@@ -67,7 +77,7 @@
         </div>
         <p class="card-description">{article.description ?? article.text}</p>
         <div class="bottom-line">
-            <p class="datetime">Опубликовано: <Time relative timestamp={article.datetime} /></p>
+            <p class="datetime">{date_word}<Time relative timestamp={article.datetime} /></p>
             <SmolButton title={button_text} {href} />
         </div>
     </div>
@@ -124,6 +134,7 @@
 
     .header_wrapper {
         display: flex;
+        margin-bottom: 10px;
     }
 
     .button_wrapper {
@@ -131,6 +142,26 @@
         display: flex;
         max-width: 100px;
         column-gap: 5px;
+    }
+
+    @media (max-width: 1001px) {
+        article {
+            flex-direction: column;
+            row-gap: 10px;
+        }
+
+        .wrapper {
+            row-gap: 10px;
+        }
+
+        .bottom-line {
+            column-gap: 5px;
+        }
+
+        .datetime {
+            order: 15;
+            text-align: right;
+        }
     }
 
 </style>

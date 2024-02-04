@@ -48,5 +48,11 @@
         color: #88AA4D;
         box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.58);
     }
+
+    @media (max-width: 1001px) {
+        .option-item-link {
+            box-shadow: none;
+        }
+    }
 </style>
 
