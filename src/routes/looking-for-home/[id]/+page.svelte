@@ -2,7 +2,7 @@
 	import Article from '$lib/components/articles/Article.svelte';
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
-	import { showModal, closeModal } from '$lib/components/utils/func.js';
+	import { showModal, closeModal, redirect } from '$lib/components/utils/func.js';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 
 	export let data;
@@ -25,7 +25,10 @@
 		document.removeEventListener('click', closeModal);
 	}
 
-	console.log(pig);
+	const redirect_to_edit = () => {
+		redirect('/admin/edit/pig/' + pig.id);
+	}
+
 </script>
 
 <svelte:head>
@@ -33,23 +36,15 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {description} {graduated} {pic} {header} {age} {show_edit} id={pig_id} />
+	<PigProfile {description} {graduated} {pic} {header} {age} {redirect_to_edit} id={pig_id} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />
 	{/if}
 </Article>
 
-<div class='modal modal_delete modal_closed'>
+<div class='modal modal_closed'>
 	<ModalOkay {action} />
-</div>
-
-<div class='modal modal_edit modal_closed'>
-	<button class="close-button" on:click={closeModal} aria-roledescription="Закрыть окно с формой">
-            <span hidden>
-                закрыть
-            </span>
-	</button>
 </div>
 
 <style>
@@ -74,4 +69,10 @@
         scale: 1.2;
         transition: 0.5s;
     }
+
+	@media (max-width: 1001px) {
+        .modal {
+            left: 0;
+        }
+	}
 </style>

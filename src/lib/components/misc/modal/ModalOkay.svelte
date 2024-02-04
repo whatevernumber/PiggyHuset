@@ -10,18 +10,21 @@
 	export let action_handler;
 	export let redirect;
 	export let sent_handle;
+	export let handle_cancel = (evt) => {
+		closeModal(evt);
+	};
 
 	let color = '#E1EDCE';
 
 	if (!success) {
 		color = "#F6B5D3";
 	}
-
-	const handle = (evt) => {
-		closeModal(evt);
-	}
-
 	const reload = (evt) => {
+
+		// Снятие оверлея при ошибке
+		let overlay = document.querySelector('.overlay');
+		overlay.style.display = 'none';
+
 		closeModal(evt);
 		action = 'delete';
 	}
@@ -38,7 +41,7 @@
 		{#if action === 'delete'}
 			<div class='buttons'>
 				<SmolButton class_name="smol-red" title='Удалить' click_handler={action_handler} />
-				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle} />
+				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle_cancel} />
 			</div>
 		{:else if (action === 'complete') }
 			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={update} />
@@ -53,8 +56,10 @@
 </div>
 
 <style>
+
 	.modal_wrapper {
-		bottom: 10%;
+		bottom: 40%;
+        position: fixed;
 		display: flex;
 		padding: 20px 20px;
 		min-width: 517px;
@@ -92,4 +97,13 @@
 		min-width: 300px;
 		justify-content: space-around;
 	}
+
+    @media (max-width: 1001px) {
+        .modal_wrapper {
+            min-width: 100%;
+			padding: 0;
+            max-width: 250px;
+            min-height: 0;
+        }
+    }
 </style>

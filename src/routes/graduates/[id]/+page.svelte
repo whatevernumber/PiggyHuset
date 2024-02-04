@@ -3,7 +3,8 @@
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
-	import { showModal, removeData, closeModal } from '$lib/components/utils/func.js';
+	import { showModal, removeData, closeModal, redirect } from '$lib/components/utils/func.js';
+
 	export let data;
 
 	const type = 'ready';
@@ -27,6 +28,10 @@
 		document.removeEventListener('click', closeModal);
 	}
 
+	const redirect_to_edit = () => {
+		redirect('/admin/edit/pig/' + pig.id);
+	}
+
 	const remove = () => {
 		removeData('article', pig.id, success);
 
@@ -43,9 +48,9 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {description} {graduated} {pic} {header} {age} {type} {show_delete} />
+	<PigProfile {description} {graduated} {pic} {header} {age} {type} {redirect_to_edit} />
 
-	{#if pig.photos.length}
+	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />
 	{/if}
 </Article>

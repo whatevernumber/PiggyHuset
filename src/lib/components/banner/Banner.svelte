@@ -32,4 +32,16 @@
         row-gap: 30px;
     }
 
+
+    @media (max-width: 1001px) {
+        .promo-container {
+            background: #F9EEE1 url('/src/lib/img/mobile_banner_background.png') no-repeat;
+            background-size: contain;
+        }
+
+        .option-list {
+            padding-top: 35px;
+            margin: 0 auto;
+        }
+    }
 </style>

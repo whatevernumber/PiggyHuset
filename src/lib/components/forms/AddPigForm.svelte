@@ -2,13 +2,18 @@
 	import Form from "$lib/components/forms/Form.svelte";
 
 	export let modal;
+	export let title = 'Новый поросёнок';
+	export let method;
+	export let is_editing;
+	export let endpoint = '/pigs';
+	export let old_photos;
 
 	let redirect_location = "looking-for-home";
-	let modal_message = 'Новая свинка успешно добавлена.';
+	let modal_message = 'Запись опубликована';
 
 	const scheme = {
-		title: 'Новый поросёнок',
-		endpoint: '/pigs',
+		title: title,
+		endpoint: endpoint,
 		fields: [
 			{
 				label: 'Имя',
@@ -38,4 +43,4 @@
 	};
 </script>
 
-<Form {scheme} {modal_message} {modal} {redirect_location} />
+<Form {scheme} {modal_message} {modal} {redirect_location} {method} {is_editing} {old_photos} />

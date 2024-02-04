@@ -14,8 +14,6 @@
 	export let id;
 	export let article;
 
-	console.log(graduated);
-
 	const click_handler = (evt) => {
 		showModal(evt);
 		evt.target.removeEventListener('click', click_handler);
@@ -47,7 +45,7 @@
 	<div class='checkbox'>
 		<label class='graduated_checkbox'>
 			<input type='checkbox' name='graduated' on:click={graduatePig}>
-			<span class='checkbox_message'>Нашёл дом</span>
+			<span class='checkbox_message'>Дом найден?</span>
 		</label>
 	</div>
 	{/if}
@@ -131,4 +129,12 @@
 		font-size: 18px;
 		font-weight: bold;
 	}
+
+    @media (max-width: 1000px) {
+        .profile_description {
+            flex-direction: column;
+            padding: 0 20px;
+            row-gap: 10px;
+        }
+    }
 </style>

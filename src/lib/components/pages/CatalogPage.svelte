@@ -10,9 +10,9 @@
     export let button_text; // Текст кнопки
     export let category; // Категория (для автоматического составления URL)
     export let data = {};
-    export let default_text = 'Ищет самые лучшие ручки на свете';
     export let page_title = ''; // Заголовок страницы каталога
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
+    export let modal_opened; // Флаг для открытия оверлея
 
     let data_array = data.payload;
     let action_id;
@@ -25,6 +25,15 @@
         showModal(evt);
         evt.target.removeEventListener('click', show_delete);
         document.removeEventListener('click', closeModal);
+
+        modal_opened = true;
+    }
+
+    // Обработка действия кнопки "отменить" при удалении
+    const handle_cancel = (evt) => {
+        closeModal(evt);
+
+        modal_opened = false;
     }
 
     async function remove () {
@@ -79,7 +88,7 @@
 </div>
 
 <div class='modal modal_closed'>
-    <ModalOkay {action} {success} action_handler={remove}/>
+    <ModalOkay {action} {success} {handle_cancel} action_handler={remove}/>
 </div>
 
 <style>
@@ -98,9 +107,24 @@
         position: fixed;
         top: 35%;
         left: 30%;
+        z-index: 3;
     }
 
     .modal_closed {
         display: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    @media (max-width: 1001px) {
+        section {
+            padding: 0;
+        }
+
+        .modal {
+            left: 0;
+        }
     }
 </style>

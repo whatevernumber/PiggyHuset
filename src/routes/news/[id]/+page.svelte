@@ -6,6 +6,7 @@
 	import CardDescription from '$lib/components/cards/CardDescription.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
+	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 
 	export let data;
 
@@ -21,13 +22,30 @@
 	const show_delete = (evt) => {
 		action = 'delete';
 		document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${news.title}". Это действие <b>необратимо</b>`;
-		showModal(evt, 'modal_delete');
+		showModal(evt, 'modal_closed');
 		evt.target.removeEventListener('click', show_delete);
 		document.removeEventListener('click', closeModal);
+
+		// Оверлей для блокировки содержимого за модальным окном
+		let overlay = document.querySelector('.overlay');
+		overlay.style.display = 'block';
+	}
+
+	// Обработка действия кнопки "отменить" при удалении
+	const handle_cancel = (evt) => {
+		closeModal(evt);
+
+		// Снятие оверлея
+		let overlay = document.querySelector('.overlay');
+		overlay.style.display = 'none';
 	}
 
 	const redirect_after_success = () => {
 		redirect('/news', 300);
+	}
+
+	const redirect_to_edit = () => {
+		redirect('/admin/edit/article/' + news.id, 250);
 	}
 
 	async function remove () {
@@ -56,7 +74,7 @@
 			<PhotoCard pic={news.main_photo} type="article" />
 			{#if admin}
 				<div class="profile_buttons">
-					<SmolButton class_name="super-smol-button" title="Изменить" />
+					<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
 					<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
 				</div>
 			{/if}
@@ -64,13 +82,15 @@
 		<CardDescription article {header} {description} />
 	</div>
 
-	{#if news.photos.length}
+	{#if news.photos.length > 1}
 	<PhotoList photos={news.photos} />
 	{/if}
 </Article>
 
-<div class='modal modal_delete modal_closed'>
-	<ModalOkay {action} action_handler={remove} {success} redirect={redirect_after_success} />
+<Overlay class_name='hidden' />
+
+<div class='modal modal_closed'>
+	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} />
 </div>
 
 <style>
@@ -92,4 +112,38 @@
         left: 30%;
         z-index: 10;
     }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+        z-index: 1;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+	@media (max-width: 1001px) {
+		.wrapper {
+			flex-direction: column;
+			row-gap: 10px;
+            margin-top: 10px;
+        }
+
+		.profile_buttons {
+			justify-self: center;
+			margin: 5px auto;
+		}
+
+        .modal {
+            left: 0;
+        }
+	}
 </style>

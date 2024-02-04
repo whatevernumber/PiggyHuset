@@ -6,7 +6,7 @@
 	export let admin = true;
 	export let type;
 	export let show_delete;
-	export let show_edit;
+	export let redirect_to_edit;
 	export let removable;
 
 </script>
@@ -15,7 +15,7 @@
 	<PhotoCard width="240" height="244" {pic} {type} />
 	{#if admin}
 		<div class="profile_buttons">
-			<SmolButton title="Редактировать" click_handler={show_edit} />
+			<SmolButton title="Редактировать" click_handler={redirect_to_edit} />
 			{#if removable}
 			<SmolButton class_name = "super-smol-button" title="Удалить" click_handler={show_delete} />
 			{/if}
@@ -29,5 +29,12 @@
       max-width: 270px;
 	  margin-top: 5px;
       justify-content: space-between;
+  }
+
+  @media (max-width: 1000px) {
+	  .profile_buttons {
+		  margin: 0 auto;
+		  margin-bottom: 15px;
+	  }
   }
 </style>

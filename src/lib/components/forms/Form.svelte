@@ -5,13 +5,15 @@
 	import {_REMOTE_SERVER} from "$env/static/public";
 	import {redirect} from "$lib/components/utils/func.js";
 	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
-    import { createEventDispatcher, tick } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 
 	export let scheme = {};
 	export let redirect_location;
     export let modal_message;
-    console.log('modal');
+    export let method = 'POST';
+    export let is_editing;
+    export let old_photos;
 
 	let success;
 
@@ -40,7 +42,7 @@
         const form = document.querySelector('form');
         const formData = new FormData(form);
         const res = await fetch(_REMOTE_SERVER + scheme.endpoint, {
-            method: 'POST',
+            method: method,
             credentials: 'include',
             body: formData
         });
@@ -137,9 +139,9 @@
             </fieldset>
             {/if}
 
-            <fieldset class="label-group">
+            <fieldset class="label-group file-fieldset">
             {#if scheme.files.file_input}
-                <FileInput class_name="form-input-field" name="files" multiple onchange="{preview}" />
+                <FileInput class_name="form-input-field" name="files[]" multiple onchange="{preview}" />
             {/if}
                 <div class="form-item button">
                     <SubmitButton on_click="{ sendForm }" />
@@ -151,6 +153,9 @@
                         <PhotoCard {src} width='80px' height='80px' />
                     {/each}
                 </div>
+            {/if}
+            {#if is_editing}
+                <input type='hidden' class='uploaded_photos' name='old_photos' bind:value={old_photos}/>
             {/if}
         </form>
     </section>
@@ -306,6 +311,45 @@
         top: 35%;
         left: 35%;
         z-index: 10;
+    }
+
+    @media (max-width: 1001px) {
+
+        .form-header {
+            text-align: center;
+        }
+
+        .form-section {
+            width: 100%;
+            height: 100%;
+            background-color: #F0F8FF;
+            padding: 5px 0;
+        }
+
+        .form-scheme textarea {
+            flex-grow: 2;
+            max-width: 88%;
+            min-width:  88%;
+            min-height: 300px;
+            max-height: 500px;
+            padding: 10px;
+        }
+
+        fieldset {
+            border: none;
+            display: flex;
+            row-gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .file-fieldset {
+            flex-wrap: nowrap;
+        }
+
+        .modal {
+            left: 0;
+        }
     }
 
 </style>
