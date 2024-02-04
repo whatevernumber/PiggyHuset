@@ -1,6 +1,6 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
-	import CardDescription from '$lib/components/cards/CardDescription.svelte';
+	import CardMainContent from '$lib/components/cards/CardMainContent.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
@@ -14,7 +14,7 @@
 	const article = data.article;
 	const pic = article.main_photo;
 	const header = article.title;
-	const description = article.text;
+	const text = article.text;
 	const author = article.author;
 
 	let action;
@@ -80,9 +80,9 @@
 				</div>
 				{/if}
 			</div>
-			<CardDescription article {header} {description} {author} />
+			<CardMainContent is_article {header} {text} {author} type="{article.type_id}" />
 		</div>
-		{#if article.photos.length > 1}
+		{#if article.photos.length > 1 && article.type_id !== 1}
 			<PhotoList photos={article.photos} />
 		{/if}
 </Article>

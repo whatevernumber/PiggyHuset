@@ -3,7 +3,7 @@
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import { showModal, removeData, closeModal, redirect } from '$lib/components/utils/func.js';
-	import CardDescription from '$lib/components/cards/CardDescription.svelte';
+	import CardMainContent from '$lib/components/cards/CardMainContent.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
@@ -12,7 +12,7 @@
 
 	let news = data.news;
 	let header = news.title;
-	let description = news.text;
+	let text = news.text;
 	let date = news.datetime;
 
 	let action;
@@ -79,7 +79,7 @@
 				</div>
 			{/if}
 		</div>
-		<CardDescription article {header} {description} />
+		<CardMainContent article {header} {text} />
 	</div>
 
 	{#if news.photos.length > 1}

@@ -1,9 +1,9 @@
 <script>
 	import ProfilePhoto from '$lib/components/cards/pig-profile-card/ProfilePhoto.svelte';
-	import CardDescription from '$lib/components/cards/CardDescription.svelte';
+	import CardMainContent from '$lib/components/cards/CardMainContent.svelte';
 
 	export let header;
-	export let description;
+	export let text;
 	export let graduated;
 	export let pic;
 	export let id;
@@ -19,7 +19,7 @@
 
 <div class='profile_wrapper'>
 	<ProfilePhoto {type} {pic} {admin} {show_delete} {redirect_to_edit} {removable}/>
-	<CardDescription {header} {description} {graduated} {article} {age} {volunteer} {id}/>
+	<CardMainContent {header} {text} {graduated} {article} {age} {volunteer} {id}/>
 </div>
 
 <style>
