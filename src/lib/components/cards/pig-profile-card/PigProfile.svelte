@@ -23,8 +23,20 @@
 </div>
 
 <style>
-	.profile_wrapper {
-		display: flex;
-		column-gap: 29px;
+    .profile_wrapper {
+        display: flex;
+    }
+
+	@media (min-width: 1001px) {
+        .profile_wrapper {
+			column-gap: 29px;
+        }
+    }
+
+	@media (max-width: 1000px) {
+        .profile_wrapper {
+			margin-top: 20px;
+            flex-direction: column;
+        }
 	}
 </style>

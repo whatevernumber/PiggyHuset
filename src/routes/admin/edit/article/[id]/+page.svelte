@@ -100,4 +100,10 @@
         max-width: 680px;
         justify-content: space-evenly;
     }
+
+	@media (max-width: 1001px) {
+		.photos_flex_wrapper {
+			width: 90%;
+		}
+	}
 </style>

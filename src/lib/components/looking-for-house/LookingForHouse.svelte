@@ -55,4 +55,11 @@
         margin: 40px auto;
         padding: 0 80px;
     }
+
+    @media (max-width: 1001px) {
+        .looking_for_home {
+            padding: 0;
+            max-width: 100%;
+        }
+    }
 </style>

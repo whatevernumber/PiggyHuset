@@ -58,4 +58,16 @@
         margin-top: 30px;
         text-align: center;
     }
+
+    @media (max-width: 1001px) {
+        .about_wrapper {
+            margin-top: 25px;
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .about_home_icon {
+            display: none;
+        }
+    }
 </style>

@@ -114,4 +114,17 @@ import {closeModal} from "$lib/components/utils/func.js";
         transition: 0.5s;
     }
 
+    @media (max-width: 1001px) {
+        .about_modal {
+            width: 90%;
+            right: 0;
+            padding-bottom: 40px;
+        }
+
+        .close-button {
+            top: -1%;
+            right: -3%;
+        }
+    }
+
 </style>

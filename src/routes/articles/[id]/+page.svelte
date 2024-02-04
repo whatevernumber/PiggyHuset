@@ -23,7 +23,7 @@
 	const show_delete = (evt) => {
 		action = 'delete';
 		document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${article.title}". Это действие <b>необратимо</b>`;
-		showModal(evt, 'modal_delete');
+		showModal(evt, 'modal_closed');
 		evt.target.removeEventListener('click', show_delete);
 		document.removeEventListener('click', closeModal);
 
@@ -89,15 +89,22 @@
 
 <Overlay class_name='hidden'/>
 
-<div class='modal modal_delete modal_closed'>
+<div class='modal modal_closed'>
 	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} />
 </div>
 
 <style>
 
+    .modal {
+        position: absolute;
+        top: 35%;
+        left: 30%;
+        z-index: 10;
+    }
+
 	.wrapper {
-			display: flex;
-			column-gap: 15px;
+		display: flex;
+		column-gap: 15px;
 	}
 
     .profile_buttons {
@@ -106,13 +113,6 @@
 		margin-top: 5px;
         justify-content: space-between;
     }
-
-	.modal {
-		position: absolute;
-		top: 35%;
-		left: 30%;
-		z-index: 10;
-	}
 
     .overlay {
         position: fixed;
@@ -129,5 +129,22 @@
 
     .hidden {
         display: none;
+    }
+
+    @media (max-width: 1001px) {
+        .wrapper {
+            flex-direction: column;
+            row-gap: 10px;
+            margin-top: 10px;
+        }
+
+        .profile_buttons {
+            justify-self: center;
+            margin: 5px auto;
+        }
+
+        .modal {
+            left: 0;
+        }
     }
 </style>

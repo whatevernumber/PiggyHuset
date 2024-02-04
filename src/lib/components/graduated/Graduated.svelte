@@ -52,4 +52,17 @@
         justify-content: space-between;
         margin-bottom: 40px;
     }
+
+    @media (max-width: 1001px) {
+
+        .graduated {
+            max-width: 400px;
+            padding: 0;
+        }
+
+        .graduated_cards_wrapper {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
 </style>

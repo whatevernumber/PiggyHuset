@@ -6,7 +6,7 @@
     export let is_light = false;
     export let onclick;
 
-    export let class_name;
+    export let class_name = '';
 </script>
 
 <a class="button {class_name}" class:button-light={is_light} {href}
@@ -42,9 +42,7 @@
 
     .button:hover {
         outline: none;
-        margin: -2px 0;
-        border-top: solid 2px var(--text-color);
-        border-bottom: solid 2px var(--text-color);
+        background-color: #EF8653;
     }
 
     .button.-active:focus {
@@ -55,6 +53,9 @@
         background-color: var(--background_color);
         color: #D97544;
         text-decoration: underline;
+        padding: 13px 70px;
+        border-top: solid 2px var(--text-color);
+        border-bottom: solid 2px var(--text-color);
     }
 
     .button-light:active {

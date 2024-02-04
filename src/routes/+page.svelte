@@ -25,4 +25,10 @@
         margin: 0 auto;
         position: relative;
     }
+
+	@media (max-width: 1001px) {
+		.landing_main_wrapper {
+            max-width: 100%;
+        }
+	}
 </style>

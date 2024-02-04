@@ -13,6 +13,7 @@
 	<span class="input_header">{header}</span>
 	{/if}
 	<input {type} {required} {name} style="--width: {width};" class="{class_name}" {placeholder}>
+	<span class="input-error-label"></span>
 </label>
 
 <style>
@@ -35,5 +36,11 @@
 		position: absolute;
 		left: -80px;
 		top: 10px;
-}
+	}
+
+	@media (max-width: 1001px) {
+		.input_header {
+			display: none;
+		}
+    }
 </style>

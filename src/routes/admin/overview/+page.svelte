@@ -3,6 +3,7 @@
     import Button from "$lib/components/misc/button/Button.svelte";
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
     import Overlay from '$lib/components/misc/overlay/Overlay.svelte'
+    import { fly } from 'svelte/transition';
 
     export let data;
     let admin = true;
@@ -20,6 +21,7 @@
 
         switch (tab) {
             default:
+                header = 'свинок';
                 type = 'pig';
                 break;
             case 'news':
@@ -46,7 +48,7 @@
 
 <section class="nav-header">
     <nav class="navigation">
-        <ul class="nav-list">
+        <ul class="nav-list" transition:fly={{ delay: 20, duration: 80, y: -50, opacity: 0.4 }}>
             <li class="nav-item">
                 <Button title="Свинки" onclick={() => switchTabs('pigs')} class_name="{tab === 'pigs' ? '-active' : ''}" />
             </li>
@@ -84,6 +86,7 @@
     }
 
     .nav-list {
+        padding: 0;
         list-style: none;
         display: flex;
         justify-content: space-between;
@@ -97,5 +100,54 @@
         position: absolute;
         right: 6%;
         bottom: -50%;
+    }
+
+    @media (max-width: 1001px) {
+        .nav-header {
+            column-gap: 15px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .navigation {
+            margin-bottom: 20px;
+        }
+
+        .nav-list {
+            flex-direction: column;
+            row-gap: 10px;
+        }
+
+        /*.burger ~ .nav-list {*/
+        /*    display: none;*/
+        /*}*/
+
+        .button_wrapper {
+            position: static;
+            right: 0;
+            text-align: right;
+        }
+
+        .burger {
+            padding: 0 5px;
+            min-width: 40px;
+            height: 30px;
+            border: 1px solid #EF8653;
+            margin: 0;
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            background-color: #D97544;
+            color: #FFFFFF;
+            transition: all 1s
+        }
+
+        /*.burger:active ~ .nav-list,*/
+        /*.burger:focus ~ .nav-list {*/
+        /*    display: flex;*/
+        /*    top: 30px;*/
+        /*    margin-bottom: 50px;*/
+        /*}*/
+
     }
 </style>

@@ -30,4 +30,11 @@
 	  margin-top: 5px;
       justify-content: space-between;
   }
+
+  @media (max-width: 1000px) {
+	  .profile_buttons {
+		  margin: 0 auto;
+		  margin-bottom: 15px;
+	  }
+  }
 </style>

@@ -54,9 +54,11 @@
         position: relative;
     }
 
+    /* Переопределяет slider-овские настройки для списка слайдов */
     .photo-card {
-        object-fit: cover;
+        object-fit: contain;
     }
+
     .cancel_button {
         width: 20px;
         height: 20px;
