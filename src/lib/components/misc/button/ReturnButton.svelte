@@ -28,7 +28,7 @@
     .return-button {
         position: fixed;
         height: 100%;
-        margin: 100px 0 0 40px;
+        margin: 110px 0 0 40px;
         color: #D97544;
         font-weight: 600;
         cursor: pointer;
@@ -41,5 +41,27 @@
         &.topped {
             margin-top: 40px;
          }
+    }
+
+    @media (max-width: 1001px) {
+        .return-button {
+            height: fit-content;
+            top: auto;
+            bottom: 5%;
+            visibility: hidden;
+        }
+
+        .return-button::before {
+            visibility: visible;
+            content: 'Назад';
+            display: flex;
+            place-content: center;
+            place-items: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #e1edce;
+            opacity: 0.5;
+        }
     }
 </style>
