@@ -151,4 +151,13 @@ export const load_more = async function (data, category) {
     }
 }
 
+export const wrap_element = function (element, tag = 'div', class_name = '') {
+    const wrap = document.createElement(tag);
+    wrap.classList.add(class_name);
+
+    element.parentNode.insertBefore(wrap, element);
+
+    return wrap.appendChild(element);
+}
+
 export { closeModal, showModal, randomElements, removeData };
