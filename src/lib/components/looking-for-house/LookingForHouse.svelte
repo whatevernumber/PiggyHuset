@@ -9,7 +9,7 @@
     let photos = [];
     let showPhotos = false;
 
-    const request = fetch(_REMOTE_SERVER + '/pigs')
+    const request = fetch(_REMOTE_SERVER + '/pigs/random/10')
         .then((response) => {
             if (response.ok) {
                 return response.json()
@@ -38,12 +38,12 @@
     <BigHeader text_content="Ищут дом" />
 
     {#await initFetch()}
-    <PhotoList photos="{Array(4).fill({image: '200w'})}" autoplay="{true}" no_border />
+    <PhotoList photos="{Array(4).fill({image: '200w.jpg'})}" autoplay="{true}" no_border />
     {:then _}
         {#if showPhotos}
     <PhotoList first_slide="src/lib/img/looking-for-home.png" {photos} autoplay="{true}" no_border linked />
         {:else}
-    <PhotoList photos="{Array(4).fill({image: '200w'})}" autoplay="{true}" no_border />
+    <PhotoList photos="{Array(4).fill({image: '200w.jpg'})}" autoplay="{true}" no_border />
         {/if}
     {/await}
 
