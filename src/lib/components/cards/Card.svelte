@@ -9,6 +9,7 @@
     import SmolButton from "$lib/components/misc/button/SmolButton.svelte";
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
+    import {onMount} from "svelte";
     import { redirect } from '$lib/components/utils/func.js';
 
     export let admin;
@@ -22,6 +23,18 @@
     export let action;
     export let success;
 
+    // подрезка текста до 300 символов
+    const text = article.text ? article.text.slice(0, 300) : article.description.slice(0, 300);
+
+    let card;
+    let innerHtml;
+
+    // отображать ли содержимое как текст или как разметку из Quill
+    text && text.includes('<p>') ?
+        innerHtml = text :
+        article.description = text;
+
+    // реактивное изменение картинки карточки
     $: image = article.main_photo ?? null;
 
     let window_width = 0;
@@ -54,9 +67,12 @@
         redirect('/admin/edit/' + type + '/' + id, 250);
     }
 
+    // подстановка [обрезанной] разметки из Quill в текст карточки
+    onMount(() => innerHtml !== undefined ? card.innerHTML = innerHtml : null);
 </script>
 
 <svelte:window bind:innerWidth={window_width} />
+
 <article>
     <a {href}>
         <PhotoCard pic={image} {type} width='250' height='250' alt='Фотография свинки' />
@@ -75,7 +91,7 @@
             </div>
         {/if}
         </div>
-        <p class="card-description">{article.description ?? article.text}</p>
+        <p class="card-description" bind:this={card}>{article.description || ''}</p>
         <div class="bottom-line">
             <p class="datetime">{date_word}<Time relative timestamp={article.datetime} /></p>
             <SmolButton title={button_text} {href} />
@@ -118,6 +134,14 @@
         font-size: 16px;
         line-height: 140%;
         color: #333333;
+    }
+
+    :global(.card-description a) {
+        color: #88aa4d;
+    }
+
+    :global(.card-description img) {
+        display: none;
     }
 
     .bottom-line {

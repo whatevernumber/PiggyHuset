@@ -20,6 +20,8 @@
 	let action;
 	let success = false;
 
+	let window_width;
+
 	const show_delete = (evt) => {
 		action = 'delete';
 		document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${article.title}". Это действие <b>необратимо</b>`;
@@ -69,10 +71,14 @@
 	<title>{header}</title>
 </svelte:head>
 
+<svelte:window bind:innerWidth={window_width} />
+
 <Article class_name="article_news" date="{article.datetime}">
 		<div class="wrapper">
-			<div>
+			<div class="photo-card-wrapper">
+				{#if (window_width > 1000)}
 				<PhotoCard {pic} type="article" />
+				{/if}
 				{#if admin}
 				<div class="profile_buttons">
 					<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
@@ -94,14 +100,6 @@
 </div>
 
 <style>
-
-    .modal {
-        position: absolute;
-        top: 35%;
-        left: 30%;
-        z-index: 10;
-    }
-
 	.wrapper {
 		display: flex;
 		column-gap: 15px;
@@ -113,6 +111,25 @@
 		margin-top: 5px;
         justify-content: space-between;
     }
+
+	.modal {
+		position: absolute;
+		top: 35%;
+		left: 30%;
+		z-index: 10;
+	}
+
+	.photo-card-wrapper {
+		height: min-content;
+		position: absolute;
+	}
+
+	.modal {
+		position: absolute;
+		top: 35%;
+		left: 30%;
+		z-index: 10;
+	}
 
     .overlay {
         position: fixed;
@@ -142,6 +159,10 @@
             justify-self: center;
             margin: 5px auto;
         }
+
+		.photo-card-wrapper {
+			position: static;
+		}
 
         .modal {
             left: 0;

@@ -23,4 +23,10 @@
 			 margin-left: 225px;
 	    }
 	}
+
+	@media (max-width: 1001px) {
+		.article_header.type_article {
+			margin-left: 0;
+		}
+	}
 </style>
