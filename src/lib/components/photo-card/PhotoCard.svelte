@@ -1,12 +1,13 @@
 <script>
     import {_REMOTE_SERVER} from "$env/static/public";
+    import {randomize} from "$lib/components/utils/func.js";
 
     export let alt = '';
 	export let pic;
 	export let width = 200;
 	export let height = 200;
     export let type = 'pig';
-    export let src = (pic && pic !== undefined) ? `${_REMOTE_SERVER}/img/${pic}.jpg` : `../src/lib/img/placeholder/${type}.png`;
+    export let src = pic ? `${_REMOTE_SERVER}/img/${pic}` : `../src/lib/img/placeholder/${type}-${randomize(1, 3)}.png`; // src картинки можно задать явно
     export let is_form = false;
     export let click_handler;
 
@@ -19,18 +20,10 @@
     //     temp: 'temp-pig-profile-photo.png',
     // }
 
-    // if (pic && pic !== undefined) {
-    //     pic = _REMOTE_SERVER + '/img/' + pic + '.jpg';
-    // } else {
-    //     pic = '../src/lib/img/placeholder/' + type + '.png';
-    // }
-
     const delete_handler = () => {
-        console.log(pic);
         pic = pic;
         click_handler(pic);
     }
-
 
 </script>
 
@@ -38,7 +31,7 @@
     <div class='image_wrapper'>
         <img {src} class="photo-card" {width} {height} {alt}>
         {#if is_form}
-            <div class='cancel_button' on:click={delete_handler}></div>
+            <div class='cancel_button' on:click={delete_handler} role="button" tabindex="0"></div>
         {/if}
     </div>
 </div>
@@ -54,9 +47,8 @@
         position: relative;
     }
 
-    /* Переопределяет slider-овские настройки для списка слайдов */
     .photo-card {
-        object-fit: contain;
+        object-fit: cover;
     }
 
     .cancel_button {

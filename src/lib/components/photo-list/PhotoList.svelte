@@ -29,7 +29,7 @@
 		perPage: 1,
 		perMove: 1,
 		pagination: false,
-		height: 520
+		height: 520,
 	};
 
 	let thumb_options = {
@@ -37,7 +37,7 @@
 		fixedWidth: 250,
 		focus: 'center',
 		isNavigation: true,
-		autoplay: {autoplay},
+		autoplay: autoplay,
 		arrows: false
 	};
 
@@ -55,7 +55,7 @@
 
 	$: if (window_width < 1000 && window_width !== 0) {
 		main_options.height = 300;
-		thumb_options.fixedWidth = 150;
+		thumb_options.fixedWidth = 200;
 
 	} else {
 		main_options.height = 520;
@@ -66,9 +66,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-
 <div class="splide-wrapper" transition:fade>
-	{#key window_width}
 	<Splide id="main-carousel" options="{main_options}" bind:this={splide}>
 		{#if (first_slide)}
 			<SplideSlide>
@@ -79,17 +77,15 @@
 			<SplideSlide>
 				{#if linked}
 				<a href="/looking-for-home/{item.id}">
-					<PhotoView src={temp_address + item.image + '.jpg'} {no_border} {linked} />
+					<PhotoView src={temp_address + item.image} {no_border} {linked} />
 				</a>
 				{:else}
-				<PhotoView src={temp_address + item.image + '.jpg'} {no_border} {linked} />
+				<PhotoView src={temp_address + item.image} {no_border} {linked} />
 				{/if}
 			</SplideSlide>
 		{/each}
 	</Splide>
-	{/key}
 
-	{#key window_width}
 	<Splide id="thumb-splide" options="{thumb_options}" bind:this={slider}>
 			{#if (first_slide)}
 				<SplideSlide>
@@ -102,5 +98,4 @@
 			</SplideSlide>
 		{/each}
 	</Splide>
-	{/key}
 </div>
