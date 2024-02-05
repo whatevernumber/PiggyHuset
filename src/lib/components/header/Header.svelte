@@ -137,10 +137,6 @@
             column-gap: 2%;
         }
 
-        .logo-wrapper {
-            margin-left: 7%;
-        }
-
         .nav-link {
             visibility: hidden;
         }
