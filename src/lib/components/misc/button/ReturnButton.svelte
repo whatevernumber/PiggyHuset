@@ -33,6 +33,7 @@
         font-weight: 600;
         cursor: pointer;
         opacity: 0.65;
+        user-select: none;
 
         &:hover {
             opacity: 1;
@@ -62,6 +63,12 @@
             border-radius: 50%;
             background: #e1edce;
             opacity: 0.5;
+        }
+
+        .return-button:active::before,
+        .return-button:focus::before,
+        .return-button:hover::before {
+            opacity: 1;
         }
     }
 </style>

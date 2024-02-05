@@ -56,7 +56,6 @@
 	$: if (window_width < 1000 && window_width !== 0) {
 		main_options.height = 300;
 		thumb_options.fixedWidth = 200;
-
 	} else {
 		main_options.height = 520;
 		thumb_options.fixedWidth = 250;

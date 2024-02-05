@@ -36,6 +36,10 @@
         background-repeat: no-repeat;
         background-size: contain;
         background-position-y: 50%;
+
+        @media (max-width: 1001px) {
+            background-position-y: 30%;
+        }
     }
 
     .extra-big-header {
@@ -53,6 +57,7 @@
         font-size: 32px;
         font-weight: 400;
         text-transform: uppercase;
+        text-align: center;
     }
 
     .home-link:hover {
