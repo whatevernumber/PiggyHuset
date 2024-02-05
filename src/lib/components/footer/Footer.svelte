@@ -1,36 +1,41 @@
 <footer class="footer">
-    <div>
-        <img class="guinea-pig-icon" src="/src/lib/img/svg/guinea-pig-small.svg" alt="Иконка морской свинки" width="64" height="58">
-        <img src="/src/lib/img/svg/domik-icon.svg" alt="Иконка Домика" width="162" height="48">
-    </div>
+    <img class="guinea-pig-icon" src="/src/lib/img/svg/guinea-pig-small.svg" alt="Иконка морской свинки" width="64" height="58">
+    <img src="/src/lib/img/svg/header-logo.svg" alt="Иконка Домика" width="162" height="48">
 
     <a class="vk-link" href="https://vk.com">
-        <img class="vk-link-image" src="/src/lib/img/svg/vk-icon.svg" alt="Иконка социальной сети Вконтакте" width="24" height="27">
+        <img class="vk-link-image" src="/src/lib/img/svg/vk.svg" alt="Иконка социальной сети Вконтакте" width="24" height="27">
     </a>
 </footer>
 
 
 <style>
 
-    .guinea-pig-icon {
-        margin-right: 88px;
-    }
-
     .footer {
-        width: calc(100% - 10px);
+        width: 100%;
         height: 80px;
         margin-top: auto;
-        padding-right: 10px;
         background-color: #F6B5D3;
         display:flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
     }
 
     .vk-link {
-        padding-top: 12px;
         display: block;
-        padding-right: 2%;
+        height: 27px;
+        padding-right: 40px;
+        position: absolute;
+        right: 0;
+    }
+
+    @media (max-width: 1001px) {
+        .footer {
+            justify-content: space-between;
+        }
+
+        .vk-link {
+            position: static;
+        }
     }
 
 </style>
