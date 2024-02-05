@@ -13,9 +13,9 @@
     <a href="{_REMOTE_SERVER + '/graduated/' + id}">
         <img {src} width="248" height="261" alt="Изображение выпускника">
     </a>
-    <p class="graduated_name">
-        <a href="{'/graduates/' + id}">{name}</a>
-    </p>
+    <a href="{'/graduates/' + id}">
+        <p class="graduated_name">{name}</p>
+    </a>
 </div>
 
 <style>
@@ -30,15 +30,12 @@
     }
 
     .graduated_name {
-        text-transform: uppercase;
         padding: 5%;
         background-color: #D97544;
-        text-align: center;
-    }
-
-    .graduated_name a {
         color: #FFFFFF;
         font-weight: 500;
+        text-align: center;
+        text-transform: uppercase;
     }
 
     .graduated_card img {
