@@ -23,8 +23,9 @@
     export let action;
     export let success;
 
-    // подрезка текста до 300 символов
-    const text = article.text ? article.text.slice(0, 300) : article.description.slice(0, 300);
+    let text = article.text || article.description;
+    // подрезка текста до 300 символов, если текст длиннее заданного лимита
+    text = text.length > 300 ? text.slice(0, 297) + '...' : text;
 
     let card;
     let innerHtml;
