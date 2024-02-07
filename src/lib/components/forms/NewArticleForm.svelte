@@ -6,10 +6,11 @@
 	export let endpoint = '/articles/type/1';
 	export let old_photos;
 	export let is_editing;
+
 	let modal_message = 'Запись опубликована';
 
     const scheme = {
-        title: title || 'Новая статья',
+        title: title,
         endpoint: endpoint,
         fields: [
             {
@@ -18,26 +19,24 @@
                 required: true
             },
             {
+                label: 'Автор статьи',
+                name: 'author',
+            },
+            {
                 label: 'Текст статьи',
                 name: 'text',
-                type: 'textarea',
-                required: true,
-                emoji: true
+                type: 'wysiwyg',
+                required: true
             },
             {
-                label: 'Автор',
-                name: 'author'
-            },
-            {
-                label: 'Источник (ссылка)',
-                name: 'origin_link'
+                label: 'Источник',
+                name: 'origin_link',
             },
         ],
         files: {
-            file_input: true,
-            multiple: true
+            file_input: false
         }
-    }
+    };
 </script>
 
 <Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="articles" />

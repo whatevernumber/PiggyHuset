@@ -6,10 +6,8 @@
 
 	export let data;
 
-
 	let article = data.article;
 	let type = article.type_id;
-
 	let method = 'PATCH';
 	let endpoint = '/articles/' + article.id;
 
@@ -19,22 +17,24 @@
 	$: old_photos = JSON.stringify(photos);
 
 	onMount(() =>
-	{
-		let article_title = document.querySelector("[name = 'title']");
-		let article_text = document.querySelector("[name = 'text']");
+		{
+			let article_title = document.querySelector("[name = 'title']");
+			let article_text = document.querySelector("[name = 'text']");
 
-		if (type === '2') {
-			let article_author = document.querySelector("[name = 'author']");
-			let article_link = document.querySelector("[name = 'origin_link']");
+			if (type === 1) {
+				let article_author = document.querySelector("[name = 'author']");
+				let article_link = document.querySelector("[name = 'origin_link']");
 
-			article_author.value = article.author;
-			article_link.value = article.origin_link;
-		}
+				article_author.value = article.author;
+				article_link.value = article.origin_link;
 
-		article_title.value = article.title;
-		article_text.value = article.text;
+				let editor = document.querySelector('.ql-editor');
+				editor.innerHTML = article.text;
+			}
 
-	});
+			article_title.value = article.title;
+			article_text.value = article.text;
+		});
 
 	const title = "Редактировать публикацию";
 
@@ -53,7 +53,7 @@
 	<title>{title}</title>
 </svelte:head>
 
-{#if type === '1'}
+{#if type === 1}
 <NewArticleForm {title} {method} {endpoint} {old_photos} is_editing />
 {:else}
 <NewPostForm {title} {method} {endpoint} {old_photos} is_editing />
