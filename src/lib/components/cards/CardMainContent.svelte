@@ -5,13 +5,15 @@
 	import { _REMOTE_SERVER } from '$env/static/public';
 
 	export let header;
-	export let description;
+	export let text;
 	export let graduated;
 	export let age;
 	export let author;
+	export let overseer = false;
 	export let admin = true;
 	export let id;
-	export let article;
+	export let is_article;
+	export let type;
 
 	const click_handler = (evt) => {
 		showModal(evt);
@@ -35,12 +37,12 @@
 </script>
 
 <div class="profile_description">
-	<ArticleHeader text={header} />
+	<ArticleHeader text={header} {type} />
 	{#if graduated}
 	<div class='graduated_image'>
 		<img class="graduated-icon" src="/src/lib/img/found-home.png" width="50px" height="50px" alt="Морская свинка в домике">
 	</div>
-	{:else if (admin && !article)}
+	{:else if (admin && !is_article)}
 	<div class='checkbox'>
 		<label class='graduated_checkbox'>
 			<input type='checkbox' name='graduated' on:click={graduatePig}>
@@ -49,16 +51,18 @@
 	</div>
 	{/if}
 	{#if age}
-		<p>Возраст: {age}</p>
+		<p class="pig_age"><b>Возраст:</b> {age}</p>
 	{/if}
 	{#if author}
-		<p>Автор статьи: {author}</p>
+		<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
 	{/if}
-	<ArticleText text={description} />
+	<ArticleText text={text} />
+	{#if overseer}
+		<p class='volunteer'>Куратор: <b>{overseer}</b></p>
+	{/if}
 </div>
 
 <style>
-
     .profile_description {
         display: flex;
         flex-direction: column;
@@ -68,6 +72,12 @@
 
 	.graduated_image {
 		justify-self: flex-start;
+	}
+
+	.volunteer {
+		font-size: 14px;
+		font-style: italic;
+		align-self: flex-end;
 	}
 
 	.graduated_checkbox {

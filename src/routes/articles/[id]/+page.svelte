@@ -1,6 +1,6 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
-	import CardDescription from '$lib/components/cards/CardDescription.svelte';
+	import CardMainContent from '$lib/components/cards/CardMainContent.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
@@ -14,11 +14,13 @@
 	const article = data.article;
 	const pic = article.main_photo;
 	const header = article.title;
-	const description = article.text;
+	const text = article.text;
 	const author = article.author;
 
 	let action;
 	let success = false;
+
+	let window_width;
 
 	const show_delete = (evt) => {
 		action = 'delete';
@@ -69,10 +71,14 @@
 	<title>{header}</title>
 </svelte:head>
 
+<svelte:window bind:innerWidth={window_width} />
+
 <Article class_name="article_news" date="{article.datetime}">
 		<div class="wrapper">
-			<div>
+			<div class="photo-card-wrapper">
+				{#if (window_width > 1000)}
 				<PhotoCard {pic} type="article" />
+				{/if}
 				{#if admin}
 				<div class="profile_buttons">
 					<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
@@ -80,9 +86,9 @@
 				</div>
 				{/if}
 			</div>
-			<CardDescription article {header} {description} {author} />
+			<CardMainContent is_article {header} {text} {author} type="{article.type_id}" />
 		</div>
-		{#if article.photos.length > 1}
+		{#if article.photos.length > 1 && article.type_id !== 1}
 			<PhotoList photos={article.photos} />
 		{/if}
 </Article>
@@ -94,14 +100,6 @@
 </div>
 
 <style>
-
-    .modal {
-        position: absolute;
-        top: 35%;
-        left: 30%;
-        z-index: 10;
-    }
-
 	.wrapper {
 		display: flex;
 		column-gap: 15px;
@@ -113,6 +111,25 @@
 		margin-top: 5px;
         justify-content: space-between;
     }
+
+	.modal {
+		position: absolute;
+		top: 35%;
+		left: 30%;
+		z-index: 10;
+	}
+
+	.photo-card-wrapper {
+		height: min-content;
+		position: absolute;
+	}
+
+	.modal {
+		position: absolute;
+		top: 35%;
+		left: 30%;
+		z-index: 10;
+	}
 
     .overlay {
         position: fixed;
@@ -142,6 +159,10 @@
             justify-self: center;
             margin: 5px auto;
         }
+
+		.photo-card-wrapper {
+			position: static;
+		}
 
         .modal {
             left: 0;

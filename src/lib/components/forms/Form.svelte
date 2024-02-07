@@ -7,6 +7,8 @@
 	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
     import { createEventDispatcher } from 'svelte';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
+    import TextEditor from "$lib/components/misc/form-elements/TextEditor.svelte";
+    import {onMount} from "svelte";
 
 	export let scheme = {};
 	export let redirect_location;
@@ -16,12 +18,14 @@
     export let old_photos;
 
 	let success;
+    let wysiwyg_input;
 
     let image_upload_preview = [];
     let errors = {};
 
     const textarea = scheme.fields.filter(field => field.type === 'textarea');
-    const fields = scheme.fields.filter(field => !textarea.includes(field));
+    const wysiwyg = scheme.fields.filter(field => field.type === 'wysiwyg');
+    const fields = scheme.fields.filter(field => !textarea.includes(field) && !wysiwyg.includes(field));
 
     const top_fields = fields.slice(0, 2);
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
@@ -40,6 +44,11 @@
 
     async function sendForm () {
         const form = document.querySelector('form');
+
+        const wysiwig = form.querySelector('#wysiwyg');
+        if (wysiwig) {
+            form.querySelector('input[type="hidden"]').value;
+        }
         const formData = new FormData(form);
         const res = await fetch(_REMOTE_SERVER + scheme.endpoint, {
             method: method,
@@ -68,7 +77,7 @@
         }
     }
 
-    const preview = function (evt) {
+    const preview = function () {
         // очистка списка файлов
         image_upload_preview = [];
 
@@ -90,6 +99,8 @@
         // re-render
         image_upload_preview = image_upload_preview;
     }
+
+    onMount(() => wysiwyg_input = document.querySelector('input[type="hidden"]'));
 </script>
 
 <div class='form-container'>
@@ -112,19 +123,27 @@
             </fieldset>
             {/if}
 
+            <fieldset class="label-group middle-group">
+                <div class="form-item field-textarea-set">
+            {#if (textarea.length)}
             {#each textarea as textarea}
                 {@const required = textarea.required ?? false}
-            <fieldset class="label-group middle-group">
-                <div class="form-item animal-health-set">
                     <label class="form-label" for="{textarea.name}">{textarea.label}</label>
                     <textarea class="form-input-field" id="{textarea.name}" name="{textarea.name}" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
                     <span class="input-error-label"></span>
                     {#if textarea.emoji}
                     <Emoji input_name={textarea.name} />
                     {/if}
+            {/each}
+            {:else if (wysiwyg.length)}
+                {#each wysiwyg as wysiwyg}
+                <label class="form-label" for="{wysiwyg.name}">{wysiwyg.label}</label>
+                <input type="hidden" name="{wysiwyg.name}" id="{wysiwyg.name}">
+                <TextEditor input="{wysiwyg_input}" />
+                {/each}
+            {/if}
                 </div>
             </fieldset>
-            {/each}
 
             {#if bottom_fields}
             <fieldset class="bottom-fields">
@@ -194,7 +213,7 @@
 
     .form-scheme {
         display: grid;
-        row-gap: 20px;
+        row-gap: 40px;
         align-items: stretch;
     }
 
@@ -273,7 +292,7 @@
         padding: 5px 13px;
     }
 
-    .animal-health-set {
+    .field-textarea-set {
         flex-direction: column;
     }
 

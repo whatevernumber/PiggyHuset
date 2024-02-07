@@ -14,7 +14,7 @@
             }
         });
 
-    async function initFetch () {
+    const initFetch = async function () {
         request.then(json => graduates = randomElements(json.payload, 3))
             .catch((any) => {})
     }
@@ -24,15 +24,15 @@
     <BigHeader text_content="Наши выпускники" />
     {#await initFetch()}
     <div class="graduated_cards_wrapper">
-        <GraduatedCard name='Финик' id="1" />
-        <GraduatedCard name='Блиник' id="2" />
-        <GraduatedCard name='Пиник' id="3" />
+        <GraduatedCard name='Финик'  id="1" />
+        <GraduatedCard name='Свиник' id="2" />
+        <GraduatedCard name='Блиник' id="3" />
     </div>
-        {:then _}
+        {:then}
     <div class="graduated_cards_wrapper">
         {#each graduates as graduate}
         <GraduatedCard name='{graduate.name}'
-                       img="{graduate.main_photo ? graduate.main_photo + '.jpg' : null}"
+                       img="{graduate.main_photo ? graduate.main_photo : null}"
                        id="{graduate.id}" />
         {/each}
     </div>

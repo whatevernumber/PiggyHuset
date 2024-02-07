@@ -14,7 +14,7 @@
 	const header = pig.name + ' нашёл дом';
 	const age = pig.age;
 	const graduated = pig.graduated;
-	const description = pig.description;
+	const text = pig.description;
 	const date = pig.datetime;
 
 	let action;
@@ -48,7 +48,7 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {description} {graduated} {pic} {header} {age} {type} {redirect_to_edit} />
+	<PigProfile {text} {graduated} {pic} {header} {age} {type} {redirect_to_edit} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />

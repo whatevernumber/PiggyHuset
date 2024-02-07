@@ -11,14 +11,14 @@
 <style>
     .photo-wrapper {
         margin: auto;
-        width: 700px;
-        height: 600px;
+        width: fit-content;
+        height: 500px;
         border: 3px #e1edce solid;
     }
 
     img {
         width: 100%;
-        height: 90%;
+        height: 100%;
     }
 
     .no-border {
