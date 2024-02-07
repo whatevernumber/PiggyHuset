@@ -38,7 +38,19 @@
 		top: 10px;
 	}
 
-	@media (max-width: 1001px) {
+    .input-error {
+        border: 2px #EF8653 solid;
+		border-radius: 5px;
+    }
+
+	.input-error-label {
+		font-size: 12px;
+		color: #d97544;
+		text-transform: uppercase;
+		text-align: center;
+	}
+
+    @media (max-width: 1001px) {
 		.input_header {
 			display: none;
 		}

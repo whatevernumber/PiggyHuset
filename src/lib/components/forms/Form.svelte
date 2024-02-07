@@ -188,7 +188,7 @@
 
     .form-container {
         min-height: 100%;
-        margin:auto;
+        margin: 10px auto 10px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -333,6 +333,10 @@
     }
 
     @media (max-width: 1001px) {
+
+        .form-container {
+            margin: 0 auto;
+        }
 
         .form-header {
             text-align: center;

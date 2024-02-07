@@ -18,14 +18,13 @@
 		if (res.ok) {
 			let result = await res.json();
 
-			if(result) {
+			if (result) {
 				// действия с админом
 				// redirect
 			}
 
 		} else {
 			errors = await res.json();
-
 
 			for (const prop in errors) {
 				const field = document.querySelector(`[name=${prop}]`);
@@ -35,6 +34,9 @@
 				field.classList.add('input-error');
 				field.value = '';
 			}
+
+			const password_field = document.querySelector(`[name='password']`);
+			password_field.value = '';
 		}
 	}
 
@@ -47,7 +49,7 @@
 
 <div class="form_wrapper">
 	<ArticleHeader size="16px" text="Вход в кабинет" />
-	<form method="post" name="login_form" class="login_form form-scheme">
+	<form method="post" name="login_form" class="login_form">
 		<TextInput width="300px" required='required' name="name" placeholder="Имя пользователя"/>
 		<TextInput width="300px" required='required' name="password" placeholder="Пароль" type="password"/>
 		<SubmitButton title='Войти' on_click={sendForm} />
