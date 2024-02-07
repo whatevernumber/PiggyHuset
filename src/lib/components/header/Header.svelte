@@ -1,15 +1,33 @@
 <script>
+    import {onMount} from "svelte";
+    import {_REMOTE_SERVER} from "$env/static/public";
+    import {redirect} from "$lib/components/utils/func.js";
+
     export let current = '/main';
-    export let admin = false;
+    export let admin = true;
+
+    onMount(
+        () => {
+            if (admin) {
+                const logout = document.querySelector('.logout');
+                logout.addEventListener('click', () => {
+                    fetch(`${_REMOTE_SERVER}/admin/logout`, {
+                        method: 'POST'
+                    });
+                    redirect('/', 500);
+                })
+            }
+        }
+    )
 </script>
 
 <header>
     {#if admin}
-            <a href="/">
-                <div class="logo-wrapper">
-                    <img class="logo" src="/src/lib/img/svg/header-logo.svg" alt="Иконка Сообщества Домик" width="256" height="58">
-                </div>
-            </a>
+        <a href="/">
+            <div class="logo-wrapper" class:hide-logo={current === '/'}>
+                <img class="logo" src="/src/lib/img/svg/header-logo.svg" alt="Иконка Сообщества Домик" width="256" height="58">
+            </div>
+        </a>
         <nav class="navigation navigation-admin">
             <a href="/admin/overview" class="nav-link">
                 <p class="navigation-home">
@@ -17,6 +35,9 @@
                 </p>
                 <img class="admin-icon" src="/src/lib/img/svg/admin-home.svg" alt="Иконка домика" width="57" height="50">
             </a>
+            <p class="logout" hidden>
+                Выйти
+            </p>
         </nav>
     {:else if current === '/'}
         <div class="warning">
@@ -58,6 +79,27 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.06);
     }
 
+    .logo-wrapper {
+        margin-left: 10%;
+        padding-top: 7px;
+        justify-self: flex-start;
+    }
+
+    .logo-wrapper::before {
+        content: '';
+        display: flex;
+        width: 98px;
+        height: 98px;
+        background-image: url("/src/lib/img/big-svinik-1.png");
+        background-size: cover;
+        position: absolute;
+        left: -12px;
+    }
+
+    .logo-wrapper.hide-logo::before {
+        display: none;
+    }
+
     .warning {
         display: flex;
         justify-content: center;
@@ -85,8 +127,19 @@
         margin-right: 1%;
     }
 
+    .navigation p {
+        &:hover {
+            color: #D97544;
+        }
+
+        &:active {
+            color: #88aa4d;
+        }
+    }
+
     .navigation-admin {
         width: 375px;
+        position: relative;
     }
 
     .navigation-home {
@@ -99,29 +152,24 @@
         justify-content: space-between;
     }
 
+    .logout {
+        position: absolute;
+        left: -99px;
+        bottom: 12px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    header:hover .navigation-admin .logout {
+        display: block;
+    }
+
     .vk-link {
         color: #88AA4D;
     }
 
     .vk-link:hover {
         color: #E1EDCE;
-    }
-
-    .logo-wrapper {
-        margin-left: 10%;
-        padding-top: 7px;
-        justify-self: flex-start;
-    }
-
-    .logo-wrapper::before {
-        content: '';
-        display: flex;
-        width: 98px;
-        height: 98px;
-        background-image: url("/src/lib/img/big-svinik-1.png");
-        background-size: cover;
-        position: absolute;
-        left: -12px;
     }
 
     @media (max-width: 1001px) {
@@ -137,8 +185,25 @@
             column-gap: 2%;
         }
 
-        .nav-link {
-            visibility: hidden;
+        .navigation {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .navigation-admin .logout {
+            display: block;
+            position: static;
+            color: #D97544;
+        }
+
+        .navigation-home {
+            display: none;
+        }
+
+        .nav-link .admin-icon {
+            width: 50px;
         }
 
         .warning-text {
