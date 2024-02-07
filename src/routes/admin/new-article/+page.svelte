@@ -1,43 +1,14 @@
 <script>
-	import Form from "$lib/components/forms/Form.svelte";
+	import NewArticleForm from "$lib/components/forms/NewArticleForm.svelte";
 
 	const title = 'Добавить новую статью';
-
-	const scheme = {
-		title: title,
-		endpoint: '/articles/type/1',
-		fields: [
-			{
-				label: 'Заголовок статьи',
-				name: 'title',
-				required: true
-			},
-			{
-				label: 'Автор статьи',
-				name: 'author',
-			},
-			{
-				label: 'Текст статьи',
-				name: 'text',
-				type: 'wysiwyg',
-				required: true
-			},
-			{
-				label: 'Источник',
-				name: 'origin_link',
-			},
-		],
-		files: {
-			file_input: false
-		}
-	};
 </script>
 
 <svelte:head>
 	<title>{title}</title>
 </svelte:head>
 <section class="container">
-	<Form {scheme} />
+	<NewArticleForm {title} />
 </section>
 
 <style>
