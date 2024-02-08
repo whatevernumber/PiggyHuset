@@ -26,10 +26,14 @@
 		height: 25px;
 		width: var(--width);
 		max-width: 780px;
-		border: none;
+		border-color: #f6b5d3;
 		background-color: #E1EDCE;
 		font-family: Jost, Arial, sans-serif;
 		font-size: 18px;
+
+		&:focus {
+			outline-color: #88aa4d;
+		}
 	}
 
 	.input_header {
@@ -39,7 +43,7 @@
 	}
 
     .input-error {
-        border: 2px #EF8653 solid;
+        border: 2px #D97544 solid;
 		border-radius: 5px;
     }
 
