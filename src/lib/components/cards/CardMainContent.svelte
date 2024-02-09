@@ -1,8 +1,8 @@
 <script>
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
-	import {showModal, redirect} from "$lib/components/utils/func.js";
-	import { _REMOTE_SERVER } from '$env/static/public';
+	import {showModal, redirect, include_auth} from "$lib/components/utils/func.js";
+	import { _REMOTE_SERVER, _REST_STORAGE_KEY } from '$env/static/public';
 
 	export let header;
 	export let text;
@@ -23,6 +23,9 @@
 	async function graduatePig () {
 		const res = await fetch(_REMOTE_SERVER + '/pigs/graduate/' + id, {
 			method: 'PATCH',
+			headers: {
+				'Authorization': include_auth(_REST_STORAGE_KEY)
+			}
 		});
 
 		if (res.ok) {

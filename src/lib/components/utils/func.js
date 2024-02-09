@@ -1,4 +1,4 @@
-import { _REMOTE_SERVER } from '$env/static/public';
+import { _REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG } from '$env/static/public';
 import {goto} from "$app/navigation";
 
 /**
@@ -88,7 +88,10 @@ async function removeData(category, id) {
 
     await fetch(_REMOTE_SERVER + '/' + server_location +'/' + id,
         {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': include_auth(_REST_STORAGE_KEY)
+            }
         }).then((response) => {
         if (response.ok) {
             success = true;
@@ -158,6 +161,16 @@ export const wrap_element = function (element, tag = 'div', class_name = '') {
     element.parentNode.insertBefore(wrap, element);
 
     return wrap.appendChild(element);
+}
+
+export const include_auth = function (key) {
+    const auth = localStorage.getItem(key);
+
+    if (localStorage.getItem(_ADMIN_FLAG) && auth) {
+        return `Bearer ${auth}`;
+    }
+
+    return null;
 }
 
 export { closeModal, showModal, randomElements, removeData };

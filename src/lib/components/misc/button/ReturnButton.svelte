@@ -1,7 +1,9 @@
 <script>
     import {onMount} from "svelte";
+    import {page} from "$app/stores";
+    import {goto} from "$app/navigation";
 
-    const move_to_top = function () {
+    const adjust_button_position = function () {
         const return_button = document.querySelector('.return-button');
         if (window.scrollY > 100) {
             return_button.classList.add('topped');
@@ -11,11 +13,12 @@
     }
 
     const go_back = () => {
-        document.removeEventListener('scroll', move_to_top);
-        history.back();
+        const href = $page.url.href.slice(0, $page.url.href.lastIndexOf('/')) + `#${$page.params.id}`;
+        document.removeEventListener('scroll', adjust_button_position);
+        goto(href);
     };
 
-    onMount(() => document.addEventListener('scroll', move_to_top));
+    onMount(() => document.addEventListener('scroll', adjust_button_position));
 </script>
 
 <div class="return-button" on:click={go_back} on:keypress={(e) => {if (e.key === 'Enter') go_back()}} role="button" aria-pressed="false" tabindex="0" title="Вернуться к списку">

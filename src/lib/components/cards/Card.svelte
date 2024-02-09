@@ -74,7 +74,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article>
+<article id="{article.id}">
     <a {href}>
         <PhotoCard pic={image} {type} width='250' height='250' alt='Фотография свинки' />
     </a>
