@@ -47,11 +47,16 @@
 		border-radius: 5px;
     }
 
-	.input-error-label {
+	.input-error + .input-error-label {
+		display: block;
 		font-size: 12px;
 		color: #d97544;
 		text-transform: uppercase;
 		text-align: center;
+	}
+
+	.input-error-label {
+		display: none;
 	}
 
     @media (max-width: 1001px) {

@@ -2,7 +2,9 @@
 	import TextInput from '$lib/components/misc/form-elements/TextInput.svelte';
 	import SubmitButton from '$lib/components/misc/form-elements/SubmitButton.svelte';
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
-	import { _REMOTE_SERVER } from '$env/static/public';
+	import { _REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG } from '$env/static/public';
+	import {onMount} from "svelte";
+	import {goto} from "$app/navigation";
 
 	let errors;
 
@@ -11,16 +13,28 @@
 		const formData = new FormData(form);
 		const res = await fetch(_REMOTE_SERVER + '/admin/login', {
 			method: 'POST',
-			credentials: 'include',
 			body: formData
 		});
+
+		// убирать класс ошибки при вводе новых значений
+		form.querySelectorAll('input').forEach(
+			(input) => {
+				input.addEventListener('input',
+					() => {
+						if (input.classList.contains('input-error'))
+							input.classList.remove('input-error');
+					});
+			}
+		);
 
 		if (res.ok) {
 			let result = await res.json();
 
 			if (result) {
-				// действия с админом
-				// redirect
+				localStorage.setItem(_REST_STORAGE_KEY, result.token);
+				localStorage.setItem(_ADMIN_FLAG, result.id);
+
+				await goto('/admin/overview');
 			}
 
 		} else {
@@ -30,7 +44,6 @@
 				const field = document.querySelector(`[name=${prop}]`);
 				const label = document.querySelector(`[name=${prop}] ~ .input-error-label`);
 				label.textContent = errors[prop];
-				console.log(errors);
 				field.classList.add('input-error');
 				field.value = '';
 			}
@@ -40,6 +53,18 @@
 		}
 	}
 
+	onMount(() => {
+		// отправка формы по кнопке Enter
+		document.querySelectorAll('input').forEach(
+			(input) => {
+				input.addEventListener('keydown', (evt) => {
+					if (evt.key === 'Enter') {
+						input.form.lastElementChild.click();
+					}
+				});
+			}
+		);
+	})
 </script>
 
 <svelte:head>
