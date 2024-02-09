@@ -2,8 +2,8 @@
 	import PhotoCard from "$lib/components/photo-card/PhotoCard.svelte";
 	import SubmitButton from "$lib/components/misc/form-elements/SubmitButton.svelte";
 	import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
-	import {_REMOTE_SERVER} from "$env/static/public";
-	import {redirect} from "$lib/components/utils/func.js";
+	import {_REMOTE_SERVER, _REST_STORAGE_KEY} from "$env/static/public";
+    import {include_auth, redirect} from "$lib/components/utils/func.js";
 	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
     import { createEventDispatcher } from 'svelte';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
@@ -50,9 +50,13 @@
             form.querySelector('input[type="hidden"]').value;
         }
         const formData = new FormData(form);
+
         const res = await fetch(_REMOTE_SERVER + scheme.endpoint, {
             method: method,
             credentials: 'include',
+            headers: {
+                'Authorization': include_auth(_REST_STORAGE_KEY)
+            },
             body: formData
         });
 
@@ -70,7 +74,6 @@
                 const field = document.querySelector(`[name=${prop}]`);
                 const label = document.querySelector(`[name=${prop}] ~ .input-error-label`);
                 label.textContent = errors[prop];
-                console.log(errors);
                 field.classList.add('input-error');
                 field.value = '';
             }
