@@ -9,7 +9,7 @@
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 
 	export let data;
-	let admin = true;
+	export let admin = true;
 
 	const article = data.article;
 	const pic = article.main_photo;
@@ -75,7 +75,7 @@
 
 <Article class_name="article_news" date="{article.datetime}">
 		<div class="wrapper">
-			<div class="photo-card-wrapper">
+			<div class="photo-card-wrapper" class:absolute={article.type_id === 1}>
 				{#if (window_width > 1000)}
 				<PhotoCard {pic} type="article" />
 				{/if}
@@ -121,7 +121,10 @@
 
 	.photo-card-wrapper {
 		height: min-content;
-		position: absolute;
+
+		&.absolute {
+			position: absolute;
+		}
 	}
 
 	.modal {
