@@ -163,7 +163,7 @@
             margin: 5px auto;
         }
 
-		.photo-card-wrapper {
+		.photo-card-wrapper.photo-card-wrapper {
 			position: static;
 		}
 
