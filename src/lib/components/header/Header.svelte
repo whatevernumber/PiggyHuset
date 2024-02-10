@@ -1,28 +1,26 @@
 <script>
     import {_REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG} from "$env/static/public";
-    import {browser} from "$app/environment";
-    import {afterUpdate, onMount} from "svelte";
     import {goto} from "$app/navigation";
     import {include_auth} from "$lib/components/utils/func.js";
+    import {afterUpdate} from "svelte";
 
     export let current = '/main';
     export let admin = false;
 
-    onMount(() => {
-        admin = localStorage.getItem(_ADMIN_FLAG);
-        document.querySelector('.logout').addEventListener('click', () => {
-            fetch(`${_REMOTE_SERVER}/admin/logout`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': include_auth(_REST_STORAGE_KEY)
-                }
-            });
-
-            localStorage.removeItem(_ADMIN_FLAG);
-            localStorage.removeItem(_REST_STORAGE_KEY);
-            goto('/', {invalidateAll: true});
+    const logout = () => {
+        fetch(`${_REMOTE_SERVER}/admin/logout`, {
+            method: 'POST',
+            headers: {
+                'Authorization': include_auth(_REST_STORAGE_KEY)
+            }
         });
-    });
+
+        localStorage.removeItem(_ADMIN_FLAG);
+        localStorage.removeItem(_REST_STORAGE_KEY);
+        goto('/', {invalidateAll: true});
+    };
+
+    afterUpdate(() => admin = Boolean(localStorage.getItem(_ADMIN_FLAG)));
 </script>
 
 <header>
@@ -34,14 +32,10 @@
         </a>
         <nav class="navigation navigation-admin">
             <a href="/admin/overview" class="nav-link">
-                <p class="navigation-home">
-                    Личный кабинет администратора
-                </p>
+                <p class="navigation-home">Личный кабинет администратора</p>
                 <img class="admin-icon" src="/src/lib/img/svg/admin-home.svg" alt="Иконка домика" width="57" height="50">
             </a>
-            <p class="logout" hidden>
-                Выйти
-            </p>
+            <p class="logout" on:click={logout} hidden>Выйти</p>
         </nav>
     {:else if current === '/'}
         <div class="warning">
