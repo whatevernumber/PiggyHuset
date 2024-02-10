@@ -10,6 +10,7 @@
 	export let action_handler;
 	export let redirect;
 	export let sent_handle;
+	export let modal_opened;
 	export let handle_cancel = (evt) => {
 		closeModal(evt);
 	};
@@ -21,15 +22,14 @@
 	}
 	const reload = (evt) => {
 
-		// Снятие оверлея при ошибке
-		let overlay = document.querySelector('.overlay');
-		overlay.style.display = 'none';
-
+		modal_opened = false;
 		closeModal(evt);
 		action = 'delete';
 	}
 
 	const update = (evt) => {
+
+		modal_opened = false;
 		closeModal(evt);
 	}
 
@@ -105,5 +105,9 @@
             max-width: 250px;
             min-height: 0;
         }
+
+		.border_wrapper {
+			border: none;
+		}
     }
 </style>
