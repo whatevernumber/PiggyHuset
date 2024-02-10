@@ -49,6 +49,7 @@
 		}
 
         .article_news {
+			min-width: 500px;
             max-width: 600px;
         }
 
@@ -66,7 +67,7 @@
 		}
     }
 
-	@media (max-width: 1000px) {
+	@media (max-width: 1001px) {
 		.article {
 			display: flex;
 			flex-direction: column;
@@ -78,5 +79,9 @@
 			margin-top: 50px;
 			margin-bottom: 20px;
 		}
+
+        .article_news {
+            min-width: 100%;
+        }
 	}
 </style>
