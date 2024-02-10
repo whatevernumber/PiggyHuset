@@ -7,9 +7,11 @@
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import { showModal, removeData, closeModal, redirect } from '$lib/components/utils/func.js';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
+	import { _ADMIN_FLAG } from '$env/static/public';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let data;
-	export let admin = true;
 
 	const article = data.article;
 	const pic = article.main_photo;
@@ -19,6 +21,12 @@
 
 	let action;
 	let success = false;
+	let admin = false;
+	let modal_opened = false;
+
+	onMount(() => {
+		admin = localStorage.getItem(_ADMIN_FLAG);
+	})
 
 	let window_width;
 
@@ -30,17 +38,15 @@
 		document.removeEventListener('click', closeModal);
 
 		// Оверлей для блокировки содержимого за модальным окном
-		let overlay = document.querySelector('.overlay');
-		overlay.style.display = 'block';
+		modal_opened = true;
 	}
 
 	// Обработка действия кнопки "отменить" при удалении
 	const handle_cancel = (evt) => {
 		closeModal(evt);
 
-		// Снятие оверлея
-		let overlay = document.querySelector('.overlay');
-		overlay.style.display = 'none';
+		// Флаг для снятия оверлея
+		modal_opened = false;
 	}
 
 	const redirect_after_success = () => {
@@ -93,10 +99,12 @@
 		{/if}
 </Article>
 
-<Overlay class_name='hidden'/>
+{#if modal_opened}
+	<Overlay />
+{/if}
 
 <div class='modal modal_closed'>
-	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} />
+	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} bind:modal_opened={modal_opened} />
 </div>
 
 <style>
@@ -133,23 +141,6 @@
 		left: 30%;
 		z-index: 10;
 	}
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(3px);
-        z-index: 1;
-    }
-
-    .hidden {
-        display: none;
-    }
 
     @media (max-width: 1001px) {
         .wrapper {

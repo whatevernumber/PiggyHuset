@@ -9,8 +9,7 @@
 	export let graduated;
 	export let age;
 	export let author;
-	export let overseer = false;
-	export let admin = true;
+	export let admin;
 	export let id;
 	export let is_article;
 	export let type;
@@ -60,9 +59,6 @@
 		<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
 	{/if}
 	<ArticleText text={text} />
-	{#if overseer}
-		<p class='volunteer'>Куратор: <b>{overseer}</b></p>
-	{/if}
 </div>
 
 <style>

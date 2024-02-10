@@ -7,6 +7,8 @@
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
+	import { _ADMIN_FLAG } from '$env/static/public';
+	import { onMount } from 'svelte';
 
 	export let data;
 
@@ -17,7 +19,12 @@
 
 	let action;
 	let success;
-	let admin = true;
+	let modal_opened = false;
+	let admin = false;
+
+	onMount(() => {
+		admin = localStorage.getItem(_ADMIN_FLAG);
+	})
 
 	const show_delete = (evt) => {
 		action = 'delete';
@@ -26,9 +33,8 @@
 		evt.target.removeEventListener('click', show_delete);
 		document.removeEventListener('click', closeModal);
 
-		// Оверлей для блокировки содержимого за модальным окном
-		let overlay = document.querySelector('.overlay');
-		overlay.style.display = 'block';
+		// Флаг оверлея для блокировки содержимого за модальным окном
+		modal_opened = true;
 	}
 
 	// Обработка действия кнопки "отменить" при удалении
@@ -36,8 +42,7 @@
 		closeModal(evt);
 
 		// Снятие оверлея
-		let overlay = document.querySelector('.overlay');
-		overlay.style.display = 'none';
+		modal_opened = false;
 	}
 
 	const redirect_after_success = () => {
@@ -87,10 +92,12 @@
 	{/if}
 </Article>
 
-<Overlay class_name='hidden' />
+{#if modal_opened}
+	<Overlay />
+{/if}
 
 <div class='modal modal_closed'>
-	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} />
+	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} bind:modal_opened={modal_opened} />
 </div>
 
 <style>
@@ -111,23 +118,6 @@
         top: 35%;
         left: 30%;
         z-index: 10;
-    }
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(3px);
-        z-index: 1;
-    }
-
-    .hidden {
-        display: none;
     }
 
 	@media (max-width: 1001px) {

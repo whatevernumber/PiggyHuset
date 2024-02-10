@@ -3,11 +3,15 @@
 	import NewPostForm from '$lib/components/forms/NewPostForm.svelte';
 	import UploadedFiles from '$lib/components/misc/form-elements/UploadedFiles.svelte';
 	import { onMount } from 'svelte';
+	import { _ADMIN_FLAG } from '$env/static/public';
+	import { goto } from '$app/navigation';
 
 	export let data;
 
+	let admin = false;
 	let article = data.article;
 	let type = article.type_id;
+
 	let method = 'PATCH';
 	let endpoint = '/articles/' + article.id;
 
@@ -17,9 +21,15 @@
 	$: old_photos = JSON.stringify(photos);
 
 	onMount(() =>
-		{
-			let article_title = document.querySelector("[name = 'title']");
-			let article_text = document.querySelector("[name = 'text']");
+	{
+		admin = localStorage.getItem(_ADMIN_FLAG);
+
+		if (!admin) {
+			goto('/');
+		}
+
+		let article_title = document.querySelector("[name = 'title']");
+		let article_text = document.querySelector("[name = 'text']");
 
 			if (type === 1) {
 				let article_author = document.querySelector("[name = 'author']");
@@ -30,11 +40,12 @@
 
 				let editor = document.querySelector('.ql-editor');
 				editor.innerHTML = article.text;
+			} else {
+				article_text.value = article.text;
 			}
 
-			article_title.value = article.title;
-			article_text.value = article.text;
-		});
+		article_title.value = article.title;
+	});
 
 	const title = "Редактировать публикацию";
 
@@ -57,8 +68,7 @@
 <NewArticleForm {title} {method} {endpoint} {old_photos} is_editing />
 {:else}
 <NewPostForm {title} {method} {endpoint} {old_photos} is_editing />
-{/if}
-
-{#if photos.length}
-	<UploadedFiles handler={delete_handler} {photos} />
+	{#if photos.length}
+		<UploadedFiles handler={delete_handler} {photos} />
+	{/if}
 {/if}

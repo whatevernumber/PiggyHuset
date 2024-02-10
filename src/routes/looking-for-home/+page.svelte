@@ -2,7 +2,6 @@
     import CatalogPage from "$lib/components/pages/CatalogPage.svelte";
 
 	export let data;
-
 	const pigs = data.pigs;
 </script>
 

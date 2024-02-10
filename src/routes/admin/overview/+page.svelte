@@ -4,9 +4,21 @@
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
     import Overlay from '$lib/components/misc/overlay/Overlay.svelte'
     import { fly } from 'svelte/transition';
+    import { _ADMIN_FLAG } from '$env/static/public';
+    import { goto } from '$app/navigation';
+    import { onMount } from 'svelte';
 
     export let data;
-    let admin = true;
+
+    let admin = false;
+
+    onMount(() => {
+       admin = localStorage.getItem(_ADMIN_FLAG);
+
+        if (!admin) {
+            goto('/');
+        }
+    });
 
     let tab = 'pigs';
     let action = {label: 'Добавить свинку', href: '/admin/add-pig'};
