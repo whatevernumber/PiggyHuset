@@ -62,7 +62,8 @@
 		flex-direction: column;
 	}
 
-	.main-container:has(.modal_opened) > div:not(.modal) {
+	.main-container:has(.modal_opened) > div:not(.modal),
+	.main-container:has(.modal_opened) section > div:not(.modal) {
 		filter: blur(10px);
 	}
 

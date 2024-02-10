@@ -40,14 +40,13 @@
         let message = document.querySelector('.message');
         message.textContent = 'Идёт удаление, подождите...';
 
-        success = await removeData(category, action_id);
+        success = removeData(category, action_id);
         if (success) {
             action = 'complete';
             const index = data_array.findIndex(a => a.id === action_id);
             data_array.splice(index, 1);
             data_array = data_array;
             message.textContent = 'Удаление успешно!';
-
         } else {
             action = 'fail';
             message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';

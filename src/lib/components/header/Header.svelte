@@ -1,24 +1,28 @@
 <script>
-    import {onMount} from "svelte";
-    import {_REMOTE_SERVER} from "$env/static/public";
-    import {redirect} from "$lib/components/utils/func.js";
+    import {_REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG} from "$env/static/public";
+    import {browser} from "$app/environment";
+    import {afterUpdate, onMount} from "svelte";
+    import {goto} from "$app/navigation";
+    import {include_auth} from "$lib/components/utils/func.js";
 
     export let current = '/main';
-    export let admin = true;
+    export let admin = false;
 
-    onMount(
-        () => {
-            if (admin) {
-                const logout = document.querySelector('.logout');
-                logout.addEventListener('click', () => {
-                    fetch(`${_REMOTE_SERVER}/admin/logout`, {
-                        method: 'POST'
-                    });
-                    redirect('/', 500);
-                })
-            }
-        }
-    )
+    onMount(() => {
+        admin = localStorage.getItem(_ADMIN_FLAG);
+        document.querySelector('.logout').addEventListener('click', () => {
+            fetch(`${_REMOTE_SERVER}/admin/logout`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': include_auth(_REST_STORAGE_KEY)
+                }
+            });
+
+            localStorage.removeItem(_ADMIN_FLAG);
+            localStorage.removeItem(_REST_STORAGE_KEY);
+            goto('/', {invalidateAll: true});
+        });
+    });
 </script>
 
 <header>
