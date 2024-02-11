@@ -11,9 +11,21 @@
 		const article = document.querySelector('.article_text');
         article.innerHTML = text;
 
-        const paragraphs = article.querySelectorAll('p');
-
         if (window_width > 1000) {
+            let lists = [
+                ...article.getElementsByTagName('ol'),
+                ...article.getElementsByTagName('ul')
+            ];
+
+            lists.forEach((l) => {
+                l.childNodes.forEach(li => {
+                    if (window.screenY + li.getBoundingClientRect().top < 380) {
+                        li.classList.add('float-right');
+                    }
+                })
+            });
+
+            const paragraphs = article.querySelectorAll('p');
             paragraphs.forEach((p) => {
                 if (window.screenY + p.getBoundingClientRect().top < 380) {
                     p.classList.add('float-right');
@@ -70,16 +82,16 @@
         }
 	}
 
+    .article_text .float-right {
+        margin-left: 225px;
+    }
+
     .article_text p:empty, .article_text br {
         display: none;
     }
 
     .article_text p {
         margin: 0.3em 0;
-
-        &.float-right {
-            margin-left: 225px;
-        }
 
         &:has(figure) {
             max-width: 85%;

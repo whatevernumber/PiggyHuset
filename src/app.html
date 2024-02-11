@@ -149,7 +149,7 @@
 		object-position: left;
 	}
 
-	/* Quill realted styles */
+	/* Quill related styles */
 
 	.editor {
 		width: 100%;
@@ -161,7 +161,11 @@
 		background-color: inherit;
 		font-family: Jost, Arial, sans-serif;
 		min-height: 225px;
+		max-height: 450px;
 		font-size: 16px;
+		overflow-y: scroll;
+		scrollbar-width: thin;
+		scrollbar-color: #D97544 #e1edce;
 	}
 
 	.editor div.ql-snow {
@@ -195,8 +199,9 @@
 
 	.textarea-emoji-control {
 		position: absolute;
-		bottom: 0;
 		top: auto;
+		bottom: 0;
+		right: 2.5%;
 		margin: 10px;
 	}
 
