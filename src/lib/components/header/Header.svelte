@@ -88,7 +88,7 @@
         display: flex;
         width: 98px;
         height: 98px;
-        background-image: url("/src/lib/img/big-svinik-1.png");
+        background-image: url("/src/lib/img/big-svinik.png");
         background-size: cover;
         position: absolute;
         left: -12px;
