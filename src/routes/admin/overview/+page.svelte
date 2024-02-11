@@ -3,7 +3,6 @@
     import Button from "$lib/components/misc/button/Button.svelte";
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
     import Overlay from '$lib/components/misc/overlay/Overlay.svelte'
-    import { fly } from 'svelte/transition';
     import { _ADMIN_FLAG } from '$env/static/public';
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
@@ -60,7 +59,7 @@
 
 <section class="nav-header">
     <nav class="navigation">
-        <ul class="nav-list" transition:fly={{ delay: 20, duration: 80, y: -50, opacity: 0.4 }}>
+        <ul class="nav-list">
             <li class="nav-item">
                 <Button title="Свинки" onclick={() => switchTabs('pigs')} class_name="{tab === 'pigs' ? '-active' : ''}" />
             </li>
