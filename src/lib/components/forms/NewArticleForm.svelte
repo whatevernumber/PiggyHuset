@@ -1,5 +1,6 @@
 <script>
     import Form from "$lib/components/forms/Form.svelte";
+    import TextEditorInstructions from "$lib/components/misc/form-elements/TextEditorInstructions.svelte";
 
     export let title;
 	export let method;
@@ -40,3 +41,4 @@
 </script>
 
 <Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="articles" />
+<TextEditorInstructions />
