@@ -148,6 +148,10 @@
     .bottom-line {
         display: flex;
         justify-content: space-between;
+
+        @media(max-width: 1179px) {
+            flex-wrap: wrap;
+        }
     }
 
     .datetime {
