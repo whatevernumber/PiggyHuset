@@ -1,7 +1,8 @@
 <script>
-    import {onMount} from "svelte";
+    import {onDestroy, onMount} from "svelte";
     import {page} from "$app/stores";
     import {goto} from "$app/navigation";
+    import {browser} from "$app/environment";
 
     const adjust_button_position = function () {
         const return_button = document.querySelector('.return-button');
@@ -19,6 +20,11 @@
     };
 
     onMount(() => document.addEventListener('scroll', adjust_button_position));
+    onDestroy(() => {
+        if (browser) {
+            document.removeEventListener('scroll', adjust_button_position)
+        }
+    });
 </script>
 
 <div class="return-button" on:click={go_back} on:keypress={(e) => {if (e.key === 'Enter') go_back()}} role="button" aria-pressed="false" tabindex="0" title="Вернуться к списку">
