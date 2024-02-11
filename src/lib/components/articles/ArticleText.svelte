@@ -11,6 +11,16 @@
 		const article = document.querySelector('.article_text');
         article.innerHTML = text;
 
+        const paragraphs = article.querySelectorAll('p');
+
+        if (window_width > 1000) {
+            paragraphs.forEach((p) => {
+                if (window.screenY + p.getBoundingClientRect().top < 380) {
+                    p.classList.add('float-right');
+                }
+            });
+        }
+
         const images = article.querySelectorAll('img');
         for (let img of images) {
             if (img.src.includes('domik-article')) {
@@ -21,18 +31,9 @@
 
             let caption = img.parentElement.parentElement.nextSibling;
 
+            caption.classList.remove('float-right');
             img.parentNode.appendChild(caption);
             caption = wrap_element(caption, 'figcaption', 'article-figure-caption');
-        }
-
-        const paragraphs = article.querySelectorAll('p');
-
-        if (window_width > 1000) {
-            paragraphs.forEach((p) => {
-                if (window.screenY + p.getBoundingClientRect().top < 380) {
-                    p.classList.add('float-right');
-                }
-            });
         }
 	})
 </script>
