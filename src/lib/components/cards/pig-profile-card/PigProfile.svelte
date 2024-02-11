@@ -19,7 +19,7 @@
 
 <div class='profile_wrapper'>
 	<ProfilePhoto {type} {pic} {admin} {show_delete} {redirect_to_edit} {removable}/>
-	<CardMainContent {header} {text} {graduated} {article} {age} {volunteer} {id}/>
+	<CardMainContent {header} {text} {graduated} {article} {age} {volunteer} {id} {admin}/>
 </div>
 
 <style>

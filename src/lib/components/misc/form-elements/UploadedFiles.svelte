@@ -6,7 +6,7 @@
 </script>
 
 <div class='uploaded_files'>
-	<p class='uploaded_header'>Загруженный ранее картинки</p>
+	<p class='uploaded_header'>Загруженные ранее картинки</p>
 	<div class='photos_flex_wrapper'>
 		{#key photos}
 			{#each photos as photo}

@@ -3,7 +3,7 @@
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 
 	export let pic;
-	export let admin = true;
+	export let admin;
 	export let type;
 	export let show_delete;
 	export let redirect_to_edit;

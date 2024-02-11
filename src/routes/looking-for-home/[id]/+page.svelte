@@ -3,7 +3,8 @@
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import { showModal, closeModal, redirect } from '$lib/components/utils/func.js';
-	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
+	import { _ADMIN_FLAG } from '$env/static/public';
+	import { onMount } from 'svelte';
 
 	export let data;
 	export let action;
@@ -17,7 +18,11 @@
 	let text = pig.description;
 	let date = pig.datetime;
 
-	let modal = false;
+	let admin = false;
+
+	onMount(() => {
+		admin = localStorage.getItem(_ADMIN_FLAG);
+	})
 
 	const show_edit = (evt) => {
 		showModal(evt, 'modal_edit');
@@ -36,43 +41,9 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {text} {graduated} {pic} {header} {age} {redirect_to_edit} id={pig_id} />
+	<PigProfile {text} {graduated} {pic} {header} {age} {redirect_to_edit} id={pig_id} {admin} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />
 	{/if}
 </Article>
-
-<div class='modal modal_closed'>
-	<ModalOkay {action} />
-</div>
-
-<style>
-    .modal {
-        position: absolute;
-        top: 35%;
-        left: 30%;
-        z-index: 10;
-    }
-
-    .close-button {
-        position: absolute;
-        width: 35px;
-        height: 35px;
-        top: -2.5%;
-        right: -5%;
-        background: url('$lib/img/x.png') no-repeat;
-        border: none;
-    }
-
-    .close-button:hover {
-        scale: 1.2;
-        transition: 0.5s;
-    }
-
-	@media (max-width: 1001px) {
-        .modal {
-            left: 0;
-        }
-	}
-</style>

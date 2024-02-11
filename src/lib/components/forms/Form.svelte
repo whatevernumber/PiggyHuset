@@ -342,7 +342,9 @@
         }
 
         .form-header {
+            margin: 0 auto;
             text-align: center;
+            max-width: 220px;
         }
 
         .form-section {

@@ -87,7 +87,7 @@
 </div>
 
 <div class='modal modal_closed'>
-    <ModalOkay {action} {success} {handle_cancel} action_handler={remove}/>
+    <ModalOkay {action} {success} {handle_cancel} action_handler={remove} bind:modal_opened={modal_opened}/>
 </div>
 
 <style>

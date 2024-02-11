@@ -24,7 +24,7 @@
         position: absolute;
         right: 12px;
         z-index: -4;
-        top: 200px;
+        top: 185px;
         opacity: 0;
         transition: top 0.2s, opacity 0.3s, z-index 0.3s;
     }
