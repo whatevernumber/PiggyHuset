@@ -3,7 +3,7 @@
 	import NewPostForm from '$lib/components/forms/NewPostForm.svelte';
 	import UploadedFiles from '$lib/components/misc/form-elements/UploadedFiles.svelte';
 	import { onMount } from 'svelte';
-	import { _ADMIN_FLAG } from '$env/static/public';
+	import {_REMOTE_SERVER, _ADMIN_FLAG} from "$env/static/public";
 	import { goto } from '$app/navigation';
 
 	export let data;
@@ -40,12 +40,18 @@
 
 				let editor = document.querySelector('.ql-editor');
 				editor.innerHTML = article.text;
-			} else {
-				article_text.value = article.text;
+
+				// правильное отображение картинок с сервера в редакторе
+				for (const img of editor.getElementsByTagName('img')) {
+					if ((img.src.includes('domik-article'))) {
+						img.src = `${_REMOTE_SERVER}/img/${img.src.slice(img.src.lastIndexOf('/') + 1)}`;
+					}
+				}
 			}
 
-		article_title.value = article.title;
-	});
+			article_title.value = article.title;
+			article_text.value = article.text;
+		});
 
 	const title = "Редактировать публикацию";
 
