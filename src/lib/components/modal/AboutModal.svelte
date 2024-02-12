@@ -47,7 +47,7 @@ import {closeModal} from "$lib/components/utils/func.js";
         background-color: #FFFFFF;
         padding: 15px 25px;
         width: 550px;
-        min-height: 680px;
+        min-height: 550px;
         border: 1px solid rgba(0, 0, 0, 0.10);
     }
 
