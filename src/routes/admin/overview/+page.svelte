@@ -57,6 +57,7 @@
     <title>Личный кабинет администратора</title>
 </svelte:head>
 
+{#if admin}
 <section class="nav-header">
     <nav class="navigation">
         <ul class="nav-list">
@@ -85,8 +86,9 @@
 <CatalogPage data="{array}" page_title="{'Список ' + header}" category={tab === 'pigs' ? 'looking-for-home' : tab} {type} admin bind:modal_opened={modal_opened} data-sveltekit-preload-data/>
 {/key}
 
-{#if modal_opened}
-    <Overlay />
+    {#if modal_opened}
+        <Overlay />
+    {/if}
 {/if}
 
 <style>
