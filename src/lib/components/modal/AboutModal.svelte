@@ -111,6 +111,7 @@ import {closeModal} from "$lib/components/utils/func.js";
     @media (max-width: 1001px) {
         .about_modal {
             width: 90%;
+            top: 0;
             right: 0;
             padding-bottom: 40px;
         }
