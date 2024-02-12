@@ -73,7 +73,7 @@
 	<title>{header}</title>
 </svelte:head>
 
-<Article {date}>
+<Article class_name='article_news' {date}>
 	<div class="wrapper">
 		<div>
 			<PhotoCard pic={news.main_photo} type="article" />

@@ -1,9 +1,9 @@
 <footer class="footer">
-    <img class="guinea-pig-icon" src="/src/lib/img/svg/guinea-pig-small.svg" alt="Иконка морской свинки" width="64" height="58">
-    <img src="/src/lib/img/svg/header-logo.svg" alt="Иконка Домика" width="162" height="48">
+    <img class="guinea-pig-icon" src="/img/svg/guinea-pig-small.svg" alt="Иконка морской свинки" width="64" height="58">
+    <img src="/img/svg/header-logo.svg" alt="Иконка Домика" width="162" height="48">
 
     <a class="vk-link" href="https://vk.com">
-        <img class="vk-link-image" src="/src/lib/img/svg/vk.svg" alt="Иконка социальной сети Вконтакте" width="24" height="27">
+        <img class="vk-link-image" src="/img/svg/vk.svg" alt="Иконка социальной сети Вконтакте" width="24" height="27">
     </a>
 </footer>
 

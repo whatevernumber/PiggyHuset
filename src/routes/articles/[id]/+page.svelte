@@ -9,7 +9,6 @@
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { _ADMIN_FLAG } from '$env/static/public';
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
 
 	export let data;
 
@@ -23,12 +22,12 @@
 	let success = false;
 	let admin = false;
 	let modal_opened = false;
+	let window_width;
 
 	onMount(() => {
 		admin = localStorage.getItem(_ADMIN_FLAG);
 	})
 
-	let window_width;
 
 	const show_delete = (evt) => {
 		action = 'delete';
@@ -79,11 +78,11 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<Article class_name="article_news" date="{article.datetime}">
+<Article date="{article.datetime}">
 		<div class="wrapper">
 			<div class="photo-card-wrapper" class:absolute={article.type_id === 1}>
 				{#if (window_width > 1000)}
-				<PhotoCard {pic} type="article" />
+					<PhotoCard {pic} type="article" />
 				{/if}
 				{#if admin}
 				<div class="profile_buttons">
