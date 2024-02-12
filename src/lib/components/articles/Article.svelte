@@ -2,6 +2,7 @@
 	import { dayjs } from "svelte-time"
 	import "dayjs/locale/ru";
 	dayjs.locale('ru')
+	import {slide} from "svelte/transition";
 </script>
 
 <script>
@@ -12,7 +13,7 @@
 </script>
 
 <div class="article_wrapper">
-	<article class="article {class_name}">
+	<article class="article {class_name}" transition:slide={{x: 600, duration: 600, delay: 0}}>
 		<slot />
 		<div class="date">
 			<p class="date-description">

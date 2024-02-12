@@ -31,10 +31,10 @@
 				required: true,
                 emoji: true
 			},
-			{
-				label: 'Куратор',
-				name: 'overseer',
-			}
+			// {
+			// 	label: 'Куратор',
+			// 	name: 'overseer',
+			// }
 		],
 		files: {
 			file_input: true,

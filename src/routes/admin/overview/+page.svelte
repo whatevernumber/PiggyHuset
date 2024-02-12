@@ -6,6 +6,7 @@
     import { _ADMIN_FLAG } from '$env/static/public';
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
+    import {fly} from "svelte/transition";
 
     export let data;
 
@@ -57,8 +58,9 @@
     <title>Личный кабинет администратора</title>
 </svelte:head>
 
+{#if admin}
 <section class="nav-header">
-    <nav class="navigation">
+    <nav class="navigation" transition:fly={{ delay: 20, duration: 200, y: -150, opacity: 0.4 }}>
         <ul class="nav-list">
             <li class="nav-item">
                 <Button title="Свинки" onclick={() => switchTabs('pigs')} class_name="{tab === 'pigs' ? '-active' : ''}" />
@@ -82,11 +84,12 @@
 </section>
 
 {#key tab}
-<CatalogPage data="{array}" page_title="{'Список ' + header}" category={tab === 'pigs' ? 'looking-for-home' : tab} {type} admin bind:modal_opened={modal_opened}/>
+<CatalogPage data="{array}" page_title="{'Список ' + header}" category={tab === 'pigs' ? 'looking-for-home' : tab} {type} admin bind:modal_opened={modal_opened} data-sveltekit-preload-data/>
 {/key}
 
-{#if modal_opened}
-    <Overlay />
+    {#if modal_opened}
+        <Overlay />
+    {/if}
 {/if}
 
 <style>
