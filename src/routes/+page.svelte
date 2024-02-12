@@ -4,6 +4,9 @@
 	import LookingForHouse from "$lib/components/looking-for-house/LookingForHouse.svelte";
 	import Graduated from "$lib/components/graduated/Graduated.svelte";
 	import AboutModal from "$lib/components/modal/AboutModal.svelte";
+	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
+
+	let modal_opened = false; // флаг для оверлея
 </script>
 
 <svelte:head>
@@ -12,12 +15,15 @@
 
 <Banner />
 <div class="landing_main_wrapper main_wrapper">
-	<About />
+	<About bind:modal_opened={modal_opened} />
 	<LookingForHouse />
 	<Graduated />
 </div>
 
 <AboutModal />
+{#if modal_opened}
+	<Overlay />
+{/if}
 
 <style>
     .landing_main_wrapper {

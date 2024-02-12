@@ -3,10 +3,25 @@
     import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
     import {showModal, closeModal} from "$lib/components/utils/func.js";
 
+    export let modal_opened;
+
     // Показать модальное окно
     const handle = (evt) => {
         showModal(evt, 'about_modal');
         evt.target.removeEventListener('click', handle);
+        modal_opened = true;
+
+        document.addEventListener('click', hide_overlay);
+    }
+
+    // прячет оверлей, если модальное окно закрыто
+    const hide_overlay = () => {
+        const modal = document.querySelector('.modal_opened');
+
+        if (!modal) {
+            modal_opened = false;
+            document.removeEventListener('click', hide_overlay)
+        }
     }
 </script>
 
