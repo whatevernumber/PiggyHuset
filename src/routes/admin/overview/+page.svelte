@@ -6,6 +6,7 @@
     import { _ADMIN_FLAG } from '$env/static/public';
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
+    import {fly} from "svelte/transition";
 
     export let data;
 
@@ -59,7 +60,7 @@
 
 {#if admin}
 <section class="nav-header">
-    <nav class="navigation">
+    <nav class="navigation" transition:fly={{ delay: 20, duration: 200, y: -150, opacity: 0.4 }}>
         <ul class="nav-list">
             <li class="nav-item">
                 <Button title="Свинки" onclick={() => switchTabs('pigs')} class_name="{tab === 'pigs' ? '-active' : ''}" />
