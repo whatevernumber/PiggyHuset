@@ -33,6 +33,7 @@
 
     .article {
         min-height: 604px;
+        min-width: 500px;
         padding: 19px 40px;
         display: flex;
         flex-direction: column;
@@ -48,7 +49,6 @@
     }
 
     .article_news {
-        min-width: 500px;
         max-width: 600px;
     }
 

@@ -42,7 +42,7 @@
 	<ArticleHeader text={header} {type} />
 	{#if graduated}
 	<div class='graduated_image'>
-		<img class="graduated-icon" src="/src/lib/img/found-home.png" width="50px" height="50px" alt="Морская свинка в домике">
+		<img class="graduated-icon" src="/static/img/found-home.png" width="50px" height="50px" alt="Морская свинка в домике">
 	</div>
 	{:else if (admin && !is_article)}
 	<div class='checkbox'>

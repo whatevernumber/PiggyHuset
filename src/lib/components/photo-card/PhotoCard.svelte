@@ -7,7 +7,7 @@
 	export let width = 200;
 	export let height = 200;
     export let type = 'pig';
-    export let src = pic ? `${_REMOTE_SERVER}/img/${pic}` : `../src/lib/img/placeholder/${type}-${randomize(1, 3)}.png`; // src картинки можно задать явно
+    export let src = pic ? `${_REMOTE_SERVER}/img/${pic}` : `../static/img/placeholder/${type}-${randomize(1, 3)}.png`; // src картинки можно задать явно
     export let is_form = false;
     export let click_handler;
 

@@ -8,7 +8,7 @@
     export let onclick;
     export let border = false;
 
-    let background_img = "url('/src/lib/img/" + icon + "')";
+    let background_img = "url('/static/img/" + icon + "')";
 
     function hover() {
         const images = document.querySelectorAll('.animate_pig');
@@ -40,8 +40,8 @@
     </a>
 
     {#if class_name.includes('modal_button')}
-        <img class='animate_pig image_right' width='60px' height='60px' src='/src/lib/img/modal_okay_main.jpg'>
-        <img class='animate_pig image_left' width='60px' height='60px' src='/src/lib/img/modal_okay_main.jpg'>
+        <img class='animate_pig image_right' width='60px' height='60px' src='/static/img/modal_okay_main.jpg'>
+        <img class='animate_pig image_left' width='60px' height='60px' src='/static/img/modal_okay_main.jpg'>
     {/if}
 </div>
 
