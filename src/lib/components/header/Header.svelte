@@ -7,17 +7,20 @@
     export let current = '/main';
     export let admin = false;
 
-    const logout = () => {
-        fetch(`${_REMOTE_SERVER}/admin/logout`, {
-            method: 'POST',
-            headers: {
-                'Authorization': include_auth(_REST_STORAGE_KEY)
-            }
-        });
-
-        localStorage.removeItem(_ADMIN_FLAG);
-        localStorage.removeItem(_REST_STORAGE_KEY);
-        goto('/', {invalidateAll: true});
+    const logout = async () => {
+        try {
+            await fetch(`${_REMOTE_SERVER}/admin/logout`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': include_auth(_REST_STORAGE_KEY)
+                }
+            });
+        }
+        finally {
+            localStorage.removeItem(_ADMIN_FLAG);
+            localStorage.removeItem(_REST_STORAGE_KEY);
+            window.location.replace('/');
+        }
     };
 
     afterUpdate(() => admin = Boolean(localStorage.getItem(_ADMIN_FLAG)));
