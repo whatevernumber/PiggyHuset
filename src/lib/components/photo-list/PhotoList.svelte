@@ -21,7 +21,7 @@
 	let slider = SplideSlide;
 
 	if (!photos) {
-		photos = [{ image: '../src/lib/img/pig-in-a-hat.jpeg' }];
+		photos = [{ image: '../static/img/pig-in-a-hat.jpeg' }];
 	}
 
 	let main_options = {

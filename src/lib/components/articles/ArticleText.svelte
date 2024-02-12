@@ -11,7 +11,7 @@
 		const article = document.querySelector('.article_text');
         article.innerHTML = text;
 
-        if (window_width > 1000) {
+       if (window_width > 1000) {
             let lists = [
                 ...article.getElementsByTagName('ol'),
                 ...article.getElementsByTagName('ul')
@@ -27,6 +27,7 @@
 
             const paragraphs = article.querySelectorAll('p');
             paragraphs.forEach((p) => {
+              
                 if (window.scrollY + p.getBoundingClientRect().top < 380) {
                     p.classList.add('float-right');
                 }
@@ -34,6 +35,7 @@
         }
 
         const images = article.querySelectorAll('img');
+
         for (let img of images) {
             if (img.src.includes('domik-article')) {
                 img.src = `${_REMOTE_SERVER}/img/${img.src.slice(img.src.lastIndexOf('/') + 1)}`;
