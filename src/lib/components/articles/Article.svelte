@@ -69,6 +69,9 @@
 	@media (max-width: 1001px) {
 		.article {
 			min-height: auto;
+			min-width: auto;
+			max-width: 90%;
+			margin: 0 auto;
 			padding: 0;
 			row-gap: normal;
 			justify-content: center;
