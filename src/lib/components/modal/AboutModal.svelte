@@ -6,7 +6,7 @@ import {closeModal} from "$lib/components/utils/func.js";
 </script>
 
 <section class="about_modal modal modal_closed">
-    <div class="about_modal_wrapper modal_wrapper">
+    <div class="about_modal_wrapper modal_wrapper" style="filter: none;">
         <h3 class="about_header">О нас</h3>
         <div class="about_modal_text">
             <p class="modal_text">
