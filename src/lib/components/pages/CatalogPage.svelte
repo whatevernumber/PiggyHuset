@@ -5,7 +5,8 @@
     import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import {onMount} from "svelte";
-    import {blur} from "svelte/transition";
+    import {slide} from "svelte/transition";
+    import {beforeNavigate, disableScrollHandling} from "$app/navigation";
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -63,6 +64,9 @@
         })
     )
 
+    // отмена поведения с прокруткой вверх списка при переходе на карточку
+    beforeNavigate(() => disableScrollHandling());
+
     // реактивное обновление списка
     $: data_array = new_batch ? [
         ...data_array,
@@ -72,7 +76,7 @@
 </script>
 
 <div>
-    <section id="catalog" transition:blur={{duration: 400}}>
+    <section id="catalog" transition:slide|global={{duration: 600, delay: 0, x: -200}}>
         <div class="section-wrapper">
 
             <BigHeader text_content="{page_title}" position="left"/>
