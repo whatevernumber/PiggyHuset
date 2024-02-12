@@ -142,5 +142,9 @@
 		.article_text {
             text-align: justify;
 		}
+
+        .article-figure-caption {
+            margin-top: 6%;
+        }
 	}
 </style>
