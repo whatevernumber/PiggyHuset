@@ -5,7 +5,7 @@
     export let name;
     export let placeholder_picture = `vdomike-${randomize(1,3)}`;
     export let img;
-    export let src = img ? `${_REMOTE_SERVER}/img/${img}` : `/src/lib/img/placeholder/graduated/${placeholder_picture}.png`;
+    export let src = img ? `${_REMOTE_SERVER}/img/${img}` : `/img/placeholder/graduated/${placeholder_picture}.png`;
     export let id = null;
 </script>
 
