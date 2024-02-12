@@ -3,10 +3,25 @@
     import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
     import {showModal, closeModal} from "$lib/components/utils/func.js";
 
+    export let modal_opened;
+
     // Показать модальное окно
     const handle = (evt) => {
         showModal(evt, 'about_modal');
         evt.target.removeEventListener('click', handle);
+        modal_opened = true;
+
+        document.addEventListener('click', hide_overlay);
+    }
+
+    // прячет оверлей, если модальное окно закрыто
+    const hide_overlay = () => {
+        const modal = document.querySelector('.modal_opened');
+
+        if (!modal) {
+            modal_opened = false;
+            document.removeEventListener('click', hide_overlay)
+        }
     }
 </script>
 
@@ -17,7 +32,7 @@
         <p class="about_text">Если Вы нашли свинку и не знаете, что с ней делать, – обратитесь к нам!</p>
         <p class="about_text">Если Вы не можете больше держать морскую свинку у себя дома – мы примем её к себе и найдём новый дом.</p>
         <p class="about_text">Связаться с нами можно в нашем <a href="https://vk.com">сообществе "ВК".</a></p>
-        <img class='about_home_icon' src="src/lib/img/svg/home.svg" alt="Маленький домик">
+        <img class='about_home_icon' src="/img/svg/home.svg" alt="Маленький домик">
         <div class="button_wrapper">
             <Button title="Подробнее" is_light onclick={handle} />
         </div>
