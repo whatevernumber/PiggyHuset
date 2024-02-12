@@ -34,6 +34,7 @@
         switch (tab) {
             default:
                 header = 'свинок';
+                action = {label: 'Добавить свинку', href: '/admin/add-pig'};
                 type = 'pig';
                 break;
             case 'news':
