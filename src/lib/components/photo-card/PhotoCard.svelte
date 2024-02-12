@@ -2,7 +2,7 @@
     import {_REMOTE_SERVER} from "$env/static/public";
     import {randomize} from "$lib/components/utils/func.js";
 
-    export let alt = '';
+    export let alt = 'Изображение';
 	export let pic;
 	export let width = 200;
 	export let height = 200;
@@ -10,15 +10,6 @@
     export let src = pic ? `${_REMOTE_SERVER}/img/${pic}` : `../img/placeholder/${type}-${randomize(1, 3)}.png`; // src картинки можно задать явно
     export let is_form = false;
     export let click_handler;
-
-    // let pics = {
-    //     article: 'article-pig.png',
-    //     profile: 'temp-pig-profile-photo.png',
-    //     graduated: 'found-home.png',
-    //     ready: 'ready.jpg',
-    //     kb_pig: 'kb-pig.png',
-    //     temp: 'temp-pig-profile-photo.png',
-    // }
 
     const delete_handler = () => {
         pic = pic;
