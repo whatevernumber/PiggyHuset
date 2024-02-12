@@ -94,7 +94,7 @@
     }
 
     .article_text p {
-        margin: 0.3em 0;
+        margin: 0.35em 0;
 
         &:has(figure) {
             max-width: 85%;
@@ -123,20 +123,27 @@
 
 	.article_text h2, .article_text h3 {
         display: inline-block;
-		margin-bottom: 5%;
+        margin: 3% 0;
 	}
+
+    .article_text h2 {
+        color: #88aa4d;
+    }
 
 	.article_text p a {
 		color: #D97544;
 	}
 
+    .article_text ul,
+    .article_text ol {
+        padding-left: 5%;
+        margin: 3% 0;
+        text-align: justify;
+    }
+
 	/*.article_text p strong {*/
 	/*	text-shadow: 1px 1px #88aa4d, -1px -1px #f6b5d3;*/
 	/*}*/
-
-    .article_text h2 {
-        color: #88aa4d;
-    }
 
 	@media (max-width: 1000px) {
 		.article_text {

@@ -83,6 +83,13 @@
 			margin: 0;
 		}
 
+		.article_author {
+			margin-left: auto;
+			width: 50%;
+			display: flex;
+			flex-direction: column;
+		}
+
 		.date {
 			margin-top: 50px;
 			margin-bottom: 20px;
