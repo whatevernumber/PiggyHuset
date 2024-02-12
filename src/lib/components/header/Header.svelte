@@ -31,11 +31,11 @@
             </div>
         </a>
         <nav class="navigation navigation-admin">
-            <a href="/admin/overview" class="nav-link">
+            <a href="/admin/overview" class="nav-link" data-sveltekit-preload-data>
                 <p class="navigation-home">Личный кабинет администратора</p>
                 <img class="admin-icon" src="/img/svg/admin-home.svg" alt="Иконка домика" width="57" height="50">
             </a>
-            <p class="logout" on:click={logout} hidden>Выйти</p>
+            <p class="logout" on:click={logout} hidden data-sveltekit-reload>Выйти</p>
         </nav>
     {:else if current === '/'}
         <div class="warning">
@@ -54,7 +54,7 @@
             </div>
         </a>
         <nav class="navigation">
-                <a class='nav-link' href="/">
+                <a class='nav-link' href="/" data-sveltekit-preload-data>
                     <p class='navigation-home'>
                         Главная
                     </p>

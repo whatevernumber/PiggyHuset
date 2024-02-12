@@ -82,7 +82,7 @@
 </section>
 
 {#key tab}
-<CatalogPage data="{array}" page_title="{'Список ' + header}" category={tab === 'pigs' ? 'looking-for-home' : tab} {type} admin bind:modal_opened={modal_opened}/>
+<CatalogPage data="{array}" page_title="{'Список ' + header}" category={tab === 'pigs' ? 'looking-for-home' : tab} {type} admin bind:modal_opened={modal_opened} data-sveltekit-preload-data/>
 {/key}
 
 {#if modal_opened}
