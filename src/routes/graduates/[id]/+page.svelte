@@ -13,7 +13,7 @@
 
 	const pig = data.pig;
 	const pic = pig.main_photo;
-	const header = pig.name + ' нашёл дом';
+	const header = pig.name + ' в Домике';
 	const age = pig.age;
 	const graduated = pig.graduated;
 	const text = pig.description;
