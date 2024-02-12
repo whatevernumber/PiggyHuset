@@ -41,14 +41,11 @@
         <div class="warning">
             <img class="warning-icon" src="/img/svg/info-button-svgrepo-com 1.svg" alt="Иконка предупреждение" width="49" height="49">
             <p class="warning-text">
-                <strong>ВНИМАНИЕ!</strong> Если Вы хотите помочь, напишите нам в
-                <span class="vk-green">
-                    <a class="vk-link" href="https://vk.com">сообщество ВК! </a>
-                </span>
+                <strong>Каждый поросёнок заслуживает свой <b>ДОМИК</b>!</strong>
             </p>
         </div>
     {:else }
-        <a href="/">
+        <a href="/" data-sveltekit-preload-data>
             <div class="logo-wrapper">
                 <img class="logo" src="/img/svg/header-logo.svg" alt="Иконка Сообщества Домик" width="256" height="58">
             </div>
@@ -92,6 +89,7 @@
         background-size: cover;
         position: absolute;
         left: -12px;
+        z-index: 5;
     }
 
     .logo-wrapper.hide-logo::before {
@@ -112,6 +110,10 @@
 
     .warning-text {
         margin-right: auto;
+    }
+
+    .warning-text strong {
+        color: #333333;
     }
 
     .warning-icon {
