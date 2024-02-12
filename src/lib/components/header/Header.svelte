@@ -33,7 +33,7 @@
         <nav class="navigation navigation-admin">
             <a href="/admin/overview" class="nav-link">
                 <p class="navigation-home">Личный кабинет администратора</p>
-                <img class="admin-icon" src="/static/img/svg/admin-home.svg" alt="Иконка домика" width="57" height="50">
+                <img class="admin-icon" src="/img/svg/admin-home.svg" alt="Иконка домика" width="57" height="50">
             </a>
             <p class="logout" on:click={logout} hidden>Выйти</p>
         </nav>

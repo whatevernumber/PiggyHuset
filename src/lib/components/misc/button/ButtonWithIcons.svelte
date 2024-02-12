@@ -8,21 +8,21 @@
     export let onclick;
     export let border = false;
 
-    let background_img = "url('/static/img/" + icon + "')";
+    let background_img = "url('/img/" + icon + "')";
 
     function hover() {
         const images = document.querySelectorAll('.animate_pig');
-        images.forEach((image) => image.setAttribute('src', '/src/lib/img/modal_hover.gif'))
+        images.forEach((image) => image.setAttribute('src', '/img/modal_hover.gif'))
     }
 
     function unhover() {
         const images = document.querySelectorAll('.animate_pig');
-        images.forEach((image) => image.setAttribute('src', '/src/lib/img/modal_unhover.gif'))
+        images.forEach((image) => image.setAttribute('src', '/img/modal_unhover.gif'))
     }
 
     function wheek() {
         const images = document.querySelectorAll('.animate_pig');
-        images.forEach((image) => image.setAttribute('src', '/src/lib/img/modal_click.gif'))
+        images.forEach((image) => image.setAttribute('src', '/img/modal_click.gif'))
     }
 
     function handle (evt) {

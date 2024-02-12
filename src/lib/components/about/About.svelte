@@ -22,7 +22,7 @@
         <br>
         <p class="about_text">
             В разделе <a href="/"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
-        <img class='about_home_icon' src="static/img/svg/home.svg" alt="Маленький домик">
+        <img class='about_home_icon' src="/img/svg/home.svg" alt="Маленький домик">
         <div class="button_wrapper">
             <Button title="Подробнее" is_light onclick={handle} />
         </div>
