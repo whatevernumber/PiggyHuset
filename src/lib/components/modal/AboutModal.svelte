@@ -40,15 +40,16 @@ import {closeModal} from "$lib/components/utils/func.js";
 <style>
 
     .about_modal {
-        position: absolute;
+        position: fixed;
         text-align: center;
-        top: 80%;
-        right: 35%;
+        top: 10%;
+        right: 25%;
         background-color: #FFFFFF;
         padding: 15px 25px;
         width: 550px;
         min-height: 550px;
         border: 1px solid rgba(0, 0, 0, 0.10);
+        z-index: 10;
     }
 
     .about_header {
@@ -110,6 +111,7 @@ import {closeModal} from "$lib/components/utils/func.js";
     @media (max-width: 1001px) {
         .about_modal {
             width: 90%;
+            top: 0;
             right: 0;
             padding-bottom: 40px;
         }
