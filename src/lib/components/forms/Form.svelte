@@ -149,7 +149,7 @@
                 </div>
             </fieldset>
 
-            {#if bottom_fields}
+            {#if bottom_fields.length}
             <fieldset class="bottom-fields">
                 {#each bottom_fields as field}
                     {@const required = field.required}
