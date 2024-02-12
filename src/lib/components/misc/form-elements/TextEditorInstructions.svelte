@@ -1,4 +1,8 @@
-<section class="text-editor-instructions">
+<script>
+    import {fade} from "svelte/transition";
+</script>
+
+<section class="text-editor-instructions" transition:fade>
     <h3>Памятка по форматированию:</h3>
     <ul>
         <li>

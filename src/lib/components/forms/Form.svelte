@@ -9,6 +9,7 @@
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import TextEditor from "$lib/components/misc/form-elements/TextEditor.svelte";
     import {onMount} from "svelte";
+    import {fade} from "svelte/transition";
 
 	export let scheme = {};
 	export let redirect_location;
@@ -106,7 +107,7 @@
     onMount(() => wysiwyg_input = document.querySelector('input[type="hidden"]'));
 </script>
 
-<div class='form-container'>
+<div class='form-container' transition:fade={{delay: 20, duration: 180}}>
     <section class="form-section">
         <h3 class="form-header">{scheme.title}</h3>
         <form class="form-scheme" enctype="multipart/form-data">
