@@ -24,11 +24,14 @@
         max-width: 1280px;
         margin: 0 auto;
         position: relative;
-    }
 
-	@media (max-width: 1001px) {
-		.landing_main_wrapper {
-            max-width: 100%;
-        }
+		@media (max-width: 1001px) {
+			max-width: 100%;
+			margin: auto 5%;
+		}
+
+		@media (max-width: 1279px) {
+			margin: 0 auto;
+		}
 	}
 </style>
