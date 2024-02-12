@@ -10,7 +10,7 @@
 </script>
 
 <div class="graduated_card">
-    <a href="{_REMOTE_SERVER + '/graduated/' + id}">
+    <a href="{'/graduates/' + id}">
         <img {src} width="248" height="261" alt="Изображение выпускника">
     </a>
     <a href="{'/graduates/' + id}">

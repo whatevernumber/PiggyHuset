@@ -5,6 +5,7 @@
     import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import {onMount} from "svelte";
+    import {blur} from "svelte/transition";
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -69,8 +70,9 @@
     ] : data_array;
 
 </script>
+
 <div>
-    <section id="catalog">
+    <section id="catalog" transition:blur={{duration: 400}}>
         <div class="section-wrapper">
 
             <BigHeader text_content="{page_title}" position="left"/>

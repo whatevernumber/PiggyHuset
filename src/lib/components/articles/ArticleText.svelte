@@ -19,7 +19,7 @@
 
             lists.forEach((l) => {
                 l.childNodes.forEach(li => {
-                    if (window.screenY + li.getBoundingClientRect().top < 380) {
+                    if (window.scrollY + li.getBoundingClientRect().top < 380) {
                         li.classList.add('float-right');
                     }
                 })
@@ -27,9 +27,8 @@
 
             const paragraphs = article.querySelectorAll('p');
             paragraphs.forEach((p) => {
-                console.log(p.getBoundingClientRect().top)
-                if (window.screenY + p.getBoundingClientRect().top < 380) {
-                    console.log(window.screenY);
+              
+                if (window.scrollY + p.getBoundingClientRect().top < 380) {
                     p.classList.add('float-right');
                 }
             });
