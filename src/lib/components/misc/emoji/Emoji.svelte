@@ -15,8 +15,7 @@
 	<emoji-picker on:emoji-click={pick}
 				  i18n={ru}
 				  locale="ru"
-				  data-source='https://cdn.jsdelivr.net/npm/emoji-picker-element-data@^1/ru/emojibase/data.json'
-	/>
+				  data-source='https://cdn.jsdelivr.net/npm/emoji-picker-element-data@^1/ru/emojibase/data.json'></emoji-picker>
 </div>
 
 <style>
@@ -39,6 +38,10 @@
         background-position: center;
         background-size: 18px 18px;
         background-repeat: no-repeat;
+
+		@media(max-width: 1001px) {
+			right: 5%;
+		}
     }
 
     .emoji_button:hover {
