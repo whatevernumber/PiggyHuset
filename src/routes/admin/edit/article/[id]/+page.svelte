@@ -3,12 +3,10 @@
 	import NewPostForm from '$lib/components/forms/NewPostForm.svelte';
 	import UploadedFiles from '$lib/components/misc/form-elements/UploadedFiles.svelte';
 	import { onMount } from 'svelte';
-	import {_REMOTE_SERVER, _ADMIN_FLAG} from "$env/static/public";
-	import { goto } from '$app/navigation';
+	import {_REMOTE_SERVER} from "$env/static/public";
 
 	export let data;
 
-	let admin = false;
 	let article = data.article;
 	let type = article.type_id;
 
@@ -22,11 +20,6 @@
 
 	onMount(() =>
 	{
-		admin = localStorage.getItem(_ADMIN_FLAG);
-
-		if (!admin) {
-			goto('/');
-		}
 
 		let article_title = document.querySelector("[name = 'title']");
 		let article_text = document.querySelector("[name = 'text']");

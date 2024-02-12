@@ -58,6 +58,8 @@
         .graduated {
             max-width: 400px;
             padding: 0;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .graduated_cards_wrapper {

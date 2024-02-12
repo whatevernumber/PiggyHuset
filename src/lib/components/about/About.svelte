@@ -13,16 +13,11 @@
 <section class="about_wrapper">
     <BigHeader text_content="О нас" />
     <div class="about_text_wrapper">
-        <p class="about_text"><b>ДОМИК</b> для бездомных поросят - это проект помощи морским свинкам, попавшим в беду.</p>
-        <p class="about_text">Если Вы нашли свинку и не знаете, что с ней делать, -- обратитесь к нам!</p>
-        <p class="about_text">Если Вы не можете больше держать морскую свинку у себя дома -- мы примем её к себе и найдём новый дом.</p>
-        <p class="about_text">Связаться с нами можно в нашем сообществе
-            <a href="https://vk.com">"ВК".</a>
-        </p>
-        <br>
-        <p class="about_text">
-            В разделе <a href="/"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
-        <img class='about_home_icon' src="/img/svg/home.svg" alt="Маленький домик">
+        <p class="about_text"><b>ДОМИК</b> для бездомных поросят – это проект помощи морским свинкам, попавшим в беду.</p>
+        <p class="about_text">Если Вы нашли свинку и не знаете, что с ней делать, – обратитесь к нам!</p>
+        <p class="about_text">Если Вы не можете больше держать морскую свинку у себя дома – мы примем её к себе и найдём новый дом.</p>
+        <p class="about_text">Связаться с нами можно в нашем <a href="https://vk.com">сообществе "ВК".</a></p>
+        <img class='about_home_icon' src="src/lib/img/svg/home.svg" alt="Маленький домик">
         <div class="button_wrapper">
             <Button title="Подробнее" is_light onclick={handle} />
         </div>
@@ -42,10 +37,15 @@
         box-shadow: 1px 1px 15px #adadad;
     }
 
+    .about_text_wrapper a {
+        color: #D97544;
+    }
+
     .about_text {
         font-size: 22px;
         margin: 5px 0;
         line-height: 35px;
+        text-align: justify;
     }
 
     .about_home_icon {
