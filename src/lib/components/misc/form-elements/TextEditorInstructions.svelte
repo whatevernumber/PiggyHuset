@@ -2,7 +2,7 @@
     import {fade} from "svelte/transition";
 </script>
 
-<section class="text-editor-instructions" transition:fade>
+<aside class="text-editor-instructions" transition:fade>
     <h3>Памятка по форматированию:</h3>
     <ul>
         <li>
@@ -17,8 +17,11 @@
         <li>
             Для картинки без подписи можно сделать двойной перенос строки после картинки;
         </li>
+        <li>
+            Смайлики можно вставлять в текст через двоеточие – например <code>:pig</code>;
+        </li>
     </ul>
-</section>
+</aside>
 
 <style>
     .text-editor-instructions {
@@ -55,11 +58,34 @@
                     display: inline-flex;
                     width: 30px;
                     height: 30px;
-                    background: url("../src/lib/img/icons-edit.png");
+                    background: url("/src/lib/img/icons-edit.png");
                     background-size: cover;
                     margin-right: 7px;
                 }
+
+                & code {
+                    display: contents;
+                    color: #D97544;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
             }
+        }
+    }
+
+    @media (max-width:1001px) {
+        .text-editor-instructions {
+            position: static;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .text-editor-instructions li {
+            padding-left: 24px;
+        }
+
+        .text-editor-instructions.text-editor-instructions li::before {
+            left: -3%;
         }
     }
 </style>
