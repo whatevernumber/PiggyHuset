@@ -32,7 +32,7 @@
         <p class="about_text">Если Вы нашли свинку и не знаете, что с ней делать, – обратитесь к нам!</p>
         <p class="about_text">Если Вы не можете больше держать морскую свинку у себя дома – мы примем её к себе и найдём новый дом.</p>
         <p class="about_text">Связаться с нами можно в нашем <a href="https://vk.com">сообществе "ВК".</a></p>
-        <img class='about_home_icon' src="/img/svg/home.svg" alt="Маленький домик">
+        <img class='about_home_icon' src="/img/about-icon.png" height="80" alt="Маленький домик">
         <div class="button_wrapper">
             <Button title="Подробнее" is_light onclick={handle} />
         </div>

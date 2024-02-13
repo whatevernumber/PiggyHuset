@@ -42,7 +42,7 @@
         </nav>
     {:else if current === '/'}
         <div class="warning">
-            <img class="warning-icon" src="/img/svg/info-button-svgrepo-com 1.svg" alt="Иконка предупреждение" width="49" height="49">
+            <img class="warning-icon" src="/img/happy.png" alt="Иконка предупреждение" width="69">
             <p class="warning-text">
                 <strong>Каждый поросёнок заслуживает свой <b>ДОМИК</b>!</strong>
             </p>
