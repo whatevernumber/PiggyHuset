@@ -117,6 +117,7 @@
 
     .warning-text strong {
         color: #333333;
+        font-weight: normal;
     }
 
     .warning-icon {
