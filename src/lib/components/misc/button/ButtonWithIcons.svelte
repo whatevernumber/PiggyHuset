@@ -63,6 +63,12 @@
         user-select: none;
     }
 
+    @media (max-width: 374px) {
+        a.button {
+            padding: 6% 25%;
+        }
+    }
+
     .button:hover {
         background-color: #F6B5D3;
     }
