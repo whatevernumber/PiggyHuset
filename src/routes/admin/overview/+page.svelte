@@ -115,6 +115,7 @@
         position: absolute;
         right: 6%;
         bottom: -50%;
+        z-index: 5;
     }
 
     @media (max-width: 1001px) {
