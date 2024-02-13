@@ -58,7 +58,7 @@
                     display: inline-flex;
                     width: 30px;
                     height: 30px;
-                    background: url("/src/lib/img/icons-edit.png");
+                    background: url("../src/lib/img/icons-edit.png");
                     background-size: cover;
                     margin-right: 7px;
                 }
@@ -76,8 +76,9 @@
     @media (max-width:1350px) {
         .text-editor-instructions {
             position: static;
-            max-width: 80vw;
+            max-width: 75vw;
             margin: 0 auto 5%;
+            padding: 6%;
         }
 
         .text-editor-instructions li {
