@@ -28,7 +28,7 @@ import {closeModal} from "$lib/components/utils/func.js";
             </p>
             <p class="about_text">В разделе <a href="/articles"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
         </div>
-        <ButtonWithIcons title="Написать нам" background_color="#E1EDCE" text_color="#333333" isModal/>
+        <ButtonWithIcons title="Написать нам" background_color="#E1EDCE" text_color="#333333" isModal href="https://vk.com/im?sel=-127412463"/>
         <button class="close-button" on:click={closeModal} aria-roledescription="Закрыть окно с информацией">
             <span hidden>
                 закрыть
@@ -43,12 +43,14 @@ import {closeModal} from "$lib/components/utils/func.js";
         position: fixed;
         text-align: center;
         top: 10%;
-        right: 25%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
         background-color: #FFFFFF;
         padding: 15px 25px;
         width: 550px;
         min-height: 550px;
-        border: 1px solid rgba(0, 0, 0, 0.10);
+        border: 1px solid #e1edce;
         z-index: 10;
     }
 
@@ -110,10 +112,20 @@ import {closeModal} from "$lib/components/utils/func.js";
 
     @media (max-width: 1001px) {
         .about_modal {
-            width: 90%;
-            top: 0;
+            width: 80vw;
+            max-height: 90vh;
+            top: 50%;
+            left: 0;
             right: 0;
-            padding-bottom: 40px;
+            padding-bottom: 35px;
+            margin-top: -315px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about_modal_text {
+            font-size: 16px;
+            margin-bottom: 8%;
         }
 
         .close-button {
