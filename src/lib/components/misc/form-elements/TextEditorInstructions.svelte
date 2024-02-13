@@ -27,7 +27,7 @@
     .text-editor-instructions {
         position: absolute;
         top: 35%;
-        right: 6%;
+        right: 3%;
         width: 350px;
         background-color: #e1edce;
         padding: 2% 2% 2% 4%;
@@ -73,11 +73,11 @@
         }
     }
 
-    @media (max-width:1001px) {
+    @media (max-width:1350px) {
         .text-editor-instructions {
             position: static;
-            max-width: 100%;
-            margin: 0 auto;
+            max-width: 80vw;
+            margin: 0 auto 5%;
         }
 
         .text-editor-instructions li {
@@ -87,5 +87,20 @@
         .text-editor-instructions.text-editor-instructions li::before {
             left: -3%;
         }
+    }
+
+    @media (min-width: 1301px) and (max-width: 1780px) {
+        .text-editor-instructions {
+            max-width: 15vw;
+            right: 1%;
+        }
+
+        .text-editor-instructions.text-editor-instructions li::before {
+            left: -20%;
+        }
+    }
+
+    :global(.modal.modal_opened ~ aside) {
+        filter: blur(10px);
     }
 </style>

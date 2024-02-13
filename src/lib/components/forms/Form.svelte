@@ -192,10 +192,11 @@
 
     .form-container {
         min-height: 100%;
-        margin: 10px auto 10px;
+        margin: auto;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 5%;
     }
 
     .form-section {
@@ -339,7 +340,9 @@
     @media (max-width: 1001px) {
 
         .form-container {
-            margin: 0 auto;
+            margin: auto;
+            max-width: 95vw;
+            padding-top: 2%;
         }
 
         .form-header {
@@ -351,8 +354,9 @@
         .form-section {
             width: 100%;
             height: 100%;
-            background-color: #F0F8FF;
+            background-color: #FFFFFF;
             padding: 5px 0;
+            margin-bottom: 5%;
         }
 
         .form-scheme textarea {

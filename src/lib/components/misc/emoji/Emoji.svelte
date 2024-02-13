@@ -60,4 +60,10 @@
         z-index: 10;
 	}
 
+	@media (max-width: 1025px) or (max-height: 1025px) {
+		emoji-picker {
+			max-width: 300px;
+			max-height: 300px;
+		}
+	}
 </style>
