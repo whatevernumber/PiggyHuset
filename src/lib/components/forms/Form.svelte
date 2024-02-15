@@ -72,11 +72,19 @@
             errors = await res.json();
 
             for (const prop in errors) {
-                const field = document.querySelector(`[name=${prop}]`);
-                const label = document.querySelector(`[name=${prop}] ~ .input-error-label`);
-                label.textContent = errors[prop];
+                let files;
+                if (prop === 'files') {
+                    files = 'files[]';
+                }
+                const field = document.querySelector(`[name="${files || prop}"]`);
+                const label = document.querySelector(`[name="${files || prop}"] ~ .input-error-label`);
                 field.classList.add('input-error');
+                label.textContent = errors[prop];
                 field.value = '';
+                field.addEventListener('change', function () {
+                    field.classList.remove('input-error');
+                    field.removeEventListener('change', this);
+                });
             }
         }
     }
@@ -90,7 +98,6 @@
         // отмена показа ошибки валидации
         if (file_input.classList.contains('input-error')) {
             file_input.classList.remove('input-error');
-            document.querySelector('input[type="file"] ~ .input-error-label').style.display = 'none';
         }
 
         // генерация URL картинок
@@ -143,6 +150,7 @@
                 {#each wysiwyg as wysiwyg}
                 <label class="form-label" for="{wysiwyg.name}">{wysiwyg.label}</label>
                 <input type="hidden" name="{wysiwyg.name}" id="{wysiwyg.name}">
+                <span class="input-error-label"></span>
                 <TextEditor input="{wysiwyg_input}" />
                 {/each}
             {/if}
@@ -311,14 +319,15 @@
 
         &:not(:placeholder-shown) {
              outline: none;
-
-            &:not([type="file"]) ~ .input-error-label {
-                  display: none;
-            }
         }
     }
 
-    :global(.input-error + .input-error-label) {
+    .input-error-label {
+        display: none;
+    }
+
+    :global(.input-error + .input-error-label.input-error-label) {
+        display: block;
         color: #D97544;
         position: absolute;
         top: 102%;
@@ -378,6 +387,11 @@
 
         .file-fieldset {
             flex-wrap: nowrap;
+            align-items: baseline;
+        }
+
+        .form-item:has(.input-error) + .form-item {
+            margin-top: 15%;
         }
 
         .modal {
