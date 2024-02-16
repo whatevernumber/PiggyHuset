@@ -10,6 +10,7 @@
     import TextEditor from "$lib/components/misc/form-elements/TextEditor.svelte";
     import {onMount} from "svelte";
     import {fade} from "svelte/transition";
+    import {beforeNavigate} from "$app/navigation";
 
 	export let scheme = {};
 	export let redirect_location;
@@ -20,6 +21,7 @@
 
 	let success;
     let wysiwyg_input;
+    let dirty = false;
 
     let image_upload_preview = [];
     let errors = {};
@@ -40,8 +42,6 @@
         modal.classList.remove('modal_closed');
         modal.classList.add('modal_opened');
     }
-
-    const dispatch = createEventDispatcher();
 
     async function sendForm () {
         const form = document.querySelector('form');
@@ -111,13 +111,21 @@
         image_upload_preview = image_upload_preview;
     }
 
-    onMount(() => wysiwyg_input = document.querySelector('input[type="hidden"]'));
+    onMount(() => {
+        wysiwyg_input = document.querySelector('input[type="hidden"]');
+    });
+
+    beforeNavigate(({ cancel }) => {
+        if (dirty && !confirm('Вы уверены? Введённые данные не сохранятся.')) {
+            cancel();
+        }
+    });
 </script>
 
 <div class='form-container' transition:fade={{delay: 20, duration: 180}}>
     <section class="form-section">
         <h3 class="form-header">{scheme.title}</h3>
-        <form class="form-scheme" enctype="multipart/form-data">
+        <form class="form-scheme" enctype="multipart/form-data" on:input={() => dirty = true}>
 
             {#if top_fields}
             <fieldset class="label-group">
