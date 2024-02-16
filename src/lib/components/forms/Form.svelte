@@ -66,6 +66,7 @@
 
             if(success.id) {
                 show_modal();
+                dirty = false;
             }
 
         } else {
