@@ -18,7 +18,7 @@
         const sub = href.slice(0, href.lastIndexOf('/'));
         const referrer = sessionStorage.getItem('referrer');
 
-        if (referrer === sub || referrer.includes('admin')) {
+        if (referrer && (referrer === sub || referrer.includes('admin'))) {
             history.go(-1);
         } else {
             goto(sub);
