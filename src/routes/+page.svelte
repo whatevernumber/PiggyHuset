@@ -5,6 +5,7 @@
 	import Graduated from "$lib/components/graduated/Graduated.svelte";
 	import AboutModal from "$lib/components/modal/AboutModal.svelte";
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
+	import {fly} from "svelte/transition";
 
 	let modal_opened = false; // флаг для оверлея
 </script>
@@ -13,12 +14,14 @@
 	<title>Домик для Морских Поросят</title>
 </svelte:head>
 
-<Banner />
-<div class="landing_main_wrapper main_wrapper">
-	<About bind:modal_opened={modal_opened} />
-	<LookingForHouse />
-	<Graduated />
-</div>
+<main in:fly={{y: 1000, duration: 500, delay: 0}}>
+	<Banner />
+	<div class="landing_main_wrapper main_wrapper">
+		<About bind:modal_opened={modal_opened} />
+		<LookingForHouse />
+		<Graduated />
+	</div>
+</main>
 
 <AboutModal />
 {#if modal_opened}

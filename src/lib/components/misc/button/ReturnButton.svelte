@@ -4,7 +4,6 @@
     import {goto} from "$app/navigation";
     import {browser} from "$app/environment";
 
-
     const adjust_button_position = function () {
         const return_button = document.querySelector('.return-button');
         if (window.scrollY > 100) {
@@ -15,13 +14,12 @@
     }
 
     const go_back = () => {
-        let href = $page.url.href;
-        const sub = href.slice(0, $page.url.href.lastIndexOf('/'));
+        const href = $page.url.href;
+        const sub = href.slice(0, href.lastIndexOf('/'));
+        const referrer = sessionStorage.getItem('referrer');
 
-        if (document.referrer === sub) {
-            history.back();
-        } else if (document.referrer.includes('admin')) {
-            goto('/admin/overview');
+        if (referrer === sub || referrer.includes('admin')) {
+            history.go(-1);
         } else {
             goto(sub);
         }

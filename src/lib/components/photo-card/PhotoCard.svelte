@@ -40,6 +40,7 @@
 
     .photo-card {
         object-fit: cover;
+        pointer-events: none;
     }
 
     .cancel_button {

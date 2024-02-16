@@ -19,16 +19,30 @@
 
 <label class="input-file">
 	<input class="{class_name}" type="file" {name} accept="image/jpeg" {multiple}>
-	<span class="input-file-propmpt">Выберите фото</span>
+	<span class="input-file-prompt">Выберите фото</span>
 	<span class="input-error-label"></span>
 </label>
 
 <style>
-    .input-file {
-        position: relative;
-    }
+    @media (min-width: 1001px) {
+		.input-file {
+			display: grid;
+			grid-auto-flow: column;
+			align-items: center;
+			column-gap: 5%;
+			width: 150%;
+		}
+	}
 
-    .input-file .input-file-propmpt {
+	@media (max-width: 1000px) {
+		.input-file {
+			display: flex;
+			flex-direction: column;
+			row-gap: 20px;
+		}
+	}
+
+    .input-file .input-file-prompt {
         width: 100px;
 		min-height: 26px;
         display: inline-block;
@@ -53,11 +67,11 @@
     }
 
 	.input-error-label {
-		display: flex;
-		width: 500%;
-		margin-top: 10px;
+		display: none;
+	}
+
+	.input-error ~ .input-error-label {
+		display: block;
 		color: #D97544;
-		position: absolute;
-		top: -115%;
 	}
 </style>

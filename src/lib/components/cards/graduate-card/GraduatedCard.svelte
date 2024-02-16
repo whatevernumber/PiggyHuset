@@ -42,5 +42,6 @@
         border: 2px dashed #D97544;
         background-color: #f0f8ff;
         object-fit: cover;
+        pointer-events: none;
     }
 </style>

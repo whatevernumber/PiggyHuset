@@ -73,7 +73,7 @@
         }
     }
 
-    @media (max-width:1350px) {
+    @media (max-width:1700px) {
         .text-editor-instructions {
             position: static;
             max-width: 75vw;
@@ -92,12 +92,8 @@
 
     @media (min-width: 1301px) and (max-width: 1780px) {
         .text-editor-instructions {
-            max-width: 15vw;
+            max-width: 25vw;
             right: 1%;
-        }
-
-        .text-editor-instructions.text-editor-instructions li::before {
-            left: -20%;
         }
     }
 

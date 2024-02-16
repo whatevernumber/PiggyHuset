@@ -11,8 +11,9 @@
 	export let first_slide = false;
 	export let linked = false;
 	export let photos;
+	export let local = false;
 
-	let temp_address = _REMOTE_SERVER + '/img/';
+	let temp_address = local ? '/img/' : _REMOTE_SERVER + '/img/';
 	let window_width = 0;
 
 	export let no_border = false;
@@ -93,7 +94,7 @@
 			{/if}
 		{#each photos as item}
 			<SplideSlide>
-				<PhotoCard pic={item.image} />
+				<PhotoCard pic={item.image} src={temp_address + item.image} />
 			</SplideSlide>
 		{/each}
 	</Splide>

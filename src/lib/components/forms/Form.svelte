@@ -10,6 +10,7 @@
     import TextEditor from "$lib/components/misc/form-elements/TextEditor.svelte";
     import {onMount} from "svelte";
     import {fade} from "svelte/transition";
+    import {beforeNavigate} from "$app/navigation";
 
 	export let scheme = {};
 	export let redirect_location;
@@ -20,6 +21,7 @@
 
 	let success;
     let wysiwyg_input;
+    let dirty = false;
 
     let image_upload_preview = [];
     let errors = {};
@@ -40,8 +42,6 @@
         modal.classList.remove('modal_closed');
         modal.classList.add('modal_opened');
     }
-
-    const dispatch = createEventDispatcher();
 
     async function sendForm () {
         const form = document.querySelector('form');
@@ -72,11 +72,19 @@
             errors = await res.json();
 
             for (const prop in errors) {
-                const field = document.querySelector(`[name=${prop}]`);
-                const label = document.querySelector(`[name=${prop}] ~ .input-error-label`);
-                label.textContent = errors[prop];
+                let files;
+                if (prop === 'files') {
+                    files = 'files[]';
+                }
+                const field = document.querySelector(`[name="${files || prop}"]`);
+                const label = document.querySelector(`[name="${files || prop}"] ~ .input-error-label`);
                 field.classList.add('input-error');
+                label.textContent = errors[prop];
                 field.value = '';
+                field.addEventListener('change', function () {
+                    field.classList.remove('input-error');
+                    field.removeEventListener('change', this);
+                });
             }
         }
     }
@@ -90,7 +98,6 @@
         // отмена показа ошибки валидации
         if (file_input.classList.contains('input-error')) {
             file_input.classList.remove('input-error');
-            document.querySelector('input[type="file"] ~ .input-error-label').style.display = 'none';
         }
 
         // генерация URL картинок
@@ -104,13 +111,21 @@
         image_upload_preview = image_upload_preview;
     }
 
-    onMount(() => wysiwyg_input = document.querySelector('input[type="hidden"]'));
+    onMount(() => {
+        wysiwyg_input = document.querySelector('input[type="hidden"]');
+    });
+
+    beforeNavigate(({ cancel }) => {
+        if (dirty && !confirm('Вы уверены? Введённые данные не сохранятся.')) {
+            cancel();
+        }
+    });
 </script>
 
 <div class='form-container' transition:fade={{delay: 20, duration: 180}}>
     <section class="form-section">
         <h3 class="form-header">{scheme.title}</h3>
-        <form class="form-scheme" enctype="multipart/form-data">
+        <form class="form-scheme" enctype="multipart/form-data" on:input={() => dirty = true}>
 
             {#if top_fields}
             <fieldset class="label-group">
@@ -143,6 +158,7 @@
                 {#each wysiwyg as wysiwyg}
                 <label class="form-label" for="{wysiwyg.name}">{wysiwyg.label}</label>
                 <input type="hidden" name="{wysiwyg.name}" id="{wysiwyg.name}">
+                <span class="input-error-label"></span>
                 <TextEditor input="{wysiwyg_input}" />
                 {/each}
             {/if}
@@ -311,14 +327,15 @@
 
         &:not(:placeholder-shown) {
              outline: none;
-
-            &:not([type="file"]) ~ .input-error-label {
-                  display: none;
-            }
         }
     }
 
-    :global(.input-error + .input-error-label) {
+    .input-error-label {
+        display: none;
+    }
+
+    :global(.input-error + .input-error-label.input-error-label) {
+        display: block;
         color: #D97544;
         position: absolute;
         top: 102%;
@@ -378,6 +395,11 @@
 
         .file-fieldset {
             flex-wrap: nowrap;
+            align-items: baseline;
+        }
+
+        .form-item:has(.input-error) + .form-item {
+            margin-top: 15%;
         }
 
         .modal {
