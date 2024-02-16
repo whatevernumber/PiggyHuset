@@ -80,7 +80,7 @@
 
 </script>
 
-<div in:fly={{duration: 600, delay: 0, y: 1200}}>
+<div in:fly={admin ? {duration: 600, y: 1200} : {duration: 600, delay: 0, x: -800}}>
     <section id="catalog">
         <div class="section-wrapper">
 
