@@ -24,6 +24,12 @@
     export let success;
 
     let text = article.text || article.description;
+
+    // удаление тегов с картинками из карточки статьи
+    if (type === 'article') {
+        text = text.replaceAll(/<img src="\S+" alt="">/g, '');
+    }
+
     // подрезка текста до 300 символов, если текст длиннее заданного лимита
     text = text.length > 300 ? text.slice(0, 297) + '...' : text;
 
@@ -69,12 +75,16 @@
     }
 
     // подстановка [обрезанной] разметки из Quill в текст карточки
-    onMount(() => innerHtml !== undefined ? card.innerHTML = innerHtml : null);
+    onMount(() => {
+        if (type === 'article') {
+            innerHtml !== undefined ? card.innerHTML = innerHtml : null;
+        }
+    });
 </script>
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article id="{article.id}">
+<article>
     <a {href}>
         <PhotoCard pic={image} {type} width='250' height='250' alt='Фотография свинки' />
     </a>
