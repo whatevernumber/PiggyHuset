@@ -5,8 +5,9 @@
     import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import {onMount} from "svelte";
-    import {slide} from "svelte/transition";
-    import {beforeNavigate, disableScrollHandling} from "$app/navigation";
+    import {fly} from "svelte/transition";
+    import {afterNavigate, beforeNavigate} from "$app/navigation";
+    import {page} from "$app/stores";
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -64,8 +65,12 @@
         })
     )
 
-    // отмена поведения с прокруткой вверх списка при переходе на карточку
-    beforeNavigate(() => disableScrollHandling());
+    beforeNavigate(() => {
+        sessionStorage.setItem('referrer', $page.url.href);
+    })
+
+    afterNavigate(() => sessionStorage.removeItem('referrer'));
+
 
     // реактивное обновление списка
     $: data_array = new_batch ? [
@@ -75,8 +80,8 @@
 
 </script>
 
-<div>
-    <section id="catalog" transition:slide|global={{duration: 600, delay: 0, x: -200}}>
+<div in:fly={{duration: 600, delay: 0, y: 1200}}>
+    <section id="catalog">
         <div class="section-wrapper">
 
             <BigHeader text_content="{page_title}" position="left"/>
