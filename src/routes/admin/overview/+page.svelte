@@ -4,9 +4,11 @@
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
     import Overlay from '$lib/components/misc/overlay/Overlay.svelte'
     import { _ADMIN_FLAG } from '$env/static/public';
-    import { goto } from '$app/navigation';
+    import {afterNavigate, beforeNavigate, goto} from '$app/navigation';
     import { onMount } from 'svelte';
     import {fly} from "svelte/transition";
+    import {page} from "$app/stores";
+    import {browser} from "$app/environment";
 
     export let data;
 
@@ -25,6 +27,10 @@
     let header = 'свинок';
     let type = 'pig';
     $: array = data[tab];
+
+    if (browser && sessionStorage.getItem('tab')) {
+        tab = sessionStorage['tab'];
+    }
 
     let modal_opened = false; // Флаг для показа оверлея;
 
@@ -53,6 +59,7 @@
         }
     };
 
+    beforeNavigate(() => sessionStorage.setItem('tab', tab));
 </script>
 
 <svelte:head>

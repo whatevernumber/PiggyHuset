@@ -26,7 +26,7 @@
     afterUpdate(() => admin = Boolean(localStorage.getItem(_ADMIN_FLAG)));
 </script>
 
-<header>
+<header on:click={() => sessionStorage.removeItem('tab')}>
     {#if admin}
         <a href="/">
             <div class="logo-wrapper" class:hide-logo={current === '/'}>
