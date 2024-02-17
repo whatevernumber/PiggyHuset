@@ -84,7 +84,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article>
+<article data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     <a {href}>
         <PhotoCard pic={image} {type} width='250' height='250' alt='Фотография свинки' />
     </a>
@@ -95,7 +95,7 @@
             </a>
         {#if admin}
             <div class='button_wrapper'>
-                <EditButton button_name='edit'  click_handler={redirect_to_edit}/>
+                <EditButton button_name='edit' click_handler={redirect_to_edit}/>
                 {#if !(/looking-for-home|graduates/.test(category))}
                 <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
                 {/if}
