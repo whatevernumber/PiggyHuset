@@ -7,8 +7,6 @@
     import {afterNavigate, beforeNavigate, goto} from '$app/navigation';
     import { onMount } from 'svelte';
     import {fly} from "svelte/transition";
-    import {page} from "$app/stores";
-    import {browser} from "$app/environment";
 
     export let data;
 
@@ -27,10 +25,6 @@
     let header = 'свинок';
     let type = 'pig';
     $: array = data[tab];
-
-    if (browser && sessionStorage.getItem('tab')) {
-        tab = sessionStorage['tab'];
-    }
 
     let modal_opened = false; // Флаг для показа оверлея;
 
@@ -60,6 +54,11 @@
     };
 
     beforeNavigate(() => sessionStorage.setItem('tab', tab));
+    afterNavigate(() => {
+        if (sessionStorage['tab']) {
+            switchTabs(sessionStorage['tab']);
+        }
+    });
 </script>
 
 <svelte:head>
