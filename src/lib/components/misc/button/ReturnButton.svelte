@@ -18,8 +18,10 @@
         const sub = href.slice(0, href.lastIndexOf('/'));
         const referrer = sessionStorage.getItem('referrer');
 
-        if (referrer && (referrer === sub || referrer.includes('admin'))) {
+        if (referrer && (referrer === sub || referrer.includes('overview'))) {
             history.go(-1);
+        } else if (referrer.includes('edit')) {
+            goto('/admin/overview');
         } else {
             goto(sub);
         }

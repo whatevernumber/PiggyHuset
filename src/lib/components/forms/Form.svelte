@@ -11,6 +11,7 @@
     import {onMount} from "svelte";
     import {fade} from "svelte/transition";
     import {beforeNavigate} from "$app/navigation";
+    import {page} from "$app/stores";
 
 	export let scheme = {};
 	export let redirect_location;
@@ -67,6 +68,7 @@
             if(success.id) {
                 show_modal();
                 dirty = false;
+                sessionStorage.setItem('referrer', $page.url.href);
             }
 
         } else {
