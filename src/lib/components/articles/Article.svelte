@@ -44,7 +44,7 @@
     }
 
     .article_wrapper {
-        max-width: 50vw;
+        max-width: 40vw;
         margin: 54px auto;
         position: relative;
     }
