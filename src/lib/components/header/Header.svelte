@@ -1,8 +1,7 @@
 <script>
     import {_REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG} from "$env/static/public";
-    import {goto} from "$app/navigation";
     import {include_auth} from "$lib/components/utils/func.js";
-    import {afterUpdate} from "svelte";
+    import {onMount} from "svelte";
 
     export let current = '/main';
     export let admin = false;
@@ -23,7 +22,22 @@
         }
     };
 
-    afterUpdate(() => admin = Boolean(localStorage.getItem(_ADMIN_FLAG)));
+    // проверка логина при первом визите
+    onMount(async () => {
+        admin = Boolean(localStorage.getItem(_ADMIN_FLAG));
+        if (admin) {
+            let check = await fetch(`${_REMOTE_SERVER}/admin`, {
+                method: 'HEAD',
+                headers: {
+                    'Authorization': include_auth(_REST_STORAGE_KEY) || null
+                }
+            });
+
+            if (!check.ok) {
+                localStorage.clear();
+            }
+        }
+    });
 </script>
 
 <header on:click={() => sessionStorage.removeItem('tab')}>
@@ -92,7 +106,7 @@
         background-size: cover;
         position: absolute;
         left: -12px;
-        z-index: 5;
+        z-index: 1;
     }
 
     .logo-wrapper.hide-logo::before {
