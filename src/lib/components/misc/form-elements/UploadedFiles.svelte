@@ -18,12 +18,10 @@
 
 <style>
     .uploaded_files {
-        padding-bottom: 10px;
-        padding-left: 20px;
-        padding-right: 10px;
+		max-width: 100%;
+        padding: 15px;
         margin: 5px auto 10px;
         background-color: #FFFFFF;
-        max-width: 650px;
     }
 
     .uploaded_header {

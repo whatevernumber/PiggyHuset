@@ -7,7 +7,7 @@
 	export let is_editing;
 	export let endpoint = '/articles/type/2';
 
-	let modal_message = 'Пост опубликован.';
+	let modal_message = 'Пост опубликован';
 
     const scheme = {
         title: title || 'Новая публикация',
@@ -34,4 +34,6 @@
     }
 </script>
 
-<Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="articles" />
+<Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="articles">
+    <slot />
+</Form>

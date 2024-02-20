@@ -7,7 +7,6 @@
 
 	export let data;
 
-
 	let pig = data.pig;
 	let title = `Профиль ${pig.name}`
 	let method = 'PATCH';
@@ -51,8 +50,8 @@
 	<title>{title}</title>
 </svelte:head>
 
-<AddPigForm {title} {method} {endpoint} {old_photos} is_editing />
-
+<AddPigForm {title} {method} {endpoint} {old_photos} is_editing>
 {#if photos.length}
 	<UploadedFiles handler={delete_handler} {photos} />
 {/if}
+</AddPigForm>
