@@ -40,7 +40,6 @@
     }
 
     const redirect_after_delete = (evt) => {
-        console.log(action);
         modal_opened = false;
         closeModal(evt);
         goto('/admin/overview');
