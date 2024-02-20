@@ -10,7 +10,7 @@
 	}
 </script>
 
-<div class='emoji_button'></div>
+<div class='emoji_button' on:click={function () {this.classList.toggle('active')}}></div>
 <div class='emoji_wrapper'>
 	<emoji-picker on:emoji-click={pick}
 				  i18n={ru}
@@ -20,12 +20,17 @@
 
 <style>
     .emoji_wrapper {
+		max-height: 300px;
         position: absolute;
-        right: 12px;
-        z-index: -4;
-        top: 185px;
-        opacity: 0;
+        top: 100%;
+		right: 4%;
+		z-index: -4;
+		opacity: 0;
         transition: top 0.2s, opacity 0.3s, z-index 0.3s;
+
+		@media(min-width: 1001px) {
+			right: 0;
+		}
     }
 
     .emoji_button {
@@ -49,10 +54,11 @@
         background-color: #EF8653;
     }
 
-    .emoji_button:hover + .emoji_wrapper {
+    .emoji_button:hover + .emoji_wrapper,
+	:global(.emoji_button.active + .emoji_wrapper) {
         opacity: 1;
         z-index: 10;
-        top: 70%;
+        top: 100%;
     }
 
 	.emoji_wrapper:hover {
@@ -60,10 +66,20 @@
         z-index: 10;
 	}
 
-	@media (max-width: 1025px) or (max-height: 1025px) {
-		emoji-picker {
+	@media (max-width: 400px) {
+		.emoji_wrapper {
 			max-width: 300px;
-			max-height: 300px;
 		}
+	}
+
+	@media (max-width: 350px) {
+		.emoji_wrapper {
+			transform: scale(0.8) translate(10%, -10%)
+		}
+	}
+
+	emoji-picker {
+		max-width: inherit;
+		max-height: inherit;
 	}
 </style>

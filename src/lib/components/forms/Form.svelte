@@ -5,12 +5,12 @@
 	import {_REMOTE_SERVER, _REST_STORAGE_KEY} from "$env/static/public";
     import {include_auth, redirect} from "$lib/components/utils/func.js";
 	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
-    import { createEventDispatcher } from 'svelte';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import TextEditor from "$lib/components/misc/form-elements/TextEditor.svelte";
     import {onMount} from "svelte";
     import {fade} from "svelte/transition";
     import {beforeNavigate} from "$app/navigation";
+    import {page} from "$app/stores";
 
 	export let scheme = {};
 	export let redirect_location;
@@ -67,6 +67,7 @@
             if(success.id) {
                 show_modal();
                 dirty = false;
+                sessionStorage.setItem('referrer', $page.url.href);
             }
 
         } else {
@@ -199,6 +200,7 @@
             {/if}
         </form>
     </section>
+    <slot />
 </div>
 
 <div class='modal modal_closed'>
@@ -211,6 +213,8 @@
         min-height: 100%;
         margin: auto;
         display: flex;
+        flex-direction: column;
+        row-gap: 10px;
         justify-content: center;
         align-items: center;
         padding: 5%;

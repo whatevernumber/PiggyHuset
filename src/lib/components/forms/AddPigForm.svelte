@@ -43,4 +43,6 @@
 	};
 </script>
 
-<Form {scheme} {modal_message} {modal} {redirect_location} {method} {is_editing} {old_photos} />
+<Form {scheme} {modal_message} {modal} {redirect_location} {method} {is_editing} {old_photos}>
+    <slot/>
+</Form>

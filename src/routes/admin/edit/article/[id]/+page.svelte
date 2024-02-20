@@ -66,8 +66,9 @@
 {#if type === 1}
 <NewArticleForm {title} {method} {endpoint} {old_photos} is_editing />
 {:else}
-<NewPostForm {title} {method} {endpoint} {old_photos} is_editing />
+<NewPostForm {title} {method} {endpoint} {old_photos} is_editing>
 	{#if photos.length}
 		<UploadedFiles handler={delete_handler} {photos} />
 	{/if}
+</NewPostForm>
 {/if}

@@ -18,19 +18,25 @@
             ];
 
             lists.forEach((l) => {
-                l.childNodes.forEach(li => {
+                [...l.childNodes].every(li => {
                     const offset = window.scrollY + li.getBoundingClientRect().top;
                     if ((offset > 2000 && offset < 2170) || offset < 380) {
                         li.classList.add('float-right');
+                        return true;
+                    } else {
+                        return false;
                     }
                 })
             });
 
             const paragraphs = article.querySelectorAll('p');
-            paragraphs.forEach((p) => {
+            [...paragraphs].every((p) => {
                 const offset = window.scrollY + p.getBoundingClientRect().top;
                 if ((offset > 2000 && offset < 2170) || offset < 380) {
                     p.classList.add('float-right');
+                    return true;
+                } else {
+                    return false;
                 }
             });
         }
