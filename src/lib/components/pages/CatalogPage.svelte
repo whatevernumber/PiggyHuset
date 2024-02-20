@@ -6,7 +6,7 @@
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import {onMount} from "svelte";
     import {fly} from "svelte/transition";
-    import {afterNavigate, beforeNavigate} from "$app/navigation";
+    import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
     import {page} from "$app/stores";
 
     export let admin;
@@ -39,16 +39,20 @@
         modal_opened = false;
     }
 
+    const redirect_after_delete = (evt) => {
+        console.log(action);
+        modal_opened = false;
+        closeModal(evt);
+        goto('/admin/overview');
+    }
+
     async function remove () {
         let message = document.querySelector('.message');
         message.textContent = 'Идёт удаление, подождите...';
 
         success = removeData(category, action_id);
         if (success) {
-            action = 'complete';
-            const index = data_array.findIndex(a => a.id === action_id);
-            data_array.splice(index, 1);
-            data_array = data_array;
+            action = 'card_delete';
             message.textContent = 'Удаление успешно!';
         } else {
             action = 'fail';
@@ -98,7 +102,7 @@
 </div>
 
 <div class='modal modal_closed'>
-    <ModalOkay {action} {success} {handle_cancel} action_handler={remove} bind:modal_opened={modal_opened}/>
+    <ModalOkay {action} {success} {handle_cancel} action_handler={remove} bind:modal_opened={modal_opened} redirect={redirect_after_delete}/>
 </div>
 
 <style>
