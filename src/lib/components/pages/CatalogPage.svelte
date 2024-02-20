@@ -35,13 +35,12 @@
     // Обработка действия кнопки "отменить" при удалении
     const handle_cancel = (evt) => {
         closeModal(evt);
-
         modal_opened = false;
     }
 
     const redirect_after_delete = (evt) => {
-        modal_opened = false;
         closeModal(evt);
+        modal_opened = false;
         goto('/admin/overview');
     }
 
