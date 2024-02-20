@@ -2,6 +2,7 @@
 	import ButtonWithIcons from '$lib/components/misc/button/ButtonWithIcons.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import { closeModal } from '$lib/components/utils/func.js';
+	import { goto } from '$app/navigation';
 
 	export let desc = '';
 	export let success;
@@ -21,14 +22,12 @@
 		color = "#F6B5D3";
 	}
 	const reload = (evt) => {
-
 		modal_opened = false;
 		closeModal(evt);
 		action = 'delete';
 	}
 
-	const update = (evt) => {
-
+	const close = (evt) => {
 		modal_opened = false;
 		closeModal(evt);
 	}
@@ -44,7 +43,7 @@
 				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle_cancel} />
 			</div>
 		{:else if (action === 'complete') }
-			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={update} />
+			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={close} />
 		{:else if (action === 'card_delete') }
 			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={redirect} />
 		{:else if action === 'fail' }
