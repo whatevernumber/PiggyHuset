@@ -1,7 +1,7 @@
 <script>
     import {_REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG} from "$env/static/public";
     import {include_auth} from "$lib/components/utils/func.js";
-    import {onMount} from "svelte";
+    import {afterUpdate, onMount} from "svelte";
 
     export let current = '/main';
     export let admin = false;
@@ -22,10 +22,11 @@
         }
     };
 
+    afterUpdate(() => admin = Boolean(localStorage.getItem(_ADMIN_FLAG)));
+
     // проверка логина при первом визите
     onMount(async () => {
-        admin = Boolean(localStorage.getItem(_ADMIN_FLAG));
-        if (admin) {
+        if (localStorage.getItem(_ADMIN_FLAG)) {
             let check = await fetch(`${_REMOTE_SERVER}/admin`, {
                 method: 'HEAD',
                 headers: {
