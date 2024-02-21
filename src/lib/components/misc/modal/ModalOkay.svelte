@@ -42,9 +42,9 @@
 				<SmolButton class_name="smol-red" title='Удалить' click_handler={action_handler} />
 				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle_cancel} />
 			</div>
-		{:else if (action === 'complete') }
+		{:else if action === 'complete' }
 			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={close} />
-		{:else if (action === 'card_delete') }
+		{:else if action === 'card_delete' }
 			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={redirect} />
 		{:else if action === 'fail' }
 			<ButtonWithIcons class_name="close-button modal_button" title='Понятно' onclick={reload} />

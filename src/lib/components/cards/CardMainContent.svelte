@@ -29,7 +29,6 @@
 
 		if (res.ok) {
 			let result = await res.json();
-
 			if (result) {
 				redirect(`/graduates/${id}`, 100)
 			}

@@ -38,19 +38,14 @@
         modal_opened = false;
     }
 
-    const redirect_after_delete = (evt) => {
-        closeModal(evt);
-        modal_opened = false;
-        goto('/admin/overview');
-    }
-
     async function remove () {
         let message = document.querySelector('.message');
         message.textContent = 'Идёт удаление, подождите...';
 
         success = removeData(category, action_id);
         if (success) {
-            action = 'card_delete';
+            action = 'complete';
+            data_array = data_array.filter(i => i.id !== action_id);
             message.textContent = 'Удаление успешно!';
         } else {
             action = 'fail';
@@ -89,7 +84,7 @@
             <BigHeader text_content="{page_title}" position="left"/>
 
             <CardList>
-                {#each data_array as article}
+                {#each data_array as article (article.id)}
                     <li>
                         <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id}/>
                     </li>
@@ -100,7 +95,7 @@
 </div>
 
 <div class='modal modal_closed'>
-    <ModalOkay {action} {success} {handle_cancel} action_handler={remove} bind:modal_opened={modal_opened} redirect={redirect_after_delete}/>
+    <ModalOkay {action} {success} {handle_cancel} action_handler={remove} bind:modal_opened={modal_opened} />
 </div>
 
 <style>
