@@ -17,7 +17,6 @@
 	let graduated = pig.graduated;
 	let text = pig.description;
 	let date = pig.datetime;
-
 	let admin = false;
 
 	onMount(() => {

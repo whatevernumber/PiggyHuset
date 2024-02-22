@@ -5,7 +5,6 @@
     export let href = null;
     export let is_light = false;
     export let onclick;
-
     export let class_name = '';
 </script>
 
@@ -68,5 +67,4 @@
         color: var(--background_color);
         background-color: var(--text-color);
     }
-
 </style>

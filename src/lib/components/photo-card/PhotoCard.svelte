@@ -15,7 +15,6 @@
         pic = pic;
         click_handler(pic);
     }
-
 </script>
 
 <div class="wrapper" aria-roledescription="Посмотреть фото">
@@ -62,5 +61,4 @@
         background-size: contain;
         background-repeat: no-repeat;
     }
-
 </style>

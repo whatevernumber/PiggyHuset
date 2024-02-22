@@ -2,11 +2,9 @@
 	import ButtonWithIcons from '$lib/components/misc/button/ButtonWithIcons.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import { closeModal } from '$lib/components/utils/func.js';
-	import { goto } from '$app/navigation';
 
 	export let desc = '';
 	export let success;
-
 	export let action;
 	export let action_handler;
 	export let redirect;

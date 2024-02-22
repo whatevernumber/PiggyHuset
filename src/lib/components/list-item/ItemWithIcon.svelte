@@ -15,11 +15,9 @@
 </a>
 
 <style>
-
-.option-item-link {
-    display: flex;
-    column-gap: 15px;
-    font-size: 24px;
-}
-
+	.option-item-link {
+		display: flex;
+		column-gap: 15px;
+		font-size: 24px;
+	}
 </style>

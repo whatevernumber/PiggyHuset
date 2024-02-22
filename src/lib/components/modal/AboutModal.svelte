@@ -1,8 +1,6 @@
 <script>
-
-import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte";
-import {closeModal} from "$lib/components/utils/func.js";
-
+    import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte";
+    import {closeModal} from "$lib/components/utils/func.js";
 </script>
 
 <section class="about_modal modal modal_closed">
@@ -26,7 +24,7 @@ import {closeModal} from "$lib/components/utils/func.js";
             <p class="modal_text">
                 Основной центр <span class="house_name">"ДОМИКА"</span> – в Москве, филиалы – Санкт-Петербург и Сочи.
             </p>
-            <p class="about_text">В разделе <a href="/articles"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
+            <p class="about_text">В разделе <a class='articles-link' href="/articles"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
         </div>
         <ButtonWithIcons title="Написать нам" background_color="#E1EDCE" text_color="#333333" isModal href="https://vk.com/im?sel=-127412463"/>
         <button class="close-button" on:click={closeModal} aria-roledescription="Закрыть окно с информацией">
@@ -110,6 +108,10 @@ import {closeModal} from "$lib/components/utils/func.js";
         transition: 0.5s;
     }
 
+    .articles-link {
+        color: #EF8653;
+    }
+
     @media (max-width: 1001px) {
         .about_modal {
             width: 80vw;
@@ -133,5 +135,4 @@ import {closeModal} from "$lib/components/utils/func.js";
             right: -3%;
         }
     }
-
 </style>

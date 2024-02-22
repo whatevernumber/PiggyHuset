@@ -202,5 +202,4 @@
             text-align: right;
         }
     }
-
 </style>

@@ -22,7 +22,6 @@
 	let success;
     let wysiwyg_input;
     let dirty = false;
-
     let image_upload_preview = [];
     let errors = {};
 
