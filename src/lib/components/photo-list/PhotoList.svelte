@@ -12,11 +12,10 @@
 	export let linked = false;
 	export let photos;
 	export let local = false;
+	export let no_border = false;
 
 	let temp_address = local ? '/img/' : _REMOTE_SERVER + '/img/';
 	let window_width = 0;
-
-	export let no_border = false;
 
 	let splide = Splide;
 	let slider = SplideSlide;

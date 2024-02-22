@@ -40,5 +40,4 @@
 		text-align: center;
 		vertical-align: baseline;
 	}
-
 </style>

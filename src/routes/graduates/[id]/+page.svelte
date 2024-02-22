@@ -2,15 +2,13 @@
 	import Article from '$lib/components/articles/Article.svelte';
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
-	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
-	import { removeData, redirect } from '$lib/components/utils/func.js';
+	import { redirect } from '$lib/components/utils/func.js';
 	import { _ADMIN_FLAG } from '$env/static/public';
 	import { onMount } from 'svelte';
 
 	export let data;
 
 	const type = 'ready';
-
 	const pig = data.pig;
 	const pic = pig.main_photo;
 	const header = pig.name + ' в Домике';
@@ -20,7 +18,6 @@
 	const date = pig.datetime;
 
 	let action;
-	let success = false;
 	let admin = false;
 
 	onMount(() => {

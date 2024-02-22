@@ -18,16 +18,15 @@
 	const text = article.text;
 	const author = article.author;
 
+	let window_width;
 	let action;
 	let success = false;
-	let admin = false;
 	let modal_opened = false;
-	let window_width;
+	let admin = false;
 
 	onMount(() => {
 		admin = localStorage.getItem(_ADMIN_FLAG);
 	})
-
 
 	const show_delete = (evt) => {
 		action = 'delete';
@@ -69,7 +68,6 @@
 			message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
 		}
 	}
-
 </script>
 
 <svelte:head>

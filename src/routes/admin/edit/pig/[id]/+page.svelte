@@ -34,16 +34,13 @@
 		pig_description.value = pig.description;
 	});
 
-
 	const delete_handler = (image) => {
-
 		photos = photos.filter(
 			(element) => {
 				return element !== image
 			}
 		)
 	}
-
 </script>
 
 <svelte:head>

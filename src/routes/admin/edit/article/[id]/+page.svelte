@@ -20,7 +20,6 @@
 
 	onMount(() =>
 	{
-
 		let article_title = document.querySelector("[name = 'title']");
 		let article_text = document.querySelector("[name = 'text']");
 
@@ -56,7 +55,6 @@
 			}
 		)
 	}
-
 </script>
 
 <svelte:head>
@@ -68,7 +66,7 @@
 {:else}
 <NewPostForm {title} {method} {endpoint} {old_photos} is_editing>
 	{#if photos.length}
-		<UploadedFiles handler={delete_handler} {photos} />
+	<UploadedFiles handler={delete_handler} {photos} />
 	{/if}
 </NewPostForm>
 {/if}

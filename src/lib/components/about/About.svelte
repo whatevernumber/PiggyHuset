@@ -1,7 +1,7 @@
 <script>
     import Button from "$lib/components/misc/button/Button.svelte";
     import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
-    import {showModal, closeModal} from "$lib/components/utils/func.js";
+    import {showModal} from "$lib/components/utils/func.js";
 
     export let modal_opened;
 
@@ -10,7 +10,6 @@
         showModal(evt, 'about_modal');
         evt.target.removeEventListener('click', handle);
         modal_opened = true;
-
         document.addEventListener('click', hide_overlay);
     }
 

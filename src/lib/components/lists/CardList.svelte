@@ -14,5 +14,4 @@
         flex-direction: column;
         row-gap: 25px;
     }
-
 </style>

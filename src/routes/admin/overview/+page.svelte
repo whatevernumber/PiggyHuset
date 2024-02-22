@@ -140,36 +140,10 @@
             row-gap: 10px;
         }
 
-        /*.burger ~ .nav-list {*/
-        /*    display: none;*/
-        /*}*/
-
         .button_wrapper {
             position: static;
             right: 0;
             text-align: right;
         }
-
-        .burger {
-            padding: 0 5px;
-            min-width: 40px;
-            height: 30px;
-            border: 1px solid #EF8653;
-            margin: 0;
-            font-size: 14px;
-            text-align: center;
-            text-transform: uppercase;
-            background-color: #D97544;
-            color: #FFFFFF;
-            transition: all 1s
-        }
-
-        /*.burger:active ~ .nav-list,*/
-        /*.burger:focus ~ .nav-list {*/
-        /*    display: flex;*/
-        /*    top: 30px;*/
-        /*    margin-bottom: 50px;*/
-        /*}*/
-
     }
 </style>

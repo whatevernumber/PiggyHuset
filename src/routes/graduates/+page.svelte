@@ -4,7 +4,6 @@
 	export let data;
 
 	const graduates = data.graduates;
-
 </script>
 
 <svelte:head>
