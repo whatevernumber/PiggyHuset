@@ -126,12 +126,6 @@
 		display: flex;
 	}
 
-	#thumb-splide {
-		@media(max-width: 1001px) {
-			display: none;
-		}
-	}
-
 	#thumb-splide::before,
 	#thumb-splide::after {
 		width: 10%;
@@ -193,6 +187,12 @@
 		object-fit: cover;
 		object-position: left;
 	}
+
+    @media(max-width: 1001px) {
+        #thumb-splide {
+            display: none;
+        }
+    }
 
 	/* Quill related styles */
 
