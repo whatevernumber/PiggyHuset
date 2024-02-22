@@ -1,19 +1,23 @@
 <script context="module">
-	import { dayjs } from "svelte-time"
+	import { dayjs } from "svelte-time";
 	import "dayjs/locale/ru";
-	dayjs.locale('ru')
-	import {fly} from "svelte/transition";
+	dayjs.locale('ru');
+	import {fly, blur} from "svelte/transition";
 </script>
 
 <script>
 	import Time from "svelte-time";
+	import {browser} from "$app/environment";
 	export let date;
 	export let class_name = '';
 	export let date_description = 'Опубликовано';
+
+	let transition = browser && innerWidth > 1000 ? fly : blur;
 </script>
 
+
 <div class="article_wrapper">
-	<article class="article {class_name}" in:fly={{x: 400, duration: 600, delay: 0}}>
+	<article class="article {class_name}" in:transition={{x: '200vw', y: 0, duration: 400, delay: 0, amount: 3}}>
 		<slot />
 		<div class="date">
 			<p class="date-description">
