@@ -21,7 +21,18 @@
     export let delete_handler;
     export let id;
     export let action;
-    export let success;
+    let status; // для отображения иконки статуса выпусника.
+
+    if (type === 'ready') {
+        switch (article.status_id) {
+            case 3:
+                status = 'rainbow';
+                break;
+            case 4:
+                status = 'taken';
+                break;
+        }
+    }
 
     let text = article.text || article.description;
 
@@ -86,7 +97,7 @@
 
 <article data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     <a {href}>
-        <PhotoCard pic={image} {type} width='250' height='250' alt='Фотография свинки' />
+        <PhotoCard pic={image} {type} {status} width='250' height='250' alt='Фотография свинки' />
     </a>
     <div class="wrapper">
         <div class='header_wrapper'>

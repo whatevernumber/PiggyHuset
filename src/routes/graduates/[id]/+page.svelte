@@ -11,11 +11,32 @@
 	const type = 'ready';
 	const pig = data.pig;
 	const pic = pig.main_photo;
-	const header = pig.name + ' в Домике';
 	const age = pig.age;
-	const graduated = pig.graduated;
+	const graduated = pig.status_id;
+	const taken = pig.taken;
+	const rainbow = pig.rainbow;
 	const text = pig.description;
 	const date = pig.datetime;
+
+	let header = pig.name;
+	let status; // для отображения картинки статуса выпусника;
+
+	switch (graduated) {
+		case 2:
+			header += ' в новом доме';
+			break;
+		case 3:
+			header += '  на радуге';
+			status = 'rainbow';
+			break;
+		case 4:
+			header += ' — зажаблено!';
+			status = 'taken';
+			break;
+
+		default :
+			header;
+	}
 
 	let action;
 	let admin = false;
@@ -35,7 +56,7 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {text} {graduated} {pic} {header} {age} {type} {redirect_to_edit} {admin} />
+	<PigProfile {text} {graduated} {status} {taken} {rainbow} {pic} {header} {age} {type} {redirect_to_edit} {admin} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />

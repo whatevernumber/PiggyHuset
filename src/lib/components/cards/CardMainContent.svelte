@@ -6,6 +6,7 @@
 
 	export let header;
 	export let text;
+	export let graduated;
 	export let age;
 	export let author;
 	export let admin;
@@ -13,8 +14,18 @@
 	export let is_article;
 	export let type;
 
-	async function graduatePig () {
-		const res = await fetch(_REMOTE_SERVER + '/pigs/graduate/' + id, {
+	const click_handler = (evt) => {
+		showModal(evt);
+		evt.target.removeEventListener('click', click_handler);
+	}
+
+	const graduate_handler = (evt) => {
+		let value = evt.target.value;
+		graduatePig(value);
+	}
+
+	async function graduatePig (value) {
+		const res = await fetch(_REMOTE_SERVER + '/pigs/graduate/' + id + '/' + value, {
 			method: 'PATCH',
 			headers: {
 				'Authorization': include_auth(_REST_STORAGE_KEY)
@@ -28,15 +39,28 @@
 			}
 		}
 	}
+
 </script>
 
 <div class="profile_description">
 	<ArticleHeader text={header} {type} />
-	{#if (admin && !is_article)}
-	<div class='checkbox'>
-		<label class='graduated_checkbox'>
-			<input type='checkbox' name='graduated' on:click={graduatePig}>
-			<span class='checkbox_message'>Дом найден?</span>
+	{#if graduated === 2}
+	<div class='graduated_image'>
+		<img class="graduated-icon" src="/img/found-home.png" width="50px" height="50px" alt="Морская свинка в домике">
+	</div>
+	{:else if (admin && !is_article && graduated === 1)}
+	<div class='radio_group'>
+		<label class='graduated_radio'>
+			<input type='radio' name='graduated' value='graduated' on:click={graduate_handler}>
+			<span class='radio_value'>Дом найден?</span>
+		</label>
+		<label class='graduated_radio'>
+			<input type='radio' name='graduated' value='rainbow' on:click={graduate_handler}>
+			<span class='radio_value'>На радуге</span>
+		</label>
+		<label class='graduated_radio'>
+			<input type='radio' name='graduated' value='taken' on:click={graduate_handler}>
+			<span class='radio_value'>Зажаблено</span>
 		</label>
 	</div>
 	{/if}
@@ -57,24 +81,22 @@
         row-gap: 50px;
     }
 
-	.overseer {
-		font-size: 14px;
-		font-style: italic;
-		align-self: flex-end;
+	.graduated_image {
+		justify-self: flex-start;
 	}
 
-	.graduated_checkbox {
+	.graduated_radio {
 		position: relative;
 		margin-left: 10px;
 		padding-left: 25px;
         cursor: pointer;
 	}
 
-	.graduated_checkbox input[type='checkbox'] {
+	.graduated_radio input[type='radio'] {
         display: none;
 	}
 
-    .graduated_checkbox span::before {
+    .graduated_radio span::before {
         content: '';
 		position: absolute;
         display: inline-block;
@@ -87,11 +109,11 @@
 		cursor: pointer;
     }
 
-    .graduated_checkbox:hover span::before {
+    .graduated_radio:hover span::before {
         border: 2px solid #d97544;
     }
 
-    .graduated_checkbox span::after {
+    .graduated_radio span::after {
         content: '';
 		position: absolute;
         display: none;
@@ -104,14 +126,20 @@
         left: -2px;
     }
 
-    .graduated_checkbox input[type='checkbox']:checked + span::after {
+    .graduated_radio input[type='radio']:checked + span::after {
         display: block;
     }
 
-	.checkbox_message {
+	.radio_value {
 		color: #EF8653;
 		font-size: 18px;
 		font-weight: bold;
+	}
+
+	.radio_group {
+		display: flex;
+		flex-direction: column;
+		row-gap: 15px;
 	}
 
     @media (max-width: 1000px) {
