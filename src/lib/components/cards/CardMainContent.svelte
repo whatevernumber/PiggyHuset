@@ -6,18 +6,12 @@
 
 	export let header;
 	export let text;
-	export let graduated;
 	export let age;
 	export let author;
 	export let admin;
 	export let id;
 	export let is_article;
 	export let type;
-
-	const click_handler = (evt) => {
-		showModal(evt);
-		evt.target.removeEventListener('click', click_handler);
-	}
 
 	async function graduatePig () {
 		const res = await fetch(_REMOTE_SERVER + '/pigs/graduate/' + id, {
@@ -34,16 +28,11 @@
 			}
 		}
 	}
-
 </script>
 
 <div class="profile_description">
 	<ArticleHeader text={header} {type} />
-	{#if graduated}
-	<div class='graduated_image'>
-		<img class="graduated-icon" src="/img/found-home.png" width="50px" height="50px" alt="Морская свинка в домике">
-	</div>
-	{:else if (admin && !is_article)}
+	{#if (admin && !is_article)}
 	<div class='checkbox'>
 		<label class='graduated_checkbox'>
 			<input type='checkbox' name='graduated' on:click={graduatePig}>
@@ -68,11 +57,7 @@
         row-gap: 50px;
     }
 
-	.graduated_image {
-		justify-self: flex-start;
-	}
-
-	.volunteer {
+	.overseer {
 		font-size: 14px;
 		font-style: italic;
 		align-self: flex-end;
