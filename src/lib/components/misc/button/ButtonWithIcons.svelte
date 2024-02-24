@@ -124,6 +124,6 @@
 
     .image_right {
         top: -17.5px;
-        right: 1px;
+        right: 2px;
     }
 </style>

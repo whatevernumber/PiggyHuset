@@ -14,22 +14,24 @@
 		closeModal(evt);
 	};
 
-	let color = '#E1EDCE';
+	$: color = success ? '#E1EDCE' : '#F6B5D3';
 
-	if (!success) {
-		color = "#F6B5D3";
-	}
-	const reload = (evt) => {
+	const reload_after_delete = (evt) => {
 		modal_opened = false;
 		closeModal(evt);
 		action = 'delete';
+	}
+
+	const reload_after_status_change = (evt) => {
+		modal_opened = false;
+		closeModal(evt);
+		action = 'change';
 	}
 
 	const close = (evt) => {
 		modal_opened = false;
 		closeModal(evt);
 	}
-
 </script>
 
 <div class="modal modal_wrapper">
@@ -40,12 +42,19 @@
 				<SmolButton class_name="smol-red" title='Удалить' click_handler={action_handler} />
 				<SmolButton class_name="close-button" title='Не удалять' click_handler={handle_cancel} />
 			</div>
+		{:else if action === 'change' }
+			<div class='buttons'>
+				<SmolButton class_name="smol-red" title='Продолжить' click_handler={action_handler} />
+				<SmolButton class_name="close-button" title='Отменить' click_handler={handle_cancel} />
+			</div>
 		{:else if action === 'complete' }
 			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={close} />
 		{:else if action === 'card_delete' }
 			<ButtonWithIcons class_name="close-button modal_button" title='Хорошо' icon='success-pig.png' onclick={redirect} />
 		{:else if action === 'fail' }
-			<ButtonWithIcons class_name="close-button modal_button" title='Понятно' onclick={reload} />
+			<ButtonWithIcons class_name="close-button modal_button" title='Понятно' onclick={reload_after_delete} />
+		{:else if action === 'change_fail' }
+			<ButtonWithIcons class_name="close-button modal_button" title='Понятно' onclick={reload_after_status_change} />
 		{:else if action === 'sent'}
 			<ButtonWithIcons class_name="modal_button" title='Отлично' onclick={sent_handle} />
 		{/if}
