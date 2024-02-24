@@ -154,6 +154,10 @@ export const load_more = async function (data, category) {
     }
 }
 
+/**
+ * Обернуть HTML Node в указанный тег с возможностью задать класс обёртке
+ * @return {*}
+ */
 export const wrap_element = function (element, tag = 'div', class_name = '') {
     const wrap = document.createElement(tag);
     wrap.classList.add(class_name);
@@ -163,6 +167,11 @@ export const wrap_element = function (element, tag = 'div', class_name = '') {
     return wrap.appendChild(element);
 }
 
+/**
+ * Составить строку с токеном для включения в заголовок Authorization
+ * @param key
+ * @return {null|string}
+ */
 export const include_auth = function (key) {
     const auth = localStorage.getItem(key);
 
