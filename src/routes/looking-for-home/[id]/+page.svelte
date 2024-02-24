@@ -14,7 +14,7 @@
 	let pic = pig.main_photo;
 	let header = pig.name + ' в поисках дома';
 	let age = pig.age;
-	let graduated = pig.graduated;
+	let graduated = pig.status_id;
 	let text = pig.description;
 	let date = pig.datetime;
 	let admin = false;

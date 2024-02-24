@@ -8,11 +8,12 @@
 	export let show_delete;
 	export let redirect_to_edit;
 	export let removable;
+	export let status;
 
 </script>
 
 <div>
-	<PhotoCard width="240" height="244" {pic} {type} />
+	<PhotoCard width="240" height="244" {pic} {type} {status} />
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton title="Редактировать" click_handler={redirect_to_edit} />

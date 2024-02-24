@@ -5,6 +5,8 @@
 	export let header;
 	export let text;
 	export let graduated;
+	export let taken;
+	export let rainbow;
 	export let pic;
 	export let id;
 	export let age;
@@ -15,11 +17,12 @@
 	export let show_delete;
 	export let redirect_to_edit;
 	export let removable;
+	export let status;
 </script>
 
 <div class='profile_wrapper'>
-	<ProfilePhoto {type} {pic} {admin} {show_delete} {redirect_to_edit} {removable}/>
-	<CardMainContent {header} {text} {graduated} {article} {age} {volunteer} {id} {admin}/>
+	<ProfilePhoto {type} {pic} {status} {admin} {show_delete} {redirect_to_edit} {removable}/>
+	<CardMainContent {header} {text} {graduated} {taken} {rainbow} {article} {age} {volunteer} {id} {admin}/>
 </div>
 
 <style>
