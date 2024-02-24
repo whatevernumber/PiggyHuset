@@ -1,8 +1,8 @@
 <script>
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
-	import {showModal, redirect, include_auth} from "$lib/components/utils/func.js";
-	import { _REMOTE_SERVER, _REST_STORAGE_KEY } from '$env/static/public';
+	import {showModal} from "$lib/components/utils/func.js";
+	import { closeModal } from '../utils/func.js';
 
 	export let header;
 	export let text;
@@ -13,33 +13,16 @@
 	export let id;
 	export let is_article;
 	export let type;
+	export let modal_opened;
+	export let status_value;
 
 	const click_handler = (evt) => {
+		modal_opened = true;
 		showModal(evt);
-		evt.target.removeEventListener('click', click_handler);
+		document.querySelector('.message').innerHTML = `Вы собираетесь изменить статус свинки. Это действие <b>необратимо</b>`;
+		document.removeEventListener('click', closeModal);
+		status_value = evt.target.value;
 	}
-
-	const graduate_handler = (evt) => {
-		let value = evt.target.value;
-		graduatePig(value);
-	}
-
-	async function graduatePig (value) {
-		const res = await fetch(_REMOTE_SERVER + '/pigs/graduate/' + id + '/' + value, {
-			method: 'PATCH',
-			headers: {
-				'Authorization': include_auth(_REST_STORAGE_KEY)
-			}
-		});
-
-		if (res.ok) {
-			let result = await res.json();
-			if (result) {
-				redirect(`/graduates/${id}`, 100)
-			}
-		}
-	}
-
 </script>
 
 <div class="profile_description">
@@ -51,15 +34,15 @@
 	{:else if (admin && !is_article && graduated === 1)}
 	<div class='radio_group'>
 		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='graduated' on:click={graduate_handler}>
+			<input type='radio' name='graduated' value='graduated' on:click={click_handler}>
 			<span class='radio_value'>Дом найден?</span>
 		</label>
 		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='rainbow' on:click={graduate_handler}>
+			<input type='radio' name='graduated' value='rainbow' on:click={click_handler}>
 			<span class='radio_value'>На радуге</span>
 		</label>
 		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='taken' on:click={graduate_handler}>
+			<input type='radio' name='graduated' value='taken' on:click={click_handler}>
 			<span class='radio_value'>Зажаблено</span>
 		</label>
 	</div>

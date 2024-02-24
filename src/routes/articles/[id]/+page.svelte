@@ -132,13 +132,6 @@
 		}
 	}
 
-	.modal {
-		position: absolute;
-		top: 35%;
-		left: 30%;
-		z-index: 10;
-	}
-
     @media (max-width: 1001px) {
         .wrapper {
             flex-direction: column;
