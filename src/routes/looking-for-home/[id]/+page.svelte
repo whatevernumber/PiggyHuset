@@ -2,12 +2,11 @@
 	import Article from '$lib/components/articles/Article.svelte';
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
 	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
-	import { showModal, closeModal, redirect } from '$lib/components/utils/func.js';
+	import { showModal, closeModal, redirect, include_auth } from '$lib/components/utils/func.js';
 	import { _ADMIN_FLAG, _REMOTE_SERVER, _REST_STORAGE_KEY } from '$env/static/public';
-	import { onMount } from 'svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
-	import { include_auth } from '$lib/components/utils/func.js';
+	import { onMount } from 'svelte';
 
 	export let data;
 

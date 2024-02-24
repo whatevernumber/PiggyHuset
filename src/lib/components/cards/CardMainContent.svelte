@@ -1,8 +1,7 @@
 <script>
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
-	import {showModal} from "$lib/components/utils/func.js";
-	import { closeModal } from '../utils/func.js';
+	import { showModal, closeModal } from "$lib/components/utils/func.js";
 
 	export let header;
 	export let text;
