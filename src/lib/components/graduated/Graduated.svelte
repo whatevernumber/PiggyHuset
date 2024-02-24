@@ -6,8 +6,9 @@
     import {randomElements} from "$lib/components/utils/func.js";
 
     let graduates = [];
+    let show_number = 3; // необходимое количество свинок для получения;
 
-    const request = fetch(_REMOTE_SERVER + '/pigs/graduated')
+    const request = fetch(_REMOTE_SERVER + '/pigs/random/' + show_number + '/graduated')
         .then((response) => {
             if (response.ok) {
                 return response.json()
