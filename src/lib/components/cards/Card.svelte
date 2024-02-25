@@ -1,7 +1,14 @@
 <script context="module">
     import { dayjs } from "svelte-time"
     import "dayjs/locale/ru";
-    dayjs.locale('ru')
+    dayjs.locale('ru');
+    import defaultExport from "dayjs/plugin/utc.js";
+    import * as tz from "dayjs/plugin/timezone.js";
+
+    dayjs.extend(defaultExport);
+    dayjs.extend(tz);
+
+    const timezone = dayjs.tz.guess();
 </script>
 
 <script>
@@ -21,6 +28,9 @@
     export let delete_handler;
     export let id;
     export let action;
+
+    const datetime = dayjs.utc(article.datetime).tz(timezone);
+
     let status; // для отображения иконки статуса выпусника.
 
     if (type === 'ready') {
@@ -115,7 +125,7 @@
         </div>
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
         <div class="bottom-line">
-            <p class="datetime">{date_word}<Time relative timestamp={article.datetime} /></p>
+            <p class="datetime">{date_word}<Time relative live={30 * 1_000} timestamp={datetime} /></p>
             <SmolButton title={button_text} {href} />
         </div>
     </div>
