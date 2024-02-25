@@ -18,11 +18,13 @@
 	export let redirect_to_edit;
 	export let removable;
 	export let status;
+	export let modal_opened;
+	export let status_value;
 </script>
 
 <div class='profile_wrapper'>
 	<ProfilePhoto {type} {pic} {status} {admin} {show_delete} {redirect_to_edit} {removable}/>
-	<CardMainContent {header} {text} {graduated} {taken} {rainbow} {article} {age} {volunteer} {id} {admin}/>
+	<CardMainContent {header} {text} {graduated} {taken} {rainbow} {article} {age} {volunteer} {id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
 </div>
 
 <style>
