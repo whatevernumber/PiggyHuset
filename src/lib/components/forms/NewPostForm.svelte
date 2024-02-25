@@ -34,6 +34,6 @@
     }
 </script>
 
-<Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="articles">
+<Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="news">
     <slot />
 </Form>
