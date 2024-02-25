@@ -20,7 +20,7 @@
 
         if (referrer && (referrer === sub || referrer.includes('overview'))) {
             history.go(-1);
-        } else if (href.includes('admin')) {
+        } else if (referrer.includes('admin') || href.includes('admin')) {
             goto('/admin/overview');
         } else {
             goto(sub);
