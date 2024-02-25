@@ -5,7 +5,7 @@
 <div class="promo-container">
     <div class='mobile-icon_wrapper'>
         <img src='/img/big-svinik.png' width='54' height='54' class='mobile-banner-icon mobile-banner-icon-left' alt='Маленькая морская свинка'>
-        <img src='/img/banner-log-mobile.png' width='162' height='66' class='mobile-banner-icon mobile-banner-text' alt='Логотип Домика'>
+        <img src='/img/svg/header-logo.svg' width='162' height='66' class='mobile-banner-icon mobile-banner-text' alt='Логотип Домика'>
         <img src='/img/big-svinik.png' width='54' height='54' class='mobile-banner-icon mobile-banner-icon-right' alt='Маленькая морская свинка'>
     </div>
     <ul class="option-list">
