@@ -18,6 +18,7 @@
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
     import {onMount} from "svelte";
     import { redirect } from '$lib/components/utils/func.js';
+    import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 
     export let admin;
     export let article = {}; // Данные для показа в карточке
@@ -106,14 +107,14 @@
 <svelte:window bind:innerWidth={window_width} />
 
 <article data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
-    <a {href}>
+    <LinkWithReferrer {href}>
         <PhotoCard pic={image} {type} {status} width='250' height='250' alt='Фотография свинки' />
-    </a>
+    </LinkWithReferrer>
     <div class="wrapper">
         <div class='header_wrapper'>
-            <a {href}>
+            <LinkWithReferrer {href}>
                 <h3 class="card-title">{article.name ?? article.title}</h3>
-            </a>
+            </LinkWithReferrer>
         {#if admin}
             <div class='button_wrapper'>
                 <EditButton button_name='edit' click_handler={redirect_to_edit}/>
