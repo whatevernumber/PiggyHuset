@@ -95,21 +95,21 @@
         border: 2px solid #d97544;
     }
 
-    .graduated_radio span::after {
+    .graduated_radio:hover span::after {
         content: '';
 		position: absolute;
-        display: none;
         width: 6px;
         height: 11px;
-        border: solid #000;
+        border: solid #88aa4d;
         border-width: 0 3px 3px 0;
         transform: rotate(45deg);
-        top: 1px;
+        top: 10%;
         left: -2px;
+		opacity: 0.5;
     }
 
     .graduated_radio input[type='radio']:checked + span::after {
-        display: block;
+        opacity: 1;
     }
 
 	.radio_value {
