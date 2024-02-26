@@ -60,11 +60,7 @@
                 new_batch = await load_more(data, category);
             }
         })
-    )
-
-    beforeNavigate(() => {
-        sessionStorage.setItem('referrer', $page.url.href);
-    })
+    );
 
     afterNavigate(() => sessionStorage.removeItem('referrer'));
 

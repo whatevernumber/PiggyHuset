@@ -6,6 +6,7 @@
 	import '@splidejs/svelte-splide/css/splide.min.css';
 	import {fade} from "svelte/transition";
 	import {_REMOTE_SERVER} from "$env/static/public";
+	import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 
 	export let autoplay = false;
 	export let first_slide = false;
@@ -75,9 +76,9 @@
 		{#each photos as item}
 			<SplideSlide>
 				{#if linked}
-				<a href="/looking-for-home/{item.id}">
+				<LinkWithReferrer href="/looking-for-home/{item.id}">
 					<PhotoView src={temp_address + item.image} {no_border} {linked} />
-				</a>
+				</LinkWithReferrer>
 				{:else}
 				<PhotoView src={temp_address + item.image} {no_border} {linked} />
 				{/if}
