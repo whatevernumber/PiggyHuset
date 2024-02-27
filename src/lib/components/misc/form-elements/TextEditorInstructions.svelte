@@ -12,7 +12,7 @@
             Текст должен быть разбит на абзацы;
         </li>
         <li>
-            Строка текста сразу после картинки становится подписью к картинке;
+            Абзац, следующий сразу за картинкой, становится подписью к картинке;
         </li>
         <li>
             Для картинки без подписи можно сделать двойной перенос строки после картинки;
@@ -20,13 +20,16 @@
         <li>
             Смайлики можно вставлять в текст через двоеточие – например <code>:pig</code>;
         </li>
+        <li>
+            Можно переносить статьи из VK, для этого нужно выделить всё содержимое статьи, скопировать и вставить в поле для текста;
+        </li>
     </ul>
 </aside>
 
 <style>
     .text-editor-instructions {
         position: absolute;
-        top: 35%;
+        top: 25%;
         right: 3%;
         width: 350px;
         background-color: #e1edce;
@@ -58,7 +61,7 @@
                     display: inline-flex;
                     width: 30px;
                     height: 30px;
-                    background: url("../src/lib/img/icons-edit.png");
+                    background: url("/../src/lib/img/icons-edit.png");
                     background-size: cover;
                     margin-right: 7px;
                 }

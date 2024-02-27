@@ -182,4 +182,13 @@ export const include_auth = function (key) {
     return null;
 }
 
+/**
+ * Проверить, ведёт ли ссылка на внешний ресурс или на страницу в рамках текущего домена
+ * @param {string} url
+ * @return {boolean}
+ */
+export const check_link_external = function (url) {
+    return new URL(url).origin !== location.origin;
+}
+
 export { closeModal, showModal, randomElements, removeData };

@@ -1,11 +1,15 @@
 <script>
 	import {onMount} from "svelte";
     import {_REMOTE_SERVER} from "$env/static/public";
-    import {wrap_element} from "$lib/components/utils/func.js";
+    import {check_link_external, wrap_element} from "$lib/components/utils/func.js";
 
 	export let text;
 
     let window_width;
+
+    const zoom_image = function (evt) {
+        evt.target.parentNode.classList.toggle('active');
+    };
 
 	onMount(() => {
 		const article = document.querySelector('.article_text');
@@ -15,10 +19,18 @@
             const paragraphs = article.querySelectorAll('*');
             paragraphs.forEach((p) => {
                 if (['P', 'BLOCKQUOTE', 'LI'].includes(p.tagName)) {
+                    // добавление отступа абзацам, котор
                     const offset = window.scrollY + p.getBoundingClientRect().top;
-                    const limit = window.scrollY + article.getBoundingClientRect().top + 150;
+                    const limit = window.scrollY + article.getBoundingClientRect().top + 100;
                     if (offset < limit) {
                         p.classList.add('float-right');
+                    }
+                } else if (p.tagName === 'A') {
+                    // пусть ссылки внутри сайта открываются в той же вкладке
+                    const link_external = check_link_external(p.href);
+
+                    if (!link_external) {
+                        p.removeAttribute('target');
                     }
                 }
             });
@@ -32,12 +44,16 @@
             }
 
             img = wrap_element(img, 'figure', 'article-figure');
+            let caption = img.parentElement.parentElement.parentElement.nextSibling;
 
-            let caption = img.parentElement.parentElement.nextSibling;
-
-            caption.classList.remove('float-right');
-            img.parentNode.appendChild(caption);
-            caption = wrap_element(caption, 'figcaption', 'article-figure-caption');
+            if (caption && caption.textContent) {
+                caption.classList.remove('float-right');
+                img.parentNode.appendChild(caption);
+                caption = wrap_element(caption, 'figcaption', 'article-figure-caption');
+                img.parentNode.classList.add('captioned');
+            } else if (window_width > 1000) {
+                img.addEventListener('click', zoom_image);
+            }
         }
 	})
 </script>
@@ -61,16 +77,13 @@
 
         & img {
             max-width: 100%;
+            max-height: 350px;
             margin: 0;
         }
 
         & blockquote {
             display: inline-block;
             font-style: italic;
-        }
-
-        & blockquote a {
-            color: #D97544;
         }
 	}
 
@@ -91,13 +104,46 @@
         }
     }
 
+    .article_text a {
+        color: #D97544 !important;
+        font-weight: 600;
+
+        &:visited {
+            color: #b0bd9a !important;
+        }
+
+        &:hover {
+            color: #88aa4d !important;
+        }
+
+        &:active {
+            font-weight: 800;
+        }
+    }
+
     .article-figure {
         margin: 0;
         padding: 15px;
-        background-color: aliceblue;
+        background-color: transparent;
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        &.captioned {
+            background-color: aliceblue;
+        }
+    }
+
+    .article-figure.active {
+        scale: 1.5;
+        margin: 15% auto;
+        padding: 1%;
+        background-color: #e1edce;
+
+        &.captioned {
+            scale: 1.2;
+            background-color: aliceblue;
+        }
     }
 
     .article-figure-caption {

@@ -27,15 +27,18 @@
 
     /* Переопределяет slider-овские настройки для главного слайда */
     .photo_main {
-        object-fit: contain;
+        object-fit: cover;
         object-position: center;
     }
 
     @media (max-width: 1000px) {
         .photo-wrapper {
-            width: 400px;
             height: 300px;
             border: none;
+        }
+
+        .photo_main {
+            object-fit: contain;
         }
     }
 </style>
