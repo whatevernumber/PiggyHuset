@@ -26,11 +26,7 @@
 
 <div class="profile_description">
 	<ArticleHeader text={header} {type} />
-	{#if graduated === 2}
-	<div class='graduated_image'>
-		<img class="graduated-icon" src="/img/found-home.png" width="50px" height="50px" alt="Морская свинка в домике">
-	</div>
-	{:else if (admin && !is_article && graduated === 1)}
+	{#if (admin && !is_article && graduated === 1)}
 	<div class='radio_group'>
 		<label class='graduated_radio'>
 			<input type='radio' name='graduated' value='graduated' on:click={click_handler}>
@@ -62,10 +58,6 @@
 		flex-grow: 1;
         row-gap: 50px;
     }
-
-	.graduated_image {
-		justify-self: flex-start;
-	}
 
 	.graduated_radio {
 		position: relative;
