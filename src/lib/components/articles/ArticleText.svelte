@@ -46,7 +46,6 @@
             img = wrap_element(img, 'figure', 'article-figure');
             let caption = img.parentElement.parentElement.parentElement.nextSibling;
 
-            console.log(img, caption)
             if (caption && caption.textContent) {
                 caption.classList.remove('float-right');
                 img.parentNode.appendChild(caption);
