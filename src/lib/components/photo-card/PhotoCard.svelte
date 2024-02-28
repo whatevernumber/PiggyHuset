@@ -1,6 +1,7 @@
 <script>
     import {_REMOTE_SERVER} from "$env/static/public";
     import {randomize} from "$lib/components/utils/func.js";
+    import CloseButton from "$lib/components/misc/button/CloseButton.svelte";
 
     export let alt = 'Изображение';
 	export let pic;
@@ -27,7 +28,7 @@
         {/if}
 
         {#if is_form}
-            <div class='cancel_button' on:click={delete_handler} role="button" tabindex="0"></div>
+            <CloseButton css_class="delete" click_handler="{delete_handler}" aria_description="Удалить фотографию" box_size="20" />
         {/if}
     </div>
 </div>
@@ -81,25 +82,5 @@
         .status.rainbow {
             bottom: -10%;
         }
-    }
-
-    .cancel_button {
-        width: 20px;
-        height: 20px;
-        top: 0;
-        right: -20px;
-        background-image: url("/src/lib/img/x.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        position: absolute;
-    }
-
-    .cancel_button:hover {
-        width: 25px;
-        height: 28px;
-        right: -17px;
-        background-image: url("/src/lib/img/x.png");
-        background-size: contain;
-        background-repeat: no-repeat;
     }
 </style>
