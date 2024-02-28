@@ -64,7 +64,7 @@
     }
 
     @media (max-width: 374px) {
-        a.button {
+        a:not(.modal_button) {
             padding: 6% 25%;
         }
     }

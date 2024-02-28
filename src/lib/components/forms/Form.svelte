@@ -24,6 +24,7 @@
     let dirty = false;
     let image_upload_preview = [];
     let errors = {};
+    let window_width = 0;
 
     const textarea = scheme.fields.filter(field => field.type === 'textarea');
     const wysiwyg = scheme.fields.filter(field => field.type === 'wysiwyg');
@@ -123,6 +124,8 @@
     });
 </script>
 
+<svelte:window bind:innerWidth={window_width} />
+
 <div class='form-container' transition:fade={{delay: 20, duration: 180}}>
     <section class="form-section">
         <h3 class="form-header">{scheme.title}</h3>
@@ -151,7 +154,7 @@
                     <label class="form-label" for="{textarea.name}">{textarea.label}</label>
                     <textarea class="form-input-field" id="{textarea.name}" name="{textarea.name}" placeholder="{textarea.placeholder ?? ' '}" {required}></textarea>
                     <span class="input-error-label"></span>
-                    {#if textarea.emoji}
+                    {#if textarea.emoji && window_width > 1001}
                     <Emoji input_name={textarea.name} />
                     {/if}
             {/each}
