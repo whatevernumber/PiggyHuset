@@ -4,6 +4,12 @@
     import {goto} from "$app/navigation";
     import {browser} from "$app/environment";
 
+    let referrer = null;
+
+    if (browser) {
+        referrer = sessionStorage.getItem('referrer');
+    }
+
     const adjust_button_position = function () {
         const return_button = document.querySelector('.return-button');
         if (window.scrollY > 100) {
@@ -16,7 +22,6 @@
     const go_back = () => {
         const href = $page.url.href;
         const sub = href.slice(0, href.lastIndexOf('/'));
-        const referrer = sessionStorage.getItem('referrer');
 
         if (referrer && (referrer === sub || referrer.includes('overview'))) {
             history.go(-1);
@@ -36,11 +41,13 @@
     });
 </script>
 
+{#if referrer}
 <div class="return-button" on:click={go_back} on:keypress={(e) => {if (e.key === 'Enter') go_back()}} role="button" aria-pressed="false" tabindex="0" title="Вернуться к списку">
     <span class="return-button-text">
         Вернуться к списку
     </span>
 </div>
+{/if}
 
 <style>
     .return-button {
