@@ -1,6 +1,7 @@
 <script>
     import {_REMOTE_SERVER} from "$env/static/public";
     import {randomize} from "$lib/components/utils/func.js";
+    import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 
     export let name;
     export let placeholder_picture = `vdomike-${randomize(1,3)}`;
@@ -10,9 +11,9 @@
 </script>
 
 <div class="graduated_card">
-    <a href="{'/graduates/' + id}">
+    <LinkWithReferrer href="{'/graduates/' + id}">
         <img {src} width="248" height="261" alt="Изображение выпускника">
-    </a>
+    </LinkWithReferrer>
     <a href="{'/graduates/' + id}">
         <p class="graduated_name">{name}</p>
     </a>
