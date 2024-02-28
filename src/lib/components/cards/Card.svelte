@@ -2,10 +2,10 @@
     import { dayjs } from "svelte-time"
     import "dayjs/locale/ru";
     dayjs.locale('ru');
-    import defaultExport from "dayjs/plugin/utc.js";
+    import utc from "dayjs/plugin/utc.js";
     import tz from "dayjs/plugin/timezone.js";
 
-    dayjs.extend(defaultExport);
+    dayjs.extend(utc);
     dayjs.extend(tz);
 
     const timezone = dayjs.tz.guess();
