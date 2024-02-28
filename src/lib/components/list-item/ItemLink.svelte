@@ -2,10 +2,12 @@
     export let text;
     export let href = '/';
     export let icon = 'list-icon-pink.png';
+    export let external = false;
+
     let background_icon_url = "url('/img/" + icon + "')";
 </script>
 
-<a class="option-item-link" {href}>
+<a class="option-item-link" {href} target="{external ? '_blank' : ''}">
     <li class="option-item" style="--background_url: {background_icon_url}">
         {text}
     </li>

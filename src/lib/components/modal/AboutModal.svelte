@@ -1,6 +1,7 @@
 <script>
     import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte";
     import {closeModal} from "$lib/components/utils/func.js";
+    import CloseButton from "$lib/components/misc/button/CloseButton.svelte";
 </script>
 
 <section class="about_modal modal modal_closed">
@@ -27,16 +28,11 @@
             <p class="about_text">В разделе <a class='articles-link' href="/articles"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
         </div>
         <ButtonWithIcons title="Написать нам" background_color="#E1EDCE" text_color="#333333" isModal href="https://vk.com/im?sel=-127412463"/>
-        <button class="close-button" on:click={closeModal} aria-roledescription="Закрыть окно с информацией">
-            <span hidden>
-                закрыть
-            </span>
-        </button>
+        <CloseButton click_handler="{closeModal}" aria_description="Закрыть окно с информацией" />
     </div>
 </section>
 
 <style>
-
     .about_modal {
         position: fixed;
         text-align: center;
@@ -93,21 +89,6 @@
         font-weight: 500;
     }
 
-    .close-button {
-        position: absolute;
-        width: 35px;
-        height: 35px;
-        top: -2.5%;
-        right: -15%;
-        background: url('$lib/img/x.png') no-repeat;
-        border: none;
-    }
-
-    .close-button:hover {
-        scale: 1.2;
-        transition: 0.5s;
-    }
-
     .articles-link {
         color: #EF8653;
     }
@@ -128,11 +109,6 @@
         .about_modal_text {
             font-size: 16px;
             margin-bottom: 8%;
-        }
-
-        .close-button {
-            top: -1%;
-            right: -3%;
         }
     }
 </style>

@@ -1,6 +1,10 @@
 <script>
     import {fade} from "svelte/transition";
+
+    let screen_width;
 </script>
+
+<svelte:window bind:innerWidth={screen_width} />
 
 <aside class="text-editor-instructions" transition:fade>
     <h3>Памятка по форматированию:</h3>
@@ -17,9 +21,15 @@
         <li>
             Для картинки без подписи можно сделать двойной перенос строки после картинки;
         </li>
+    {#if screen_width >= 1000}
         <li>
             Смайлики можно вставлять в текст через двоеточие – например <code>:pig</code>;
         </li>
+    {:else}
+        <li>
+            Смайлики лучше добавлять из клавиатуры смартфона;
+        </li>
+    {/if}
         <li>
             Можно переносить статьи из VK, для этого нужно выделить всё содержимое статьи, скопировать и вставить в поле для текста;
         </li>

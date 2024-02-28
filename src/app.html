@@ -260,6 +260,14 @@
 		margin: 10px;
 	}
 
+	/* скрывать кнопку эмодзи на мобильных устройствах */
+	@media (max-width: 920px) {
+		.textarea-emoji-control,
+		button.ql-emoji.ql-emoji {
+			display: none;
+		}
+	}
+
 	#tab-panel {
 		background: aliceblue;
 		max-height: 200px;

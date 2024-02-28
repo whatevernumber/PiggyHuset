@@ -1,14 +1,12 @@
 <footer class="footer">
     <img class="guinea-pig-icon" src="/img/big-svinik.png" alt="Иконка морской свинки" width="64" height="64">
     <img src="/img/svg/header-logo.svg" alt="Иконка Домика" width="162" height="48">
-    <a class="vk-link" href="https://vk.com" rel="external">
+    <a class="vk-link" href="https://vk.com/domiksvinok" rel="external">
         <img class="vk-link-image" src="/img/svg/vk.svg" alt="Иконка социальной сети Вконтакте" width="24" height="27">
     </a>
 </footer>
 
-
 <style>
-
     .footer {
         width: 100%;
         height: 80px;

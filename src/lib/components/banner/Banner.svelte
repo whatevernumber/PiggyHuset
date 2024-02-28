@@ -13,7 +13,7 @@
         <ItemLink text="Новости" href="/news" icon="list-icon-light-brown.png" data-sveltekit-preload-data/>
         <ItemLink text="Выпускники" href="/graduates" icon="list-icon-green.png" data-sveltekit-preload-data/>
         <ItemLink text="Полезные статьи" href="/articles" icon="list-icon-grey.png" data-sveltekit-preload-data/>
-        <ItemLink href="/turn-in" text="Оставить свинку нам"/>
+        <ItemLink href="https://vk.com/domiksvinok" external text="Оставить свинку нам"/>
     </ul>
 </div>
 
