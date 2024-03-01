@@ -20,7 +20,7 @@
 
 	onMount(() =>
 	{
-		let article_title = document.querySelector("[name = 'title']");
+		let article_title = document.querySelector("input[name = 'title']");
 		let article_text = document.querySelector("[name = 'text']");
 
 			if (type === 1) {
