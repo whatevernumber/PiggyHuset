@@ -28,6 +28,7 @@
         background-color: var(--background_color);
         color: var(--text-color);
         user-select: none;
+        cursor: pointer;
     }
 
     .button:active {

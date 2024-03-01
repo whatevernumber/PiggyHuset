@@ -27,7 +27,7 @@
             </p>
             <p class="about_text">В разделе <a class='articles-link' href="/articles"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
         </div>
-        <ButtonWithIcons title="Написать нам" background_color="#E1EDCE" text_color="#333333" isModal href="https://vk.com/im?sel=-127412463"/>
+        <ButtonWithIcons title="Написать нам" background_color="#E1EDCE" text_color="#333333" isModal href="https://vk.com/im?sel=-127412463" external />
         <CloseButton click_handler="{closeModal}" aria_description="Закрыть окно с информацией" />
     </div>
 </section>
