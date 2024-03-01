@@ -2,11 +2,11 @@
     export let class_name = '';
     export let title;
     export let href;
+    export let external = false;
     export let background_color;
     export let text_color;
     export let icon = 'button-icon-happy-pig.png';
     export let onclick;
-    export let border = false;
 
     let background_img = "url('/img/" + icon + "')";
 
@@ -32,7 +32,7 @@
 </script>
 
 <div class='button_container'>
-    <a class="button {class_name}" {href} style="--background_color: {background_color}; --background_img: {background_img};
+    <a class="button {class_name}" {href} target="{external ? '_blank' : ''}" style="--background_color: {background_color}; --background_img: {background_img};
         --text-color: {text_color}"
                 on:click={handle} on:click={wheek}
                 on:mouseover={hover} on:mouseout={unhover} >
