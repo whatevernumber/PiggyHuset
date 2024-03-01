@@ -14,6 +14,7 @@
 	<title>Домик для Морских Поросят</title>
 </svelte:head>
 
+<h1 class="main-header">Домик для бездомных поросят</h1>
 <main in:fly={{y: 1000, duration: 500, delay: 0}}>
 	<Banner />
 	<div class="landing_main_wrapper main_wrapper">
@@ -29,6 +30,10 @@
 {/if}
 
 <style>
+	.main-header {
+		font-size: 0;
+	}
+
     .landing_main_wrapper {
         max-width: 1280px;
         margin: 0 auto;
