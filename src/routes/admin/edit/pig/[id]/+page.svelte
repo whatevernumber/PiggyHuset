@@ -14,6 +14,7 @@
 	let photos = pig.photos.map(({ image }) => image);
 	let admin = false;
 
+
 	// Уже имеющиеся в БД фотографии для отображения и отправки в скрытом поле
 	$: old_photos = JSON.stringify(photos);
 
@@ -25,9 +26,9 @@
 			goto('/');
 		}
 
-		let pig_name = document.querySelector("[name = 'name']");
-		let pig_age = document.querySelector("[name = 'age']");
-		let pig_description = document.querySelector("[name = 'description']");
+		let pig_name = document.querySelector("input[name = 'name']");
+		let pig_age = document.querySelector("input[name = 'age']");
+		let pig_description = document.querySelector("textarea[name = 'description']");
 
 		pig_name.value = pig.name;
 		pig_age.value = pig.age;
