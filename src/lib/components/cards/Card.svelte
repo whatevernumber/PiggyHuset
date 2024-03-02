@@ -34,6 +34,18 @@
 
     let status; // для отображения иконки статуса выпусника.
     let city = article.city ? article.city.city_name : null;
+    let pig_sex = article.sex ? article.sex : null;
+
+    if (pig_sex) {
+        switch(pig_sex) {
+            case 'F':
+                pig_sex = 'Женский';
+                break;
+            case 'M':
+                pig_sex = 'Мужской';
+                break;
+        }
+    }
 
     if (type === 'ready') {
         switch (article.status_id) {
@@ -125,9 +137,12 @@
             </div>
         {/if}
         </div>
-        {#if city}
+            {#if pig_sex}
+        <p class="info pig_city"><b>Пол:</b> {pig_sex}</p>
+             {/if}
+             {#if city}
         <p class="info pig_city"><b>Город:</b> {city}</p>
-        {/if}
+             {/if}
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
         <div class="bottom-line">
             <p class="datetime">{date_word}<Time relative live={30 * 1_000} timestamp={datetime} /></p>

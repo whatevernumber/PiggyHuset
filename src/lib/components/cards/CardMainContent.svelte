@@ -16,6 +16,18 @@
 	export let status_value;
 	export let city;
 	export let overseer;
+	export let pig_sex;
+
+	if (pig_sex) {
+		switch(pig_sex) {
+			case 'F':
+				pig_sex = 'Женский';
+				break;
+			case 'M':
+				pig_sex = 'Мужской';
+				break;
+		}
+	}
 
 	const click_handler = (evt) => {
 		modal_opened = true;
@@ -45,6 +57,9 @@
 	</div>
 	{/if}
 	<div class='bio'>
+		{#if pig_sex}
+			<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
+		{/if}
 		{#if age}
 			<p class="info pig_age"><b>Возраст:</b> {age}</p>
 		{/if}
