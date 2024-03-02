@@ -9,4 +9,4 @@
 	<title>Ищут дом</title>
 </svelte:head>
 
-<CatalogPage category="looking-for-home" page_title="Ищут дом" data="{pigs}" />
+<CatalogPage category="looking-for-home" page_title="Ищут дом" data="{pigs}" type="pig" />

@@ -3,7 +3,6 @@
 	import CardMainContent from '$lib/components/cards/CardMainContent.svelte';
 
 	export let header;
-	export let text;
 	export let graduated;
 	export let pic;
 	export let id;
@@ -25,7 +24,7 @@
 
 <div class='profile_wrapper'>
 	<ProfilePhoto {type} {pic} {status} {admin} {show_delete} {redirect_to_edit} {removable}/>
-	<CardMainContent {header} {pig_sex} {text} {city} {overseer} {graduated} {article} {age} {volunteer} {id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
+	<CardMainContent {header} {pig_sex} {city} {overseer} {graduated} {article} {age} {volunteer} {id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
 </div>
 
 <style>
