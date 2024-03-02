@@ -33,6 +33,7 @@
     const datetime = dayjs.utc(article.datetime).tz(timezone);
 
     let status; // для отображения иконки статуса выпусника.
+    let city = article.city ? article.city.city_name : null;
 
     if (type === 'ready') {
         switch (article.status_id) {
@@ -124,6 +125,9 @@
             </div>
         {/if}
         </div>
+        {#if city}
+        <p class="info pig_city"><b>Город:</b> {city}</p>
+        {/if}
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
         <div class="bottom-line">
             <p class="datetime">{date_word}<Time relative live={30 * 1_000} timestamp={datetime} /></p>

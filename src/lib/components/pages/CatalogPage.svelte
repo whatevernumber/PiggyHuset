@@ -7,7 +7,6 @@
     import {onMount} from "svelte";
     import {fly} from "svelte/transition";
     import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
-    import {page} from "$app/stores";
 
     export let admin;
     export let button_text; // Текст кнопки
