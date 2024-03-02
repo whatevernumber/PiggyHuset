@@ -18,10 +18,10 @@
         if (window_width > 1000) {
             const paragraphs = article.querySelectorAll('*');
             paragraphs.forEach((p) => {
-                if (['P', 'BLOCKQUOTE', 'LI'].includes(p.tagName)) {
-                    // добавление отступа абзацам, котор
+                if (['P', 'BLOCKQUOTE', 'LI', 'STRONG'].includes(p.tagName)) {
+                    // добавление отступа абзацам, идущим до перехода от картинки к полной ширине
                     const offset = window.scrollY + p.getBoundingClientRect().top;
-                    const limit = window.scrollY + article.getBoundingClientRect().top + 100;
+                    const limit = window.scrollY + article.getBoundingClientRect().top + 120;
                     if (offset < limit) {
                         p.classList.add('float-right');
                     }
@@ -44,10 +44,10 @@
             }
 
             img = wrap_element(img, 'figure', 'article-figure');
-            let caption = img.parentElement.parentElement.parentElement.nextSibling;
+            let caption = img.parentElement.parentElement.tagName === 'SPAN' ? img.parentElement.parentElement.parentElement.nextSibling : img.parentElement.parentElement.nextSibling;
 
             if (caption && caption.textContent) {
-                caption.classList.remove('float-right');
+                caption.classList.contains('float-right') ? caption.classList.remove('float-right') : '';
                 img.parentNode.appendChild(caption);
                 caption = wrap_element(caption, 'figcaption', 'article-figure-caption');
                 img.parentNode.classList.add('captioned');
