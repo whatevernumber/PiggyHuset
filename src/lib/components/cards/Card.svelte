@@ -80,12 +80,21 @@
     $: image = article.main_photo ?? null;
 
     let window_width = 0;
-    let date_word = '';
+    let date_prefix;
+
+    switch (type) {
+        case 'pig':
+            date_prefix = 'Поступил в Домик: ';
+            break;
+        case 'ready':
+            date_prefix = 'Выпустился: ';
+            break;
+        default:
+            date_prefix = 'Опубликовано: ';
+    }
 
     $: if (window_width < 1000 && window_width !== 0) {
-        date_word = '';
-    } else {
-        date_word = 'Опубликовано: '
+        date_prefix = '';
     }
 
     const show_delete_message = () => {
@@ -145,7 +154,7 @@
              {/if}
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
         <div class="bottom-line">
-            <p class="datetime">{date_word}<Time relative live={30 * 1_000} timestamp={datetime} /></p>
+            <p class="datetime">{date_prefix}<Time relative live={30 * 1_000} timestamp={datetime} /></p>
             <SmolButton title={button_text} {href} />
         </div>
     </div>

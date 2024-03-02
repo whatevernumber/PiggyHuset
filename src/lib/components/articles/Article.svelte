@@ -8,20 +8,40 @@
 <script>
 	import Time from "svelte-time";
 	import {browser} from "$app/environment";
+	import ArticleText from "$lib/components/articles/ArticleText.svelte";
+	import PhotoList from "$lib/components/photo-list/PhotoList.svelte";
 	export let date;
 	export let class_name = '';
-	export let date_description = 'Опубликовано';
+	export let type = 'article';
+	export let text;
+	export let photos;
+
+	let date_prefix;
+
+	switch (type) {
+		case 'pig':
+			date_prefix = 'Поступил в Домик';
+			break;
+		case 'ready':
+			date_prefix = 'Выпустился';
+			break;
+		default:
+			date_prefix = 'Опубликовано';
+	}
 
 	let transition = browser && innerWidth > 1000 ? fly : blur;
 </script>
 
-
 <div class="article_wrapper">
 	<article class="article {class_name}" in:transition={{x: '200vw', y: 0, duration: 400, delay: 0, amount: 3}}>
 		<slot />
+		<ArticleText {text} />
+	{#if photos && photos.length > 1}
+		<PhotoList photos={photos} />
+	{/if}
 		<div class="date">
 			<p class="date-description">
-				{date_description}: <Time timestamp={date} format="DD MMMM YYYY г." />
+				{date_prefix}: <Time timestamp={date} format="DD MMMM YYYY г." />
 			</p>
 		</div>
 	</article>
@@ -37,12 +57,12 @@
 	}
 
     .article {
-        min-height: 604px;
+        min-height: fit-content;
         min-width: 500px;
         padding: 19px 40px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
         row-gap: 50px;
         background-color: #FFFFFF;
     }
@@ -76,7 +96,7 @@
 			min-width: auto;
 			max-width: 90%;
 			margin: 0 auto;
-			padding: 0;
+			padding: 0 10%;
 			row-gap: normal;
 			justify-content: center;
 			background-color: #FFFFFF;

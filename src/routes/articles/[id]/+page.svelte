@@ -76,7 +76,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<Article date="{article.datetime}">
+<Article date="{article.datetime}" {text}>
 		<div class="wrapper">
 			<div class="photo-card-wrapper" class:absolute={article.type_id === 1}>
 				{#if (window_width > 1000)}
@@ -89,7 +89,7 @@
 				</div>
 				{/if}
 			</div>
-			<CardMainContent is_article {header} {text} {author} type="{article.type_id}" />
+			<CardMainContent is_article {header} {author} type="{article.type_id}" />
 		</div>
 		{#if article.photos.length > 1 && article.type_id !== 1}
 			<PhotoList photos={article.photos} />

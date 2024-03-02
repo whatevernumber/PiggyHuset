@@ -1,7 +1,6 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
-	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import { showModal, closeModal, redirect, include_auth } from '$lib/components/utils/func.js';
 	import { _ADMIN_FLAG, _REMOTE_SERVER, _REST_STORAGE_KEY } from '$env/static/public';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
@@ -81,12 +80,8 @@
 	<title>{pig.name ?? 'Свинка'}</title>
 </svelte:head>
 
-<Article {date}>
-	<PigProfile {text} {overseer} {city} {graduated} {pic} {header} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
-
-	{#if pig.photos.length > 1}
-		<PhotoList photos={pig.photos} />
-	{/if}
+<Article {date} {text} type="pig" photos="{pig.photos}">
+	<PigProfile {overseer} {city} {graduated} {pic} {header} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
 </Article>
 
 {#if modal_opened}

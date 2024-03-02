@@ -1,7 +1,6 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
-	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import { redirect } from '$lib/components/utils/func.js';
 	import { _ADMIN_FLAG } from '$env/static/public';
 	import { onMount } from 'svelte';
@@ -58,10 +57,6 @@
 	<title>{header}</title>
 </svelte:head>
 
-<Article {date}>
-	<PigProfile {text} {city} {overseer} {graduated} {pig_sex} {status} {taken} {rainbow} {pic} {header} {age} {type} {redirect_to_edit} {admin} />
-
-	{#if pig.photos.length > 1}
-		<PhotoList photos={pig.photos} />
-	{/if}
+<Article {date} {text} photos="{pig.photos}" type="graduate">
+	<PigProfile {city} {overseer} {graduated} {pig_sex} {status} {taken} {rainbow} {pic} {header} {age} {type} {redirect_to_edit} {admin} />
 </Article>

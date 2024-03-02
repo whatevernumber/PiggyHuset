@@ -4,7 +4,6 @@
 	import { showModal, closeModal } from "$lib/components/utils/func.js";
 
 	export let header;
-	export let text;
 	export let graduated;
 	export let age;
 	export let author;
@@ -21,10 +20,10 @@
 	if (pig_sex) {
 		switch(pig_sex) {
 			case 'F':
-				pig_sex = 'Женский';
+				pig_sex = 'Девочка';
 				break;
 			case 'M':
-				pig_sex = 'Мужской';
+				pig_sex = 'Мальчик';
 				break;
 		}
 	}
@@ -73,7 +72,6 @@
 			<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
 		{/if}
 	</div>
-	<ArticleText text={text} />
 </div>
 
 <style>
