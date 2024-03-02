@@ -17,6 +17,9 @@
 	const rainbow = pig.rainbow;
 	const text = pig.description;
 	const date = pig.datetime;
+	let city = pig.city.city_name;
+	let overseer = pig.overseer ? pig.overseer.overseer_name : null;
+	let pig_sex = pig.sex;
 
 	let header = pig.name;
 	let status; // для отображения картинки статуса выпусника;
@@ -56,7 +59,7 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {text} {graduated} {status} {taken} {rainbow} {pic} {header} {age} {type} {redirect_to_edit} {admin} />
+	<PigProfile {text} {city} {overseer} {graduated} {pig_sex} {status} {taken} {rainbow} {pic} {header} {age} {type} {redirect_to_edit} {admin} />
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />

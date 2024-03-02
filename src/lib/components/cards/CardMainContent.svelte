@@ -14,6 +14,20 @@
 	export let type;
 	export let modal_opened;
 	export let status_value;
+	export let city;
+	export let overseer;
+	export let pig_sex;
+
+	if (pig_sex) {
+		switch(pig_sex) {
+			case 'F':
+				pig_sex = 'Женский';
+				break;
+			case 'M':
+				pig_sex = 'Мужской';
+				break;
+		}
+	}
 
 	const click_handler = (evt) => {
 		modal_opened = true;
@@ -42,12 +56,23 @@
 		</label>
 	</div>
 	{/if}
-	{#if age}
-		<p class="pig_age"><b>Возраст:</b> {age}</p>
-	{/if}
-	{#if author}
-		<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
-	{/if}
+	<div class='bio'>
+		{#if pig_sex}
+			<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
+		{/if}
+		{#if age}
+			<p class="info pig_age"><b>Возраст:</b> {age}</p>
+		{/if}
+		{#if city}
+			<p class="info pig_city"><b>Город:</b> {city}</p>
+		{/if}
+		{#if overseer}
+			<p class="info pig_overseer"><b>Куратор:</b> {overseer}</p>
+		{/if}
+		{#if author}
+			<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
+		{/if}
+	</div>
 	<ArticleText text={text} />
 </div>
 
@@ -114,6 +139,12 @@
 		display: flex;
 		flex-direction: column;
 		row-gap: 15px;
+	}
+
+	.bio {
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
 	}
 
     @media (max-width: 1000px) {

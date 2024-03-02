@@ -11,6 +11,7 @@
 	export let data;
 
 	let pig = data.pig;
+
 	let pig_id = pig.id;
 	let pic = pig.main_photo;
 	let header = pig.name + ' в поисках дома';
@@ -18,12 +19,15 @@
 	let graduated = pig.status_id;
 	let text = pig.description;
 	let date = pig.datetime;
+	let city = pig.city.city_name;
+	let overseer = pig.overseer ? pig.overseer.overseer_name : null;
 	let admin = false;
 
 	let modal_opened = false;
 	let action = 'change';
 	let status_value;
 	let success = false;
+	let pig_sex = pig.sex;
 
 	onMount(() => {
 		admin = localStorage.getItem(_ADMIN_FLAG);
@@ -78,7 +82,7 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {text} {graduated} {pic} {header} {age} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
+	<PigProfile {text} {overseer} {city} {graduated} {pic} {header} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />

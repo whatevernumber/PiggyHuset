@@ -5,8 +5,6 @@
 	export let header;
 	export let text;
 	export let graduated;
-	export let taken;
-	export let rainbow;
 	export let pic;
 	export let id;
 	export let age;
@@ -20,11 +18,14 @@
 	export let status;
 	export let modal_opened;
 	export let status_value;
+	export let overseer;
+	export let city;
+	export let pig_sex;
 </script>
 
 <div class='profile_wrapper'>
 	<ProfilePhoto {type} {pic} {status} {admin} {show_delete} {redirect_to_edit} {removable}/>
-	<CardMainContent {header} {text} {graduated} {taken} {rainbow} {article} {age} {volunteer} {id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
+	<CardMainContent {header} {pig_sex} {text} {city} {overseer} {graduated} {article} {age} {volunteer} {id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
 </div>
 
 <style>
