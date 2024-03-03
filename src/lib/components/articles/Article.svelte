@@ -10,10 +10,12 @@
 	import {browser} from "$app/environment";
 	import ArticleText from "$lib/components/articles/ArticleText.svelte";
 	import PhotoList from "$lib/components/photo-list/PhotoList.svelte";
+	import PigNotification from "$lib/components/articles/PigNotification.svelte";
 	export let date;
 	export let class_name = '';
 	export let type = 'article';
 	export let text;
+	export let pig_name;
 	export let photos;
 
 	let date_prefix;
@@ -36,6 +38,9 @@
 	<article class="article {class_name}" in:transition={{x: '200vw', y: 0, duration: 400, delay: 0, amount: 3}}>
 		<slot />
 		<ArticleText {text} />
+	{#if pig_name}
+		<PigNotification {pig_name} />
+	{/if}
 	{#if photos && photos.length > 1}
 		<PhotoList photos={photos} />
 	{/if}
