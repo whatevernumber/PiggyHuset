@@ -58,6 +58,7 @@
 
     .article {
         min-height: fit-content;
+        min-height: -moz-fit-content;
         min-width: 500px;
         padding: 19px 40px;
         display: flex;

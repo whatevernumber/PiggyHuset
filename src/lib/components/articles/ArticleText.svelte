@@ -17,23 +17,29 @@
 
         if (window_width > 1000) {
             const paragraphs = article.querySelectorAll('*');
-            paragraphs.forEach((p) => {
-                if (['P', 'BLOCKQUOTE', 'LI', 'STRONG'].includes(p.tagName)) {
-                    // добавление отступа абзацам, идущим до перехода от картинки к полной ширине
-                    const offset = window.scrollY + p.getBoundingClientRect().top;
-                    const limit = window.scrollY + article.getBoundingClientRect().top + 120;
-                    if (offset < limit) {
-                        p.classList.add('float-right');
-                    }
-                } else if (p.tagName === 'A') {
-                    // пусть ссылки внутри сайта открываются в той же вкладке
+
+            for (const p of paragraphs) {
+
+                // пусть ссылки внутри сайта открываются в той же вкладке
+                if (p.tagName === 'A') {
                     const link_external = check_link_external(p.href);
 
                     if (!link_external) {
                         p.removeAttribute('target');
                     }
                 }
-            });
+
+                // добавление отступа абзацам, идущим до перехода от картинки к полной ширине
+                if (['P', 'BLOCKQUOTE', 'LI', 'STRONG'].includes(p.tagName)) {
+                    const offset = window.scrollY + p.getBoundingClientRect().top;
+                    const limit = window.scrollY + article.getBoundingClientRect().top + 80;
+                    if (offset < limit) {
+                        p.classList.add('float-right');
+                    } else {
+                        break;
+                    }
+                }
+            }
         }
 
         const images = article.querySelectorAll('img');
@@ -77,7 +83,7 @@
 
         & img {
             max-width: 100%;
-            max-height: 350px;
+
             margin: 0;
         }
 
@@ -171,13 +177,36 @@
 
     .article_text ul,
     .article_text ol {
-        padding-left: 5%;
+        width: 80%;
+        padding-left: 10%;
         margin: 3% 0;
         text-align: justify;
     }
 
+    .article_text ul > li,
+    .article_text ol > li {
+        margin-bottom: 5%;
+    }
+
+    .article_text ul > li {
+        list-style: none;
+        padding: 1% 10px;
+        border: 1px solid #e1edce;
+    }
+
+    .article_text ul > li::before {
+        content: '';
+        display: flex;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        margin-left: -50px;
+        background-image: url("/img/list-item.png");
+        background-size: contain;
+    }
+
 	/*.article_text p strong {*/
-	/*	text-shadow: 1px 1px #88aa4d, -1px -1px #f6b5d3;*/
+    /*    font-weight: bold;*/
 	/*}*/
 
 	@media (max-width: 1000px) {
