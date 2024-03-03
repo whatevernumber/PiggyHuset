@@ -31,11 +31,24 @@
 </script>
 
 <select name={input_name += '_id'} id={type}>
+	<optgroup class="overseer-active" label="Активные кураторы">
 	{#each list as option}
+		{#if option.active}
 		<option value={option.id}>
 			{option[`${option_name}`]}
 		</option>
+		{/if}
 	{/each}
+	</optgroup>
+	<optgroup class="overseer-inactive" label="Неактивные кураторы">
+		{#each list as option}
+		{#if !option.active}
+			<option value={option.id}>
+				{option[`${option_name}`]}
+			</option>
+		{/if}
+		{/each}
+	</optgroup>
 </select>
 
 <style>
