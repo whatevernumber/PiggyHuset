@@ -3,6 +3,9 @@
 	import { onMount } from 'svelte';
 
 	export let type;
+	export let grouped = false;
+	export let group_by;
+
 	let input_name;
 	let list = [];
 	let option_name;
@@ -31,24 +34,35 @@
 </script>
 
 <select name={input_name += '_id'} id={type}>
+
+	{#if grouped}
 	<optgroup class="overseer-active" label="Активные кураторы">
-	{#each list as option}
-		{#if option.active}
+		{#each list as option}
+			{#if option[group_by]}
 		<option value={option.id}>
 			{option[`${option_name}`]}
 		</option>
-		{/if}
-	{/each}
+			{/if}
+		{/each}
 	</optgroup>
+
 	<optgroup class="overseer-inactive" label="Неактивные кураторы">
 		{#each list as option}
-		{#if !option.active}
+			{#if !option[group_by]}
 			<option value={option.id}>
 				{option[`${option_name}`]}
 			</option>
-		{/if}
+			{/if}
 		{/each}
 	</optgroup>
+
+	{:else}
+		{#each list as option}
+			<option value={option.id}>
+				{option[`${option_name}`]}
+			</option>
+		{/each}
+	{/if}
 </select>
 
 <style>

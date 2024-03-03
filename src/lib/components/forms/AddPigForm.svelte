@@ -36,6 +36,8 @@
 				name: 'overseers',
                 type: 'select',
                 required: true,
+                grouped: true,
+                group_column: 'active'
 			},
             {
                 label: 'Город',
