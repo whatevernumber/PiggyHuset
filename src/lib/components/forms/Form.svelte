@@ -182,7 +182,7 @@
                     {#if field.type === 'select'}
                         <div class="select_wrapper form-item">
                             <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                            <SelectInput type={field.name} />
+                            <SelectInput type={field.name} grouped="{field.grouped}" group_by="{field.group_column}" />
                         </div>
                     {:else}
                 <div class="form-item">
