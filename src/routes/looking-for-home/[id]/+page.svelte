@@ -6,6 +6,7 @@
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
+	import SelectInput from '../../../lib/components/misc/form-elements/SelectInput.svelte';
 
 	export let data;
 

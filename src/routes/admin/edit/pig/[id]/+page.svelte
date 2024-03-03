@@ -29,10 +29,20 @@
 		let pig_name = document.querySelector("input[name = 'name']");
 		let pig_age = document.querySelector("input[name = 'age']");
 		let pig_description = document.querySelector("textarea[name = 'description']");
+		let overseer = document.querySelector("select[name = 'overseer_id']");
+		let city = document.querySelector("select[name = 'city_id']");
 
 		pig_name.value = pig.name;
 		pig_age.value = pig.age;
 		pig_description.value = pig.description;
+
+		// Задержка для корректной работы select-ов
+		setTimeout((
+			() => {
+				overseer.value = pig.overseer.id;
+				city.value = pig.city.id;
+			}
+		), 150)
 	});
 
 	const delete_handler = (image) => {
@@ -42,6 +52,7 @@
 			}
 		)
 	}
+
 </script>
 
 <svelte:head>
