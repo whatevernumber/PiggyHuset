@@ -30,7 +30,8 @@
     export let id;
     export let action;
 
-    const datetime = dayjs.utc(article.datetime).tz(timezone);
+    let date = article.graduation_date ? article.graduation_date : article.datetime;
+    const datetime = dayjs.utc(date).tz(timezone);
 
     let status; // для отображения иконки статуса выпусника.
     let city = article.city ? article.city.city_name : null;
@@ -85,7 +86,11 @@
     $: if (window_width < 1000 && window_width !== 0) {
         date_word = '';
     } else {
-        date_word = 'Опубликовано: '
+        if (article.graduation_date && article.status_id) {
+            article.status_id !== 1 ? date_word = article.status.text + ': ' : date_word = 'Опубликовано: ';
+        } else {
+            date_word = 'Опубликовано: ';
+        }
     }
 
     const show_delete_message = () => {
@@ -145,7 +150,9 @@
              {/if}
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
         <div class="bottom-line">
-            <p class="datetime">{date_word}<Time relative live={30 * 1_000} timestamp={datetime} /></p>
+            <p class="datetime">
+                <span class='date_word'>{date_word}</span>
+                <Time relative live={30 * 1_000} timestamp={datetime} /></p>
             <SmolButton title={button_text} {href} />
         </div>
     </div>
@@ -210,6 +217,10 @@
         font-style: italic;
         color: rgba(0, 0, 0, 0.5);
         align-self: flex-end;
+    }
+
+    .date_word {
+        text-transform: capitalize;
     }
 
     .header_wrapper {

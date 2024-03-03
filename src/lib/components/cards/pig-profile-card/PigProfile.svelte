@@ -21,11 +21,18 @@
 	export let overseer;
 	export let city;
 	export let pig_sex;
+	export let graduation_date;
+	export let pig_status;
+	export let pig_status_id;
 </script>
 
 <div class='profile_wrapper'>
 	<ProfilePhoto {type} {pic} {status} {admin} {show_delete} {redirect_to_edit} {removable}/>
-	<CardMainContent {header} {pig_sex} {text} {city} {overseer} {graduated} {article} {age} {volunteer} {id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
+	<CardMainContent {pig_status} {pig_status_id}
+					 {graduation_date} {header} {pig_sex} {text} {city} {overseer} {graduated} {article} {age}
+					 {volunteer} {id} {admin}
+					 bind:modal_opened={modal_opened} bind:status_value={status_value}
+	/>
 </div>
 
 <style>

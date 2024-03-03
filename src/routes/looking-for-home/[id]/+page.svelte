@@ -7,7 +7,6 @@
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
-	import SelectInput from '../../../lib/components/misc/form-elements/SelectInput.svelte';
 
 	export let data;
 
@@ -15,7 +14,7 @@
 
 	let pig_id = pig.id;
 	let pic = pig.main_photo;
-	let header = pig.name + ' в поисках дома';
+	let header = pig.name + ' ' + pig.status.text;
 	let age = pig.age;
 	let graduated = pig.status_id;
 	let text = pig.description;
@@ -29,6 +28,7 @@
 	let status_value;
 	let success = false;
 	let pig_sex = pig.sex;
+	let pig_status_id = pig.status_id;
 
 	onMount(() => {
 		admin = localStorage.getItem(_ADMIN_FLAG);
@@ -83,7 +83,9 @@
 </svelte:head>
 
 <Article {date}>
-	<PigProfile {text} {overseer} {city} {graduated} {pic} {header} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
+	<PigProfile {text} {overseer} {city} {graduated} {pic} {header} {age} {pig_sex} {pig_status_id} {redirect_to_edit}
+				id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}
+	/>
 
 	{#if pig.photos.length > 1}
 		<PhotoList photos={pig.photos} />
