@@ -2,10 +2,10 @@
     <img class="guinea-pig-icon" src="/img/big-svinik.png" alt="Иконка морской свинки" width="64" height="64">
     <img src="/img/svg/header-logo.svg" alt="Иконка Домика" width="162" height="48">
     <div class='links'>
-        <a class="link vk-link" href="https://vk.com/domiksvinok" rel="external">
+        <a class="link vk-link" href="https://vk.com/domiksvinok" target="_blank" rel="external">
             <img class="vk-link-image" src="/img/svg/icon-vk.svg" alt="Иконка социальной сети Вконтакте" width="50" height="50">
         </a>
-        <a class="link telegram-link" href="https://t.me/domiksvinok" rel="external">
+        <a class="link telegram-link" href="https://t.me/domiksvinok" target="_blank" rel="external">
             <img class="telegram-link-image" src="/img/svg/icon-telegram.svg" alt="Иконка социальной сети Вконтакте" width="50" height="50">
         </a>
     </div>
