@@ -190,6 +190,14 @@
     .vk-link:hover {
         color: #E1EDCE;
     }
+    
+    @media (max-width: 361px) {
+        .navigation.navigation-admin {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
 
     @media (max-width: 1001px) {
         header {
