@@ -18,7 +18,7 @@
 			{
 				label: 'Имя',
 				name: 'name',
-				required: true
+				required: true,
 			},
 			{
 				label: 'Возраст свинки',
@@ -29,16 +29,24 @@
 				name: 'description',
 				type: 'textarea',
 				required: true,
-                emoji: true
+                emoji: true,
 			},
-			// {
-			// 	label: 'Куратор',
-			// 	name: 'overseer',
-			// }
+			{
+				label: 'Куратор',
+				name: 'overseers',
+                type: 'select',
+                required: true,
+			},
+            {
+                label: 'Город',
+                name: 'cities',
+                type: 'select',
+                required: true,
+            }
 		],
 		files: {
 			file_input: true,
-			multiple: true
+			multiple: true,
 		}
 	};
 </script>
