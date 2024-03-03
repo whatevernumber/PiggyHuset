@@ -203,7 +203,7 @@
 		.radio_group {
 			grid-template-columns: 50% 50%;
 			width: 120%;
-			left: -5vw;
+			left: -15vw;
 		}
 
 		.radio_group > label {
