@@ -30,7 +30,8 @@
     export let id;
     export let action;
 
-    const datetime = dayjs.utc(article.datetime).tz(timezone);
+    let date = article.graduation_date ? article.graduation_date : article.datetime;
+    const datetime = dayjs.utc(date).tz(timezone);
 
     let status; // для отображения иконки статуса выпусника.
     let city = article.city ? article.city.city_name : null;
@@ -80,21 +81,14 @@
     $: image = article.main_photo ?? null;
 
     let window_width = 0;
-    let date_prefix;
+    let date_prefix = '';
 
-    switch (type) {
-        case 'pig':
-            date_prefix = 'Поступил в Домик: ';
-            break;
-        case 'ready':
-            date_prefix = 'Выпустился: ';
-            break;
-        default:
-            date_prefix = 'Опубликовано: ';
-    }
-
-    $: if (window_width < 1000 && window_width !== 0) {
-        date_prefix = '';
+    $: if (window_width > 1000) {
+        if (article.status_id) {
+            date_prefix = article.status.text;
+        } else {
+            date_prefix = 'Опубликовано';
+        }
     }
 
     const show_delete_message = () => {
@@ -154,7 +148,9 @@
              {/if}
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
         <div class="bottom-line">
-            <p class="datetime">{date_prefix}<Time relative live={30 * 1_000} timestamp={datetime} /></p>
+            <p class="datetime">
+                <span class='date_word'>{date_prefix}: </span>
+                <Time relative live={30 * 1_000} timestamp={datetime} /></p>
             <SmolButton title={button_text} {href} />
         </div>
     </div>
@@ -219,6 +215,10 @@
         font-style: italic;
         color: rgba(0, 0, 0, 0.5);
         align-self: flex-end;
+    }
+
+    .datetime:first-letter {
+        text-transform: capitalize;
     }
 
     .header_wrapper {

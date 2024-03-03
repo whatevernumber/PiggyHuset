@@ -20,7 +20,7 @@
 
 	switch (type) {
 		case 'pig':
-			date_prefix = 'Поступил в Домик';
+			date_prefix = 'Дата поступления';
 			break;
 		case 'ready':
 			date_prefix = 'Выпустился';

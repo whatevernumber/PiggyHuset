@@ -34,8 +34,7 @@
 
   @media (max-width: 1000px) {
 	  .profile_buttons {
-		  margin: 0 auto;
-		  margin-bottom: 15px;
+		  margin: 0 auto 15px;
 	  }
   }
 </style>

@@ -1,7 +1,16 @@
+<script context="module">
+	import { dayjs } from "svelte-time";
+	import "dayjs/locale/ru";
+	dayjs.locale('ru');
+</script>
+
 <script>
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
 	import { showModal, closeModal } from "$lib/components/utils/func.js";
+	import Time from "svelte-time";
+	import { _REMOTE_SERVER } from '$env/static/public';
+	import { onMount } from 'svelte';
 
 	export let header;
 	export let graduated;
@@ -16,6 +25,10 @@
 	export let city;
 	export let overseer;
 	export let pig_sex;
+	export let graduation_date;
+	export let pig_status;
+	export let pig_status_id;
+	let status_list = [];
 
 	if (pig_sex) {
 		switch(pig_sex) {
@@ -35,42 +48,57 @@
 		document.removeEventListener('click', closeModal);
 		status_value = evt.target.value;
 	}
+
+	onMount(async () => {
+		if(!is_article) {
+			const res = await fetch(_REMOTE_SERVER + '/statuses', {
+				method: 'GET'
+			});
+
+			if (res.ok) {
+				status_list = await res.json();
+				status_list = status_list.filter(i => i.id !== pig_status_id);
+			}
+		}
+	})
+
 </script>
 
 <div class="profile_description">
 	<ArticleHeader text={header} {type} />
-	{#if (admin && !is_article && graduated === 1)}
-	<div class='radio_group'>
-		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='graduated' on:click={click_handler}>
-			<span class='radio_value'>Дом найден?</span>
-		</label>
-		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='rainbow' on:click={click_handler}>
-			<span class='radio_value'>На радуге</span>
-		</label>
-		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='taken' on:click={click_handler}>
-			<span class='radio_value'>Зажаблено</span>
-		</label>
-	</div>
-	{/if}
-	<div class='bio'>
-		{#if pig_sex}
-			<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
+	<div class="bio_wrapper">
+		{#if (admin && !is_article)}
+		<div class='radio_group'>
+			{#each status_list as status}
+			<label class='graduated_radio'>
+				<input type='radio' name='graduated' value={status.value} on:click={click_handler}>
+				<span class='radio_value'>
+					{status.text}
+				</span>
+			</label>
+			{/each}
+		</div>
 		{/if}
-		{#if age}
-			<p class="info pig_age"><b>Возраст:</b> {age}</p>
-		{/if}
-		{#if city}
-			<p class="info pig_city"><b>Город:</b> {city}</p>
-		{/if}
-		{#if overseer}
-			<p class="info pig_overseer"><b>Куратор:</b> {overseer}</p>
-		{/if}
-		{#if author}
-			<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
-		{/if}
+		<div class='bio'>
+			{#if graduation_date && pig_status_id !== 1}
+				<p class="info pig_graduation"><b>{pig_status}:</b> <Time timestamp={graduation_date} format="DD MMMM YYYY г." /></p>
+			{/if}
+			{#if pig_sex}
+				<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
+			{/if}
+			{#if age}
+				<p class="info pig_age"><b>Возраст:</b> {age}</p>
+			{/if}
+			{#if city}
+				<p class="info pig_city"><b>Город:</b> {city}</p>
+			{/if}
+			{#if overseer}
+				<p class="info pig_overseer"><b>Куратор:</b> {overseer}</p>
+			{/if}
+			{#if author}
+				<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
+			{/if}
+		</div>
 	</div>
 </div>
 
@@ -81,6 +109,34 @@
 		flex-grow: 1;
         row-gap: 50px;
     }
+
+	.bio_wrapper {
+		display: flex;
+		flex-direction: column-reverse;
+		row-gap: 25px;
+		width: 100%;
+		margin-bottom: 25px;
+	}
+
+	.bio {
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+	}
+
+	.pig_graduation:first-letter {
+		text-transform: capitalize;
+	}
+
+	.radio_group {
+		row-gap: 15px;
+		width: 100%;
+		margin-left: 25px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 12rem);
+		column-gap: 15px;
+		position: relative;
+	}
 
 	.graduated_radio {
 		position: relative;
@@ -133,16 +189,8 @@
 		font-weight: bold;
 	}
 
-	.radio_group {
-		display: flex;
-		flex-direction: column;
-		row-gap: 15px;
-	}
-
-	.bio {
-		display: flex;
-		flex-direction: column;
-		row-gap: 10px;
+	.graduated_radio:first-letter {
+		text-transform: capitalize;
 	}
 
     @media (max-width: 1000px) {
@@ -151,5 +199,15 @@
             padding: 0 20px;
             row-gap: 10px;
         }
+
+		.radio_group {
+			grid-template-columns: 50% 50%;
+			width: 120%;
+			left: -5vw;
+		}
+
+		.radio_group > label {
+			scale: 0.9;
+		}
     }
 </style>
