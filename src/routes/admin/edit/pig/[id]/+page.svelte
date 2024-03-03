@@ -42,7 +42,7 @@
 				overseer.value = pig.overseer.id;
 				city.value = pig.city.id;
 			}
-		), 150)
+		), 1000)
 	});
 
 	const delete_handler = (image) => {
