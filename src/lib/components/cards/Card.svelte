@@ -89,6 +89,8 @@
         } else {
             date_prefix = 'Опубликовано';
         }
+
+        date_prefix = date_prefix + ':'
     }
 
     const show_delete_message = () => {
@@ -149,7 +151,7 @@
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
         <div class="bottom-line">
             <p class="datetime">
-                <span class='date_word'>{date_prefix}: </span>
+                <span class='date_word'>{date_prefix} </span>
                 <Time relative live={30 * 1_000} timestamp={datetime} /></p>
             <SmolButton title={button_text} {href} />
         </div>
