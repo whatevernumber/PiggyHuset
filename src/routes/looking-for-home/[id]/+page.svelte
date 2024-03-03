@@ -82,7 +82,7 @@
 </svelte:head>
 
 <Article {date} {text} type="pig" photos="{pig.photos}">
-	<PigProfile {overseer} {city} {graduated} {pic} {header} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
+	<PigProfile {overseer} {city} {pig_status_id} {graduated} {pic} {header} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
 </Article>
 
 {#if modal_opened}
