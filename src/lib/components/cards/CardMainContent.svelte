@@ -1,7 +1,16 @@
+<script context="module">
+	import { dayjs } from "svelte-time";
+	import "dayjs/locale/ru";
+	dayjs.locale('ru');
+</script>
+
 <script>
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import ArticleText from '$lib/components/articles/ArticleText.svelte';
 	import { showModal, closeModal } from "$lib/components/utils/func.js";
+	import Time from "svelte-time";
+	import { _REMOTE_SERVER } from '$env/static/public';
+	import { onMount } from 'svelte';
 
 	export let header;
 	export let graduated;
@@ -16,6 +25,10 @@
 	export let city;
 	export let overseer;
 	export let pig_sex;
+	export let graduation_date;
+	export let pig_status;
+	export let pig_status_id;
+	let status_list = [];
 
 	if (pig_sex) {
 		switch(pig_sex) {
@@ -35,27 +48,40 @@
 		document.removeEventListener('click', closeModal);
 		status_value = evt.target.value;
 	}
+
+	onMount(async () => {
+		if(!is_article) {
+			const res = await fetch(_REMOTE_SERVER + '/statuses', {
+				method: 'GET'
+			});
+
+			if (res.ok) {
+				status_list = await res.json();
+				status_list = status_list.filter(i => i.id !== pig_status_id);
+			}
+		}
+	})
+
 </script>
 
 <div class="profile_description">
 	<ArticleHeader text={header} {type} />
-	{#if (admin && !is_article && graduated === 1)}
+	{#if (admin && !is_article)}
 	<div class='radio_group'>
+		{#each status_list as status}
 		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='graduated' on:click={click_handler}>
-			<span class='radio_value'>Дом найден?</span>
+			<input type='radio' name='graduated' value={status.value} on:click={click_handler}>
+			<span class='radio_value'>
+				{status.text}
+			</span>
 		</label>
-		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='rainbow' on:click={click_handler}>
-			<span class='radio_value'>На радуге</span>
-		</label>
-		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value='taken' on:click={click_handler}>
-			<span class='radio_value'>Зажаблено</span>
-		</label>
+		{/each}
 	</div>
 	{/if}
 	<div class='bio'>
+		{#if graduation_date && pig_status_id !== 1}
+			<p class="info pig_graduation"><b>{pig_status}:</b> <Time timestamp={graduation_date} format="DD MMMM YYYY г." /></p>
+		{/if}
 		{#if pig_sex}
 			<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
 		{/if}
@@ -131,6 +157,7 @@
 		color: #EF8653;
 		font-size: 18px;
 		font-weight: bold;
+		text-transform: capitalize;
 	}
 
 	.radio_group {
@@ -143,6 +170,10 @@
 		display: flex;
 		flex-direction: column;
 		row-gap: 10px;
+	}
+
+	.pig_graduation {
+		text-transform: capitalize;
 	}
 
     @media (max-width: 1000px) {

@@ -13,7 +13,7 @@
 
 	let pig_id = pig.id;
 	let pic = pig.main_photo;
-	let header = pig.name + ' в поисках дома';
+	let header = pig.name + ' ' + pig.status.text;
 	let age = pig.age;
 	let graduated = pig.status_id;
 	let text = pig.description;
@@ -27,6 +27,7 @@
 	let status_value;
 	let success = false;
 	let pig_sex = pig.sex;
+	let pig_status_id = pig.status_id;
 
 	onMount(() => {
 		admin = localStorage.getItem(_ADMIN_FLAG);
