@@ -83,9 +83,9 @@
     let window_width = 0;
     let date_prefix = '';
 
-    $: if (window_width > 1000 && window_width !== 0) {
-        if (article.graduation_date && article.status_id) {
-            date_prefix = article.status_id !== 1 ? article.status.text : 'Опубликовано';
+    $: if (window_width > 1000) {
+        if (article.status_id) {
+            date_prefix = article.status.text;
         } else {
             date_prefix = 'Опубликовано';
         }
@@ -217,7 +217,7 @@
         align-self: flex-end;
     }
 
-    .date_word {
+    .datetime:first-letter {
         text-transform: capitalize;
     }
 
