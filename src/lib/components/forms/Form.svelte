@@ -180,7 +180,7 @@
                 {#each bottom_fields as field}
                     {@const required = field.required}
                     {#if field.type === 'select'}
-                        <div class='select_wrapper'>
+                        <div class="select_wrapper form-item">
                             <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
                             <SelectInput type={field.name} />
                         </div>
@@ -344,6 +344,8 @@
     .select_group {
         display: flex;
         justify-content: space-between;
+        max-width: 100%;
+        column-gap: 5%;
     }
 
     .select_wrapper {
