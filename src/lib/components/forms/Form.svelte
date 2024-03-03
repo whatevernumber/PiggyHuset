@@ -11,6 +11,7 @@
     import {fade} from "svelte/transition";
     import {beforeNavigate} from "$app/navigation";
     import {page} from "$app/stores";
+    import SelectInput from '../misc/form-elements/SelectInput.svelte';
 
 	export let scheme = {};
 	export let redirect_location;
@@ -26,12 +27,17 @@
     let errors = {};
     let window_width = 0;
 
+
+    const select = scheme.fields.filter(field => field.type === 'select');
     const textarea = scheme.fields.filter(field => field.type === 'textarea');
     const wysiwyg = scheme.fields.filter(field => field.type === 'wysiwyg');
     const fields = scheme.fields.filter(field => !textarea.includes(field) && !wysiwyg.includes(field));
 
     const top_fields = fields.slice(0, 2);
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
+
+    let select_style;
+    select ? select_style = 'select_group' : '';
 
     const handle = () => {
         redirect(redirect_location ? `/${redirect_location}/${success.id || null}` : '/')
@@ -134,7 +140,7 @@
             {#if top_fields}
             <fieldset class="label-group">
                 {#each top_fields as field}
-                    {#if field !== textarea}
+                    {#if field !== textarea && field !== select}
                         {@const required = field.required}
                 <div class="form-item">
                     <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
@@ -170,14 +176,21 @@
             </fieldset>
 
             {#if bottom_fields.length}
-            <fieldset class="bottom-fields">
+            <fieldset class="bottom-fields {select_style}">
                 {#each bottom_fields as field}
                     {@const required = field.required}
+                    {#if field.type === 'select'}
+                        <div class="select_wrapper form-item">
+                            <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                            <SelectInput type={field.name} />
+                        </div>
+                    {:else}
                 <div class="form-item">
                     <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
                     <input class="form-input-field blank" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
                     <span class="input-error-label"></span>
                 </div>
+                    {/if}
                 {/each}
             </fieldset>
             {/if}
@@ -326,6 +339,18 @@
 
     .form-input-field {
         width: 75%;
+    }
+
+    .select_group {
+        display: flex;
+        justify-content: space-between;
+        max-width: 100%;
+        column-gap: 5%;
+    }
+
+    .select_wrapper {
+        display: flex;
+        column-gap: 15px;
     }
 
     :global(form.form-scheme input[name].input-error),
