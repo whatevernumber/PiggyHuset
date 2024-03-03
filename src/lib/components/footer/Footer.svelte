@@ -5,7 +5,7 @@
         <a class="link vk-link" href="https://vk.com/domiksvinok" rel="external">
             <img class="vk-link-image" src="/img/svg/icon-vk.svg" alt="Иконка социальной сети Вконтакте" width="50" height="50">
         </a>
-        <a class="link telegram-link" href="https://vk.com/domiksvinok" rel="external">
+        <a class="link telegram-link" href="https://t.me/domiksvinok" rel="external">
             <img class="telegram-link-image" src="/img/svg/icon-telegram.svg" alt="Иконка социальной сети Вконтакте" width="50" height="50">
         </a>
     </div>
