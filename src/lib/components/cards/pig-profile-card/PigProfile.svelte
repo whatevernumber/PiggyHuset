@@ -41,7 +41,7 @@
 
 	@media (min-width: 1001px) {
         .profile_wrapper {
-			column-gap: 29px;
+			column-gap: 15px;
         }
     }
 

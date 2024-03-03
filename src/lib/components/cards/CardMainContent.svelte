@@ -66,37 +66,39 @@
 
 <div class="profile_description">
 	<ArticleHeader text={header} {type} />
-	{#if (admin && !is_article)}
-	<div class='radio_group'>
-		{#each status_list as status}
-		<label class='graduated_radio'>
-			<input type='radio' name='graduated' value={status.value} on:click={click_handler}>
-			<span class='radio_value'>
-				{status.text}
-			</span>
-		</label>
-		{/each}
-	</div>
-	{/if}
-	<div class='bio'>
-		{#if graduation_date && pig_status_id !== 1}
-			<p class="info pig_graduation"><b>{pig_status}:</b> <Time timestamp={graduation_date} format="DD MMMM YYYY г." /></p>
+	<div class="bio_wrapper">
+		{#if (admin && !is_article)}
+		<div class='radio_group'>
+			{#each status_list as status}
+			<label class='graduated_radio'>
+				<input type='radio' name='graduated' value={status.value} on:click={click_handler}>
+				<span class='radio_value'>
+					{status.text}
+				</span>
+			</label>
+			{/each}
+		</div>
 		{/if}
-		{#if pig_sex}
-			<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
-		{/if}
-		{#if age}
-			<p class="info pig_age"><b>Возраст:</b> {age}</p>
-		{/if}
-		{#if city}
-			<p class="info pig_city"><b>Город:</b> {city}</p>
-		{/if}
-		{#if overseer}
-			<p class="info pig_overseer"><b>Куратор:</b> {overseer}</p>
-		{/if}
-		{#if author}
-			<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
-		{/if}
+		<div class='bio'>
+			{#if graduation_date && pig_status_id !== 1}
+				<p class="info pig_graduation"><b>{pig_status}:</b> <Time timestamp={graduation_date} format="DD MMMM YYYY г." /></p>
+			{/if}
+			{#if pig_sex}
+				<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
+			{/if}
+			{#if age}
+				<p class="info pig_age"><b>Возраст:</b> {age}</p>
+			{/if}
+			{#if city}
+				<p class="info pig_city"><b>Город:</b> {city}</p>
+			{/if}
+			{#if overseer}
+				<p class="info pig_overseer"><b>Куратор:</b> {overseer}</p>
+			{/if}
+			{#if author}
+				<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
+			{/if}
+		</div>
 	</div>
 </div>
 
@@ -107,6 +109,34 @@
 		flex-grow: 1;
         row-gap: 50px;
     }
+
+	.bio_wrapper {
+		display: flex;
+		flex-direction: column-reverse;
+		row-gap: 25px;
+		width: 100%;
+		margin-bottom: 25px;
+	}
+
+	.bio {
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+	}
+
+	.pig_graduation:first-letter {
+		text-transform: capitalize;
+	}
+
+	.radio_group {
+		row-gap: 15px;
+		width: 100%;
+		margin-left: 25px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 12rem);
+		column-gap: 15px;
+		position: relative;
+	}
 
 	.graduated_radio {
 		position: relative;
@@ -157,22 +187,9 @@
 		color: #EF8653;
 		font-size: 18px;
 		font-weight: bold;
-		text-transform: capitalize;
 	}
 
-	.radio_group {
-		display: flex;
-		flex-direction: column;
-		row-gap: 15px;
-	}
-
-	.bio {
-		display: flex;
-		flex-direction: column;
-		row-gap: 10px;
-	}
-
-	.pig_graduation {
+	.graduated_radio:first-letter {
 		text-transform: capitalize;
 	}
 
@@ -182,5 +199,15 @@
             padding: 0 20px;
             row-gap: 10px;
         }
+
+		.radio_group {
+			grid-template-columns: 50% 50%;
+			width: 120%;
+			left: -5vw;
+		}
+
+		.radio_group > label {
+			scale: 0.9;
+		}
     }
 </style>
