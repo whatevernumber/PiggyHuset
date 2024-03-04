@@ -69,7 +69,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        row-gap: 50px;
+        row-gap: 30px;
         background-color: #FFFFFF;
     }
 
