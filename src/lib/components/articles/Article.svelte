@@ -125,8 +125,8 @@
 			margin-bottom: 20px;
 		}
 
-        .article_news {
-            min-width: 100%;
-        }
+        /*.article_news {*/
+        /*    height: calc(100vh / 1.2);*/
+        /*}*/
 	}
 </style>
