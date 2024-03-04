@@ -38,14 +38,7 @@
     let pig_sex = article.sex ? article.sex : null;
 
     if (pig_sex) {
-        switch(pig_sex) {
-            case 'F':
-                pig_sex = 'Женский';
-                break;
-            case 'M':
-                pig_sex = 'Мужской';
-                break;
-        }
+        pig_sex = (pig_sex === 'F') ? 'Девочка' : 'Мальчик';
     }
 
     if (type === 'ready') {
