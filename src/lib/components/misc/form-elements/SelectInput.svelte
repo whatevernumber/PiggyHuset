@@ -5,6 +5,7 @@
 	export let type;
 	export let grouped = false;
 	export let group_by;
+	export let options = [];
 
 	let input_name;
 	let list = [];
@@ -17,14 +18,14 @@
 		case 'overseers':
 			input_name = 'overseer'
 			break;
+		default:
+			input_name = type;
 	}
 
 	option_name = input_name + '_name';
 
 	onMount(async () => {
-		const res = await fetch(_REMOTE_SERVER + '/' + type, {
-			method: 'GET',
-		});
+		const res = await fetch(_REMOTE_SERVER + '/' + type);
 
 		if (res.ok) {
 			list = await res.json();
@@ -33,7 +34,7 @@
 
 </script>
 
-<select name={input_name += '_id'} id={type}>
+<select name={input_name === type ? input_name : `${input_name}_id`} id={type}>
 
 	{#if grouped}
 	<optgroup class="overseer-active" label="Активные кураторы">
@@ -56,6 +57,12 @@
 		{/each}
 	</optgroup>
 
+	{:else if options.length }
+		{#each options as option}
+			<option value={option.id}>
+				{option.value}
+			</option>
+		{/each}
 	{:else}
 		{#each list as option}
 			<option value={option.id}>

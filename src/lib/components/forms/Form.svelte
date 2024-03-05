@@ -182,7 +182,7 @@
                     {#if field.type === 'select'}
                         <div class="select_wrapper form-item">
                             <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                            <SelectInput type={field.name} grouped="{field.grouped}" group_by="{field.group_column}" />
+                            <SelectInput type={field.name} options="{field.options}" grouped="{field.grouped}" group_by="{field.group_column}" />
                         </div>
                     {:else}
                 <div class="form-item">
@@ -342,15 +342,16 @@
     }
 
     .select_group {
+        max-width: 100%;
         display: flex;
         justify-content: space-between;
-        max-width: 100%;
+        flex-wrap: wrap;
         column-gap: 5%;
     }
 
     .select_wrapper {
         display: flex;
-        column-gap: 15px;
+        width: 275px;
     }
 
     :global(form.form-scheme input[name].input-error),
