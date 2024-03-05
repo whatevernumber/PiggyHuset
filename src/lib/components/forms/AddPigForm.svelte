@@ -44,6 +44,22 @@
                 name: 'cities',
                 type: 'select',
                 required: true,
+            },
+            {
+                label: 'Пол',
+                name: 'sex',
+                type: 'select',
+                options: [
+                    {
+                        id: 'M',
+                        value: 'Мальчик',
+                    },
+                    {
+                        id: 'F',
+                        value: 'Девочка'
+                    }
+                ],
+                required: true,
             }
 		],
 		files: {
