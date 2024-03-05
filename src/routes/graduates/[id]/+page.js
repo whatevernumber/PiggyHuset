@@ -1,9 +1,15 @@
 import {_REMOTE_SERVER} from "$env/static/public";
+import {redirect} from "@sveltejs/kit";
 
 export async function load({ fetch, params }) {
 
 	const res = await fetch(`${_REMOTE_SERVER}/pigs/${params.id}?expand=photos,overseer,city,status`);
-	const data = res.json();
+	const data = await res.json();
+
+
+	if (data.status.value !== 'graduated') {
+		throw redirect(303, `/looking-for-home/${params.id}`);
+	}
 
 	return {
 		pig: data,
