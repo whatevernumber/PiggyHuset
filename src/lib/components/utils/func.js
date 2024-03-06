@@ -191,4 +191,12 @@ export const check_link_external = function (url) {
     return new URL(url).origin !== location.origin;
 }
 
+Array.prototype.sort_by_date = function (param) {
+    return this.sort((a, b) => new Date(b[param]) - new Date(a[param]));
+}
+
+Array.prototype.sort_by_string = function (param) {
+    return this.sort((a, b) => a[param].localeCompare(b[param]));
+};
+
 export { closeModal, showModal, randomElements, removeData };

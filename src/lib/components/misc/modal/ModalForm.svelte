@@ -5,7 +5,6 @@
 
 	export let type;
 	export let modal;
-	console.log(type);
 </script>
 
 <section class="container">
