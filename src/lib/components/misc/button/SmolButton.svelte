@@ -5,9 +5,15 @@
     export let click_handler;
 </script>
 
-<a class="button {class_name}" {href} on:click={click_handler}>
+{#if href}
+<a class="button smol-button {class_name}" {href} on:click={click_handler}>
     {title}
 </a>
+{:else}
+<button class="button smol-button {class_name}" on:click={click_handler}>
+    {title}
+</button>
+{/if}
 
 <style>
 
@@ -17,6 +23,7 @@
         text-transform: uppercase;
         background-color: #D97544;
         color: #FFFFFF;
+        border: none;
         user-select: none;
     }
 
@@ -30,8 +37,9 @@
 
     .smol-button {
         align-self: flex-end;
-        max-width: 125px;
+        max-width: max-content;
         padding: 2px 20px;
+        font-family: Jost, Arial, sans-serif;
     }
 
     .smol-but-long-button {
@@ -41,7 +49,7 @@
     }
 
     .super-smol-button {
-        max-width: 82px;
+        /*max-width: 82px;*/
         padding: 4px 10px;
     }
 
@@ -51,7 +59,6 @@
     }
 
     .smol-red {
-        max-width: 125px;
         padding: 5px 20px;
         background-color: red;
     }
@@ -61,8 +68,42 @@
     }
 
     .close-button {
-        max-width: 125px;
         padding: 5px 20px;
         background-color: green;
+    }
+
+    .sort-button {
+        padding: 5px 10px;
+
+        &.sort-button:hover {
+            opacity: 0.9;
+        }
+
+        &.sort-button:active {
+            opacity: 1;
+            filter: hue-rotate(5deg);
+        }
+    }
+
+    .sort-button.up,
+    .sort-button.down {
+        background-color: #88aa4d;
+    }
+
+    .sort-button::before,
+    .sort-button::after {
+        content: " ➚";
+        width: 2px;
+        height: 2px;
+        visibility: hidden;
+    }
+
+    .sort-button.up::after {
+        visibility: visible;
+    }
+
+    .sort-button.down::after {
+        content: " ➘";
+        visibility: visible;
     }
 </style>

@@ -6,7 +6,8 @@
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import {onMount} from "svelte";
     import {fly} from "svelte/transition";
-    import { afterNavigate, beforeNavigate, goto } from '$app/navigation';
+    import { afterNavigate } from '$app/navigation';
+    import SortButton from "$lib/components/misc/button/SortButton.svelte";
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -21,6 +22,8 @@
     let new_batch = [];
     let action = '';
     let success;
+
+    const is_article = (type === 'article' || type === 'news');
 
     const show_delete = (evt) => {
         action = 'delete';
@@ -52,6 +55,32 @@
         }
     }
 
+    let sorted = {
+        param: 'datetime',
+        type: 'asc'
+    };
+
+    const sort_by = function (param, evt) {
+        if (sorted.param !== param) {
+            data_array = param === 'datetime' ? data_array.sort_by_date(param) : data_array.sort_by_string(param);
+            sorted.param = param;
+            evt.target.classList.add('up');
+            evt.target.previousElementSibling?.classList.remove('up', 'down');
+            evt.target.nextElementSibling?.classList.remove('up', 'down');
+        } else {
+            if (sorted.type === 'desc') {
+                sorted.type = 'asc';
+                evt.target.classList.toggle('down');
+                evt.target.classList.toggle('up');
+            } else {
+                sorted.type = 'desc';
+                evt.target.classList.toggle('up');
+                evt.target.classList.toggle('down');
+            }
+            data_array = data_array.reverse();
+        }
+    }
+
     onMount(
         () => document.addEventListener('scroll', async function () {
             const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
@@ -62,7 +91,6 @@
     );
 
     afterNavigate(() => sessionStorage.removeItem('referrer'));
-
 
     // реактивное обновление списка
     $: data_array = new_batch ? [
@@ -77,6 +105,13 @@
         <div class="section-wrapper">
 
             <BigHeader text_content="{page_title}" position="left"/>
+
+            <div class="sorting">
+                <p class="by_{sorted.param}">
+                    <SortButton title="{is_article ? 'По названию' : 'По именам'}" click_handler={(evt) => sort_by(data_array[0].hasOwnProperty('name') ? 'name' : 'title', evt)} />
+                    <SortButton class_name="up" title="{is_article ? 'По дате публикации' : 'По дате поступления'}" click_handler={(evt) => sort_by('datetime', evt)} />
+                </p>
+            </div>
 
             <CardList>
                 {#each data_array as article (article.id)}
@@ -103,6 +138,13 @@
     .section-wrapper {
         min-height: 100%;
         padding: 40px 5%;
+    }
+
+    .sorting {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-bottom: 5%;
     }
 
     .modal {
