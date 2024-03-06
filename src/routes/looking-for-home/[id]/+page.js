@@ -6,7 +6,7 @@ export async function load({ fetch, params }) {
 	const res = await fetch(`${_REMOTE_SERVER}/pigs/${params.id}?expand=photos,overseer,city,status`);
 	const data = await res.json();
 
-	if (data.status.value !== 'pending') {
+	if (!['pending', 'reserved', 'quarantine'].includes(data.status.value)) {
 		throw redirect(303, `/graduates/${params.id}`);
 	}
 
