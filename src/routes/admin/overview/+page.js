@@ -2,10 +2,10 @@ import {_REMOTE_SERVER} from "$env/static/public";
 
 export async function load({ fetch }) {
 
-    const pigs = await fetch(`${_REMOTE_SERVER}/pigs?expand=city,status`);
+    const pigs = await fetch(`${_REMOTE_SERVER}/pigs?expand=city,status,overseer`);
     const news = await fetch(`${_REMOTE_SERVER}/articles/type/2`);
     const articles = await fetch(`${_REMOTE_SERVER}/articles/type/1`);
-    const graduates = await fetch(`${_REMOTE_SERVER}/pigs/graduated?expand=city,status`);
+    const graduates = await fetch(`${_REMOTE_SERVER}/pigs/graduated?expand=city,status,overseer`);
 
     return {
         pigs: await pigs.json(),

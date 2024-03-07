@@ -125,7 +125,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
+<article id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     <LinkWithReferrer {href}>
         <PhotoCard pic={image} {type} {status} width='250' height='250' alt='Фотография свинки' />
     </LinkWithReferrer>

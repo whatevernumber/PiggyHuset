@@ -8,6 +8,7 @@
     import {fly} from "svelte/transition";
     import { afterNavigate } from '$app/navigation';
     import SortButton from "$lib/components/misc/button/SortButton.svelte";
+    import FilterList from "$lib/components/lists/FilterList.svelte";
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -22,6 +23,8 @@
     let new_batch = [];
     let action = '';
     let success;
+
+    let original_data = data_array;
 
     const is_article = (type === 'article' || type === 'news');
 
@@ -60,6 +63,12 @@
         type: 'asc'
     };
 
+    /**
+     * Сортировка списка
+     * @param param
+     * @param evt
+     * @return void
+     */
     const sort_by = function (param, evt) {
         if (sorted.param !== param) {
             data_array = param === 'datetime' ? data_array.sort_by_date(param) : data_array.sort_by_string(param);
@@ -79,6 +88,44 @@
             }
             data_array = data_array.reverse();
         }
+    }
+
+    let active_filters = [];
+
+    const add_to_filter = function (evt) {
+        // убрать из массива фильтров, если он уже там
+        if (active_filters.includes(evt.target.value)) {
+            active_filters.splice(active_filters.indexOf(evt.target.value), 1)
+        } else {
+            active_filters.push(evt.target.value);
+        }
+
+        // запустить фильтрацию
+        filter();
+    }
+
+    /**
+     * Фильтрация по массиву active_filters: карточке добавляется фильтр для скрытия
+     * @return void
+     */
+    const filter = function () {
+        data_array.map(
+            (el) => {
+                let node = document.getElementById(el.id);
+
+                // если чекнули хотя бы один фильтр
+                if (active_filters.length) {
+                    if (active_filters.includes(el.city.city_name) || active_filters.includes(el.overseer?.overseer_name)) {
+                        node.parentElement.classList.remove('filtered');
+                    } else {
+                        node.parentElement.classList.add('filtered');
+                    }
+                } else {
+                    // если все фильтры сняты, отобразить все элементы
+                    node.parentElement.classList.remove('filtered');
+                }
+            }
+        );
     }
 
     onMount(
@@ -113,6 +160,12 @@
                 </p>
             </div>
 
+            {#if type === 'pig' || type === 'ready'}
+            <div class="filtering">
+                <FilterList data="{data_array}" filter_handler="{add_to_filter}" />
+            </div>
+            {/if}
+
             <CardList>
                 {#each data_array as article (article.id)}
                     <li>
@@ -120,6 +173,7 @@
                     </li>
                 {/each}
             </CardList>
+
         </div>
     </section>
 </div>
@@ -138,6 +192,11 @@
     .section-wrapper {
         min-height: 100%;
         padding: 40px 5%;
+        position: relative;
+    }
+
+    .filtered {
+        display: none;
     }
 
     .sorting {
@@ -145,6 +204,17 @@
         flex-direction: row;
         justify-content: flex-end;
         margin-bottom: 5%;
+    }
+
+    .filtering {
+        height: 400px;
+        position: absolute;
+        top: 210px;
+        left: -22vw;
+        padding: 5%;
+        background-color: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        overflow: auto;
     }
 
     .modal {
@@ -169,6 +239,12 @@
 
         .modal {
             left: 0;
+        }
+
+        .filtering {
+            position: static;
+            height: 200px;
+            margin-bottom: 5vw;
         }
     }
 </style>
