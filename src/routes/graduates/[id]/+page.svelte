@@ -24,7 +24,12 @@
 	let pig_sex = pig.sex;
 	let pig_status = pig.status ? pig.status.text : '';
 	let pig_status_id = pig.status ? pig.status.id : '';
-	let header = pig.name + ' ' + pig.status.text;
+
+	if (graduated === 2) {
+		pig.status.text = (pig_sex === 'M' ? 'нашёл' : 'нашла') + ' дом';
+	}
+
+	let header = pig.name + ' — ' + pig.status.text;
 	let status; // для отображения картинки статуса выпусника;
 
 	switch (graduated) {

@@ -6,7 +6,6 @@
 
 <script>
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
-	import ArticleText from '$lib/components/articles/ArticleText.svelte';
 	import { showModal, closeModal } from "$lib/components/utils/func.js";
 	import Time from "svelte-time";
 	import { _REMOTE_SERVER } from '$env/static/public';
@@ -87,7 +86,7 @@
 				<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
 			{/if}
 			{#if age}
-				<p class="info pig_age"><b>Возраст:</b> {age}</p>
+				<p class="info pig_age"><b>{pig_sex === 'Мальчик' ? 'Поступил' : 'Поступила'} к нам в возрасте:</b> {age}</p>
 			{/if}
 			{#if city}
 				<p class="info pig_city"><b>Город:</b> {city}</p>

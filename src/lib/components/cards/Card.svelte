@@ -77,10 +77,18 @@
     let date_prefix = '';
 
     $: if (window_width > 1000) {
-        if (article.status_id) {
-            date_prefix = article.status.text;
-        } else {
-            date_prefix = 'Опубликовано';
+        switch (article.status_id) {
+            case 1:
+                date_prefix = (pig_sex === 'Мальчик' ? 'поступил' : 'поступила') + ' в Домик';
+                break;
+            case 2:
+                date_prefix = (pig_sex === 'Мальчик' ? 'нашёл' : 'нашла') + ' дом';
+                break;
+            case 3:
+                date_prefix = (pig_sex === 'Мальчик' ? 'убежал' : 'убежала') + ' на Радугу';
+                break;
+            default:
+                date_prefix = article?.status?.text || 'Опубликовано';
         }
 
         date_prefix = date_prefix + ':'
@@ -117,7 +125,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
+<article id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     <LinkWithReferrer {href}>
         <PhotoCard pic={image} {type} {status} width='250' height='250' alt='Фотография свинки' />
     </LinkWithReferrer>
@@ -145,7 +153,7 @@
         <div class="bottom-line">
             <p class="datetime">
                 <span class='date_word'>{date_prefix} </span>
-                <Time relative live={30 * 1_000} timestamp={datetime} /></p>
+                <Time relative="{type === 'news'}" format="D MMM YYYYг." live={type === 'news'} timestamp={datetime} /></p>
             <SmolButton title={button_text} {href} />
         </div>
     </div>
