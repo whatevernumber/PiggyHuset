@@ -60,6 +60,12 @@
                     }
                 ],
                 required: true,
+            },
+            {
+                label: 'id',
+                name: 'id',
+                type: 'number',
+                required: true,
             }
 		],
 		files: {

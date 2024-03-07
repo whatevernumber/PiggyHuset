@@ -37,7 +37,7 @@
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
 
     let select_style;
-    select ? select_style = 'select_group' : '';
+    select_style = select ? 'select_group' : '';
 
     const handle = () => {
         redirect(redirect_location ? `/${redirect_location}/${success.id || null}` : '/')
@@ -182,12 +182,12 @@
                     {#if field.type === 'select'}
                         <div class="select_wrapper form-item">
                             <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                            <SelectInput type={field.name} options="{field.options}" grouped="{field.grouped}" group_by="{field.group_column}" />
+                            <SelectInput css_class="form-input-field" type={field.name} options="{field.options}" grouped="{field.grouped}" group_by="{field.group_column}" />
                         </div>
                     {:else}
                 <div class="form-item">
                     <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                    <input class="form-input-field blank" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
                     <span class="input-error-label"></span>
                 </div>
                     {/if}
@@ -223,6 +223,10 @@
 </div>
 
 <style>
+
+    :global([disabled]) {
+        filter: saturate(0.1);
+    }
 
     .form-container {
         min-height: 100%;
@@ -279,7 +283,7 @@
 
     .form-label {
         text-transform: uppercase;
-        flex-basis: 70px;
+        flex-basis: 75px;
     }
 
     .form-label:has(~ textarea) {
@@ -387,6 +391,14 @@
         z-index: 10;
     }
 
+    .bottom-fields.select_group .form-item {
+        max-width: 275px;
+
+        & input {
+            width: 200px;
+        }
+    }
+
     @media (max-width: 1001px) {
 
         .form-container {
@@ -433,6 +445,10 @@
 
         .form-item:has(.input-error) + .form-item {
             margin-top: 15%;
+        }
+
+        .select_group {
+            justify-content: center;
         }
 
         .modal {
