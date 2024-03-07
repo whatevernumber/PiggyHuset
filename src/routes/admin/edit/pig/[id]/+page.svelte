@@ -2,8 +2,6 @@
 	import AddPigForm from '$lib/components/forms/AddPigForm.svelte';
 	import UploadedFiles from '$lib/components/misc/form-elements/UploadedFiles.svelte';
 	import { onMount } from 'svelte';
-	import { _ADMIN_FLAG } from '$env/static/public';
-	import { goto } from '$app/navigation';
 
 	export let data;
 
@@ -12,37 +10,25 @@
 	let method = 'PATCH';
 	let endpoint = '/pigs/' + pig.id;
 	let photos = pig.photos.map(({ image }) => image);
-	let admin = false;
-
 
 	// Уже имеющиеся в БД фотографии для отображения и отправки в скрытом поле
 	$: old_photos = JSON.stringify(photos);
 
-	onMount(() =>
-	{
-		admin = localStorage.getItem(_ADMIN_FLAG);
+	onMount(() => {
+		const form = document.querySelector('form');
+		const fields = form.getElementsByClassName('form-input-field');
 
-		if (!admin) {
-			goto('/');
+		for (const field of fields) {
+			if (field.tagName === 'SELECT') {
+				setTimeout(() => {
+					field.value = pig[field.name] || pig[(field.name.slice(0, field.name.lastIndexOf('_')))].id;
+				}, 100);
+			} else if (field.type !== 'file') {
+				field.value = pig[field.name];
+			}
 		}
 
-		let pig_name = document.querySelector("input[name = 'name']");
-		let pig_age = document.querySelector("input[name = 'age']");
-		let pig_description = document.querySelector("textarea[name = 'description']");
-		let overseer = document.querySelector("select[name = 'overseer_id']");
-		let city = document.querySelector("select[name = 'city_id']");
-
-		pig_name.value = pig.name;
-		pig_age.value = pig.age;
-		pig_description.value = pig.description;
-
-		// Задержка для корректной работы select-ов
-		setTimeout((
-			() => {
-				overseer.value = pig.overseer.id;
-				city.value = pig.city.id;
-			}
-		), 1000)
+		document.getElementById('id').disabled = true;
 	});
 
 	const delete_handler = (image) => {
