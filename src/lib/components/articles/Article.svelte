@@ -22,10 +22,8 @@
 
 	switch (type) {
 		case 'pig':
+		case 'graduate':
 			date_prefix = 'Дата поступления';
-			break;
-		case 'ready':
-			date_prefix = 'Выпустился';
 			break;
 		default:
 			date_prefix = 'Опубликовано';
