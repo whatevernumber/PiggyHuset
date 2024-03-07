@@ -40,14 +40,37 @@
     <li>
         <h4>По кураторам</h4>
         <ul class="overseers-list">
-            {#each overseers as overseer}
-                <li class="overseer">
-                    <label class="filter-list-label overseer-label">
-                        Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
-                        <input type="checkbox" value="{overseer.overseer_name}" on:change={(evt) => filter_handler(evt)}>
-                    </label>
-                </li>
-            {/each}
+            <div>
+                <h5>Активные кураторы</h5>
+                <ul class="overseers-list-active">
+                {#each overseers as overseer}
+                    {#if overseer.active}
+                    <li class="overseer">
+                        <label class="filter-list-label overseer-label">
+                            Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
+                            <input type="checkbox" value="{overseer.overseer_name}" on:change={(evt) => filter_handler(evt)}>
+                        </label>
+                    </li>
+                    {/if}
+                {/each}
+                </ul>
+            </div>
+
+            <div>
+                <h5>Неактивные кураторы</h5>
+                <ul class="overseers-list-active">
+                    {#each overseers as overseer}
+                        {#if !overseer.active}
+                        <li class="overseer">
+                            <label class="filter-list-label overseer-label">
+                                Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
+                                <input type="checkbox" value="{overseer.overseer_name}" on:change={(evt) => filter_handler(evt)}>
+                            </label>
+                        </li>
+                        {/if}
+                    {/each}
+                </ul>
+            </div>
         </ul>
     </li>
 </ul>
@@ -60,6 +83,11 @@
     h4 {
         color: #3f3f3f;
         margin: 15px 0;
+    }
+
+    h5 {
+        color: #D97544;
+        margin: 0 0 15px;
     }
 
     .filter-list,
@@ -75,7 +103,7 @@
     ul.overseers-list {
         padding: 10px;
         width: 90%;
-        row-gap: 5px;
+        row-gap: 15px;
         background-color: aliceblue;
     }
 
