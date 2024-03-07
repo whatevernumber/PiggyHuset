@@ -195,7 +195,7 @@
         position: relative;
     }
 
-    .filtered {
+    :global(li.filtered) {
         display: none;
     }
 
