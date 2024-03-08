@@ -27,50 +27,53 @@
     <li>
         <h4>По городам</h4>
         <ul class="cities-list">
-        {#each cities as city}
-            <li class="city">
-                <label class="filter-list-label city-label">
-                    {city.city_name}
-                    <input type="checkbox" name="city_name" value="{city.city_name}" on:change={(evt) => filter_handler(evt)}>
-                </label>
-            </li>
-        {/each}
+            {#each cities as city}
+                <li class="city">
+                    <label class="filter-list-label city-label">
+                        {city.city_name}
+                        <input type="checkbox" name="city_name" value="{city.city_name}"
+                               on:change={(evt) => filter_handler(evt)}>
+                    </label>
+                </li>
+            {/each}
         </ul>
     </li>
     <li>
         <h4>По кураторам</h4>
         <ul class="overseers-list">
-            <div>
+            <li>
                 <h5>Активные кураторы</h5>
                 <ul class="overseers-list-active">
-                {#each overseers as overseer}
-                    {#if overseer.active}
-                    <li class="overseer">
-                        <label class="filter-list-label overseer-label">
-                            Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
-                            <input type="checkbox" value="{overseer.overseer_name}" on:change={(evt) => filter_handler(evt)}>
-                        </label>
-                    </li>
-                    {/if}
-                {/each}
+                    {#each overseers as overseer}
+                        {#if overseer.active}
+                            <li class="overseer">
+                                <label class="filter-list-label overseer-label">
+                                    Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
+                                    <input type="checkbox" value="{overseer.overseer_name}"
+                                           on:change={(evt) => filter_handler(evt)}>
+                                </label>
+                            </li>
+                        {/if}
+                    {/each}
                 </ul>
-            </div>
+            </li>
 
-            <div>
+            <li>
                 <h5>Неактивные кураторы</h5>
                 <ul class="overseers-list-active">
                     {#each overseers as overseer}
                         {#if !overseer.active}
-                        <li class="overseer">
-                            <label class="filter-list-label overseer-label">
-                                Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
-                                <input type="checkbox" value="{overseer.overseer_name}" on:change={(evt) => filter_handler(evt)}>
-                            </label>
-                        </li>
+                            <li class="overseer">
+                                <label class="filter-list-label overseer-label">
+                                    Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
+                                    <input type="checkbox" value="{overseer.overseer_name}"
+                                           on:change={(evt) => filter_handler(evt)}>
+                                </label>
+                            </li>
                         {/if}
                     {/each}
                 </ul>
-            </div>
+            </li>
         </ul>
     </li>
 </ul>
@@ -99,10 +102,15 @@
         margin: 0;
     }
 
+    .filter-list ul {
+        row-gap: 15px;
+    }
+
     ul.cities-list,
     ul.overseers-list {
         padding: 10px;
-        width: 90%;
+        width: 95%;
+        font-size: 15px;
         row-gap: 15px;
         background-color: aliceblue;
     }
@@ -128,7 +136,30 @@
         background-size: cover;
     }
 
-    .filter-list-label:has(:checked)::before {
+    .filter-list-label:has(:checked)::before,
+    .filter-list-label.checked::before{
         background-image: url("/img/checked.png");
+    }
+
+    ul.cities-list,
+    .overseers-list ul {
+        display: grid;
+        grid-template-columns: 7vw 7vw;
+        align-items: center;
+        column-gap: 5px;
+    }
+
+    @media (max-width: 1001px) {
+        .filter-list {
+            font-size: 14px;
+        }
+
+        ul.cities-list,
+        .overseers-list ul {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            column-gap: 5px;
+        }
     }
 </style>

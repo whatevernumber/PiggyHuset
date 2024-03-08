@@ -93,6 +93,9 @@
     let active_filters = [];
 
     const add_to_filter = function (evt) {
+        const label = evt.target.parentElement;
+        label.classList.toggle('checked');
+
         // убрать из массива фильтров, если он уже там
         if (active_filters.includes(evt.target.value)) {
             active_filters.splice(active_filters.indexOf(evt.target.value), 1)
@@ -115,7 +118,17 @@
 
                 // если чекнули хотя бы один фильтр
                 if (active_filters.length) {
-                    if (active_filters.includes(el.city.city_name) || active_filters.includes(el.overseer?.overseer_name)) {
+                    const city_match = active_filters.includes(el.city.city_name);
+                    const overseer_match = active_filters.includes(el.overseer?.overseer_name);
+                    const filter_by_overseer = active_filters.some(f => f.includes('Домик') || f.includes('Куратор'));
+                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор'));
+
+                    // если чекнуты город и куратор / куратор без города / город без куратора
+                    if (
+                        filter_by_overseer && ((city_match && overseer_match)
+                        || (!filter_by_city && overseer_match))
+                        || !filter_by_overseer && (city_match || overseer_match)
+                    ) {
                         node.parentElement.classList.remove('filtered');
                     } else {
                         node.parentElement.classList.add('filtered');
