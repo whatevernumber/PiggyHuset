@@ -58,6 +58,29 @@
 		margin: 0;
 	}
 
+	/* Стилизация скроллбара */
+	*::-webkit-scrollbar {
+		width: 7px;
+		height: 5px;
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background-color: #88aa4d;
+	}
+
+	*::-webkit-scrollbar-track {
+		background-color: #e1edce;
+	}
+
+	/* для Firefox */
+	@supports (-moz-appearance:none) {
+		* {
+			scrollbar-width: thin;
+			scrollbar-color: #88aa4d #e1edce;
+			scroll-behavior: smooth;
+		}
+	}
+
 	.main-container {
 		width: 100%;
 		min-height: 100%;
@@ -103,7 +126,7 @@
 	/*}*/
 
 	.splide__track--nav > .splide__list > .splide__slide.is-active {
-		 border: 3px solid #d97544;
+		border: 3px solid #d97544;
 	}
 
 	.article li.splide__slide {
@@ -184,6 +207,11 @@
 	.splide__slide {
 		margin-bottom: 2%;
 		margin-right: 5px;
+		border-radius: 10px;
+
+		& .photo-card {
+			  border-radius: 6px;
+		}
 	}
 
 	.splide__slide .image-wrapper {
