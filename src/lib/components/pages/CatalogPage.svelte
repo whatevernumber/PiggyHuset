@@ -224,7 +224,7 @@
         position: absolute;
         top: 210px;
         left: -22vw;
-        padding: 5%;
+        padding: 3%;
         background-color: #FFFFFF;
         border: 1px solid rgba(0, 0, 0, 0.1);
         overflow: auto;
@@ -257,8 +257,9 @@
 
         .filtering {
             position: static;
-            height: 200px;
+            height: 180px;
             margin-bottom: 5vw;
+            padding: 3% 5%;
         }
     }
 
