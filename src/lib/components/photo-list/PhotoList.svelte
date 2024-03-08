@@ -70,7 +70,7 @@
 	<Splide id="main-carousel" options="{main_options}" bind:this={splide}>
 		{#if (first_slide)}
 			<SplideSlide>
-				<PhotoView src="{first_slide}" no_border />
+				<PhotoView src="{first_slide}" no_border no_shadow />
 			</SplideSlide>
 		{/if}
 		{#each photos as item}

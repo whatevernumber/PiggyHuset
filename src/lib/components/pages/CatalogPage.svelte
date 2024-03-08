@@ -215,6 +215,7 @@
         background-color: #FFFFFF;
         border: 1px solid rgba(0, 0, 0, 0.1);
         overflow: auto;
+        box-shadow: 6px 6px 8px 2px rgba(0, 0, 0, 0.1);
     }
 
     .modal {
@@ -245,6 +246,12 @@
             position: static;
             height: 200px;
             margin-bottom: 5vw;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .filtering {
+            width: 16vw;
         }
     }
 </style>
