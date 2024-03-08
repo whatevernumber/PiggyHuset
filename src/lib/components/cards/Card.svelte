@@ -167,6 +167,13 @@
         padding: 19px;
         background-color: #FFFFFF;
         border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 3px 8px 8px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (min-width: 1001px) and (max-width: 1441px) {
+        article {
+            width: 60vw;
+        }
     }
 
     .wrapper {

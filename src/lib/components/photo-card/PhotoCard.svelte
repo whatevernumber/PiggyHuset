@@ -51,6 +51,16 @@
         user-select: none;
     }
 
+    :global(.profile_wrapper .photo-card) {
+        box-shadow: 0 0 16px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (min-width: 1001px) {
+        :global(.profile_wrapper .photo-card) {
+            box-shadow: 3px 3px 8px 2px rgba(0, 0, 0, 0.3);
+        }
+    }
+
     .status {
         position: absolute;
         right: 0;

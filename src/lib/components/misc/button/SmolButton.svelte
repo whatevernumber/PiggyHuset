@@ -106,4 +106,16 @@
         content: " ➘";
         visibility: visible;
     }
+
+    @media (max-width: 412px) {
+        .sort-button {
+            font-size: 11px;
+        }
+    }
+
+    @media (max-width: 312px) {
+        .sort-button {
+            font-size: 10px;
+        }
+    }
 </style>
