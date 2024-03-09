@@ -24,8 +24,6 @@
     let action = '';
     let success;
 
-    let original_data = data_array;
-
     const is_article = (type === 'article' || type === 'news');
 
     const show_delete = (evt) => {
