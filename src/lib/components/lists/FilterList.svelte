@@ -136,8 +136,8 @@
         background-size: cover;
     }
 
-    .filter-list-label:has(:checked)::before,
-    .filter-list-label.checked::before{
+    /* по какой-то причине правило не работает, если не задать ему высокую специфичность */
+    :global(.filter-list-label.checked.checked::before) {
         background-image: url("/img/checked.png");
     }
 
