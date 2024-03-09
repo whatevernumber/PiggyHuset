@@ -25,6 +25,13 @@
     let success;
 
     const is_article = (type === 'article' || type === 'news');
+    const is_homeless = type === 'pig';
+
+    let overseers;
+    if (is_homeless) {
+        // получение списка кураторов, у которых есть хотя бы один подопечный
+        overseers = data_array.map(({overseer}) => overseer).filter(Boolean);
+    }
 
     const show_delete = (evt) => {
         action = 'delete';
@@ -171,9 +178,9 @@
                 </p>
             </div>
 
-            {#if type === 'pig' || type === 'ready'}
+            {#if !is_article}
             <div class="filtering">
-                <FilterList data="{data_array}" filter_handler="{add_to_filter}" />
+                <FilterList data="{data_array}" filter_handler="{add_to_filter}" active_only="{is_homeless}" {overseers} />
             </div>
             {/if}
 

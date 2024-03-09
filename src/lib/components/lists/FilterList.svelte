@@ -3,9 +3,10 @@
     import {_REMOTE_SERVER} from "$env/static/public";
 
     export let filter_handler;
+    export let active_only = false; // только кураторы с подопечными
+    export let overseers = [];
 
     let cities = [];
-    let overseers = [];
 
     onMount(async () => {
         const city_list = await fetch(_REMOTE_SERVER + '/cities');
@@ -14,10 +15,16 @@
             cities = await city_list.json();
         }
 
-        const overseer_list = await fetch(_REMOTE_SERVER + '/overseers');
+        if (active_only) {
+            // удаление повторяющихся записей
+            const ovs_ids = overseers.map(ov => ov.id);
+            overseers = overseers.filter((ov, i) => !ovs_ids.includes(ov.id, i + 1));
+        } else {
+            const get_overseers = await fetch(_REMOTE_SERVER + '/overseers');
 
-        if (overseer_list.ok) {
-            overseers = await overseer_list.json();
+            if (get_overseers.ok) {
+                overseers = await get_overseers.json();
+            }
         }
     })
 </script>
@@ -41,39 +48,51 @@
     <li>
         <h4>По кураторам</h4>
         <ul class="overseers-list">
-            <li>
-                <h5>Активные кураторы</h5>
-                <ul class="overseers-list-active">
-                    {#each overseers as overseer}
-                        {#if overseer.active}
-                            <li class="overseer">
-                                <label class="filter-list-label overseer-label">
-                                    Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
-                                    <input type="checkbox" value="{overseer.overseer_name}"
-                                           on:change={(evt) => filter_handler(evt)}>
-                                </label>
-                            </li>
-                        {/if}
-                    {/each}
-                </ul>
-            </li>
+            {#if active_only}
+                {#each overseers as overseer}
+                    <li class="overseer">
+                        <label class="filter-list-label overseer-label">
+                            Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
+                            <input type="checkbox" value="{overseer.overseer_name}"
+                                   on:change={(evt) => filter_handler(evt)}>
+                        </label>
+                    </li>
+                {/each}
+            {:else}
+                <li>
+                    <h5>Активные кураторы</h5>
+                    <ul class="overseers-list-active">
+                        {#each overseers as overseer}
+                            {#if overseer.active}
+                                <li class="overseer">
+                                    <label class="filter-list-label overseer-label">
+                                        Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
+                                        <input type="checkbox" value="{overseer.overseer_name}"
+                                               on:change={(evt) => filter_handler(evt)}>
+                                    </label>
+                                </li>
+                            {/if}
+                        {/each}
+                    </ul>
+                </li>
 
-            <li>
-                <h5>Неактивные кураторы</h5>
-                <ul class="overseers-list-active">
-                    {#each overseers as overseer}
-                        {#if !overseer.active}
-                            <li class="overseer">
-                                <label class="filter-list-label overseer-label">
-                                    Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
-                                    <input type="checkbox" value="{overseer.overseer_name}"
-                                           on:change={(evt) => filter_handler(evt)}>
-                                </label>
-                            </li>
-                        {/if}
-                    {/each}
-                </ul>
-            </li>
+                <li>
+                    <h5>Неактивные кураторы</h5>
+                    <ul class="overseers-list-active">
+                        {#each overseers as overseer}
+                            {#if !overseer.active}
+                                <li class="overseer">
+                                    <label class="filter-list-label overseer-label">
+                                        Домик {overseer.overseer_name.slice(overseer.overseer_name.lastIndexOf(' '))}
+                                        <input type="checkbox" value="{overseer.overseer_name}"
+                                               on:change={(evt) => filter_handler(evt)}>
+                                    </label>
+                                </li>
+                            {/if}
+                        {/each}
+                    </ul>
+                </li>
+            {/if}
         </ul>
     </li>
 </ul>
