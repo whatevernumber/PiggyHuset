@@ -25,6 +25,13 @@
     let success;
 
     const is_article = (type === 'article' || type === 'news');
+    const is_homeless = type === 'pig';
+
+    let overseers;
+    if (is_homeless) {
+        // получение списка кураторов, у которых есть хотя бы один подопечный
+        overseers = data_array.map(({overseer}) => overseer).filter(Boolean);
+    }
 
     const show_delete = (evt) => {
         action = 'delete';
@@ -171,9 +178,9 @@
                 </p>
             </div>
 
-            {#if type === 'pig' || type === 'ready'}
+            {#if !is_article}
             <div class="filtering">
-                <FilterList data="{data_array}" filter_handler="{add_to_filter}" />
+                <FilterList data="{data_array}" filter_handler="{add_to_filter}" active_only="{is_homeless}" {overseers} />
             </div>
             {/if}
 
@@ -218,7 +225,8 @@
     }
 
     .filtering {
-        height: 400px;
+        height: max-content;
+        max-height: 400px;
         position: absolute;
         top: 210px;
         left: -22vw;
@@ -255,15 +263,19 @@
 
         .filtering {
             position: static;
-            height: 180px;
+            max-height: 200px;
             margin-bottom: 5vw;
-            padding: 3% 5%;
+            padding: 2% 5%;
         }
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: 1000px) and (max-width: 1640px){
         .filtering {
             width: 16vw;
+        }
+
+        :global(.filtering .filter-list-label) {
+            width: 120px;
         }
     }
 </style>
