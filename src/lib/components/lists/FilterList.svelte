@@ -168,6 +168,13 @@
         column-gap: 5px;
     }
 
+    @media (min-width: 1001px) and (max-width: 1441px) {
+        .cities-list,
+        .overseers-list ul {
+            grid-template-columns: auto;
+        }
+    }
+
     @media (max-width: 1001px) {
         .filter-list {
             font-size: 14px;
