@@ -63,31 +63,73 @@
         }
     }
 
+    let sort_options = [];
+
+    if (is_article) {
+        sort_options.push(
+            {
+                param: 'title',
+                label: 'По названию',
+                type: 'string',
+                direction: 'asc'
+            },
+            {
+                param: 'datetime',
+                label: 'По дате публикации',
+                type: 'date'
+            }
+        );
+    } else {
+        sort_options.push({
+            param: 'name',
+            label: 'По имени',
+            type: 'string',
+            direction: 'asc'
+        });
+
+        if (is_homeless) {
+            sort_options.push({
+                param: 'datetime',
+                label: 'По дате поступления',
+                type: 'date',
+                direction: 'asc'
+            });
+        } else {
+            sort_options.push({
+                param: 'graduation_date',
+                label: 'По дате выпуска',
+                type: 'date',
+                direction: 'asc'
+            });
+        }
+    }
+
     let sorted = {
-        param: 'datetime',
-        type: 'asc'
+        param: sort_options[1].param,
+        type: sort_options[1].type,
+        direction: sort_options[1].direction ?? 'desc'
     };
 
     /**
      * Сортировка списка
-     * @param param
+     * @param sorting
      * @param evt
      * @return void
      */
-    const sort_by = function (param, evt) {
-        if (sorted.param !== param) {
-            data_array = param === 'datetime' ? data_array.sort_by_date(param) : data_array.sort_by_string(param);
-            sorted.param = param;
+    const sort_by = function (sorting, evt) {
+        if (sorted.param !== sorting.param) {
+            sorted = sorting;
+            data_array = sorted.type === 'date' ? data_array.sort_by_date(sorting.param) : data_array.sort_by_string(sorting.param);
             evt.target.classList.add('up');
             evt.target.previousElementSibling?.classList.remove('up', 'down');
             evt.target.nextElementSibling?.classList.remove('up', 'down');
         } else {
-            if (sorted.type === 'desc') {
-                sorted.type = 'asc';
+            if (sorted.direction === 'desc') {
+                sorted.direction = 'asc';
                 evt.target.classList.toggle('down');
                 evt.target.classList.toggle('up');
             } else {
-                sorted.type = 'desc';
+                sorted.direction = 'desc';
                 evt.target.classList.toggle('up');
                 evt.target.classList.toggle('down');
             }
@@ -173,8 +215,9 @@
 
             <div class="sorting">
                 <p class="by_{sorted.param}">
-                    <SortButton title="{is_article ? 'По названию' : 'По именам'}" click_handler={(evt) => sort_by(data_array[0].hasOwnProperty('name') ? 'name' : 'title', evt)} />
-                    <SortButton class_name="up" title="{is_article ? 'По дате публикации' : 'По дате поступления'}" click_handler={(evt) => sort_by('datetime', evt)} />
+                {#each sort_options as sort_option}
+                    <SortButton class_name="{sort_option.param === sorted.param ? (sorted.direction === 'desc' ? 'down' : 'up') : ''}" title="{sort_option.label}" click_handler={(evt) => sort_by(sort_option, evt)} />
+                {/each}
                 </p>
             </div>
 
