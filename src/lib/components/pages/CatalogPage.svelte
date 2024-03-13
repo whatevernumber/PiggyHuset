@@ -214,11 +214,9 @@
             <BigHeader text_content="{page_title}" position="left"/>
 
             <div class="sorting">
-                <p class="by_{sorted.param}">
-                {#each sort_options as sort_option}
-                    <SortButton class_name="{sort_option.param === sorted.param ? (sorted.direction === 'desc' ? 'down' : 'up') : ''}" title="{sort_option.label}" click_handler={(evt) => sort_by(sort_option, evt)} />
-                {/each}
-                </p>
+            {#each sort_options as sort_option}
+                <SortButton class_name="{sort_option.param === sorted.param ? (sorted.direction === 'desc' ? 'down' : 'up') : ''}" title="{sort_option.label}" click_handler={(evt) => sort_by(sort_option, evt)} />
+            {/each}
             </div>
 
             {#if !is_article}
@@ -265,6 +263,7 @@
         flex-direction: row;
         justify-content: flex-end;
         margin-bottom: 5%;
+        column-gap: 5px;
     }
 
     .filtering {
