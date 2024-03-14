@@ -11,12 +11,12 @@
 	import { _REMOTE_SERVER } from '$env/static/public';
 	import { onMount } from 'svelte';
 
-	export let header;
 	export let graduated;
 	export let age;
 	export let author;
 	export let admin;
 	export let id;
+	export let pig_name;
 	export let is_article;
 	export let type;
 	export let modal_opened;
@@ -27,7 +27,10 @@
 	export let graduation_date;
 	export let pig_status;
 	export let pig_status_id;
+	export let action;
 	let status_list = [];
+	let current_status = pig_status;
+	$: header = pig_name + ' ' + current_status;
 
 	if (pig_sex) {
 		switch(pig_sex) {
@@ -43,6 +46,7 @@
 	const click_handler = (evt) => {
 		modal_opened = true;
 		showModal(evt);
+		action = 'change';
 		document.querySelector('.message').innerHTML = `Вы собираетесь изменить статус свинки. Это действие <b>необратимо</b>`;
 		document.removeEventListener('click', closeModal);
 		status_value = evt.target.value;
@@ -56,6 +60,7 @@
 
 			if (res.ok) {
 				status_list = await res.json();
+				current_status = status_list.find(i => i.id === pig_status_id).text;
 				status_list = status_list.filter(i => i.id !== pig_status_id);
 			}
 		}
@@ -70,7 +75,7 @@
 		<div class='radio_group'>
 			{#each status_list as status}
 			<label class='graduated_radio'>
-				<input type='radio' name='graduated' value={status.value} on:click={click_handler}>
+				<input type='radio' name='graduated' value={status.id} on:click={click_handler}>
 				<span class='radio_value'>
 					{status.text}
 				</span>

@@ -6,11 +6,14 @@
 	import {onMount} from 'svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	export let data;
 
 	const type = 'ready';
-	const pig = data.pig;
+	let pig = data.pig;
+	let pig_id = pig.id;
+	let pig_name = pig.name;
 	const pic = pig.main_photo;
 	const age = pig.age;
 	const graduated = pig.status_id;
@@ -23,13 +26,11 @@
 	let overseer = pig.overseer ? pig.overseer.overseer_name : null;
 	let pig_sex = pig.sex;
 	let pig_status = pig.status ? pig.status.text : '';
-	let pig_status_id = pig.status ? pig.status.id : '';
 
 	if (graduated === 2) {
 		pig.status.text = (pig_sex === 'M' ? 'нашёл' : 'нашла') + ' дом';
 	}
 
-	let header = pig.name + ' — ' + pig.status.text;
 	let status; // для отображения картинки статуса выпусника;
 
 	switch (graduated) {
@@ -52,6 +53,9 @@
 	let status_value;
 	let success = false;
 
+	const UNAVAILABLE_STATUSES = [2, 3, 4];
+	$: pig_status_id = pig.status_id;
+
 	onMount(() => {
 		admin = localStorage.getItem(_ADMIN_FLAG);
 	})
@@ -67,10 +71,19 @@
 
 	const graduate_handler = () => {
 		graduatePig(status_value);
+
+		if ((UNAVAILABLE_STATUSES.includes(parseInt(status_value)) && UNAVAILABLE_STATUSES.includes(pig_status_id))) {
+			action = 'complete';
+			pig_status_id = parseInt(status_value);
+		} else {
+			action = 'sent';
+		}
 	}
 
 	const redirect_after_graduate = () => {
-		redirect(`/admin/overview`, 100)
+		if (action === 'sent') {
+			redirect(`/looking-for-home/${pig_id}`, 100);
+		}
 	}
 
 	async function graduatePig (value) {
@@ -86,7 +99,6 @@
 			if (result) {
 				document.querySelector('.message').innerHTML = `Статус успешно изменён`;
 				success = true;
-				action = 'sent';
 			} else {
 				action = 'change_fail'
 			}
@@ -95,12 +107,15 @@
 </script>
 
 <svelte:head>
-	<title>{header}</title>
+	<title>{pig_name ? pig_name + ' ' + pig_status : 'Свинка'}</title>
 </svelte:head>
 
+{#key pig_status_id}
 <Article {date} {text} photos="{pig.photos}" type="graduate">
-	<PigProfile {city} {overseer} {graduated} {graduation_date} {pig_sex} {pig_status} {pig_status_id} {status} {taken} {rainbow} {pic} {header} {age} {type} {redirect_to_edit} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value} />
+	<PigProfile {city} {overseer} {graduated} {graduation_date} {pig_sex} {pig_status} {pig_status_id} {status} {taken} {rainbow} {pic} {pig_name} {age} {type} {redirect_to_edit} {admin}
+				bind:modal_opened={modal_opened} bind:status_value={status_value} bind:action={action} />
 </Article>
+{/key}
 
 {#if modal_opened}
 	<Overlay />

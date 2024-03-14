@@ -6,16 +6,14 @@
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
-
 	export let data;
 
 	let pig = data.pig;
 
 	let pig_id = pig.id;
+	let pig_name = pig.name;
 	let pic = pig.main_photo;
-	let header = pig.name + ' ' + pig.status.text;
 	let age = pig.age;
-	let graduated = pig.status_id;
 	let text = pig.description;
 	let date = pig.datetime;
 	let city = pig.city.city_name;
@@ -27,7 +25,10 @@
 	let status_value;
 	let success = false;
 	let pig_sex = pig.sex;
-	let pig_status_id = pig.status_id;
+	let pig_status = pig.status ? pig.status.text : '';
+
+	const AVAILABLE_STATUSES = [1, 5, 6];
+	$: pig_status_id = pig.status_id;
 
 	onMount(() => {
 		admin = localStorage.getItem(_ADMIN_FLAG);
@@ -43,17 +44,26 @@
 		redirect('/admin/edit/pig/' + pig.id);
 	}
 
+	const graduate_handler = () => {
+		graduatePig(status_value);
+
+		if ((AVAILABLE_STATUSES.includes(parseInt(status_value)) && AVAILABLE_STATUSES.includes(pig_status_id))) {
+			action = 'complete';
+			pig_status_id = parseInt(status_value);
+		} else {
+			action = 'sent';
+		}
+	}
+
 	const redirect_after_graduate = () => {
-		redirect(`/graduates/${pig_id}`, 100)
+		if (action === 'sent') {
+			redirect(`/graduates/${pig_id}`, 100);
+		}
 	}
 
 	const cancel = (evt) => {
 		modal_opened = false;
 		closeModal(evt);
-	}
-
-	const graduate_handler = () => {
-		graduatePig(status_value);
 	}
 
 	async function graduatePig (value) {
@@ -69,7 +79,6 @@
 			if (result) {
 				document.querySelector('.message').innerHTML = `Статус успешно изменён`;
 				success = true;
-				action = 'sent';
 			} else {
 				action = 'change_fail'
 			}
@@ -78,12 +87,15 @@
 </script>
 
 <svelte:head>
-	<title>{pig.name ?? 'Свинка'}</title>
+	<title>{pig_name ?? 'Свинка'}</title>
 </svelte:head>
 
+{#key pig_status_id}
 <Article {date} {text} type="pig" photos="{pig.photos}" pig_name="{pig.name}">
-	<PigProfile {overseer} {city} {pig_status_id} {graduated} {pic} {header} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened} bind:status_value={status_value}/>
+	<PigProfile {overseer} {city} {pig_status_id} {pic} {pig_name} {pig_status} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened}
+				bind:status_value={status_value} bind:action={action}/>
 </Article>
+{/key}
 
 {#if modal_opened}
 	<Overlay />
