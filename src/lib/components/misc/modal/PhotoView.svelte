@@ -2,9 +2,17 @@
     export let src = '../src/lib/img/kb-pig.png';
     export let no_border = false;
     export let no_shadow = false;
+
+    // флаг для класса, отменяющего скругление
+    let no_border_radius = false;
+
+    if (!no_border) {
+        no_border_radius = true;
+    }
+
 </script>
 
-<figure class="photo-wrapper" class:no-border={no_border} class:no-shadow={no_shadow}>
+<figure class="photo-wrapper" class:no-border={no_border} class:no-shadow={no_shadow} class:no-border-radius={no_border_radius}>
     <img class='photo_main' {src} width='700' height='600' alt="Фотография свинки">
 </figure>
 
@@ -23,6 +31,10 @@
 
     .no-border {
         border: none;
+    }
+
+    .no-border-radius img {
+        border-radius: 0;
     }
 
     .no-shadow .photo_main {
