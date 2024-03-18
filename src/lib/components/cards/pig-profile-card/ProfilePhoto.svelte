@@ -12,7 +12,7 @@
 
 </script>
 
-<div>
+<div class="profile_photo">
 	<PhotoCard width="240" height="244" {pic} {type} {status} />
 	{#if admin}
 		<div class="profile_buttons">
@@ -25,12 +25,18 @@
 </div>
 
 <style>
-  .profile_buttons {
-      display: flex;
-      max-width: 270px;
-	  margin-top: 5px;
-      justify-content: space-between;
-  }
+	.profile_photo {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+    .profile_buttons {
+        display: flex;
+        max-width: 270px;
+	    margin-top: 5px;
+		justify-content: space-between;
+    }
 
   @media (max-width: 1000px) {
 	  .profile_buttons {

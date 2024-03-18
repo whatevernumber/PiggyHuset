@@ -126,7 +126,7 @@
 <svelte:window bind:innerWidth={window_width} />
 
 <article id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
-    <LinkWithReferrer {href}>
+    <LinkWithReferrer {href} css_class="card-container">
         <PhotoCard pic={image} {type} {status} width='250' height='250' alt='Фотография свинки' />
     </LinkWithReferrer>
     <div class="wrapper">
@@ -181,6 +181,7 @@
         flex-direction: column;
         flex-grow: 1;
         justify-content: space-around;
+        row-gap: 10px;
     }
 
     img {
