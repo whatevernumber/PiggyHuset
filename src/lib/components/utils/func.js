@@ -146,7 +146,9 @@ export const load_more = async function (data, category) {
                 break;
         }
 
-        const url = `${_REMOTE_SERVER}/${server_location}?page=${data.pagination.page++}`;
+        let expand = category === 'articles' || category === 'news' ? '' : 'overseer,city,status';
+
+        const url = `${_REMOTE_SERVER}/${server_location}?page=${data.pagination.page++}&expand=${expand}`;
         const response = await fetch(url);
         const batch = await response.json();
 
