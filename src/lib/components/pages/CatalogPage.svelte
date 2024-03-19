@@ -104,28 +104,35 @@
         direction: sort_options[1].direction ?? 'desc'
     };
 
+    const do_sorting = function (param) {
+        return sorted.type === 'date' ? data_array.sort_by_date(param) : data_array.sort_by_string(param);
+    }
+
     /**
      * Сортировка списка
      * @param sorting
-     * @param evt
+     * @param node
      * @return void
      */
-    const sort_by = function (sorting, evt) {
-        if (sorted.param !== sorting.param) {
+    const sort_by = function (sorting, node) {
+        if (sorted.param !== sorting.param && get_new_batch()) {
             sorted = sorting;
-            data_array = sorted.type === 'date' ? data_array.sort_by_date(sorting.param) : data_array.sort_by_string(sorting.param);
-            evt.target.classList.add('up');
-            evt.target.previousElementSibling?.classList.remove('up', 'down');
-            evt.target.nextElementSibling?.classList.remove('up', 'down');
+            data_array = do_sorting(sorting.param);
+
+            if (node) {
+                node.classList.add('up');
+                node.previousElementSibling?.classList.remove('up', 'down');
+                node.nextElementSibling?.classList.remove('up', 'down');
+            }
         } else {
             if (sorted.direction === 'desc') {
                 sorted.direction = 'asc';
-                evt.target.classList.toggle('down');
-                evt.target.classList.toggle('up');
+                node.classList.toggle('down');
+                node.classList.toggle('up');
             } else {
                 sorted.direction = 'desc';
-                evt.target.classList.toggle('up');
-                evt.target.classList.toggle('down');
+                node.classList.toggle('up');
+                node.classList.toggle('down');
             }
             data_array = data_array.reverse();
         }
@@ -144,8 +151,8 @@
             active_filters.push(evt.target.value);
         }
 
-        // Принудительное скролл-событие для подгрузки остальных данных перед фильтрацией через load_more
-        document.dispatchEvent(new MouseEvent('scroll', {detail: 1}));
+        // Принудительная подгрузка остального списка
+        get_new_batch();
 
         // запустить фильтрацию
         filter();
@@ -186,6 +193,24 @@
         );
     }
 
+    async function get_new_batch () {
+        let new_batch = await load_more(data, category);
+
+        // второе условие не даёт данным в массиве дублироваться, что может привести к нерабочему #each
+        if (new_batch && !data_array.some(el => new_batch.includes(el))) {
+            data_array = [
+                ...data_array,
+                ...new_batch
+            ];
+            do_sorting(sorted.param);
+        }
+
+        setTimeout(() => {
+            if (active_filters) filter();
+            do_sorting(sorted.param);
+        }, 200);
+    }
+
     /**
      * Подгрузка новых партий при скролле до конца страницы
      */
@@ -193,13 +218,7 @@
         () => document.addEventListener('scroll', async function (evt) {
             const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
             if (bottom_reached || evt.detail) {
-                new_batch = await load_more(data, category);
-            }
-
-            // Повторная фильтрация с сортировкой при принудительной подгрузке
-            if (evt.detail) {
-                setTimeout(filter, 200);
-                sort_by(sorted);
+                await get_new_batch(data, category);
             }
         })
     );
@@ -207,11 +226,7 @@
     afterNavigate(() => sessionStorage.removeItem('referrer'));
 
     // реактивное обновление списка
-    // второе условие не даёт данным в массиве дублироваться, что может привести к нерабочему #each
-    $: data_array = (new_batch && !data_array.some(el => new_batch.includes(el))) ? [
-        ...data_array,
-        ...new_batch
-    ] : data_array;
+    $: data_array = data_array;
 
 </script>
 
@@ -223,7 +238,7 @@
 
             <div class="sorting">
             {#each sort_options as sort_option}
-                <SortButton class_name="{sort_option.param === sorted.param ? (sorted.direction === 'desc' ? 'down' : 'up') : ''}" title="{sort_option.label}" click_handler={(evt) => sort_by(sort_option, evt)} />
+                <SortButton class_name="{sort_option.param === sorted.param ? (sorted.direction === 'desc' ? 'down' : 'up') : ''} {sort_option.param}" title="{sort_option.label}" click_handler={(evt) => sort_by(sort_option, evt.target)} />
             {/each}
             </div>
 
