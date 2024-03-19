@@ -84,7 +84,7 @@
 				</div>
 			{/if}
 		</div>
-		<CardMainContent article {header} {text} />
+		<CardMainContent is_article {header} {text} />
 	</div>
 
 	{#if news.photos.length > 1}

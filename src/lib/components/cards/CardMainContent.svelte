@@ -28,9 +28,10 @@
 	export let pig_status;
 	export let pig_status_id;
 	export let action;
+	export let header;
 	let status_list = [];
-	let current_status = pig_status;
-	$: header = pig_name + ' ' + current_status;
+	let current_status = pig_status ?? ' ';
+	$: pig_header = pig_name ? pig_name + ' ' + current_status : null;
 
 	if (pig_sex) {
 		switch(pig_sex) {
@@ -69,7 +70,9 @@
 </script>
 
 <div class="profile_description">
-	<ArticleHeader text={header} {type} />
+	{#key pig_header}
+		<ArticleHeader text={pig_header || header} {type} />
+	{/key}
 	<div class="bio_wrapper">
 		{#if (admin && !is_article)}
 		<div class='radio_group'>
