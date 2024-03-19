@@ -27,12 +27,6 @@
     const is_article = (type === 'article' || type === 'news');
     const is_homeless = type === 'pig';
 
-    let overseers;
-    if (is_homeless) {
-        // получение списка кураторов, у которых есть хотя бы один подопечный
-        overseers = data_array.map(({overseer}) => overseer).filter(Boolean);
-    }
-
     const show_delete = (evt) => {
         action = 'delete';
         showModal(evt);
@@ -150,6 +144,9 @@
             active_filters.push(evt.target.value);
         }
 
+        // Принудительное скролл-событие для подгрузки остальных данных перед фильтрацией через load_more
+        document.dispatchEvent(new MouseEvent('scroll', {detail: 1}));
+
         // запустить фильтрацию
         filter();
     }
@@ -176,23 +173,32 @@
                         || (!filter_by_city && overseer_match))
                         || !filter_by_overseer && (city_match || overseer_match)
                     ) {
-                        node.parentElement.classList.remove('filtered');
+                        node?.parentElement.classList.remove('filtered');
                     } else {
-                        node.parentElement.classList.add('filtered');
+                        node?.parentElement.classList.add('filtered');
                     }
                 } else {
                     // если все фильтры сняты, отобразить все элементы
-                    node.parentElement.classList.remove('filtered');
+                    const card = node?.parentElement;
+                    if (card?.classList.contains('filtered')) card.classList.remove('filtered');
                 }
             }
         );
     }
 
+    /**
+     * Подгрузка новых партий при скролле до конца страницы
+     */
     onMount(
-        () => document.addEventListener('scroll', async function () {
+        () => document.addEventListener('scroll', async function (evt) {
             const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
-            if (bottom_reached) {
+            if (bottom_reached || evt.detail) {
                 new_batch = await load_more(data, category);
+            }
+
+            // Повторная фильтрация при принудительной подгрузке
+            if (evt.detail) {
+                setTimeout(filter, 200);
             }
         })
     );
@@ -200,7 +206,8 @@
     afterNavigate(() => sessionStorage.removeItem('referrer'));
 
     // реактивное обновление списка
-    $: data_array = new_batch ? [
+    // второе условие не даёт данным в массиве дублироваться, что может привести к нерабочему #each
+    $: data_array = (new_batch && !data_array.some(el => new_batch.includes(el))) ? [
         ...data_array,
         ...new_batch
     ] : data_array;
@@ -221,7 +228,7 @@
 
             {#if !is_article}
             <div class="filtering">
-                <FilterList data="{data_array}" filter_handler="{add_to_filter}" active_only="{is_homeless}" {overseers} />
+                <FilterList data="{data_array}" filter_handler="{add_to_filter}" active_only="{is_homeless}" />
             </div>
             {/if}
 

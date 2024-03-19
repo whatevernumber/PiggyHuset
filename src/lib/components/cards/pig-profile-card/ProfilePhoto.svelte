@@ -12,8 +12,8 @@
 
 </script>
 
-<div>
-	<PhotoCard width="240" height="244" {pic} {type} {status} />
+<div class="profile_photo">
+	<PhotoCard width="250" {pic} {type} {status} />
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton title="Редактировать" click_handler={redirect_to_edit} />
@@ -25,16 +25,22 @@
 </div>
 
 <style>
-  .profile_buttons {
-      display: flex;
-      max-width: 270px;
-	  margin-top: 5px;
-      justify-content: space-between;
-  }
+	.profile_photo {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
 
-  @media (max-width: 1000px) {
-	  .profile_buttons {
-		  margin: 0 auto 15px;
-	  }
-  }
+    .profile_buttons {
+		display: flex;
+        max-width: 270px;
+	    margin-top: 5px;
+		justify-content: space-between;
+    }
+
+	@media (max-width: 1000px) {
+		.profile_buttons {
+			margin: 0 auto 15px;
+		}
+	}
 </style>

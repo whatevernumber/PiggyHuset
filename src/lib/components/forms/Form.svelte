@@ -395,7 +395,8 @@
         max-width: 275px;
 
         & input {
-            width: 200px;
+            -moz-appearance: textfield;
+            -webkit-appearance: none;
         }
     }
 

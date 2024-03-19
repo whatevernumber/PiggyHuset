@@ -4,8 +4,8 @@
 
     export let filter_handler;
     export let active_only = false; // только кураторы с подопечными
-    export let overseers = [];
 
+    let overseers = [];
     let cities = [];
 
     onMount(async () => {
@@ -15,16 +15,16 @@
             cities = await city_list.json();
         }
 
-        if (active_only) {
-            // удаление повторяющихся записей
-            const ovs_ids = overseers.map(ov => ov.id);
-            overseers = overseers.filter((ov, i) => !ovs_ids.includes(ov.id, i + 1));
-        } else {
-            const get_overseers = await fetch(_REMOTE_SERVER + '/overseers');
+        let query = _REMOTE_SERVER + '/overseers';
 
-            if (get_overseers.ok) {
-                overseers = await get_overseers.json();
-            }
+        if (active_only) {
+            query += '/active';
+        }
+
+        let get_overseers = await fetch(query);
+
+        if (get_overseers.ok) {
+            overseers = await get_overseers.json();
         }
     })
 </script>

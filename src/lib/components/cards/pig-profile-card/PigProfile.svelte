@@ -26,7 +26,7 @@
 	export let action;
 </script>
 
-<div class='profile_wrapper'>
+<div class="profile_wrapper">
 	<ProfilePhoto {type} {pic} {status} {admin} {show_delete} {redirect_to_edit} {removable}/>
 	<CardMainContent {pig_status} {pig_status_id}
 					 {pig_name} {graduation_date} {pig_sex} {city} {overseer} {graduated} {article} {age}
