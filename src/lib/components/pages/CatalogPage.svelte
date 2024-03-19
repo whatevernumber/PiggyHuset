@@ -144,10 +144,7 @@
             active_filters.push(evt.target.value);
         }
 
-        /** Принудительное скролл-событие для подгрузки остальных данных перед фильтрацией:
-         *  сначала симулируется скролл для триггера load_more,
-         *  а затем спустя 200мс повторный скролл для фильтрации
-         */
+        // Принудительное скролл-событие для подгрузки остальных данных перед фильтрацией через load_more
         document.dispatchEvent(new MouseEvent('scroll', {detail: 1}));
 
         // запустить фильтрацию
@@ -189,6 +186,9 @@
         );
     }
 
+    /**
+     * Подгрузка новых партий при скролле до конца страницы
+     */
     onMount(
         () => document.addEventListener('scroll', async function (evt) {
             const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
@@ -196,6 +196,7 @@
                 new_batch = await load_more(data, category);
             }
 
+            // Повторная фильтрация при принудительной подгрузке
             if (evt.detail) {
                 setTimeout(filter, 200);
             }
@@ -205,6 +206,7 @@
     afterNavigate(() => sessionStorage.removeItem('referrer'));
 
     // реактивное обновление списка
+    // второе условие не даёт данным в массиве дублироваться, что может привести к нерабочему #each
     $: data_array = (new_batch && !data_array.some(el => new_batch.includes(el))) ? [
         ...data_array,
         ...new_batch

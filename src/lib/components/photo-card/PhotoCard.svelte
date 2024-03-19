@@ -10,6 +10,8 @@
     export let is_form = false;
     export let click_handler;
     export let status = null;
+    export let width;
+    export let height;
 
     const delete_handler = () => {
         pic = pic;
@@ -19,7 +21,7 @@
 
 <div class="wrapper" aria-roledescription="Посмотреть фото">
     <div class='image_wrapper'>
-        <img {src} class="photo-card" {alt}>
+        <img {src} class="photo-card" {width} {height} {alt} style="--width: {width || 300}px">
 
         {#if type === 'ready'}
         <span class="status {status}"></span>
@@ -43,12 +45,22 @@
     }
 
     .photo-card {
-        width: 300px;
+        width: var(--width);
         max-height: 250px;
         position: relative;
-        object-fit: cover;
+        object-fit: contain;
         pointer-events: none;
         user-select: none;
+    }
+
+    :global(.uploaded_files .photo-card) {
+        width: auto;
+    }
+
+    :global(.splide__slide .photo-card) {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
     }
 
     :global(.profile_wrapper .photo-card) {

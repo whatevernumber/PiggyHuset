@@ -80,7 +80,7 @@
 		<div class="wrapper">
 			<div class="photo-card-wrapper" class:absolute={article.type_id === 1}>
 				{#if (window_width > 1000)}
-					<PhotoCard {pic} type="article" />
+					<PhotoCard {pic} width="200" type="article" />
 				{/if}
 				{#if admin}
 				<div class="profile_buttons">

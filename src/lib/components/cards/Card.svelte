@@ -127,7 +127,7 @@
 
 <article id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     <LinkWithReferrer {href} css_class="card-container">
-        <PhotoCard pic={image} {type} {status} width='250' height='250' alt='Фотография свинки' />
+        <PhotoCard pic={image} {type} {status} width="300" height="300" alt='Фотография свинки' />
     </LinkWithReferrer>
     <div class="wrapper">
         <div class='header_wrapper'>
