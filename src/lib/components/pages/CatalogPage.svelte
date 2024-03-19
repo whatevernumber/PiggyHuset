@@ -196,9 +196,10 @@
                 new_batch = await load_more(data, category);
             }
 
-            // Повторная фильтрация при принудительной подгрузке
+            // Повторная фильтрация с сортировкой при принудительной подгрузке
             if (evt.detail) {
                 setTimeout(filter, 200);
+                sort_by(sorted);
             }
         })
     );
