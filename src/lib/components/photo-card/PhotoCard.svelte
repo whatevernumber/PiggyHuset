@@ -58,7 +58,7 @@
     }
 
     :global(.splide__slide .photo-card) {
-        width: 200px;
+        width: 244px;
         height: 200px;
         object-fit: cover;
     }
