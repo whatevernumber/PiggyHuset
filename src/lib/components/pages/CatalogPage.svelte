@@ -125,7 +125,7 @@
                 node.nextElementSibling?.classList.remove('up', 'down');
             }
         } else {
-            if (sorted.direction === 'desc') {
+            if (sorted.direction === 'desc' || get_new_batch()) {
                 sorted.direction = 'asc';
                 node.classList.toggle('down');
                 node.classList.toggle('up');
@@ -207,7 +207,6 @@
 
         setTimeout(() => {
             if (active_filters) filter();
-            do_sorting(sorted.param);
         }, 200);
     }
 
