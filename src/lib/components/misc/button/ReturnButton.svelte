@@ -24,11 +24,23 @@
         const sub = href.slice(0, href.lastIndexOf('/'));
 
         if (referrer && (referrer === sub || referrer.includes('overview'))) {
-            history.go(-1);
+            try {
+                history.go(-1);
+            } catch (_) {
+                goto(referrer);
+            }
         } else if (referrer.includes('admin') || href.includes('admin')) {
-            goto('/admin/overview');
+            try {
+                goto('/admin/overview');
+            } catch (_) {
+                goto('/');
+            }
         } else {
-            goto(sub);
+            try {
+                goto(sub);
+            } catch (_) {
+                goto('/');
+            }
         }
         document.removeEventListener('scroll', adjust_button_position);
     };
