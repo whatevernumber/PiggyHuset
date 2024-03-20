@@ -91,7 +91,7 @@
 </svelte:head>
 
 {#key pig_status_id}
-<Article {date} {text} type="pig" photos="{pig.photos}" pig_name="{pig.name}">
+<Article {date} {text} type="pig" photos="{pig.photos}" pig_name="{pig.name}" {pig_status}>
 	<PigProfile {overseer} {city} {pig_status_id} {pic} {pig_name} {pig_status} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened}
 				bind:status_value={status_value} bind:action={action}/>
 </Article>
