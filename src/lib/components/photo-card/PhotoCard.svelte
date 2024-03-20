@@ -84,9 +84,9 @@
         z-index: 5;
 
         &.rainbow {
-            width: 65%;
-            height: 75%;
-            right: -15%;
+            width: 125px;
+            height: 125px;
+            right: -10%;
             bottom: -20%;
             background-image: url("/src/lib/img/rainbow.png");
         }
