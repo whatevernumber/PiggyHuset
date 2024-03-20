@@ -87,7 +87,7 @@
             width: 125px;
             height: 125px;
             right: -10%;
-            bottom: -20%;
+            bottom: -10%;
             background-image: url("/src/lib/img/rainbow.png");
         }
 
