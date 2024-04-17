@@ -32,7 +32,7 @@
                 // добавление отступа абзацам, идущим до перехода от картинки к полной ширине
                 if (['P', 'BLOCKQUOTE', 'LI', 'H1', 'H2'].includes(p.tagName)) {
                     const offset = window.scrollY + p.getBoundingClientRect().top;
-                    const limit = window.scrollY + article.getBoundingClientRect().top + 70;
+                    const limit = window.scrollY + article.getBoundingClientRect().top + 30;
                     if (offset < limit) {
                         p.classList.add('float-right');
                     } else {
@@ -179,13 +179,11 @@
     .article_text ol {
         width: 80%;
         padding-left: 10%;
-        margin: 3% 0;
+        margin: 0.35em 0;
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
         text-align: justify;
-    }
-
-    .article_text ul > li,
-    .article_text ol > li {
-        margin-bottom: 5%;
     }
 
     .article_text ul > li {
