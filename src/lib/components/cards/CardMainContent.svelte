@@ -31,7 +31,7 @@
 	export let header;
 	let status_list = [];
 	let current_status = pig_status ?? ' ';
-	$: pig_header = pig_name ? pig_name + ' ' + current_status : null;
+	$: pig_header = pig_name ? pig_name + ' — ' + current_status : null;
 
 	if (pig_sex) {
 		switch(pig_sex) {
