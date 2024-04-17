@@ -84,16 +84,16 @@
         z-index: 5;
 
         &.rainbow {
-            width: 125px;
-            height: 125px;
+            width: 150px;
+            height: 150px;
             right: -10%;
             bottom: -10%;
             background-image: url("/src/lib/img/rainbow.png");
         }
 
         &.taken {
-            width: 75%;
-            height: 90%;
+            width: 200px;
+            height: 200px;
             right: -15%;
             bottom: -15%;
             background-image: url("/src/lib/img/taken.png");
@@ -101,7 +101,7 @@
     }
 
     @media (max-width: 1001px) {
-        .status.rainbow {
+        .status {
             bottom: -10%;
         }
     }
