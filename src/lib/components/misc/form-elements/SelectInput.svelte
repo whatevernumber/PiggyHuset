@@ -27,6 +27,9 @@
 
 	onMount(async () => {
 		if (type !== 'sex') {
+
+			type === 'status_id' ? type = 'statuses' : type;
+
 			const res = await fetch(_REMOTE_SERVER + '/' + type);
 
 			if (res.ok) {
