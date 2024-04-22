@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-	<title>Домик для Морских Поросят</title>
+	<title>Домик для Бездомных Поросят</title>
 </svelte:head>
 
 <h1 class="main-header">Домик для бездомных поросят</h1>
