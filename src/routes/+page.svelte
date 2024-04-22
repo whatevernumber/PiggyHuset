@@ -11,10 +11,10 @@
 </script>
 
 <svelte:head>
-	<title>Домик для Бездомных Поросят</title>
+	<title>ДОМИК для бездомных поросят</title>
 </svelte:head>
 
-<h1 class="main-header">Домик для бездомных поросят</h1>
+<h1 class="main-header">ДОМИК для бездомных поросят</h1>
 <main in:fly={{y: 1000, duration: 500, delay: 0}}>
 	<Banner />
 	<div class="landing_main_wrapper main_wrapper">
