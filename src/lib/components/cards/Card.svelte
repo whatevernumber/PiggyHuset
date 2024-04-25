@@ -41,13 +41,16 @@
         pig_sex = (pig_sex === 'F') ? 'Девочка' : 'Мальчик';
     }
 
-    if (type === 'ready') {
+    if (type === 'ready' || type === 'pig') {
         switch (article.status_id) {
             case 3:
                 status = 'rainbow';
                 break;
             case 4:
                 status = 'taken';
+                break;
+            case 6:
+                status = 'quarantine';
                 break;
         }
     }
@@ -215,6 +218,7 @@
     .bottom-line {
         display: flex;
         justify-content: space-between;
+        column-gap: 5px;
 
         @media(max-width: 1179px) {
             flex-wrap: wrap;
@@ -222,10 +226,13 @@
     }
 
     .datetime {
+        align-self: flex-end;
+        display: flex;
+        column-gap: 5px;
+        flex-wrap: wrap;
         font-size: 15px;
         font-style: italic;
         color: rgba(0, 0, 0, 0.5);
-        align-self: flex-end;
     }
 
     .datetime:first-letter {

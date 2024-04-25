@@ -6,7 +6,6 @@
 	import {onMount} from 'svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
-	import { invalidateAll } from '$app/navigation';
 
 	export let data;
 
@@ -31,19 +30,17 @@
 		pig.status.text = (pig_sex === 'M' ? 'нашёл' : 'нашла') + ' дом';
 	}
 
-	let status; // для отображения картинки статуса выпусника;
+	let status_picture; // для отображения картинки статуса выпусника;
 
 	switch (graduated) {
 		case 2:
 			break;
 		case 3:
-			status = 'rainbow';
+			status_picture = 'rainbow';
 			break;
 		case 4:
-			status = 'taken';
+			status_picture = 'taken';
 			break;
-		default:
-			header;
 	}
 
 	let admin = false;
@@ -75,6 +72,15 @@
 		if ((UNAVAILABLE_STATUSES.includes(parseInt(status_value)) && UNAVAILABLE_STATUSES.includes(pig_status_id))) {
 			action = 'complete';
 			pig_status_id = parseInt(status_value);
+
+			// Обновление иконки статуса в зависимости от изменений
+			if (pig_status_id === 3) {
+				status_picture = 'rainbow';
+			} else if (pig_status_id === 4) {
+				status_picture = 'taken'
+			} else if (pig_status_id === 2) {
+				status_picture = 'graduated'
+			}
 		} else {
 			action = 'sent';
 		}
@@ -112,7 +118,7 @@
 
 {#key pig_status_id}
 <Article {date} {text} photos="{pig.photos}" type="graduate">
-	<PigProfile {city} {overseer} {graduated} {graduation_date} {pig_sex} {pig_status} {pig_status_id} {status} {taken} {rainbow} {pic} {pig_name} {age} {type} {redirect_to_edit} {admin}
+	<PigProfile {city} {overseer} {graduated} {graduation_date} {pig_sex} {pig_status} {pig_status_id} status={status_picture} {taken} {rainbow} {pic} {pig_name} {age} {type} {redirect_to_edit} {admin}
 				bind:modal_opened={modal_opened} bind:status_value={status_value} bind:action={action} />
 </Article>
 {/key}
