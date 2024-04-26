@@ -22,13 +22,16 @@
 
 	let modal_opened = false;
 	let action = 'change';
-	let status_value;
+	let status_value; // Выбранное в чекбоксе id статуса, изменяется при действии 'Graduate'
 	let success = false;
 	let pig_sex = pig.sex;
-	let pig_status = pig.status ? pig.status.text : '';
+	let pig_status = pig.status ? pig.status.text : ''; // Текущий статус свинки;
+
+	let status_picture = pig.status.value; // Для отображения мини-картинки статуса для Карантина
 
 	const AVAILABLE_STATUSES = [1, 5, 6];
 	$: pig_status_id = pig.status_id;
+
 
 	onMount(() => {
 		admin = localStorage.getItem(_ADMIN_FLAG);
@@ -50,6 +53,12 @@
 		if ((AVAILABLE_STATUSES.includes(parseInt(status_value)) && AVAILABLE_STATUSES.includes(pig_status_id))) {
 			action = 'complete';
 			pig_status_id = parseInt(status_value);
+
+			if (pig_status_id === 6) {
+				status_picture = 'quarantine';
+			} else {
+				status_picture = null;
+			}
 		} else {
 			action = 'sent';
 		}
@@ -92,7 +101,7 @@
 
 {#key pig_status_id}
 <Article {date} {text} type="pig" photos="{pig.photos}" pig_name="{pig.name}" {pig_status}>
-	<PigProfile {overseer} {city} {pig_status_id} {pic} {pig_name} {pig_status} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened}
+	<PigProfile {overseer} {city} {pig_status_id} status={status_picture} {pic} {pig_name} {pig_status} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened}
 				bind:status_value={status_value} bind:action={action}/>
 </Article>
 {/key}

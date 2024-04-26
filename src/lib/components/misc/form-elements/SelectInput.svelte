@@ -19,6 +19,9 @@
 		case 'overseers':
 			input_name = 'overseer'
 			break;
+		case 'statuses':
+			input_name = 'status'
+			break;
 		default:
 			input_name = type;
 	}
@@ -27,6 +30,11 @@
 
 	onMount(async () => {
 		if (type !== 'sex') {
+
+			if (type === 'statuses') {
+				option_name = 'text';
+			}
+
 			const res = await fetch(_REMOTE_SERVER + '/' + type);
 
 			if (res.ok) {

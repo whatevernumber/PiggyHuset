@@ -74,34 +74,8 @@
             },
             {
                 label: 'Статус',
-                name: 'status_id',
+                name: 'statuses',
                 type: 'select',
-                options: [
-                    {
-                        id: '1',
-                        value: 'Ищет дом',
-                    },
-                    {
-                        id: '6',
-                        value: 'Карантин'
-                    },
-                    {
-                        id: '5',
-                        value: 'Резерв'
-                    },
-                    {
-                        id: '2',
-                        value: 'В новом доме'
-                    },
-                    {
-                        id: '3',
-                        value: 'Радуга'
-                    },
-                    {
-                        id: '4',
-                        value: 'Зажабить'
-                    }
-                ],
                 required: true,
             },
 		],

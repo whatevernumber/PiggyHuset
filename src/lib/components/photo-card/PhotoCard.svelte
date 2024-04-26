@@ -23,7 +23,7 @@
     <div class='image_wrapper'>
         <img {src} class="photo-card" {width} {height} {alt} style="--width: {width || 300}px">
 
-        {#if type === 'ready'}
+        {#if type === 'ready' || status === 'quarantine'}
         <span class="status {status}"></span>
         {/if}
 
@@ -98,6 +98,14 @@
             bottom: -15%;
             background-image: url("/src/lib/img/taken.png");
         }
+
+        &.quarantine {
+             width: 120px;
+             height: 120px;
+             right: -5%;
+             bottom: -10%;
+             background-image: url("/src/lib/img/quarantine.png");
+         }
     }
 
     @media (max-width: 1001px) {
