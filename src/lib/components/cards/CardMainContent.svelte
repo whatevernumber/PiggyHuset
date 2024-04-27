@@ -87,6 +87,12 @@
 		</div>
 		{/if}
 		<div class='bio'>
+			{#if pig_status_id === 6}
+				<p class="quarantine-notice">
+					<strong>Внимание!</strong>
+					Животное сейчас находится на карантине и будет искать дом немного позже. Следите за обновлением.
+				</p>
+			{/if}
 			{#if graduation_date && pig_status_id !== 1}
 				<p class="info pig_graduation"><b>{pig_status}:</b> <Time timestamp={graduation_date} format="DD MMMM YYYY г." /></p>
 			{/if}
@@ -217,4 +223,9 @@
 			scale: 0.9;
 		}
     }
+
+	.quarantine-notice {
+		color: red;
+		text-decoration: 1px solid underline;
+	}
 </style>
