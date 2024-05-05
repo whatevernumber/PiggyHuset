@@ -249,9 +249,11 @@
 
             <CardList>
                 {#each data_array as article (article.id)}
-                    <li>
+                    {#key data_array}
+                    <li class:filtered={article.hidden}>
                         <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id}/>
                     </li>
+                    {/key}
                 {/each}
             </CardList>
 
