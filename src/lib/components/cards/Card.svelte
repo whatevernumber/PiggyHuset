@@ -62,15 +62,15 @@
         text = text.replaceAll(/<img src="\S+" alt="">/g, '');
     }
 
-    // подрезка текста до 300 символов, если текст длиннее заданного лимита
-    text = text.length > 300 ? text.slice(0, 297) + '...' : text;
+    text = text.slice(0, 297) + '...' || '';
 
     let card;
     let innerHtml;
 
-    // отображать ли содержимое как текст или как разметку из Quill
-    text && text.includes('<p>') ?
-        innerHtml = text :
+    // отображать ли содержимое как разметку из Quill или как текст
+    if (text && text.includes('<p>'))
+        innerHtml = text;
+    else
         article.description = text;
 
     // реактивное изменение картинки карточки

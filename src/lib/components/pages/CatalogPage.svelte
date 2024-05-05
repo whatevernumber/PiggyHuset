@@ -2,13 +2,14 @@
     import BigHeader from "$lib/components/misc/h-headers/BigHeader.svelte";
     import CardList from "$lib/components/lists/CardList.svelte";
     import Card from "$lib/components/cards/Card.svelte";
-    import {closeModal, load_more, removeData, showModal} from '$lib/components/utils/func.js';
+    import {closeModal, load_all, load_more, removeData, showModal} from '$lib/components/utils/func.js';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import {onMount} from "svelte";
     import {fly} from "svelte/transition";
     import { afterNavigate } from '$app/navigation';
     import SortButton from "$lib/components/misc/button/SortButton.svelte";
     import FilterList from "$lib/components/lists/FilterList.svelte";
+    import {browser} from "$app/environment";
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -20,9 +21,10 @@
 
     let data_array = data.payload;
     let action_id;
-    let new_batch = [];
     let action = '';
     let success;
+    let active_filters = [];
+    let full_list_is_loaded = false;
 
     const is_article = (type === 'article' || type === 'news');
     const is_homeless = type === 'pig';
@@ -98,47 +100,42 @@
         }
     }
 
-    let sorted = {
+    let sort_config = {
         param: sort_options[1].param,
         type: sort_options[1].type,
         direction: sort_options[1].direction ?? 'desc'
     };
 
-    const do_sorting = function (param) {
-        return sorted.type === 'date' ? data_array.sort_by_date(param) : data_array.sort_by_string(param);
+    const do_sorting = function () {
+        return sort_config.type === 'date' ? data_array.sort_by_date(sort_config.param) : data_array.sort_by_string(sort_config.param);
     }
 
     /**
      * Сортировка списка
      * @param sorting
-     * @param node
      * @return void
      */
-    const sort_by = function (sorting, node) {
-        if (sorted.param !== sorting.param && get_new_batch()) {
-            sorted = sorting;
-            data_array = do_sorting(sorting.param);
+    const sort_by = async function (sorting) {
+        if (sort_config.param !== sorting.param) {
 
-            if (node) {
-                node.classList.add('up');
-                node.previousElementSibling?.classList.remove('up', 'down');
-                node.nextElementSibling?.classList.remove('up', 'down');
-            }
+            // загрузка полного списка (пропускается, если есть фильтрация)
+            data_array = active_filters.length ? data_array : (await load_all(category));
+            full_list_is_loaded = true;
+
+            // обновление объекта сортировки
+            sort_config = sorting;
+
+            // запуск сортировки
+            data_array = do_sorting();
         } else {
-            if (sorted.direction === 'desc' || get_new_batch()) {
-                sorted.direction = 'asc';
-                node.classList.toggle('down');
-                node.classList.toggle('up');
-            } else {
-                sorted.direction = 'desc';
-                node.classList.toggle('up');
-                node.classList.toggle('down');
-            }
+            sort_config.direction = sort_config.direction === 'desc' ? 'asc' : 'desc';
+
+            // если сортировка по тому же параметру, достаточно просто перевернуть список
             data_array = data_array.reverse();
         }
     }
 
-    let active_filters = [];
+    $: data_array = data_array.sort_by_status();
 
     const add_to_filter = function (evt) {
         const label = evt.target.parentElement;
@@ -151,9 +148,6 @@
             active_filters.push(evt.target.value);
         }
 
-        // Принудительная подгрузка остального списка
-        get_new_batch();
-
         // запустить фильтрацию
         filter();
     }
@@ -162,10 +156,16 @@
      * Фильтрация по массиву active_filters: карточке добавляется фильтр для скрытия
      * @return void
      */
-    const filter = function () {
+    const filter = async function () {
+
+        // Принудительная подгрузка остального списка
+        data_array = await load_all(category);
+        full_list_is_loaded = true;
+
+        document.removeEventListener('scroll', load_on_scroll);
+
         data_array.map(
             (el) => {
-                let node = document.getElementById(el.id);
 
                 // если чекнули хотя бы один фильтр
                 if (active_filters.length) {
@@ -175,51 +175,56 @@
                     const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор'));
 
                     // если чекнуты город и куратор / куратор без города / город без куратора
-                    if (
-                        filter_by_overseer && ((city_match && overseer_match)
-                        || (!filter_by_city && overseer_match))
-                        || !filter_by_overseer && (city_match || overseer_match)
-                    ) {
-                        node?.parentElement.classList.remove('filtered');
-                    } else {
-                        node?.parentElement.classList.add('filtered');
-                    }
+                    el.hidden = !(filter_by_overseer && ((city_match && overseer_match)
+                            || (!filter_by_city && overseer_match))
+                        || !filter_by_overseer && (city_match || overseer_match));
+                    data_array = data_array;
                 } else {
                     // если все фильтры сняты, отобразить все элементы
-                    const card = node?.parentElement;
-                    if (card?.classList.contains('filtered')) card.classList.remove('filtered');
+                    el.hidden = false;
                 }
             }
         );
+
+        data_array = do_sorting();
+    }
+
+    $: if (browser && !active_filters.length) {
+        // возврат подгрузки на скролле
+        data_array = data.payload;
+        document.addEventListener('scroll', load_on_scroll);
     }
 
     async function get_new_batch () {
         let new_batch = await load_more(data, category);
+        const ids = data_array.map(el => el.id);
+        const no_duplicates = new_batch && !new_batch.some(el => ids.includes(el.id));
 
         // второе условие не даёт данным в массиве дублироваться, что может привести к нерабочему #each
-        if (new_batch && !data_array.some(el => new_batch.includes(el))) {
+        if (no_duplicates) {
             data_array = [
                 ...data_array,
                 ...new_batch
             ];
-            do_sorting(sorted.param);
         }
 
         setTimeout(() => {
-            if (active_filters) filter();
+            if (active_filters.length) filter();
         }, 200);
     }
+
+    const load_on_scroll = async function () {
+        const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
+        if (bottom_reached) {
+            await get_new_batch();
+        }
+    };
 
     /**
      * Подгрузка новых партий при скролле до конца страницы
      */
     onMount(
-        () => document.addEventListener('scroll', async function (evt) {
-            const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
-            if (bottom_reached || evt.detail) {
-                await get_new_batch(data, category);
-            }
-        })
+        () => document.addEventListener('scroll', load_on_scroll)
     );
 
     afterNavigate(() => sessionStorage.removeItem('referrer'));
@@ -237,7 +242,7 @@
 
             <div class="sorting">
             {#each sort_options as sort_option}
-                <SortButton class_name="{sort_option.param === sorted.param ? (sorted.direction === 'desc' ? 'down' : 'up') : ''} {sort_option.param}" title="{sort_option.label}" click_handler={(evt) => sort_by(sort_option, evt.target)} />
+                <SortButton class_name="{sort_option.param === sort_config.param ? (sort_config.direction === 'desc' ? 'down' : 'up') : ''} {sort_option.param}" title="{sort_option.label}" click_handler={() => sort_by(sort_option)} />
             {/each}
             </div>
 
@@ -249,9 +254,11 @@
 
             <CardList>
                 {#each data_array as article (article.id)}
-                    <li>
+                    {#key data_array}
+                    <li class:filtered={article.hidden}>
                         <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id}/>
                     </li>
+                    {/key}
                 {/each}
             </CardList>
 
@@ -292,7 +299,7 @@
         height: max-content;
         max-height: 400px;
         position: absolute;
-        top: 210px;
+        top: 15vh;
         left: -22vw;
         padding: 3%;
         background-color: #FFFFFF;
