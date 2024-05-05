@@ -113,6 +113,18 @@ export const redirect = function (url, delay) {
     setTimeout(() => goto(url), delay);
 }
 
+export const load_all = async function (category) {
+    // Определение адреса для загрузки данных
+    const server_location = define_api(category);
+    const expand = category === 'articles' || category === 'news' ? '' : 'overseer,city,status';
+
+    const url = `${_REMOTE_SERVER}/${server_location}?all=1&expand=${expand}`;
+    const response = await fetch(url);
+    const batch = await response.json();
+
+    return batch.payload;
+};
+
 /**
  * Подгрузка постраничных данных
  * @param data Данные с сервера
@@ -128,25 +140,9 @@ export const load_more = async function (data, category) {
 
     /* Подгрузка останавливается при достижении последней партии */
     if (data.pagination.page <= data.pagination.pageCount) {
+        const server_location = define_api(category);
 
-        // Определение адреса подгрузки данных
-        let server_location;
-        switch (category) {
-            default:
-                server_location = 'pigs';
-                break;
-            case 'graduates':
-                server_location = 'pigs/graduated';
-                break;
-            case 'articles':
-                server_location = 'articles/type/1';
-                break;
-            case 'news':
-                server_location = 'articles/type/2';
-                break;
-        }
-
-        let expand = category === 'articles' || category === 'news' ? '' : 'overseer,city,status';
+        const expand = category === 'articles' || category === 'news' ? '' : 'overseer,city,status';
 
         const url = `${_REMOTE_SERVER}/${server_location}?page=${data.pagination.page++}&expand=${expand}`;
         const response = await fetch(url);
@@ -155,6 +151,31 @@ export const load_more = async function (data, category) {
         return batch.payload;
     }
 }
+
+/**
+ * Определить адрес для обращения к API по категории
+ * @param {string} category
+ * @return {string}
+ */
+const define_api = function (category) {
+    let server_location;
+    switch (category) {
+        default:
+            server_location = 'pigs';
+            break;
+        case 'graduates':
+            server_location = 'pigs/graduated';
+            break;
+        case 'articles':
+            server_location = 'articles/type/1';
+            break;
+        case 'news':
+            server_location = 'articles/type/2';
+            break;
+    }
+
+    return server_location;
+};
 
 /**
  * Обернуть HTML Node в указанный тег с возможностью задать класс обёртке
@@ -193,12 +214,31 @@ export const check_link_external = function (url) {
     return new URL(url).origin !== location.origin;
 }
 
+export const debounce = function (callback, wait) {
+    let timeoutId = null;
+    return (...args) => {
+        window.clearTimeout(timeoutId);
+        timeoutId = window.setTimeout(() => {
+            callback(...args);
+        }, wait);
+    };
+}
+
 Array.prototype.sort_by_date = function (param) {
     return this.sort((a, b) => new Date(b[param]) - new Date(a[param]));
 }
 
 Array.prototype.sort_by_string = function (param) {
     return this.sort((a, b) => a[param].localeCompare(b[param]));
+};
+
+/**
+ * Производит сортировку по статусу: статус карантина имеет самое высокое значение,
+ * поэтому оказывается в конце отсортированного списка
+ * @return {Array}
+ */
+Array.prototype.sort_by_status = function () {
+    return this.sort((a, b) =>  a.status_id - b.status_id)
 };
 
 export { closeModal, showModal, randomElements, removeData };
