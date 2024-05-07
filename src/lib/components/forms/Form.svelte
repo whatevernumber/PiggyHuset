@@ -147,11 +147,11 @@
         // Прячем блок с датой выпуска, если свинка ещё не выпустилась
         let graduation_date = document.querySelector('input[name="graduation_date"]');
 
-        const AVAILABLE_STATUSES = [1, 5, 6];
+        if (graduation_date) {
 
-        // Если нет даты выпуска или она есть, но текущий статус относится к актуальным, ищущим дом
-        if (graduation_date && !pig['graduation_date'] || AVAILABLE_STATUSES.includes(parseInt(pig['status_id']))) {
-            graduation_date.parentNode.classList.add('hidden');
+            const AVAILABLE_STATUSES = [1, 5, 6];
+            // Если нет даты выпуска или она есть, но текущий статус относится к актуальным, ищущим дом
+            !pig['graduation_date'] || AVAILABLE_STATUSES.includes(parseInt(pig['status_id'])) ? graduation_date.parentNode.classList.add('hidden') : null;
         }
     });
 
