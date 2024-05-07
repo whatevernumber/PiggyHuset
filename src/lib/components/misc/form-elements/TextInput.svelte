@@ -30,11 +30,11 @@
 		background-color: #E1EDCE;
 		font-family: Jost, Arial, sans-serif;
 		font-size: 18px;
-
-		&:focus {
-			outline-color: #88aa4d;
-		}
 	}
+
+	.text_input:focus {
+        outline-color: #88aa4d;
+    }
 
 	.input_header {
 		position: absolute;

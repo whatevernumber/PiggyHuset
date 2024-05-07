@@ -70,16 +70,16 @@
     <nav class="navigation" transition:fly={{ delay: 20, duration: 200, y: -150, opacity: 0.4 }}>
         <ul class="nav-list">
             <li class="nav-item">
-                <Button title="Свинки" onclick={() => switchTabs('pigs')} class_name="{tab === 'pigs' ? '-active' : ''}" />
+                <Button title="Свинки" onclick={() => switchTabs('pigs')} class_name="{tab === 'pigs' ? 'active' : ''}" />
             </li>
             <li class="nav-item">
-                <Button title="Новости" onclick={() => switchTabs('news')} class_name="{tab === 'news' ? '-active' : ''}" />
+                <Button title="Новости" onclick={() => switchTabs('news')} class_name="{tab === 'news' ? 'active' : ''}" />
             </li>
             <li class="nav-item">
-                <Button title="Статьи" onclick={() => switchTabs('articles')} class_name="{tab === 'articles' ? '-active' : ''}" />
+                <Button title="Статьи" onclick={() => switchTabs('articles')} class_name="{tab === 'articles' ? 'active' : ''}" />
             </li>
             <li class="nav-item">
-                <Button title="Выпускники" onclick={() => switchTabs('graduates')} class_name="{tab === 'graduates' ? '-active' : ''}" />
+                <Button title="Выпускники" onclick={() => switchTabs('graduates')} class_name="{tab === 'graduates' ? 'active' : ''}" />
             </li>
         </ul>
     </nav>

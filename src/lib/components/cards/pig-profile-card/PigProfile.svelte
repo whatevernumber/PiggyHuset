@@ -32,8 +32,7 @@
 					 {pig_name} {graduation_date} {pig_sex} {city} {overseer} {graduated} {article} {age}
 					 {volunteer} {id} {admin}
 					 bind:modal_opened={modal_opened} bind:status_value={status_value}
-					 bind:action={action}
-	/>
+					 bind:action={action} />
 </div>
 
 <style>

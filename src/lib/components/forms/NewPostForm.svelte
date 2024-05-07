@@ -6,6 +6,7 @@
 	export let old_photos;
 	export let is_editing;
 	export let endpoint = '/articles/type/2';
+    export let article;
 
 	let modal_message = 'Пост опубликован';
 
@@ -34,6 +35,6 @@
     }
 </script>
 
-<Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="news">
+<Form {scheme} {modal_message} {method} {is_editing} {old_photos} {article} redirect_location="news">
     <slot />
 </Form>

@@ -6,7 +6,7 @@
 	export let method;
 	export let is_editing;
 	export let endpoint = '/pigs';
-	export let old_photos;
+    export let pig;
 
 	let redirect_location = "looking-for-home";
 	let modal_message = 'Запись опубликована';
@@ -78,6 +78,12 @@
                 type: 'select',
                 required: true,
             },
+            {
+                label: 'Выпуск',
+                name: 'graduation_date',
+                type: 'date',
+                required: true,
+            },
 		],
 		files: {
 			file_input: true,
@@ -86,6 +92,6 @@
 	};
 </script>
 
-<Form {scheme} {modal_message} {modal} {redirect_location} {method} {is_editing} {old_photos}>
+<Form {scheme} {modal_message} {modal} {redirect_location} {method} {is_editing} {pig}>
     <slot/>
 </Form>

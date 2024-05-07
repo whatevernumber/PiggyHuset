@@ -45,10 +45,6 @@
         background-color: #EF8653;
     }
 
-    .button.-active:focus {
-        border-color: #f6b5d3;
-    }
-
     .button-light:hover {
         background-color: var(--background_color);
         color: #D97544;
@@ -64,8 +60,12 @@
         text-decoration: underline;
     }
 
-    .-active {
+    .active {
         color: var(--background_color);
         background-color: var(--text-color);
+    }
+
+    .button .active:focus {
+        border-color: #f6b5d3;
     }
 </style>

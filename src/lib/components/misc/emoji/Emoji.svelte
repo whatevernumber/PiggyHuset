@@ -27,10 +27,6 @@
 		z-index: -4;
 		opacity: 0;
         transition: top 0.2s, opacity 0.3s, z-index 0.3s;
-
-		@media(min-width: 1001px) {
-			right: 0;
-		}
     }
 
     .emoji_button {
@@ -43,15 +39,10 @@
         background-position: center;
         background-size: 18px 18px;
         background-repeat: no-repeat;
-
-		@media(max-width: 1001px) {
-			right: 5%;
-		}
     }
 
     .emoji_button:hover {
-        border-radius: 50%;
-        background-color: #EF8653;
+        right: 5%;
     }
 
     .emoji_button:hover + .emoji_wrapper,
@@ -77,6 +68,17 @@
 			transform: scale(0.8) translate(10%, -10%)
 		}
 	}
+
+    @media (max-width: 1001px) {
+		.emoji_wrapper {
+            right: 0;
+		}
+
+        .emoji_button {
+            border-radius: 50%;
+            background-color: #EF8653;
+        }
+    }
 
 	emoji-picker {
 		max-width: inherit;

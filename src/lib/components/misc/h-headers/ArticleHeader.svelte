@@ -18,14 +18,14 @@
 	  	line-height: 130%;
 		text-align: center;
 		text-transform: uppercase;
-
-		&.type_article {
-			 margin-left: 225px;
-	    }
 	}
 
+	.article_header .type_article {
+        margin-left: 225px;
+    }
+
 	@media (max-width: 1001px) {
-		.article_header.type_article {
+		.article_header .type_article {
 			margin-left: 0;
 		}
 	}

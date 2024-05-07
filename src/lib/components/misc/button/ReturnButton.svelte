@@ -71,14 +71,14 @@
         cursor: pointer;
         opacity: 0.65;
         user-select: none;
+    }
 
-        &:hover {
-            opacity: 1;
-         }
+    .return-button:hover {
+        opacity: 1;
+    }
 
-        &.topped {
-            margin-top: 40px;
-         }
+    .return-button .topped {
+        margin-top: 40px;
     }
 
     @media (max-width: 1001px) {

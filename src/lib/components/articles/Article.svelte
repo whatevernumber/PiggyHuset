@@ -123,9 +123,5 @@
 			margin-top: 50px;
 			margin-bottom: 20px;
 		}
-
-        /*.article_news {*/
-        /*    height: calc(100vh / 1.2);*/
-        /*}*/
 	}
 </style>

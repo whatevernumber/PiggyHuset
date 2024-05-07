@@ -119,11 +119,11 @@
         justify-content: center;
         align-items: center;
         width: 50%;
+    }
 
-        & strong {
-            font-weight: normal;
-            color: #D97544;
-          }
+    .warning strong {
+        font-weight: normal;
+        color: #D97544;
     }
 
     .warning-text {
@@ -146,14 +146,12 @@
         margin-right: 1%;
     }
 
-    .navigation p {
-        &:hover {
-            color: #D97544;
-        }
+    .navigation p:hover {
+        color: #D97544;
+    }
 
-        &:active {
-            color: #88aa4d;
-        }
+    .navigation p:active {
+        color: #88aa4d;
     }
 
     .navigation-admin {

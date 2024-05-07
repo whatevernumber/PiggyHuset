@@ -80,18 +80,17 @@
 		word-wrap: anywhere;
         white-space: pre-wrap;
 		text-align: justify;
-
-        & img {
-            max-width: 100%;
-
-            margin: 0;
-        }
-
-        & blockquote {
-            display: inline-block;
-            font-style: italic;
-        }
 	}
+
+    .article_text img {
+        margin: 0;
+        max-width: 100%;
+    }
+
+    .article_text blockquote {
+        display: inline-block;
+        font-style: italic;
+    }
 
     .article_text .float-right {
         margin-left: 225px;
@@ -103,28 +102,28 @@
 
     .article_text p {
         margin: 0.35em 0;
+    }
 
-        &:has(figure) {
-            max-width: 85%;
-            place-self: center;
-        }
+    .article_text p:has(figure) {
+        max-width: 85%;
+        place-self: center;
     }
 
     .article_text a {
         color: #D97544 !important;
         font-weight: 600;
+    }
 
-        &:visited {
-            color: #b0bd9a !important;
-        }
+    .article_text a:visited {
+        color: #b0bd9a !important;
+    }
 
-        &:hover {
-            color: #88aa4d !important;
-        }
+    .article_text a:hover {
+        color: #88aa4d !important;
+    }
 
-        &:active {
-            font-weight: 800;
-        }
+    .article_text a:active {
+        font-weight: 800;
     }
 
     .article-figure {
@@ -134,10 +133,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
 
-        &.captioned {
-            background-color: aliceblue;
-        }
+    .article-figure .captioned {
+        background-color: aliceblue;
     }
 
     .article-figure.active {
@@ -145,21 +144,21 @@
         margin: 15% auto;
         padding: 1%;
         background-color: #e1edce;
+    }
 
-        &.captioned {
-            scale: 1.2;
-            background-color: aliceblue;
-        }
+    .article-figure.active .captioned {
+        scale: 1.2;
+        background-color: aliceblue;
     }
 
     .article-figure-caption {
         margin-top: 3%;
         text-align: justify;
         color: #D97544;
+    }
 
-        & p {
-            margin: 0;
-        }
+    .article-figure-caption p {
+        margin: 0;
     }
 
 	.article_text h2, .article_text h3 {
@@ -202,10 +201,6 @@
         background-image: url("/img/list-item.png");
         background-size: contain;
     }
-
-	/*.article_text p strong {*/
-    /*    font-weight: bold;*/
-	/*}*/
 
 	@media (max-width: 1000px) {
 		.article_text {
