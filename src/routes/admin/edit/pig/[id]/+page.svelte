@@ -18,15 +18,6 @@
 				setTimeout(() => {
 					field.value = pig[field.name] || pig[(field.name.slice(0, field.name.lastIndexOf('_')))].id;
 				}, 400);
-			} else if (field.type === 'date') {
-				let value = pig[field.name];
-
-				// Обрезает время у даты (?)
-				if (value) {
-					let date = value.split(' ');
-					field.value = date[0];
-				}
-
 			} else if (field.type !== 'file') {
 				field.value = pig[field.name];
 			}
