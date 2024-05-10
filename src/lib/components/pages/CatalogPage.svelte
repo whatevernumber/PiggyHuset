@@ -24,7 +24,6 @@
     let action = '';
     let success;
     let active_filters = [];
-    let full_list_is_loaded = false;
 
     const is_article = (type === 'article' || type === 'news');
     const is_homeless = type === 'pig';
@@ -120,7 +119,6 @@
 
             // загрузка полного списка (пропускается, если есть фильтрация)
             data_array = active_filters.length ? data_array : (await load_all(category));
-            full_list_is_loaded = true;
 
             // обновление объекта сортировки
             sort_config = sorting;
@@ -135,7 +133,10 @@
         }
     }
 
-    $: data_array = data_array.sort_by_status();
+    // сортировать по статусу только в списке "Ищут дом"
+    $: if (category === 'looking-for-home') {
+        data_array = data_array.sort_by_status();
+    }
 
     const add_to_filter = function (evt) {
         const label = evt.target.parentElement;
@@ -160,7 +161,6 @@
 
         // Принудительная подгрузка остального списка
         data_array = await load_all(category);
-        full_list_is_loaded = true;
 
         document.removeEventListener('scroll', load_on_scroll);
 

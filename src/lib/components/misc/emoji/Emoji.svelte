@@ -39,10 +39,11 @@
         background-position: center;
         background-size: 18px 18px;
         background-repeat: no-repeat;
+		opacity: 0.7;
     }
 
     .emoji_button:hover {
-        right: 5%;
+        opacity: 1;
     }
 
     .emoji_button:hover + .emoji_wrapper,

@@ -76,6 +76,7 @@
     .photo-card {
         width: var(--width);
         max-height: 250px;
+        padding: 2px;
         position: relative;
         object-fit: contain;
         pointer-events: none;
@@ -113,7 +114,7 @@
         z-index: 5;
     }
 
-    .status .rainbow {
+    .status.rainbow {
         width: 150px;
         height: 150px;
         right: -10%;
@@ -121,7 +122,7 @@
         background-image: url("/src/lib/img/rainbow.png");
     }
 
-    .status .taken {
+    .status.taken {
         width: 200px;
         height: 200px;
         right: -15%;
@@ -129,7 +130,7 @@
         background-image: url("/src/lib/img/taken.png");
     }
 
-    .status .quarantine {
+    .status.quarantine {
         width: 120px;
         height: 120px;
         right: -5%;
@@ -139,6 +140,7 @@
 
     .marked {
         outline: 3px solid #F6B5D3;
+        box-shadow: 6px 6px 10px #3f3f3f;
     }
 
     @media (max-width: 1001px) {

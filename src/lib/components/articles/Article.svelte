@@ -92,7 +92,7 @@
     }
 
     .article_author {
-        margin-left: 225px;
+        text-align: right;
     }
 
 	@media (max-width: 1001px) {
