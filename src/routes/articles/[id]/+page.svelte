@@ -126,10 +126,10 @@
 
 	.photo-card-wrapper {
 		height: min-content;
+	}
 
-		&.absolute {
-			position: absolute;
-		}
+	.photo-card-wrapper .absolute {
+        position: absolute;
 	}
 
     @media (max-width: 1001px) {

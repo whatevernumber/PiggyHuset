@@ -92,7 +92,7 @@
     }
 
     .article_author {
-        margin-left: 225px;
+        text-align: right;
     }
 
 	@media (max-width: 1001px) {
@@ -123,9 +123,5 @@
 			margin-top: 50px;
 			margin-bottom: 20px;
 		}
-
-        /*.article_news {*/
-        /*    height: calc(100vh / 1.2);*/
-        /*}*/
 	}
 </style>

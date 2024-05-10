@@ -36,8 +36,10 @@
         background-repeat: no-repeat;
         background-size: contain;
         background-position-y: 50%;
+    }
 
-        @media (max-width: 1001px) {
+    @media (max-width: 1001px) {
+        section {
             background-position-y: 30%;
         }
     }

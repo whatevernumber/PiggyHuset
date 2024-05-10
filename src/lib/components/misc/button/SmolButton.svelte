@@ -74,15 +74,15 @@
 
     .sort-button {
         padding: 5px 10px;
+    }
 
-        &.sort-button:hover {
-            opacity: 0.9;
-        }
+    .sort-button:hover {
+        opacity: 0.9;
+    }
 
-        &.sort-button:active {
-            opacity: 1;
-            filter: hue-rotate(5deg);
-        }
+    .sort-button:active {
+        opacity: 1;
+        filter: hue-rotate(5deg);
     }
 
     .sort-button.up,

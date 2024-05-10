@@ -10,7 +10,7 @@
 </a>
 
 <style>
-    a.card-container     {
+    a.card-container {
         display: flex;
         place-content: center;
         flex-direction: column;

@@ -7,7 +7,6 @@
 	export let grouped = false;
 	export let group_by;
 	export let options = [];
-
 	let input_name;
 	let list = [];
 	let option_name;
@@ -43,9 +42,24 @@
 		}
 	});
 
+	// Показывает или прячет поле для ввода даты выпуска
+	const show_graduation_date = (evt) => {
+
+		let status_id = evt.target.value;
+		let graduation_date = document.querySelector('input[name="graduation_date"]');
+
+		const AVAILABLE_STATUSES = [1, 5, 6]; // статусы, не предполагающие дату выпуска
+
+		if (AVAILABLE_STATUSES.includes(parseInt(status_id))) {
+			graduation_date.parentNode.classList.add('hidden');
+		} else {
+			graduation_date.parentNode.classList.remove('hidden');
+		}
+	}
+
 </script>
 
-<select class="{css_class}" name={input_name === type ? input_name : `${input_name}_id`} id={type}>
+<select class="{css_class}" name={input_name === type ? input_name : `${input_name}_id`} id={type} on:change={ input_name === 'status' ? show_graduation_date : null}>
 
 	{#if grouped}
 	<optgroup class="overseer-active" label="Активные кураторы">
@@ -96,11 +110,11 @@
 		background: #f0f6e6 url("/img/dropdown.png") no-repeat 95% 50%;
 		background-size: 20px;
 		border: 1px solid transparent;
-
-		&:is(:focus, :active) {
-			outline-color: #f6b5d3;
-		}
 	}
+
+	select:is(:focus, :active) {
+        outline-color: #f6b5d3;
+    }
 
 	select > option {
 		color: #333333;

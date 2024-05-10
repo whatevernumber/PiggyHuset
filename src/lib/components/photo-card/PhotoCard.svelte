@@ -13,15 +13,44 @@
     export let width;
     export let height;
 
+    export let main_photo; // индекс новой фотографии, отмечанной основной
+    export let old_photo_name; // название старой фотографии, отмечанной основной
+    export let index; // индекс добавленной новой фотографии
+
+    export let form_photo_type; // тип превью фотографий для формы (новый\старые)
+
     const delete_handler = () => {
-        pic = pic;
         click_handler(pic);
     }
+
+    // отмечает фотографию главной (для форм)
+    const mark_photo_as_main = () => {
+
+        if (form_photo_type === 'new') {
+
+            // Снять выбор из списка старых фотографий
+            old_photo_name = null;
+
+            // Если текущая фотография уже выбрана, снять выбор, в ином случае отметить выбранной
+            main_photo === index ? null : main_photo = index;
+        }
+
+
+        if (form_photo_type === 'old') {
+
+            // Снять выбор из списка новых фотографий
+            main_photo = null;
+
+            // Если текущая фотография уже выбрана, снять выбор, в ином случае отметить выбранной
+            old_photo_name === pic ? null : old_photo_name = pic;
+        }
+    }
+
 </script>
 
-<div class="wrapper" aria-roledescription="Посмотреть фото">
+<div class="wrapper" aria-roledescription="Посмотреть фото" on:click={ (form_photo_type === 'old' || form_photo_type === 'new') ? mark_photo_as_main : null}>
     <div class='image_wrapper'>
-        <img {src} class="photo-card" {width} {height} {alt} style="--width: {width || 300}px">
+        <img {src} class="photo-card" class:marked={ old_photo_name && old_photo_name === pic || form_photo_type === 'new' && main_photo === index } {width} {height} {alt} style="--width: {width || 300}px">
 
         {#if type === 'ready' || status === 'quarantine'}
         <span class="status {status}"></span>
@@ -47,6 +76,7 @@
     .photo-card {
         width: var(--width);
         max-height: 250px;
+        padding: 2px;
         position: relative;
         object-fit: contain;
         pointer-events: none;
@@ -82,30 +112,35 @@
         background-image: url("/img/found-home.png");
         background-size: cover;
         z-index: 5;
+    }
 
-        &.rainbow {
-            width: 150px;
-            height: 150px;
-            right: -10%;
-            bottom: -10%;
-            background-image: url("/src/lib/img/rainbow.png");
-        }
+    .status.rainbow {
+        width: 150px;
+        height: 150px;
+        right: -10%;
+        bottom: -10%;
+        background-image: url("/src/lib/img/rainbow.png");
+    }
 
-        &.taken {
-            width: 200px;
-            height: 200px;
-            right: -15%;
-            bottom: -15%;
-            background-image: url("/src/lib/img/taken.png");
-        }
+    .status.taken {
+        width: 200px;
+        height: 200px;
+        right: -15%;
+        bottom: -15%;
+        background-image: url("/src/lib/img/taken.png");
+    }
 
-        &.quarantine {
-             width: 120px;
-             height: 120px;
-             right: -5%;
-             bottom: -10%;
-             background-image: url("/src/lib/img/quarantine.png");
-         }
+    .status.quarantine {
+        width: 120px;
+        height: 120px;
+        right: -5%;
+        bottom: -10%;
+        background-image: url("/src/lib/img/quarantine.png");
+    }
+
+    .marked {
+        outline: 3px solid #F6B5D3;
+        box-shadow: 6px 6px 10px #3f3f3f;
     }
 
     @media (max-width: 1001px) {

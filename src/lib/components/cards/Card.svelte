@@ -219,8 +219,10 @@
         display: flex;
         justify-content: space-between;
         column-gap: 5px;
+    }
 
-        @media(max-width: 1179px) {
+    @media(max-width: 1179px) {
+        .bottom-line {
             flex-wrap: wrap;
         }
     }

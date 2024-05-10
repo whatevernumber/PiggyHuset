@@ -13,11 +13,6 @@
 	let method = 'PATCH';
 	let endpoint = '/articles/' + article.id;
 
-	let photos = article.photos.map(({ image }) => image);
-
-	// Уже имеющиеся в БД фотографии для отображения и отправки в скрытом поле
-	$: old_photos = JSON.stringify(photos);
-
 	onMount(() =>
 	{
 		let article_title = document.querySelector("input[name = 'title']");
@@ -46,15 +41,6 @@
 		});
 
 	const title = "Редактировать публикацию";
-
-	const delete_handler = (image) => {
-
-		photos = photos.filter(
-			(element) => {
-				return element !== image
-			}
-		)
-	}
 </script>
 
 <svelte:head>
@@ -62,11 +48,9 @@
 </svelte:head>
 
 {#if type === 1}
-<NewArticleForm {title} {method} {endpoint} {old_photos} is_editing />
+<NewArticleForm {title} {method} {endpoint} is_editing />
 {:else}
-<NewPostForm {title} {method} {endpoint} {old_photos} is_editing>
-	{#if photos.length}
-	<UploadedFiles handler={delete_handler} {photos} />
-	{/if}
+<NewPostForm {title} {method} {endpoint} {article} is_editing>
+
 </NewPostForm>
 {/if}

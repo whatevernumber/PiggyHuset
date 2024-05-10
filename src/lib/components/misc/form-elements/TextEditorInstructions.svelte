@@ -44,46 +44,46 @@
         width: 350px;
         background-color: #e1edce;
         padding: 2% 2% 2% 4%;
+    }
 
-        & h3 {
-            color: #D97544;
-        }
+    .text-editor-instructions h3 {
+        color: #D97544;
+    }
 
-        & ul {
-            padding: 0;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            row-gap: 25px;
+    .text-editor-instructions ul {
+        padding: 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+    }
 
-            & li {
-                display: inline-flex;
-                align-items: center;
-                font-family: Jost, "Courier New", sans-serif;
-                list-style: none;
-                text-decoration: underline 1px dashed #88aa4d;
-                text-align: justify;
+    .text-editor-instructions li {
+        display: inline-flex;
+        align-items: center;
+        font-family: Jost, "Courier New", sans-serif;
+        list-style: none;
+        text-decoration: underline 1px dashed #88aa4d;
+        text-align: justify;
+    }
 
-                &::before {
-                    content: "";
-                    position: absolute;
-                    left: -12%;
-                    display: inline-flex;
-                    width: 30px;
-                    height: 30px;
-                    background: url("/../src/lib/img/icons-edit.png");
-                    background-size: cover;
-                    margin-right: 7px;
-                }
+    .text-editor-instructions li::before {
+        content: "";
+        position: absolute;
+        left: -12%;
+        display: inline-flex;
+        width: 30px;
+        height: 30px;
+        background: url("/../src/lib/img/icons-edit.png");
+        background-size: cover;
+        margin-right: 7px;
+    }
 
-                & code {
-                    display: contents;
-                    color: #D97544;
-                    font-size: 16px;
-                    font-weight: 600;
-                }
-            }
-        }
+    .text-editor-instructions code {
+        display: contents;
+        color: #D97544;
+        font-size: 16px;
+        font-weight: 600;
     }
 
     @media (max-width:1700px) {

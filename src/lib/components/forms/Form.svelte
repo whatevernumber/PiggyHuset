@@ -12,13 +12,34 @@
     import {beforeNavigate} from "$app/navigation";
     import {page} from "$app/stores";
     import SelectInput from '../misc/form-elements/SelectInput.svelte';
+    import UploadedFiles from '$lib/components/misc/form-elements/UploadedFiles.svelte';
 
 	export let scheme = {};
 	export let redirect_location;
     export let modal_message;
     export let method = 'POST';
     export let is_editing;
-    export let old_photos;
+    export let pig; // array of photos to show in the preview
+    export let article;
+
+    let photos = [];
+
+    pig ? photos = pig.photos.map(({ image }) => image) : null;
+    article ? photos = article.photos.map(({ image }) => image) : null;
+
+    // Уже имеющиеся в БД фотографии для отображения и отправки в скрытом поле
+    $: old_photos = JSON.stringify(photos);
+
+    const delete_handler = (image) => {
+        photos = photos.filter(
+            (element) => {
+                return element !== image
+            }
+        )
+    }
+
+    let main_photo_name;
+    let main_photo_index;
 
 	let success;
     let wysiwyg_input;
@@ -26,7 +47,6 @@
     let image_upload_preview = [];
     let errors = {};
     let window_width = 0;
-
 
     const select = scheme.fields.filter(field => field.type === 'select');
     const textarea = scheme.fields.filter(field => field.type === 'textarea');
@@ -84,8 +104,10 @@
                 if (prop === 'files') {
                     files = 'files[]';
                 }
-                const field = document.querySelector(`[name="${files || prop}"]`);
-                const label = document.querySelector(`[name="${files || prop}"] ~ .input-error-label`);
+
+                const form = document.querySelector('form');
+                const field = form.querySelector(`[name="${files || prop}"]`);
+                const label = form.querySelector(`[name="${files || prop}"] ~ .input-error-label`);
                 field.classList.add('input-error');
                 label.textContent = errors[prop];
                 field.value = '';
@@ -121,6 +143,17 @@
 
     onMount(() => {
         wysiwyg_input = document.querySelector('input[type="hidden"]');
+
+        // Прячем блок с датой выпуска, если свинка ещё не выпустилась
+        let graduation_date = document.querySelector('input[name="graduation_date"]');
+
+        if (graduation_date) {
+
+            const AVAILABLE_STATUSES = [1, 5, 6];
+
+            // Если нет свинки (для новых свинок) или если текущий статус свинки относится к актуальным, ищущим дом
+            !pig || AVAILABLE_STATUSES.includes(parseInt(pig['status_id'])) ? graduation_date.parentNode.classList.add('hidden') : null;
+        }
     });
 
     beforeNavigate(({ cancel }) => {
@@ -203,17 +236,26 @@
                     <SubmitButton on_click="{ sendForm }" />
                 </div>
             </fieldset>
-            {#if image_upload_preview.length}
-                <div class="photo_preview">
-                    {#each image_upload_preview as src}
-                        <PhotoCard {src} width='80px' height='80px' />
-                    {/each}
-                </div>
+            {#if main_photo_index || main_photo_index === 0}
+                <input type='hidden' class='main_photo' name='main_photo_index' bind:value={main_photo_index}>
+            {/if}
+            {#if photos.length && main_photo_name }
+                <input type='hidden' class='main_photo_name' name='main_photo_name' bind:value={main_photo_name}>
             {/if}
             {#if is_editing}
                 <input type='hidden' class='uploaded_photos' name='old_photos' bind:value={old_photos}/>
             {/if}
         </form>
+        {#if image_upload_preview.length}
+            <div class="photo_preview">
+                {#each image_upload_preview as src, index (index)}
+                    <PhotoCard {src} {index} width='80px' height='80px' bind:main_photo={main_photo_index} bind:old_photo_name={main_photo_name} form_photo_type='new' />
+                {/each}
+            </div>
+        {/if}
+        {#if photos.length}
+            <UploadedFiles handler={delete_handler} bind:photos bind:old_photo_name={main_photo_name} bind:main_photo={main_photo_index} />
+        {/if}
     </section>
     <slot />
 </div>
@@ -361,17 +403,14 @@
     :global(form.form-scheme input[name].input-error),
     :global(form.form-scheme textarea[name].input-error) {
         outline: 2px inset #D97544;
-
-        &:not(:placeholder-shown) {
-             outline: none;
-        }
     }
 
-    .input-error-label {
-        display: none;
+    :global(form.form-scheme input[name].input-error):not(:placeholder-shown),
+    :global(form.form-scheme textarea[name].input-error):not(:placeholder-shown) {
+        outline: none;
     }
 
-    :global(.input-error + .input-error-label.input-error-label) {
+    :global(.input-error + .input-error-label) {
         display: block;
         color: #D97544;
         position: absolute;
@@ -384,6 +423,10 @@
         fill: #e1edce;
     }
 
+    :global(.input-error-label) {
+        display: none;
+    }
+
     .modal {
         position: absolute;
         top: 35%;
@@ -393,11 +436,15 @@
 
     .bottom-fields.select_group .form-item {
         max-width: 275px;
+    }
 
-        & input {
-            -moz-appearance: textfield;
-            -webkit-appearance: none;
-        }
+    .bottom-fields.select_group .form-item input {
+        -moz-appearance: textfield;
+        -webkit-appearance: none;
+    }
+
+    .hidden {
+        display: none;
     }
 
     @media (max-width: 1001px) {

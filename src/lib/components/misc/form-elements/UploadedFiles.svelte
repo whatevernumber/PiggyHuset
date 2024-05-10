@@ -3,14 +3,18 @@
 
 	export let photos;
 	export let handler;
+	export let main_photo;
+	export let old_photo_name;
+
+	let form_photo_type = 'old'; // тип превью фотографий (новые\уже загруженные)
 </script>
 
 <div class='uploaded_files'>
 	<p class='uploaded_header'>Загруженные ранее картинки</p>
 	<div class='photos_flex_wrapper'>
 		{#key photos}
-			{#each photos as photo}
-				<PhotoCard width='100' height='100' pic={photo} is_form click_handler={handler} />
+			{#each photos as photo, index}
+				<PhotoCard width='100' height='100' pic={photo} is_form click_handler={handler} bind:main_photo bind:old_photo_name {form_photo_type} />
 			{/each}
 		{/key}
 	</div>
@@ -29,15 +33,13 @@
         padding-top: 5px;
         text-align: left;
         font-weight: bold;
-        margin-bottom: 5px;
+        margin-bottom: 15px;
     }
 
     .photos_flex_wrapper {
-        min-height: 100%;
-		width: 650px;
         display: flex;
         column-gap: 25px;
-        row-gap: 15px;
+        row-gap: 20px;
         flex-wrap: wrap;
         justify-content: space-evenly;
     }

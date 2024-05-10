@@ -42,6 +42,10 @@
 		}
 	}
 
+	.input-file-prompt:hover {
+        background-color: #f5b193;
+	}
+
     .input-file .input-file-prompt {
         width: 100px;
 		min-height: 26px;
