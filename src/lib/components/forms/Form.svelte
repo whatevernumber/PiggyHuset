@@ -150,8 +150,9 @@
         if (graduation_date) {
 
             const AVAILABLE_STATUSES = [1, 5, 6];
-            // Если нет даты выпуска или она есть, но текущий статус относится к актуальным, ищущим дом
-            !pig['graduation_date'] || AVAILABLE_STATUSES.includes(parseInt(pig['status_id'])) ? graduation_date.parentNode.classList.add('hidden') : null;
+
+            // Если нет свинки (для новых свинок) или если текущий статус свинки относится к актуальным, ищущим дом
+            !pig || AVAILABLE_STATUSES.includes(parseInt(pig['status_id'])) ? graduation_date.parentNode.classList.add('hidden') : null;
         }
     });
 
