@@ -10,4 +10,8 @@
     );
 </script>
 
+<svelte:head>
+    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+</svelte:head>
+
 <div id="vk-messages"></div>
