@@ -9,6 +9,7 @@
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { _ADMIN_FLAG } from '$env/static/public';
 	import { onMount } from 'svelte';
+	import VKCommunityMessages from "$lib/components/widgets/VKCommunityMessages.svelte";
 
 	export let data;
 
@@ -95,6 +96,8 @@
 			<PhotoList photos={article.photos} />
 		{/if}
 </Article>
+
+<VKCommunityMessages />
 
 {#if modal_opened}
 	<Overlay />

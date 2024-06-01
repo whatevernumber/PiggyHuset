@@ -17,7 +17,7 @@ const config = {
 			directives: {
 				'base-uri': ['self'],
 				// 'img-src': ['self', 'backend domain'],
-				'script-src': ['self']
+				'script-src': ['self', 'unsafe-eval', 'http://vk.com', 'https://vk.com']
 			}
 		},
 		env: {
