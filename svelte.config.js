@@ -22,9 +22,9 @@ const config = {
 					'https://*.google-analytics.com',
 					'https://*.googletagmanager.com',
 					'https://mc.yandex.ru',
+					'https://*.userapi.com',
 				],
 				'script-src': [
-					'self',
 					'strict-dynamic',
 					'https://*.googletagmanager.com',
 					'unsafe-eval',
