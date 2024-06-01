@@ -6,7 +6,6 @@
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
-	import VKCommunityMessages from "$lib/components/widgets/VKCommunityMessages.svelte";
 	export let data;
 
 	let pig = data.pig;
@@ -105,7 +104,6 @@
 	<PigProfile {overseer} {city} {pig_status_id} status={status_picture} {pic} {pig_name} {pig_status} {age} {pig_sex} {redirect_to_edit} id={pig_id} {admin} bind:modal_opened={modal_opened}
 				bind:status_value={status_value} bind:action={action}/>
 </Article>
-	<VKCommunityMessages />
 {/key}
 
 {#if modal_opened}
