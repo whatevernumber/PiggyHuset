@@ -2,11 +2,14 @@
 <html lang="en">
 	<head>
 		<!-- Google Tag Manager -->
-		<script nonce="%sveltekit.nonce%">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-					new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-5NM92S5X');</script>
+		<script nonce="%sveltekit.nonce%" async src="https://www.googletagmanager.com/gtag/js?id=G-02FMYFG00N"></script>
+		<script nonce="%sveltekit.nonce%">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-02FMYFG00N');
+		</script>
 		<!-- End Google Tag Manager -->
 
 		<meta charset="utf-8" />
@@ -36,9 +39,9 @@
 				accurateTrackBounce:true
 			});
 		</script>
-		<script nonce="%sveltekit.nonce%" src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
 		<noscript><div><img src="https://mc.yandex.ru/watch/97457692" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 		<!-- /Yandex.Metrika counter -->
+		<script nonce="%sveltekit.nonce%" src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
 	</head>
 	<body data-sveltekit-preload-data="hover">
 
