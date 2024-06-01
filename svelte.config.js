@@ -16,8 +16,36 @@ const config = {
 			mode: 'auto',
 			directives: {
 				'base-uri': ['self'],
-				// 'img-src': ['self', 'backend domain'],
-				'script-src': ['self', 'unsafe-eval', 'http://vk.com', 'https://vk.com']
+				'img-src': [
+					'self',
+					'https://domik-svinok.ru/api/',
+					'https://*.google-analytics.com',
+					'https://*.googletagmanager.com',
+					'https://mc.yandex.ru',
+				],
+				'script-src': [
+					'self',
+					'strict-dynamic',
+					'https://*.googletagmanager.com',
+					'unsafe-eval',
+					'http://vk.com',
+					'https://vk.com',
+				],
+				'connect-src': [
+					'https://mc.yandex.ru',
+					'https://*.google-analytics.com',
+					'https://*.analytics.google.com',
+					'https://*.googletagmanager.com',
+					'https://domik-svinok.ru/api/'
+				],
+				'child-src': [
+					'blob: https://mc.yandex.ru',
+				],
+				'frame-src': [
+					'blob: https://mc.yandex.ru/',
+					'blob: https://mc.yandex.md/',
+					'blob: https://vk.com/'
+				]
 			}
 		},
 		env: {
