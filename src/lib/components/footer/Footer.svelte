@@ -2,6 +2,12 @@
     <img class="guinea-pig-icon" src="/img/big-svinik.png" alt="Иконка морской свинки" width="64" height="64">
     <img src="/img/svg/header-logo.svg" alt="Иконка Домика" width="162" height="48">
     <div class='links'>
+        <span class="promo">
+            Разработка сайта —
+            <a class="github-link_wn" href="https://github.com/whatevernumber" target="_blank" rel="external">
+                WhateverNumber
+            </a>, <a class="github-link_tn" href="https://github.com/the-nepodarok" target="_blank" rel="external">the_nepodarok</a>
+        </span>
         <a class="link vk-link" href="https://vk.com/domiksvinok" target="_blank" rel="external">
             <img class="vk-link-image" src="/img/svg/icon-vk.svg" alt="Иконка социальной сети Вконтакте" width="50" height="50">
         </a>
@@ -36,6 +42,21 @@
         align-self: flex-start;
     }
 
+    .promo {
+        align-self: center;
+        height: min-content;
+        font-size: 12px;
+        opacity: 0.6;
+    }
+
+    .github-link_wn:hover {
+        color: #88aa4d;
+    }
+
+    .github-link_tn:hover {
+        color: #d97544;
+    }
+
     @media (max-width: 1001px) {
         .footer {
             justify-content: space-between;
@@ -43,6 +64,10 @@
 
         .link {
             position: static;
+        }
+
+        .promo {
+            display: none;
         }
     }
 </style>
