@@ -6,6 +6,7 @@
 	import AboutModal from "$lib/components/modal/AboutModal.svelte";
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import {fly} from "svelte/transition";
+	import VKCommunityMessages from "$lib/components/widgets/VKCommunityMessages.svelte";
 
 	let modal_opened = false; // флаг для оверлея
 </script>
@@ -14,7 +15,6 @@
 	<title>ДОМИК для бездомных поросят</title>
 </svelte:head>
 
-<h1 class="main-header">ДОМИК для бездомных поросят</h1>
 <main in:fly={{y: 1000, duration: 500, delay: 0}}>
 	<Banner />
 	<div class="landing_main_wrapper main_wrapper">
@@ -24,16 +24,15 @@
 	</div>
 </main>
 
+<VKCommunityMessages />
+
 <AboutModal />
+
 {#if modal_opened}
 	<Overlay />
 {/if}
 
 <style>
-	.main-header {
-		font-size: 0;
-	}
-
     .landing_main_wrapper {
         max-width: 1280px;
         margin: 0 auto;

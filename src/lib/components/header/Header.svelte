@@ -42,6 +42,7 @@
 </script>
 
 <header on:click={() => sessionStorage.removeItem('tab')}>
+    <h1 class="main-header">ДОМИК для бездомных поросят</h1>
     {#if admin}
         <a href="/">
             <div class="logo-wrapper" class:hide-logo={current === '/'}>
@@ -90,6 +91,10 @@
         background-color: #FFFFFF;
         font-size: 18px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+
+    .main-header {
+        font-size: 0;
     }
 
     .logo-wrapper {
