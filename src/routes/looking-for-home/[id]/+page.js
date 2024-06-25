@@ -3,12 +3,14 @@ import {error, redirect} from "@sveltejs/kit";
 
 export async function load({ fetch, params }) {
 
-	const res = await fetch(`${_REMOTE_SERVER}/pigs/${params.id}?expand=photos,overseer,city,status`);
-	const data = await res.json();
+	const res = await fetch(`/api/pigs?id=${params.id}`);
 
-	if (data.name === 'Not Found') {
+	if (res.status === 404) {
 		throw error(404);
-	} else if (!['pending', 'reserved', 'quarantine'].includes(data.status.value)) {
+	}
+
+	const data = await res.json();
+	if (!['pending', 'reserved', 'quarantine'].includes(data.status.value)) {
 		throw redirect(303, `/graduates/${params.id}`);
 	}
 

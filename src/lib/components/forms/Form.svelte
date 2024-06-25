@@ -2,8 +2,7 @@
 	import PhotoCard from "$lib/components/photo-card/PhotoCard.svelte";
 	import SubmitButton from "$lib/components/misc/form-elements/SubmitButton.svelte";
 	import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
-	import {_REMOTE_SERVER, _REST_STORAGE_KEY} from "$env/static/public";
-    import {include_auth, redirect} from "$lib/components/utils/func.js";
+    import {redirect} from "$lib/components/utils/func.js";
 	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import TextEditor from "$lib/components/misc/form-elements/TextEditor.svelte";
@@ -78,18 +77,17 @@
         }
         const formData = new FormData(form);
 
-        const res = await fetch(_REMOTE_SERVER + scheme.endpoint, {
+        const res = await fetch('/api/' + scheme.endpoint, {
             method: method,
-            credentials: 'include',
-            headers: {
-                'Authorization': include_auth(_REST_STORAGE_KEY)
-            },
             body: formData
         });
 
+        if (res.status === 401) {
+            redirect('/')
+        }
+
         if (res.ok) {
             success = await res.json();
-
             if(success.id) {
                 show_modal();
                 dirty = false;
@@ -98,6 +96,7 @@
 
         } else {
             errors = await res.json();
+
 
             for (const prop in errors) {
                 let files;

@@ -1,8 +1,7 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
 	import PigProfile from '$lib/components/cards/pig-profile-card/PigProfile.svelte';
-	import {closeModal, include_auth, redirect} from '$lib/components/utils/func.js';
-	import {_ADMIN_FLAG, _REMOTE_SERVER, _REST_STORAGE_KEY} from '$env/static/public';
+	import {closeModal, redirect} from '$lib/components/utils/func.js';
 	import {onMount} from 'svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
@@ -12,27 +11,15 @@
 	const type = 'ready';
 	let pig = data.pig;
 	let pig_id = pig.id;
-	let pig_name = pig.name;
-	const pic = pig.main_photo;
-	const age = pig.age;
-	const graduated = pig.status_id;
+
 	const taken = pig.taken;
 	const rainbow = pig.rainbow;
-	const text = pig.description;
-	const date = pig.datetime;
-	const graduation_date = pig.graduation_date;
-	let city = pig.city.city_name;
-	let overseer = pig.overseer ? pig.overseer.overseer_name : null;
-	let pig_sex = pig.sex;
-	let pig_status = pig.status ? pig.status.text : '';
 
-	if (graduated === 2) {
-		pig.status.text = (pig_sex === 'M' ? 'нашёл' : 'нашла') + ' дом';
-	}
+	let pig_status = pig.status ? pig.status.text : '';
 
 	let status_picture; // для отображения картинки статуса выпусника;
 
-	switch (graduated) {
+	switch (pig.status.id) {
 		case 2:
 			break;
 		case 3:
@@ -53,8 +40,10 @@
 	const UNAVAILABLE_STATUSES = [2, 3, 4];
 	$: pig_status_id = pig.status_id;
 
+	let desc = 'Вы собираетесь изменить статус свинки';
+
 	onMount(() => {
-		admin = localStorage.getItem(_ADMIN_FLAG);
+		admin = data.authorized;
 	})
 
 	const redirect_to_edit = () => {
@@ -67,19 +56,22 @@
 	}
 
 	const graduate_handler = () => {
-		graduatePig(status_value);
+		graduate_pig(status_value);
 
 		if ((UNAVAILABLE_STATUSES.includes(parseInt(status_value)) && UNAVAILABLE_STATUSES.includes(pig_status_id))) {
 			action = 'complete';
 			pig_status_id = parseInt(status_value);
 
-			// Обновление иконки статуса в зависимости от изменений
+			// Обновление иконки и текста статуса в зависимости от изменений
 			if (pig_status_id === 3) {
 				status_picture = 'rainbow';
+				pig_status = 'на радуге';
 			} else if (pig_status_id === 4) {
 				status_picture = 'taken'
+				pig_status = 'зажаблено';
 			} else if (pig_status_id === 2) {
 				status_picture = 'graduated'
+				pig_status = 'в новом доме';
 			}
 		} else {
 			action = 'sent';
@@ -92,33 +84,29 @@
 		}
 	}
 
-	async function graduatePig (value) {
-		const res = await fetch(_REMOTE_SERVER + '/pigs/graduate/' + pig.id + '/' + value, {
+	async function graduate_pig (value) {
+		const res = await fetch('/api/pigs/graduate?id=' + pig.id + '&value=' + value, {
 			method: 'PATCH',
-			headers: {
-				'Authorization': include_auth(_REST_STORAGE_KEY)
-			}
 		});
 
 		if (res.ok) {
-			let result = await res.json();
-			if (result) {
-				document.querySelector('.message').innerHTML = `Статус успешно изменён`;
-				success = true;
-			} else {
-				action = 'change_fail'
-			}
+			document.querySelector('.message').innerHTML = `Статус успешно изменён`;
+			success = true;
+			desc = 'Успешно';
+		} else {
+			action = 'change_fail';
+			desc = 'Произошла ошибка';
 		}
 	}
 </script>
 
 <svelte:head>
-	<title>{pig_name ? pig_name + ' ' + pig_status : 'Свинка'}</title>
+	<title>{pig.name ? pig.name + ' ' + pig_status : 'Свинка'}</title>
 </svelte:head>
 
 {#key pig_status_id}
-<Article {date} {text} photos="{pig.photos}" type="graduate">
-	<PigProfile {city} {overseer} {graduated} {graduation_date} {pig_sex} {pig_status} {pig_status_id} status={status_picture} {taken} {rainbow} {pic} {pig_name} {age} {type} {redirect_to_edit} {admin}
+<Article date={pig.datetime} text={pig.description} photos="{pig.photos}" type="graduate">
+	<PigProfile {pig} {pig_status} {pig_status_id} status={status_picture} {type} {redirect_to_edit} {admin}
 				bind:modal_opened={modal_opened} bind:status_value={status_value} bind:action={action} />
 </Article>
 {/key}
@@ -128,7 +116,9 @@
 {/if}
 
 <div class='modal modal_closed'>
-	<ModalOkay {action} action_handler={graduate_handler} {success} handle_cancel={cancel} sent_handle={redirect_after_graduate} bind:modal_opened={modal_opened} />
+	<ModalOkay {action} action_handler={graduate_handler} {success} handle_cancel={cancel} sent_handle={redirect_after_graduate} bind:modal_opened={modal_opened}
+		   {desc}
+	/>
 </div>
 
 <style>

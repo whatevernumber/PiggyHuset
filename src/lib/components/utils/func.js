@@ -1,4 +1,3 @@
-import { _REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG } from '$env/static/public';
 import {goto} from "$app/navigation";
 
 /**
@@ -86,19 +85,12 @@ async function removeData(category, id) {
 
     const server_location = /article|news/.test(category) ? 'articles' : 'pigs';
 
-    await fetch(_REMOTE_SERVER + '/' + server_location +'/' + id,
+    await fetch('/api/' + server_location + '/delete/?id=' + id,
         {
             method: 'DELETE',
-            headers: {
-                'Authorization': include_auth(_REST_STORAGE_KEY)
-            }
         }).then((response) => {
-        if (response.ok) {
-            success = true;
-        }
-    }).catch((e) => {
-        success = false;
-    });
+        success = response.ok;
+        });
 
     return success;
 }
@@ -116,9 +108,11 @@ export const redirect = function (url, delay) {
 export const load_all = async function (category) {
     // Определение адреса для загрузки данных
     const server_location = define_api(category);
-    const expand = category === 'articles' || category === 'news' ? '' : 'overseer,city,status';
 
-    const url = `${_REMOTE_SERVER}/${server_location}?all=1&expand=${expand}`;
+    let query = category === 'graduates' ? '&' : '?';
+    query += 'all=1'
+
+    const url = `/api/${server_location}${query}`;
     const response = await fetch(url);
     const batch = await response.json();
 
@@ -142,11 +136,15 @@ export const load_more = async function (data, category) {
     if (data.pagination.page <= data.pagination.pageCount) {
         const server_location = define_api(category);
 
-        const expand = category === 'articles' || category === 'news' ? '' : 'overseer,city,status';
+        let page_query = category === 'graduates' ? '&' : '?';
+        page_query += `page=${data.pagination.page++}`;
 
-        const url = `${_REMOTE_SERVER}/${server_location}?page=${data.pagination.page++}&expand=${expand}`;
+        const url = `/api/${server_location}${page_query}`;
+
         const response = await fetch(url);
         const batch = await response.json();
+
+        console.log(batch);
 
         return batch.payload;
     }
@@ -161,16 +159,16 @@ const define_api = function (category) {
     let server_location;
     switch (category) {
         default:
-            server_location = 'pigs';
+            server_location = 'pigs/all';
             break;
         case 'graduates':
-            server_location = 'pigs/graduated';
+            server_location = 'pigs/all?graduated=true';
             break;
         case 'articles':
-            server_location = 'articles/type/1';
+            server_location = 'articles/all';
             break;
         case 'news':
-            server_location = 'articles/type/2';
+            server_location = 'articles/news/all';
             break;
     }
 
@@ -195,15 +193,6 @@ export const wrap_element = function (element, tag = 'div', class_name = '') {
  * @param key
  * @return {null|string}
  */
-export const include_auth = function (key) {
-    const auth = localStorage.getItem(key);
-
-    if (localStorage.getItem(_ADMIN_FLAG) && auth) {
-        return `Bearer ${auth}`;
-    }
-
-    return null;
-}
 
 /**
  * Проверить, ведёт ли ссылка на внешний ресурс или на страницу в рамках текущего домена

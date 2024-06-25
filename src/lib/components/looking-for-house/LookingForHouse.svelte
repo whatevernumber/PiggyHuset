@@ -3,41 +3,58 @@
     import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
     import '@splidejs/svelte-splide/css/splide.min.css';
     import PhotoList from "$lib/components/photo-list/PhotoList.svelte";
-    import {_REMOTE_SERVER} from "$env/static/public";
+    import {onMount} from "svelte";
 
     let pigs = [];
     let photos = [];
     let showPhotos = false;
+    let request;
 
-    const request = fetch(_REMOTE_SERVER + '/pigs/random/10')
-        .then((response) => {
-            if (response.ok) {
-                return response.json()
-            }
-        });
-
-    async function initFetch () {
-        request.then(json => pigs = json.payload)
-            .then(
-                () => pigs.map((pig) => {
-                        if (pig.main_photo) {
-                            photos.push({
-                                'id': pig.id,
-                                'image': pig.main_photo,
-                            })
-                        }
+    onMount(async () => {
+        request = fetch('/api/pigs/random?number=10')
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+            }).then((json) => {
+                pigs = json.payload;
+            }).then(() =>
+                pigs.map((pig) => {
+                    if (pig.main_photo) {
+                        photos.push({
+                            'id': pig.id,
+                            'image': pig.main_photo,
+                        })
                     }
-                )
-            )
+                }))
             .then(() => showPhotos = true)
-            .catch((any) => {})
-    }
+            .catch((any) => {});
+    });
+
+    // async function initFetch () {
+    //     console.log(request);
+    //     request.then(json => pigs = json.payload)
+    //         .then(
+    //             () => pigs.map((pig) => {
+    //                     if (pig.main_photo) {
+    //                         photos.push({
+    //                             'id': pig.id,
+    //                             'image': pig.main_photo,
+    //                         })
+    //                     }
+    //                 }
+    //             )
+    //         )
+    //         .then(() => showPhotos = true)
+    //         .catch((any) => {})
+    // }
+
 </script>
 
 <section class="looking_for_home">
     <BigHeader text_content="Ищут дом" />
 
-    {#await initFetch()}
+    {#await request}
     <PhotoList photos="{Array(4).fill({image: '200w.gif'})}" local autoplay="{true}" no_border />
     {:then _}
         {#if showPhotos}

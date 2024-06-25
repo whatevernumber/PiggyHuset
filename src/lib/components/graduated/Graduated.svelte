@@ -2,28 +2,30 @@
     import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
     import GraduatedCard from '$lib/components/cards/graduate-card/GraduatedCard.svelte';
     import Button from '$lib/components/misc/button/Button.svelte';
-    import {_REMOTE_SERVER} from "$env/static/public";
     import {randomElements} from "$lib/components/utils/func.js";
+    import { onMount } from 'svelte';
 
     let graduates = [];
     let show_number = 3; // необходимое количество свинок для получения;
+    $: request = null;
 
-    const request = fetch(_REMOTE_SERVER + '/pigs/random/' + show_number + '/graduated')
-        .then((response) => {
-            if (response.ok) {
-                return response.json()
-            }
-        });
-
-    const initFetch = async function () {
-        request.then(json => graduates = randomElements(json.payload, 3))
-            .catch((any) => {})
-    }
+    onMount(async () => {
+        request = fetch('/api/pigs/random?number=' + show_number + '&graduated=true')
+            .then((response) => {
+                if (response.ok) {
+                    return response.json()
+                }
+            })
+            .then((json) => {
+                graduates = randomElements(json.payload, 3)
+            })
+            .catch((any) => {});
+    });
 </script>
 
 <section class="graduated">
     <BigHeader text_content="Наши выпускники" />
-    {#await initFetch()}
+    {#await request}
     <div class="graduated_cards_wrapper">
         <GraduatedCard name='Финик'  id="1" />
         <GraduatedCard name='Свиник' id="2" />
