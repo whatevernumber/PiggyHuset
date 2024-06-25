@@ -1,8 +1,6 @@
-import {_REMOTE_SERVER} from "$env/static/public";
-
 export async function load({ fetch }) {
 
-    const res = await fetch(`${_REMOTE_SERVER}/articles/type/2`);
+    const res = await fetch('/api/articles/news/all');
     const data = await res.json();
 
     return {

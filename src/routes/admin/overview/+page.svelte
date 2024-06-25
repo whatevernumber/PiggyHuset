@@ -3,19 +3,15 @@
     import Button from "$lib/components/misc/button/Button.svelte";
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
     import Overlay from '$lib/components/misc/overlay/Overlay.svelte'
-    import { _ADMIN_FLAG } from '$env/static/public';
     import {afterNavigate, beforeNavigate, goto} from '$app/navigation';
     import { onMount } from 'svelte';
     import {fly} from "svelte/transition";
 
     export let data;
-
-    let admin = false;
+    let admin = data.authorized;
 
     onMount(() => {
-       admin = localStorage.getItem(_ADMIN_FLAG);
-
-        if (!admin) {
+        if (!data.authorized) {
             goto('/');
         }
     });

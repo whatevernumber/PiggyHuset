@@ -5,7 +5,7 @@
 	export let title = 'Новый поросёнок';
 	export let method;
 	export let is_editing;
-	export let endpoint = '/pigs';
+	export let endpoint = 'pigs/add';
     export let pig;
 
 	let redirect_location = "looking-for-home";

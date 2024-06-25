@@ -4,7 +4,7 @@
 
     export let title;
 	export let method;
-	export let endpoint = '/articles/type/1';
+	export let endpoint = 'articles/add';
 	export let old_photos;
 	export let is_editing;
 

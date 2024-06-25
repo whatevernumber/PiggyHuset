@@ -8,38 +8,31 @@
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
 	import { showModal, closeModal } from "$lib/components/utils/func.js";
 	import Time from "svelte-time";
-	import { _REMOTE_SERVER } from '$env/static/public';
 	import { onMount } from 'svelte';
 
-	export let graduated;
-	export let age;
+	export let pig;
+
 	export let author;
 	export let admin;
-	export let id;
-	export let pig_name;
-	export let is_article;
+	export let is_article = false;
 	export let type;
 	export let modal_opened;
 	export let status_value;
-	export let city;
-	export let overseer;
-	export let pig_sex;
-	export let graduation_date;
 	export let pig_status;
 	export let pig_status_id;
 	export let action;
 	export let header;
 	let status_list = [];
-	let current_status = pig_status ?? ' ';
-	$: pig_header = pig_name ? pig_name + ' — ' + current_status : null;
+	let current_status = pig?.status.text ?? ' ';
+	$: pig_header = pig?.name ? pig.name + ' — ' + current_status : null;
 
-	if (pig_sex) {
-		switch(pig_sex) {
+	if (pig && pig.sex) {
+		switch(pig.sex) {
 			case 'F':
-				pig_sex = 'Девочка';
+				pig.sex = 'Девочка';
 				break;
 			case 'M':
-				pig_sex = 'Мальчик';
+				pig.sex = 'Мальчик';
 				break;
 		}
 	}
@@ -48,14 +41,13 @@
 		modal_opened = true;
 		showModal(evt);
 		action = 'change';
-		document.querySelector('.message').innerHTML = `Вы собираетесь изменить статус свинки. Это действие <b>необратимо</b>`;
 		document.removeEventListener('click', closeModal);
 		status_value = evt.target.value;
 	}
 
 	onMount(async () => {
 		if(!is_article) {
-			const res = await fetch(_REMOTE_SERVER + '/statuses', {
+			const res = await fetch('/api/pigs/statuses', {
 				method: 'GET'
 			});
 
@@ -87,26 +79,28 @@
 		</div>
 		{/if}
 		<div class='bio'>
-			{#if pig_status_id === 6}
+			{#if !is_article}
+				{#if pig_status_id === 6}
 				<p class="quarantine-notice">
 					<strong>Внимание!</strong>
 					Животное сейчас находится на карантине и будет искать дом немного позже. Следите за обновлением.
 				</p>
-			{/if}
-			{#if graduation_date && pig_status_id !== 1}
-				<p class="info pig_graduation"><b>{pig_status}:</b> <Time timestamp={graduation_date} format="DD MMMM YYYY г." /></p>
-			{/if}
-			{#if pig_sex}
-				<p class="info pig_sex"><b>Пол:</b> {pig_sex}</p>
-			{/if}
-			{#if age}
-				<p class="info pig_age"><b>{pig_sex === 'Мальчик' ? 'Поступил' : 'Поступила'} к нам в возрасте:</b> {age}</p>
-			{/if}
-			{#if city}
-				<p class="info pig_city"><b>Город:</b> {city}</p>
-			{/if}
-			{#if overseer}
-				<p class="info pig_overseer"><b>Куратор:</b> {overseer}</p>
+				{/if}
+				{#if pig.graduation_date && pig_status_id !== 1}
+				<p class="info pig_graduation"><b>{pig_status}:</b> <Time timestamp={pig.graduation_date} format="DD MMMM YYYY г." /></p>
+				{/if}
+				{#if pig.sex}
+				<p class="info pig_sex"><b>Пол:</b> {pig.sex}</p>
+				{/if}
+				{#if pig.age}
+				<p class="info pig_age"><b>{pig.sex === 'Мальчик' ? 'Поступил' : 'Поступила'} к нам в возрасте:</b> {pig.age}</p>
+				{/if}
+				{#if pig.city}
+				<p class="info pig_city"><b>Город:</b> {pig.city.city_name}</p>
+				{/if}
+				{#if pig.overseer}
+				<p class="info pig_overseer"><b>Куратор:</b> {pig.overseer.overseer_name}</p>
+				{/if}
 			{/if}
 			{#if author}
 				<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>

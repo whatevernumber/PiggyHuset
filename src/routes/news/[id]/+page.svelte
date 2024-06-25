@@ -7,7 +7,6 @@
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
-	import { _ADMIN_FLAG } from '$env/static/public';
 	import { onMount } from 'svelte';
 
 	export let data;
@@ -21,14 +20,15 @@
 	let success;
 	let modal_opened = false;
 	let admin = false;
+	let desc; // текст для модального окна
 
 	onMount(() => {
-		admin = localStorage.getItem(_ADMIN_FLAG);
+		admin = data.authorized;
 	})
 
 	const show_delete = (evt) => {
 		action = 'delete';
-		document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${news.title}". Это действие <b>необратимо</b>`;
+		desc = `Вы собираетесь удалить запись "${news.title}". Это действие необратимо!`;
 		showModal(evt, 'modal_closed');
 		evt.target.removeEventListener('click', show_delete);
 		document.removeEventListener('click', closeModal);
@@ -54,16 +54,15 @@
 	}
 
 	async function remove () {
-		let message = document.querySelector('.message');
-		message.textContent = 'Идёт удаление, подождите...';
+		desc = 'Идёт удаление, подождите...';
 
 		success = await removeData('articles', news.id);
 		if (success) {
 			action = 'card_delete';
-			message.textContent = 'Удаление успешно!';
+			desc = 'Удаление успешно!';
 		} else {
 			action = 'fail';
-			message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
+			desc = 'Произошла ошибка. Попробуйте повторить позднее.';
 		}
 	}
 
@@ -97,7 +96,9 @@
 {/if}
 
 <div class='modal modal_closed'>
-	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} bind:modal_opened={modal_opened} />
+	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} bind:modal_opened={modal_opened}
+		   {desc}
+	/>
 </div>
 
 <style>

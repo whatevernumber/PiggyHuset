@@ -29,6 +29,7 @@
     export let delete_handler;
     export let id;
     export let action;
+    export let desc; // для показа текста модального окна при удалении
 
     let date = article.graduation_date ? article.graduation_date : article.datetime;
     const datetime = dayjs.utc(date).tz(timezone);
@@ -101,7 +102,7 @@
 
         // для получения id-значения конкретной карточки
         id = article.id;
-        document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие <b>необратимо</b>`;
+        desc = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие необратимо`;
     }
 
     const redirect_to_edit = () => {
