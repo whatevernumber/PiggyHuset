@@ -31,24 +31,6 @@
             .catch((any) => {});
     });
 
-    // async function initFetch () {
-    //     console.log(request);
-    //     request.then(json => pigs = json.payload)
-    //         .then(
-    //             () => pigs.map((pig) => {
-    //                     if (pig.main_photo) {
-    //                         photos.push({
-    //                             'id': pig.id,
-    //                             'image': pig.main_photo,
-    //                         })
-    //                     }
-    //                 }
-    //             )
-    //         )
-    //         .then(() => showPhotos = true)
-    //         .catch((any) => {})
-    // }
-
 </script>
 
 <section class="looking_for_home">

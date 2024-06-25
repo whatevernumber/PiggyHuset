@@ -144,8 +144,6 @@ export const load_more = async function (data, category) {
         const response = await fetch(url);
         const batch = await response.json();
 
-        console.log(batch);
-
         return batch.payload;
     }
 }

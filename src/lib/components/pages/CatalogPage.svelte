@@ -164,8 +164,6 @@
 
         document.removeEventListener('scroll', load_on_scroll);
 
-        console.log(data_array);
-
         data_array.map(
             (el) => {
 
@@ -199,7 +197,6 @@
 
     async function get_new_batch () {
         let new_batch = await load_more(data, category);
-        console.log(new_batch);
 
         const ids = data_array.map(el => el.id);
         const no_duplicates = new_batch && !new_batch.some(el => ids.includes(el.id));
