@@ -17,7 +17,6 @@
 </script>
 
 <header on:click={() => sessionStorage.removeItem('tab')}>
-    <a href='/admin'>Админ</a>
     <h1 class="main-header">ДОМИК для бездомных поросят</h1>
     {#if admin}
         <a href="/">
