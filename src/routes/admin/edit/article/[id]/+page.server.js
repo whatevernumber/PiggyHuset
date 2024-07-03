@@ -1,12 +1,11 @@
-import { error } from '@sveltejs/kit';
-import {goto} from "$app/navigation";
+import { error, redirect } from '@sveltejs/kit';
 
 export const ssr = false;
 
 export async function load({ fetch, params, cookies }) {
 
 	if (!cookies.get('bearer')) {
-		goto('/');
+		throw redirect(308, '/');
 	}
 
 	const res = await fetch(`/api/articles?id=${params.id}`);

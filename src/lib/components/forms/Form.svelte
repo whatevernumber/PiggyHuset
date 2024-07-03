@@ -20,6 +20,7 @@
     export let is_editing;
     export let pig; // array of photos to show in the preview
     export let article;
+    export let product;
 
     let photos = [];
 
@@ -59,7 +60,12 @@
     select_style = select ? 'select_group' : '';
 
     const handle = () => {
-        redirect(redirect_location ? `/${redirect_location}/${success.id || null}` : '/')
+
+        if (redirect_location === 'info') {
+            redirect('/info');
+        } else {
+            redirect(redirect_location ? `/${redirect_location}/${success.id || null}` : '/')
+        }
     }
 
     const show_modal = () => {
@@ -96,7 +102,6 @@
 
         } else {
             errors = await res.json();
-
 
             for (const prop in errors) {
                 let files;
@@ -170,7 +175,7 @@
         <form class="form-scheme" enctype="multipart/form-data" on:input={() => dirty = true}>
 
             {#if top_fields}
-            <fieldset class="label-group">
+            <fieldset class="label-group head-group {redirect_location === 'info' ? 'full-width' : ''}">
                 {#each top_fields as field}
                     {#if field !== textarea && field !== select}
                         {@const required = field.required}
@@ -208,7 +213,7 @@
             </fieldset>
 
             {#if bottom_fields.length}
-            <fieldset class="bottom-fields {select_style}">
+            <fieldset class="bottom-fields {select_style} {redirect_location === 'info' ? 'full-width' : ''}">
                 {#each bottom_fields as field}
                     {@const required = field.required}
                     {#if field.type === 'select'}
@@ -226,10 +231,9 @@
                 {/each}
             </fieldset>
             {/if}
-
             <fieldset class="label-group file-fieldset">
             {#if scheme.files.file_input}
-                <FileInput class_name="form-input-field" name="files[]" multiple onchange="{preview}" />
+                <FileInput class_name="form-input-field" name="{scheme.files.multiple ? 'files[]' : 'file'}" multiple={scheme.files.multiple} onchange="{preview}" />
             {/if}
                 <div class="form-item button">
                     <SubmitButton on_click="{ sendForm }" />
@@ -254,6 +258,9 @@
         {/if}
         {#if photos.length}
             <UploadedFiles handler={delete_handler} bind:photos bind:old_photo_name={main_photo_name} bind:main_photo={main_photo_index} />
+        {/if}
+        {#if product && product.image && !image_upload_preview.length}
+            <PhotoCard pic={product.image} type='food' width='80px' height='80px' />
         {/if}
     </section>
     <slot />
@@ -446,6 +453,19 @@
         display: none;
     }
 
+    .full-width {
+        flex-direction: column;
+        row-gap: 25px;
+    }
+
+    .full-width .form-item {
+        min-width: 100%;
+    }
+
+    .full-width .form-input-field {
+        max-width: 400px;
+    }
+
     @media (max-width: 1001px) {
 
         .form-container {
@@ -501,6 +521,19 @@
         .modal {
             left: 0;
         }
+
+        .full-width {
+            row-gap: 10px;
+        }
+
+        .full-width .form-item {
+            min-width: 100%;
+        }
+
+        .full-width .form-input-field {
+            max-width: 120px;
+        }
+
     }
 
 </style>

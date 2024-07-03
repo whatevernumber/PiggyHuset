@@ -4,9 +4,9 @@
     import CloseButton from "$lib/components/misc/button/CloseButton.svelte";
 
     export let alt = 'Изображение';
-	export let pic;
     export let type = 'pig';
-    export let src = pic ? `${_REMOTE_SERVER}/img/${pic}` : `../img/placeholder/${type}-${randomize(1, 3)}.png`; // src картинки можно задать явно
+	export let pic;
+    export let src = (`../img/placeholder/${type}-${randomize(1, 3)}.png`); // src картинки можно задать явно
     export let is_form = false;
     export let click_handler;
     export let status = null;
@@ -18,6 +18,10 @@
     export let index; // индекс добавленной новой фотографии
 
     export let form_photo_type; // тип превью фотографий для формы (новый\старые)
+
+    if (pic) {
+        src = `${_REMOTE_SERVER}/img/` + (type === 'food' ? `/info/${pic}` : `${pic}`);
+    }
 
     const delete_handler = () => {
         click_handler(pic);

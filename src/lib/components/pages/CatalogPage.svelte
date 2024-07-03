@@ -262,7 +262,6 @@
                     {/key}
                 {/each}
             </CardList>
-
         </div>
     </section>
 </div>

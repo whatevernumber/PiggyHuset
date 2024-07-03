@@ -6,13 +6,14 @@
 	export let width = '780px';
 	export let type = 'text';
 	export let required = false;
+	export let value;
 </script>
 
 <label>
 	{#if header}
 	<span class="input_header">{header}</span>
 	{/if}
-	<input {type} {required} {name} style="--width: {width};" class="{class_name}" {placeholder}>
+	<input {type} {required} {name} style="--width: {width};" class="{class_name}" {placeholder} value={value ?? ''}>
 	<span class="input-error-label"></span>
 </label>
 

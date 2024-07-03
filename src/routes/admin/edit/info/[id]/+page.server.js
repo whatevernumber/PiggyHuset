@@ -1,4 +1,5 @@
 import { error, redirect } from '@sveltejs/kit';
+
 export const ssr = false;
 
 export async function load({ fetch, params, cookies }) {
@@ -7,14 +8,15 @@ export async function load({ fetch, params, cookies }) {
 		throw redirect(308, '/');
 	}
 
-	const res = await fetch(`/api/pigs?id=${params.id}`);
-	const data =  await res.json();
+	const res = await fetch(`/api/info/get?id=${params.id}`);
 
-	if (data.status === 404) {
-		throw error(data.status);
+	if (res.status === 404) {
+		throw error(res.status);
 	}
+
+	const data = await res.json();
 
 	return {
-		pig: data
-	}
+		article: data,
+	};
 }

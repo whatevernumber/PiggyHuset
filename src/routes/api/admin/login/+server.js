@@ -22,7 +22,12 @@ export async function POST({request, cookies}) {
 
 	if (result.token) {
 		const token = 'Bearer ' + result.token;
-		cookies.set('bearer', token, { path: '/'});
+
+		// sets the expiration date in 1 month from the current date
+		let exp_date = new Date();
+		exp_date.setMonth(exp_date.getMonth() + 1);
+
+		cookies.set('bearer', token, { path: '/', expires: exp_date });
 	}
 
 	return new Response(JSON.stringify(result), {

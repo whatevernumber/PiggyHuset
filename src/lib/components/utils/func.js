@@ -83,7 +83,7 @@ export const randomize = (start, end, dotIndex = 0) => {
 async function removeData(category, id) {
     let success;
 
-    const server_location = /article|news/.test(category) ? 'articles' : 'pigs';
+    const server_location = /article|news/.test(category) ? 'articles' : (category === 'food' ? 'info' : 'pigs');
 
     await fetch('/api/' + server_location + '/delete/?id=' + id,
         {
