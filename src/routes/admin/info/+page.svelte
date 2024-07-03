@@ -180,5 +180,9 @@
 			flex-direction: column;
 			order: -2;
 		}
+
+		th {
+			border: 1px solid #3f3f3f;
+		}
 	}
 </style>
