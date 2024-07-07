@@ -8,6 +8,7 @@ import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 import { goto } from '$app/navigation';
 import { closeModal, removeData, showModal } from '$lib/components/utils/func.js';
 import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
+import LinkWithReferrer from '$lib/components/misc/links/LinkWithReferrer.svelte';
 
 export let data;
 let results = data.info;
@@ -15,6 +16,7 @@ let results = data.info;
 let searchWord = '';
 let resultWord;
 let filter_id = null;
+let screen_width;
 
 const search = async () => {
 
@@ -36,6 +38,7 @@ const searchData = async () => {
 
 const filterCategory = async (id) => {
 	filter_id = id;
+	searchWord = '';
 	results = search();
 }
 
@@ -67,8 +70,8 @@ async function remove () {
 	success = await removeData('food', action_id);
 	if (success) {
 		action = 'complete';
-		results = results.filter(i => i.id !== action_id);
 		desc = 'Удаление успешно!';
+		results = search();
 	} else {
 		action = 'fail';
 		desc = 'Произошла ошибка. Попробуйте повторить позднее.';
@@ -77,56 +80,68 @@ async function remove () {
 
 </script>
 
+<svelte:window bind:innerWidth={screen_width} />
+
 <svelte:head>
 	<title>База знаний</title>
 </svelte:head>
 
-<div class='wrapper'>
-	<Search bind:searchWord onclick={searchData} />
-	<div class='query_wrapper'>
+<div class="wrapper">
+	<Search bind:searchWord onclick={searchData} rounded />
+	<div class="query_wrapper">
 		{#if resultWord}
-			<p class='query_text'>Результаты по запросу: <b>{resultWord}</b></p>
+			<p class="query_text">Результаты по запросу: <b>{resultWord}</b></p>
 		{/if}
 	</div>
-	<div>
-		{#if data.categories && data.categories.length}
-		<div class='filters'>
-			<ul class='list'>
-				<li class='list-option list-reset' on:click={() => filterCategory('')}>Сбросить</li>
-				{#each data.categories as category}
-					<li class="list-option {filter_id === category.id ? 'active' : ''}" on:click={() => filterCategory(category.id)}>{ category.value }</li>
-				{/each}
-			</ul>
+	{#if data.categories && data.categories.length}
+	<div class="filters">
+		<ul class="list">
+
+			<li class="list-option list-reset" on:click={() => filterCategory(null)}>Сбросить</li>
+
+			{#each data.categories as category}
+				<li class="list-option {filter_id === category.id ? 'active' : ''}" on:click={() => filterCategory(category.id)}>{ category.value }</li>
+			{/each}
+
+		</ul>
+	</div>
+	{/if}
+
+	{#if data.authorized}
+		<div class="button_wrapper">
+			<LinkWithReferrer href="/admin/info/add">
+				<SmolButton class_name="smol-green" title="Добавить" />
+			</LinkWithReferrer>
+
+			<LinkWithReferrer href="/admin/info">
+				<SmolButton title="Статистика" />
+			</LinkWithReferrer>
 		</div>
-		{/if}
-		{#if data.authorized}
-		<div class='button_wrapper'>
-			<SmolButton class_name='smol-green' title='Добавить' click_handler={() => {goto('/admin/info/add')}} />
-			<SmolButton title='Статистика' click_handler={() => {goto('/admin/info')}} />
+	{/if}
+
+	{#await results}
+		<div class="result-wrapper">
+			<p>Ищем ваш запрос...</p>
+			<img src="/img/pig-search.png" width="150px" height="150px" alt="Свинка ищет слово" />
 		</div>
-		{/if}
-		{#await results}
-			<div class='result-wrapper'>
-				<p>Свинка ищет ваш запрос...</p>
-				<img src='/img/pig-search.jpg' width='150px' height='150px' alt='Свинка ищет слово'/>
-			</div>
-		{:then results}
-			{#if results && results.length}
+	{:then results}
+		{#if results && results.length}
+			<div class="result-wrapper">
 				<CardList>
 					{#each results as card (card.id)}
-						<li>
-							<Card is_article type='info' article={card} admin={data.authorized} delete_handler={show_delete} bind:id={action_id} bind:desc />
+						<li class="result-item">
+							<Card is_article type="info" article={card} admin={data.authorized} delete_handler={show_delete} bind:id={action_id} bind:desc rounded={screen_width < 1001} />
 						</li>
 					{/each}
 				</CardList>
-			{:else}
-				<div class='result-wrapper'>
-					<p>Нет результатов :c</p>
-					<img src='/img/await-search.jpg' width='150px' height='150px' alt='Свинка ищет слово'/>
-				</div>
-			{/if}
-		{/await}
-	</div>
+			</div>
+		{:else}
+			<div class="result-wrapper">
+				<img src="/img/await-search.png" width="150px" height="150px" alt="Свинка ищет слово"/>
+				<p class="not-found">Мы искали, но ничего не нашли :c</p>
+			</div>
+		{/if}
+	{/await}
 </div>
 
 {#if modal_opened}
@@ -134,13 +149,16 @@ async function remove () {
 {/if}
 
 
-<div class='modal modal_closed'>
+<div class="modal modal_closed">
 	<ModalOkay {desc} {action} {success} {handle_cancel} action_handler={remove} bind:modal_opened={modal_opened} />
 </div>
 
 <style>
 	.wrapper {
 		margin: 20px auto;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
 	}
 
 	.query_wrapper {
@@ -149,6 +167,13 @@ async function remove () {
 
 	.result-wrapper {
 		text-align: center;
+		flex-grow: 1;
+		place-content: center;
+		max-width: 40vw;
+	}
+
+	.result-item {
+		text-align: left;
 	}
 
 	.list {
@@ -161,16 +186,29 @@ async function remove () {
 		justify-content: center;
 	}
 
+	.list-option {
+		padding: 7px;
+		border: 1px dashed #3f3f3f;
+		border-radius: 25px;
+	}
+
 	.list-option:hover {
-		color: #EF8653;
+		color: #d97544;
+		cursor: pointer;
 	}
 
 	.list-reset {
-		color: #d97544;
+		color: #b25f36;
+	}
+
+	.list-reset:hover {
+		background-color: rgba(246, 181, 211, 0.6);
 	}
 
 	.active {
-		color: #88aa4d;
+		border-style: solid;
+		border-color: #d97544;
+		background-color: #f0f6e6;
 	}
 
 	.button_wrapper {
@@ -180,10 +218,20 @@ async function remove () {
 		margin-bottom: 20px;
 	}
 
+	.not-found {
+		font-size: 18px;
+		font-style: italic;
+	}
+
 	@media (max-width: 1001px) {
 		.query_wrapper {
 			text-align: center;
 		}
+
+        .result-item {
+            width: 90vw;
+            margin-left: 5vw;
+        }
     }
 
     .modal {

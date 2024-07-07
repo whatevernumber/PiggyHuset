@@ -3,9 +3,13 @@
 
     onMount(
         () => {
-            VK?.Widgets.CommunityMessages("vk-messages", 127412463, {
-                tooltipButtonText: 'Связаться с нами'
-            });
+			try {
+				VK.Widgets.CommunityMessages('vk-messages', 127412463, {
+					tooltipButtonText: 'Связаться с нами'
+				});
+			} catch (_) {
+				// ignore
+			}
         }
     );
 </script>

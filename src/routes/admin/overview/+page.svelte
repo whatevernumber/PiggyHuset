@@ -6,6 +6,7 @@
     import {afterNavigate, beforeNavigate, goto} from '$app/navigation';
     import { onMount } from 'svelte';
     import {fly} from "svelte/transition";
+    import LinkWithReferrer from '$lib/components/misc/links/LinkWithReferrer.svelte';
 
     export let data;
     let admin = data.authorized;
@@ -81,7 +82,9 @@
     </nav>
     {#if tab !== 'graduates'}
     <div class="button_wrapper">
-        <SmolButton title={action.label} href="{action.href}" />
+        <LinkWithReferrer href="{action.href}">
+            <SmolButton title={action.label} />
+        </LinkWithReferrer>
     </div>
     {/if}
 </section>

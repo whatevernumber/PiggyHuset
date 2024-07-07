@@ -9,7 +9,7 @@ export async function GET({url}) {
 		throw error(404);
 	}
 
-	const res = await fetch(`${REMOTE_SERVER}/product/${id}`, {
+	const res = await fetch(`${REMOTE_SERVER}/product/${id}?expand=photo`, {
 		headers: {
 			accept: 'application/json'
 		},

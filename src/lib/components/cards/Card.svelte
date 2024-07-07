@@ -30,6 +30,7 @@
     export let id;
     export let action;
     export let desc; // для показа текста модального окна при удалении
+    export let rounded = false;
 
     let date = article.graduation_date ? article.graduation_date : article.datetime;
     const datetime = dayjs.utc(date).tz(timezone);
@@ -132,7 +133,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
+<article class:rounded id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     {#if type === 'info'}
         <PhotoCard pic={image} type='food' {status} width="300" height="300"
                    alt='Изображение продукта' />
@@ -153,8 +154,10 @@
             </LinkWithReferrer>
             {/if}
         {#if admin}
-            <div class='button_wrapper'>
-                <EditButton button_name='edit' click_handler={redirect_to_edit}/>
+            <div class="button_wrapper">
+                <LinkWithReferrer href="{'/admin/edit/' + type + '/' + article.id}">
+                    <EditButton button_name='edit' />
+                </LinkWithReferrer>
                 {#if !(/looking-for-home|graduates/.test(category))}
                 <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
                 {/if}
@@ -169,23 +172,17 @@
              {/if}
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
         {#if type === 'info'}
-            <div>
-                {#if article.info.doses}
+            <div class="card-notices">
+                {#if article.info.restrictions}
                     <p>
-                        <span class='details doses'>Дозировка: </span>
-                        {article.info.doses}
+                        <span class='details restricted'> Ограничения: </span>
+                        {article.info.restrictions}
                     </p>
                 {/if}
                 {#if article.info.allowed}
                     <p>
                         <span class='details allowed'> Допустимо: </span>
                         {article.info.allowed}
-                    </p>
-                {/if}
-                {#if article.info.restrictions}
-                    <p>
-                        <span class='details restricted'> Ограничения: </span>
-                        {article.info.restrictions}
                     </p>
                 {/if}
                 {#if article.info.notes}
@@ -202,6 +199,12 @@
                     <Time relative="{type === 'news'}" format="D MMM YYYYг." live={type === 'news'} timestamp={datetime} /></p>
                 <SmolButton title={button_text} {href} />
             </div>
+        {/if}
+        {#if article.info?.doses}
+            <p class="datetime">
+                <span class='details doses'>Дозировка: </span>
+                {article.info?.doses}
+            </p>
         {/if}
     </div>
 </article>
@@ -251,6 +254,14 @@
         color: #333333;
     }
 
+    .card-notices {
+        text-align: left;
+        margin-right: 5%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
     .details {
         font-weight: bold;
     }
@@ -260,11 +271,11 @@
     }
 
     .restricted {
-        color: rgba(162, 10, 51, 0.56);
+        color: rgba(162, 10, 51, 0.92);
     }
 
     .note {
-        color: #f5b193;
+        color: #b0bd9a;
     }
 
     :global(.card-description a) {
@@ -317,6 +328,10 @@
         article {
             flex-direction: column;
             row-gap: 10px;
+        }
+
+        article.rounded {
+            border-radius: 25px;
         }
 
         .wrapper {

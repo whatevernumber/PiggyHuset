@@ -1,6 +1,6 @@
 export function load({cookies}) {
 
-	const authorized = cookies.get('bearer') ? true : false;
+	const authorized = !!cookies.get('bearer');
 
 	return {
 		authorized: authorized,

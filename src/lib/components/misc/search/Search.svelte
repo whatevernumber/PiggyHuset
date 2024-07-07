@@ -1,6 +1,7 @@
 <script>
 	export let searchWord;
 	export let onclick;
+	export let rounded = false;
 
 	const handle_form = (evt) => {
 		evt.preventDefault();
@@ -8,9 +9,9 @@
 	}
 </script>
 
-<form class='search_wrapper'>
-	<input class='search_input' bind:value={searchWord}  placeholder='Например, овощи'>
-	<button class='search_button' on:click={handle_form}>
+<form class="search_wrapper">
+	<input class="search_input" class:rounded bind:value={searchWord}  placeholder="Например, овощи">
+	<button class="search_button" class:rounded on:click={handle_form}>
 	</button>
 </form>
 
@@ -20,6 +21,7 @@
 		column-gap: 5px;
 		margin: auto;
 		width: 600px;
+        transition: all 300ms ;
 	}
 
 	.search_button {
@@ -30,11 +32,12 @@
 		align-items: center;
 		background-image: url("/img/search_button_icon.jpg");
 		background-size: contain;
-		transition: all 500ms ;
+		transition: inherit;
 	}
 
 	.search_button:hover {
 		outline: solid 2px #F6B5D3;
+		cursor: pointer;
 	}
 
 	.search_input {
@@ -42,9 +45,16 @@
         height: 25px;
         width: 500px;
         max-width: 780px;
-        border-color: #f6b5d3;
+        border-color: #b0bd9a;
         font-family: Jost, Arial, sans-serif;
         font-size: 18px;
+        transition: inherit;
+		text-transform: capitalize;
+	}
+
+	.search_input:focus {
+		border: 2px dotted #d97544;
+		outline: none;
 	}
 
 	@media (max-width: 1024px) {
@@ -56,4 +66,8 @@
             width: 200px;
         }
     }
+
+	.rounded {
+		border-radius: 25px;
+	}
 </style>

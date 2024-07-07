@@ -1,12 +1,12 @@
 import {REMOTE_SERVER} from "$env/static/private";
-import { json } from '@sveltejs/kit';
+import { json, error } from '@sveltejs/kit';
 
 export async function GET({url}) {
 
 	const search_word = url.searchParams.get('q') ?? '';
 	const type_id = url.searchParams.get('type') ?? '';
 
-	const res = await fetch(`${REMOTE_SERVER}/product/search/` + (type_id ? type_id + '/' : '') + search_word, {
+	const res = await fetch(`${REMOTE_SERVER}/product/search/` + (type_id ? type_id + '/' : '') + search_word + '?expand=photo', {
 		headers: {
 			accept: 'application/json'
 		},

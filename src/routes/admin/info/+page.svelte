@@ -1,5 +1,6 @@
 <script>
 	import Paginator from '$lib/components/misc/paginator/Paginator.svelte';
+	import ReturnButton from '$lib/components/misc/button/ReturnButton.svelte';
 
 	export let data;
 	$: queries = data.stats;
@@ -30,19 +31,19 @@
 	<title>Статистика запросов</title>
 </svelte:head>
 
-<div class='page_wrapper'>
-	<h1 class='header'>Статистика</h1>
-	<div class='filter_wrapper'>
-		<div class='filter_list'>
-			<span class="filter_option {filter === 'all' ? 'active' : '' }" on:click={() => handleSortOrFilter('filter', 'all')}>
+<div class="page_wrapper">
+	<h1 class="header">Статистика</h1>
+	<div class="filter_wrapper">
+		<div class="filter_list">
+			<span class="filter_option {filter === 'all' ? 'active' : '' }" on:click={() => handleSortOrFilter("filter", "all")}>
 				Все
 			</span>
-			<span class="filter_option {filter === 'failed' ? 'active' : '' }" on:click={() => handleSortOrFilter('filter', 'failed')}>
+			<span class="filter_option {filter === 'failed' ? 'active' : '' }" on:click={() => handleSortOrFilter("filter", "failed")}>
 				Неудачные
 			</span>
 		</div>
 		<div>
-			<ul class='sort_list'>
+			<ul class="sort_list">
 				<li class="sort_option {sort_option === 'date' ? 'active' : '' }" on:click={() => {handleSortOrFilter('sort', 'date')}}>
 					По дате
 				</li>
@@ -55,7 +56,7 @@
 			</ul>
 		</div>
 	</div>
-	<table class='table'>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -72,25 +73,27 @@
 				{#each queries.payload as stat}
 			<tr>
 				<td>{stat.id}</td>
-				<td>{stat.value}</td>
+				<td class:failed={stat.failed}>{stat.value}</td>
 				<td>{stat.count}</td>
-				<td>{stat.failed ? 'Нет' : 'Да'}</td>
+				<td class:failed={stat.failed}>{stat.failed ? 'Нет' : 'Да'}</td>
 				<td>{stat.updated_at}</td>
 			</tr>
 				{/each}
 			{:else}
-				<p class='no_results'>Нет результатов!</p>
+				<p class="no_results">Нет результатов!</p>
 			{/if}
 		{/await}
 		</tbody>
 	</table>
 
 	{#if queries.pagination.pageCount > 1}
-		<div class='paginator_wrapper'>
+		<div class="paginator_wrapper">
 			<Paginator bind:data={queries} current_page={queries.pagination.page + 1} page_count={queries.pagination.pageCount} loadFunc={loadNewPage}/>
 		</div>
 	{/if}
 </div>
+
+<ReturnButton />
 
 <style>
 	.header {
@@ -109,6 +112,7 @@
 
 	.table {
 		min-width: 70%;
+		max-width: 95vw;
 		border: 1px solid #adadad;
         border-collapse: collapse;
 	}
@@ -123,8 +127,12 @@
 	}
 
     td:nth-child(even) {
-		background-color: #F9EEE1;
+		background-color: #e1edce;
     }
+
+	td:nth-child(even).failed {
+		background-color: rgba(63, 63, 63, 0.25);
+	}
 
 	.sort_list {
 		padding: 0;

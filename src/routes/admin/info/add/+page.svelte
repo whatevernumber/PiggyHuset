@@ -1,5 +1,6 @@
 <script>
 	import NewInfoForm from '$lib/components/forms/NewInfoForm.svelte';
+	import ReturnButton from '$lib/components/misc/button/ReturnButton.svelte';
 </script>
 
 <svelte:head>
@@ -7,3 +8,4 @@
 </svelte:head>
 
 <NewInfoForm />
+<ReturnButton />

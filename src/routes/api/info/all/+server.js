@@ -1,9 +1,9 @@
 import {REMOTE_SERVER} from "$env/static/private";
-import { json } from '@sveltejs/kit';
+import { json, error } from '@sveltejs/kit';
 
-export async function GET({}) {
+export async function GET() {
 
-	const res = await fetch(`${REMOTE_SERVER}/product/random`, {
+	const res = await fetch(`${REMOTE_SERVER}/product/random?expand=photo`, {
 		headers: {
 			accept: 'application/json'
 		},

@@ -4,7 +4,7 @@
 	export let message_handler;
 </script>
 
-<a class="button" on:click={click_handler} on:click={message_handler}>
+<div class="button" on:click={click_handler} on:click={message_handler}>
 	<div class='wrapper'>
 		{#if button_name === 'edit'}
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -16,7 +16,7 @@
 		</svg>
 		{/if}
 	</div>
-</a>
+</div>
 
 <style>
 
