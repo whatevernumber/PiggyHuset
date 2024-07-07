@@ -33,6 +33,7 @@ const config = {
 					'https://vk.com',
 				],
 				'connect-src': [
+					'self',
 					'https://mc.yandex.ru',
 					'https://*.google-analytics.com',
 					'https://*.analytics.google.com',
