@@ -3,19 +3,16 @@
     import Button from "$lib/components/misc/button/Button.svelte";
     import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
     import Overlay from '$lib/components/misc/overlay/Overlay.svelte'
-    import { _ADMIN_FLAG } from '$env/static/public';
     import {afterNavigate, beforeNavigate, goto} from '$app/navigation';
     import { onMount } from 'svelte';
     import {fly} from "svelte/transition";
+    import LinkWithReferrer from '$lib/components/misc/links/LinkWithReferrer.svelte';
 
     export let data;
-
-    let admin = false;
+    let admin = data.authorized;
 
     onMount(() => {
-       admin = localStorage.getItem(_ADMIN_FLAG);
-
-        if (!admin) {
+        if (!data.authorized) {
             goto('/');
         }
     });
@@ -85,7 +82,9 @@
     </nav>
     {#if tab !== 'graduates'}
     <div class="button_wrapper">
-        <SmolButton title={action.label} href="{action.href}" />
+        <LinkWithReferrer href="{action.href}">
+            <SmolButton title={action.label} />
+        </LinkWithReferrer>
     </div>
     {/if}
 </section>

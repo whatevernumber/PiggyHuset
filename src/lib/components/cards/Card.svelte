@@ -29,6 +29,8 @@
     export let delete_handler;
     export let id;
     export let action;
+    export let desc; // для показа текста модального окна при удалении
+    export let rounded = false;
 
     let date = article.graduation_date ? article.graduation_date : article.datetime;
     const datetime = dayjs.utc(date).tz(timezone);
@@ -55,14 +57,16 @@
         }
     }
 
-    let text = article.text || article.description;
+    let text = article.text || article.description || article.info?.desc;
 
     // удаление тегов с картинками из карточки статьи
     if (type === 'article') {
         text = text.replaceAll(/<img src="\S+" alt="">/g, '');
     }
 
-    text = text.slice(0, 297) + '...' || '';
+    if (type !== 'info') {
+        text = text.slice(0, 297) + '...' || '';
+    }
 
     let card;
     let innerHtml;
@@ -74,7 +78,7 @@
         article.description = text;
 
     // реактивное изменение картинки карточки
-    $: image = article.main_photo ?? null;
+    $: image = article.main_photo ?? (article.image ?? null);
 
     let window_width = 0;
     let date_prefix = '';
@@ -101,7 +105,7 @@
 
         // для получения id-значения конкретной карточки
         id = article.id;
-        document.querySelector('.message').innerHTML = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие <b>необратимо</b>`;
+        desc = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие необратимо`;
     }
 
     const redirect_to_edit = () => {
@@ -115,7 +119,7 @@
             type = 'article';
         }
 
-        redirect('/admin/edit/' + type + '/' + id, 250);
+        redirect('/admin/edit/' + type + '/' + id, 100);
     }
 
     // подстановка [обрезанной] разметки из Quill в текст карточки
@@ -124,22 +128,36 @@
             innerHtml !== undefined ? card.innerHTML = innerHtml : null;
         }
     });
+
 </script>
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
-    <LinkWithReferrer {href} css_class="card-container">
-        <PhotoCard pic={image} {type} {status} width="300" height="300" alt='Фотография свинки' />
-    </LinkWithReferrer>
+<article class:rounded id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
+    {#if type === 'info'}
+        <PhotoCard pic={image} type='food' {status} width="300" height="300"
+                   alt='Изображение продукта' />
+        {:else}
+        <LinkWithReferrer {href} css_class="card-container">
+            <PhotoCard pic={image} {type} {status} width="300" height="300"
+                       alt={type === 'pig' || type === 'ready' ? 'Фотография свинки' : 'Обложка поста'} />
+        </LinkWithReferrer>
+    {/if}
+
     <div class="wrapper">
         <div class='header_wrapper'>
+            {#if type === 'info'}
+                <h3>{article.title}</h3>
+            {:else }
             <LinkWithReferrer {href}>
                 <h3 class="card-title">{article.name ?? article.title}</h3>
             </LinkWithReferrer>
+            {/if}
         {#if admin}
-            <div class='button_wrapper'>
-                <EditButton button_name='edit' click_handler={redirect_to_edit}/>
+            <div class="button_wrapper">
+                <LinkWithReferrer href="{'/admin/edit/' + type + '/' + article.id}">
+                    <EditButton button_name='edit' />
+                </LinkWithReferrer>
                 {#if !(/looking-for-home|graduates/.test(category))}
                 <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
                 {/if}
@@ -147,18 +165,47 @@
         {/if}
         </div>
             {#if pig_sex}
-        <p class="info pig_city"><b>Пол:</b> {pig_sex}</p>
+        <p><b>Пол:</b> {pig_sex}</p>
              {/if}
              {#if city}
-        <p class="info pig_city"><b>Город:</b> {city}</p>
+        <p><b>Город:</b> {city}</p>
              {/if}
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
-        <div class="bottom-line">
+        {#if type === 'info'}
+            <div class="card-notices">
+                {#if article.info.restrictions}
+                    <p>
+                        <span class='details restricted'> Ограничения: </span>
+                        {article.info.restrictions}
+                    </p>
+                {/if}
+                {#if article.info.allowed}
+                    <p>
+                        <span class='details allowed'> Допустимо: </span>
+                        {article.info.allowed}
+                    </p>
+                {/if}
+                {#if article.info.notes}
+                    <p>
+                        <span class='details note'>Примечание: </span>
+                        {article.info.notes}
+                    </p>
+                {/if}
+            </div>
+        {:else}
+            <div class="bottom-line">
+                <p class="datetime">
+                    <span class='date_word'>{date_prefix} </span>
+                    <Time relative="{type === 'news'}" format="D MMM YYYYг." live={type === 'news'} timestamp={datetime} /></p>
+                <SmolButton title={button_text} {href} />
+            </div>
+        {/if}
+        {#if article.info?.doses}
             <p class="datetime">
-                <span class='date_word'>{date_prefix} </span>
-                <Time relative="{type === 'news'}" format="D MMM YYYYг." live={type === 'news'} timestamp={datetime} /></p>
-            <SmolButton title={button_text} {href} />
-        </div>
+                <span class='details doses'>Дозировка: </span>
+                {article.info?.doses}
+            </p>
+        {/if}
     </div>
 </article>
 <div class='hidden overlay'></div>
@@ -205,6 +252,30 @@
         font-size: 16px;
         line-height: 140%;
         color: #333333;
+    }
+
+    .card-notices {
+        text-align: left;
+        margin-right: 5%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    .details {
+        font-weight: bold;
+    }
+
+    .allowed {
+        color: #88aa4d;
+    }
+
+    .restricted {
+        color: rgba(162, 10, 51, 0.92);
+    }
+
+    .note {
+        color: #b0bd9a;
     }
 
     :global(.card-description a) {
@@ -257,6 +328,10 @@
         article {
             flex-direction: column;
             row-gap: 10px;
+        }
+
+        article.rounded {
+            border-radius: 25px;
         }
 
         .wrapper {

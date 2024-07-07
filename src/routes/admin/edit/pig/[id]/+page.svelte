@@ -7,7 +7,7 @@
 	let pig = data.pig;
 	let title = `Профиль ${pig.name}`
 	let method = 'PATCH';
-	let endpoint = '/pigs/' + pig.id;
+	let endpoint = 'pigs/edit?id=' + pig.id;
 
 	onMount(() => {
 		const form = document.querySelector('form');

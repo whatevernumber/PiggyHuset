@@ -1,7 +1,6 @@
 <script>
 	import NewArticleForm from "$lib/components/forms/NewArticleForm.svelte";
 	import NewPostForm from '$lib/components/forms/NewPostForm.svelte';
-	import UploadedFiles from '$lib/components/misc/form-elements/UploadedFiles.svelte';
 	import { onMount } from 'svelte';
 	import {_REMOTE_SERVER} from "$env/static/public";
 
@@ -11,7 +10,7 @@
 	let type = article.type_id;
 
 	let method = 'PATCH';
-	let endpoint = '/articles/' + article.id;
+	let endpoint = 'articles/edit?id=' + article.id;
 
 	onMount(() =>
 	{

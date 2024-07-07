@@ -18,6 +18,7 @@ const config = {
 				'base-uri': ['self'],
 				'img-src': [
 					'self',
+					'blob: self',
 					'https://domik-svinok.ru/api/',
 					'https://*.google-analytics.com',
 					'https://*.googletagmanager.com',
@@ -32,11 +33,14 @@ const config = {
 					'https://vk.com',
 				],
 				'connect-src': [
+					'self',
 					'https://mc.yandex.ru',
 					'https://*.google-analytics.com',
 					'https://*.analytics.google.com',
 					'https://*.googletagmanager.com',
-					'https://domik-svinok.ru/api/'
+					'https://domik-svinok.ru/api/',
+					'https://cdn.jsdelivr.net/npm/',
+					'self',
 				],
 				'child-src': [
 					'blob: https://mc.yandex.ru',
@@ -50,7 +54,7 @@ const config = {
 		},
 		env: {
 			publicPrefix: '_'
-		}
+		},
 	}
 };
 

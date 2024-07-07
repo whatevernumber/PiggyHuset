@@ -5,7 +5,7 @@
 	export let method;
 	export let old_photos;
 	export let is_editing;
-	export let endpoint = '/articles/type/2';
+	export let endpoint = 'articles/news/add';
     export let article;
 
 	let modal_message = 'Пост опубликован';

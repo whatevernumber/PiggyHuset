@@ -24,6 +24,7 @@
     let action = '';
     let success;
     let active_filters = [];
+    let desc = ''; // для показа сведений об удаляемой записи внутри модального окна
 
     const is_article = (type === 'article' || type === 'news');
     const is_homeless = type === 'pig';
@@ -44,17 +45,16 @@
     }
 
     async function remove () {
-        let message = document.querySelector('.message');
-        message.textContent = 'Идёт удаление, подождите...';
+        desc = 'Идёт удаление, подождите...';
 
-        success = removeData(category, action_id);
+        success = await removeData(category, action_id);
         if (success) {
             action = 'complete';
             data_array = data_array.filter(i => i.id !== action_id);
-            message.textContent = 'Удаление успешно!';
+            desc = 'Удаление успешно!';
         } else {
             action = 'fail';
-            message.textContent = 'Произошла ошибка. Попробуйте повторить позднее.';
+            desc = 'Произошла ошибка. Попробуйте повторить позднее.';
         }
     }
 
@@ -197,6 +197,7 @@
 
     async function get_new_batch () {
         let new_batch = await load_more(data, category);
+
         const ids = data_array.map(el => el.id);
         const no_duplicates = new_batch && !new_batch.some(el => ids.includes(el.id));
 
@@ -256,18 +257,17 @@
                 {#each data_array as article (article.id)}
                     {#key data_array}
                     <li class:filtered={article.hidden}>
-                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id}/>
+                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc />
                     </li>
                     {/key}
                 {/each}
             </CardList>
-
         </div>
     </section>
 </div>
 
 <div class='modal modal_closed'>
-    <ModalOkay {action} {success} {handle_cancel} action_handler={remove} bind:modal_opened={modal_opened} />
+    <ModalOkay {desc} {action} {success} {handle_cancel} action_handler={remove} bind:modal_opened={modal_opened} />
 </div>
 
 <style>

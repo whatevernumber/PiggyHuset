@@ -3,7 +3,7 @@
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import { closeModal } from '$lib/components/utils/func.js';
 
-	export let desc = '';
+	export let desc;
 	export let success;
 	export let action;
 	export let action_handler;

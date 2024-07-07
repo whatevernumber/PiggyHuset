@@ -30,11 +30,14 @@
                 goto(referrer);
             }
         } else if (referrer.includes('admin') || href.includes('admin')) {
-            try {
-                goto('/admin/overview');
-            } catch (_) {
-                goto('/');
-            }
+            if (referrer.includes('info'))
+                goto('/info');
+            else
+                try {
+                    goto('/admin/overview');
+                } catch (_) {
+                    goto('/');
+                }
         } else {
             try {
                 goto(sub);

@@ -21,6 +21,9 @@
 		case 'statuses':
 			input_name = 'status'
 			break;
+		case 'food':
+			input_name = 'category'
+			break;
 		default:
 			input_name = type;
 	}
@@ -34,7 +37,11 @@
 				option_name = 'text';
 			}
 
-			const res = await fetch(_REMOTE_SERVER + '/' + type);
+			if (type === 'food') {
+				option_name = 'value';
+			}
+
+			const res = await fetch('/api/' + type);
 
 			if (res.ok) {
 				list = await res.json();

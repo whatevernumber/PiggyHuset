@@ -9,19 +9,19 @@
     let cities = [];
 
     onMount(async () => {
-        const city_list = await fetch(_REMOTE_SERVER + '/cities');
+        const city_list = await fetch('/api/cities');
 
         if (city_list.ok) {
             cities = await city_list.json();
         }
 
-        let query = _REMOTE_SERVER + '/overseers';
+        let query = '';
 
         if (active_only) {
-            query += '/active';
+            query += '?q=active';
         }
 
-        let get_overseers = await fetch(query);
+        let get_overseers = await fetch('/api/overseers' + query);
 
         if (get_overseers.ok) {
             overseers = await get_overseers.json();

@@ -2,16 +2,16 @@
 	import TextInput from '$lib/components/misc/form-elements/TextInput.svelte';
 	import SubmitButton from '$lib/components/misc/form-elements/SubmitButton.svelte';
 	import ArticleHeader from '$lib/components/misc/h-headers/ArticleHeader.svelte';
-	import { _REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG } from '$env/static/public';
 	import {onMount} from "svelte";
 	import {goto} from "$app/navigation";
 
+	export let data;
 	let errors;
 
 	async function sendForm () {
 		const form = document.querySelector('form');
 		const formData = new FormData(form);
-		const res = await fetch(_REMOTE_SERVER + '/admin/login', {
+		const res = await fetch('/api/admin/login', {
 			method: 'POST',
 			body: formData
 		});
@@ -28,14 +28,7 @@
 		);
 
 		if (res.ok) {
-			let result = await res.json();
-
-			if (result) {
-				localStorage.setItem(_REST_STORAGE_KEY, result.token);
-				localStorage.setItem(_ADMIN_FLAG, result.id);
-
-				await goto('/admin/overview');
-			}
+			goto('/admin/overview');
 
 		} else {
 			errors = await res.json();

@@ -63,6 +63,10 @@
         background-color: red;
     }
 
+    .smol-green {
+        background-color: #88aa4d;
+    }
+
     .smol-red:hover {
         background-color: rgba(255,85,22,0.87);
     }

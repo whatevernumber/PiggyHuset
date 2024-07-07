@@ -1,44 +1,19 @@
 <script>
-    import {_REMOTE_SERVER, _REST_STORAGE_KEY, _ADMIN_FLAG} from "$env/static/public";
-    import {include_auth} from "$lib/components/utils/func.js";
-    import {afterUpdate, onMount} from "svelte";
+    import { goto } from '$app/navigation';
 
     export let current = '/main';
     export let admin = false;
 
     const logout = async () => {
-        try {
-            await fetch(`${_REMOTE_SERVER}/admin/logout`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': include_auth(_REST_STORAGE_KEY)
-                }
-            });
-        }
-        finally {
-            localStorage.removeItem(_ADMIN_FLAG);
-            localStorage.removeItem(_REST_STORAGE_KEY);
-            window.location.replace('/');
+        const response = await fetch('/api/admin/logout', {
+            method: 'POST',
+        });
+
+        if (response.status === 205) {
+            admin = false;
+            goto('/');
         }
     };
-
-    afterUpdate(() => admin = Boolean(localStorage.getItem(_ADMIN_FLAG)));
-
-    // проверка логина при первом визите
-    onMount(async () => {
-        if (localStorage.getItem(_ADMIN_FLAG)) {
-            let check = await fetch(`${_REMOTE_SERVER}/admin`, {
-                method: 'HEAD',
-                headers: {
-                    'Authorization': include_auth(_REST_STORAGE_KEY) || null
-                }
-            });
-
-            if (!check.ok) {
-                localStorage.clear();
-            }
-        }
-    });
 </script>
 
 <header on:click={() => sessionStorage.removeItem('tab')}>
