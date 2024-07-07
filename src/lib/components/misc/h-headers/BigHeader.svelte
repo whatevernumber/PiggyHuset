@@ -16,4 +16,8 @@
         font-size: 36px;
         font-weight: 700;
     }
+
+    h2.smaller-margin {
+       margin-bottom: 20px;
+    }
 </style>

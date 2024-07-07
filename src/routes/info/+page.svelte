@@ -5,10 +5,10 @@ import Card from '$lib/components/cards/Card.svelte';
 import CardList from '$lib/components/lists/CardList.svelte';
 import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
-import { goto } from '$app/navigation';
 import { closeModal, removeData, showModal } from '$lib/components/utils/func.js';
 import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 import LinkWithReferrer from '$lib/components/misc/links/LinkWithReferrer.svelte';
+import BigHeader from '$lib/components/misc/h-headers/BigHeader.svelte';
 
 export let data;
 let results = data.info;
@@ -87,6 +87,7 @@ async function remove () {
 </svelte:head>
 
 <div class="wrapper">
+	<BigHeader text_content="ЧТО ЕДЯТ СВИНКИ" class_name="smaller-margin" />
 	<Search bind:searchWord onclick={searchData} rounded />
 	<div class="query_wrapper">
 		{#if resultWord}
@@ -120,7 +121,7 @@ async function remove () {
 	{/if}
 
 	{#await results}
-		<div class="result-wrapper">
+		<div class="result-wrapper" style="place-self: center;">
 			<p>Ищем ваш запрос...</p>
 			<img src="/img/pig-search.png" width="150px" height="150px" alt="Свинка ищет слово" />
 		</div>
