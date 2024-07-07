@@ -240,34 +240,34 @@
                 </div>
             </fieldset>
             {#if main_photo_index || main_photo_index === 0}
-                <input type='hidden' class='main_photo' name='main_photo_index' bind:value={main_photo_index}>
+                <input type="hidden" class="main_photo" name="main_photo_index" bind:value={main_photo_index}>
             {/if}
             {#if photos.length && main_photo_name }
-                <input type='hidden' class='main_photo_name' name='main_photo_name' bind:value={main_photo_name}>
+                <input type="hidden" class="main_photo_name" name="main_photo_name" bind:value={main_photo_name}>
             {/if}
             {#if is_editing}
-                <input type='hidden' class='uploaded_photos' name='old_photos' bind:value={old_photos}/>
+                <input type="hidden" class="uploaded_photos" name="old_photos" bind:value={old_photos}/>
             {/if}
         </form>
         {#if image_upload_preview.length}
             <div class="photo_preview">
                 {#each image_upload_preview as src, index (index)}
-                    <PhotoCard {src} {index} width='80px' height='80px' bind:main_photo={main_photo_index} bind:old_photo_name={main_photo_name} form_photo_type='new' />
+                    <PhotoCard {src} {index} width="80px" height="80px" bind:main_photo={main_photo_index} bind:old_photo_name={main_photo_name} form_photo_type="new" />
                 {/each}
             </div>
         {/if}
         {#if photos.length}
             <UploadedFiles handler={delete_handler} bind:photos bind:old_photo_name={main_photo_name} bind:main_photo={main_photo_index} />
         {/if}
-        {#if product && product.image && !image_upload_preview.length}
-            <PhotoCard pic={product.image} type='food' width='80px' height='80px' />
+        {#if product && product.photo && !image_upload_preview.length}
+            <PhotoCard pic={product.photo.image} type="food" width="80px" height="80px" />
         {/if}
     </section>
     <slot />
 </div>
 
-<div class='modal modal_closed'>
-    <ModalOkay desc={modal_message} sent_handle={handle} success=true action='sent'/>
+<div class="modal modal_closed">
+    <ModalOkay desc={modal_message} sent_handle={handle} success=true action="sent"/>
 </div>
 
 <style>
