@@ -22,6 +22,11 @@ const search = async () => {
 
 	let res;
 
+	// Сбросить поиск по категории, если указано слово
+	if (searchWord) {
+		filter_id = null;
+	}
+
 	if (!filter_id && !searchWord) {
 		res = await fetch('/api/info/all');
 	} else {
