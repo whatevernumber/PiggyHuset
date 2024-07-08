@@ -155,7 +155,7 @@
             {/if}
         {#if admin}
             <div class="button_wrapper">
-                <LinkWithReferrer href="{'/admin/edit/' + type + '/' + article.id}">
+                <LinkWithReferrer href="{'/admin/edit/' + (type === 'news' ? 'article' : type) + '/' + article.id}">
                     <EditButton button_name='edit' />
                 </LinkWithReferrer>
                 {#if !(/looking-for-home|graduates/.test(category))}
