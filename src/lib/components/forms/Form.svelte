@@ -259,8 +259,8 @@
         {#if photos.length}
             <UploadedFiles handler={delete_handler} bind:photos bind:old_photo_name={main_photo_name} bind:main_photo={main_photo_index} />
         {/if}
-        {#if product && product.photo && !image_upload_preview.length}
-            <PhotoCard pic={product.photo.image} type="food" width="80px" height="80px" />
+        {#if product && product.main_photo && !image_upload_preview.length}
+            <PhotoCard pic={product.main_photo} type="food" width="80px" height="80px" />
         {/if}
     </section>
     <slot />
