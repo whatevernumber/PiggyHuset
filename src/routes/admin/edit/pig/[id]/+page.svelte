@@ -17,7 +17,7 @@
 			if (field.tagName === 'SELECT') {
 				setTimeout(() => {
 					field.value = pig[field.name] || pig[(field.name.slice(0, field.name.lastIndexOf('_')))].id;
-				}, 400);
+				}, 2450);
 			} else if (field.type !== 'file') {
 				field.value = pig[field.name];
 			}
