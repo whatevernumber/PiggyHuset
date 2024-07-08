@@ -75,7 +75,6 @@ async function remove () {
 	success = await removeData('food', action_id);
 	if (success) {
 		action = 'complete';
-		results = results.filter(i => i.id !== action_id);
 		desc = 'Удаление успешно!';
 		results = search();
 	} else {
