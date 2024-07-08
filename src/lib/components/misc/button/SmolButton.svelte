@@ -10,9 +10,9 @@
     {title}
 </a>
 {:else}
-<button class="button smol-button {class_name}" on:click={click_handler}>
+<span class="button smol-button {class_name}" on:click={click_handler}>
     {title}
-</button>
+</span>
 {/if}
 
 <style>
