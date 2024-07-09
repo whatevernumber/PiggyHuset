@@ -88,7 +88,7 @@ async function remove () {
 <svelte:window bind:innerWidth={screen_width} />
 
 <svelte:head>
-	<title>База знаний</title>
+	<title>Что едят свинки?</title>
 </svelte:head>
 
 <div class="wrapper">
