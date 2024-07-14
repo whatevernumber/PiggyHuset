@@ -22,6 +22,11 @@ const search = async () => {
 
 	let res;
 
+	// Сбросить поиск по категории, если указано слово
+	if (searchWord) {
+		filter_id = null;
+	}
+
 	if (!filter_id && !searchWord) {
 		res = await fetch('/api/info/all');
 	} else {
@@ -83,7 +88,7 @@ async function remove () {
 <svelte:window bind:innerWidth={screen_width} />
 
 <svelte:head>
-	<title>База знаний</title>
+	<title>Что едят свинки?</title>
 </svelte:head>
 
 <div class="wrapper">

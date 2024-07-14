@@ -14,7 +14,7 @@
         <ItemLink text="Выпускники" href="/graduates" icon="list-icon-green.png" data-sveltekit-preload-data/>
         <ItemLink text="Полезные статьи" href="/articles" icon="list-icon-grey.png" data-sveltekit-preload-data/>
         <ItemLink href="/articles/1" text="Как взять у нас свинку"/>
-        <ItemLink text="База Знаний" href="/info" icon="list_pig_info.jpg" data-sveltekit-preload-data/>
+        <ItemLink text="Что едят свинки?" href="/info" icon="list_pig_info.jpg" data-sveltekit-preload-data/>
     </ul>
 </div>
 

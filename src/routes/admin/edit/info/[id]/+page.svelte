@@ -18,7 +18,7 @@
 			if (field.tagName === 'SELECT') {
 				setTimeout(() => {
 					field.value = product[field.name];
-				}, 400);
+				}, 2450);
 			} else if (field.type !== 'file') {
 				field.value = product[field.name] ?? (product.info[field.name] ?? '');
 			}
