@@ -12,6 +12,7 @@
     export let status = null;
     export let width;
     export let height;
+    export let add_class;
 
     export let main_photo; // индекс новой фотографии, отмечанной основной
     export let old_photo_name; // название старой фотографии, отмечанной основной
@@ -54,7 +55,7 @@
 
 <div class="wrapper" aria-roledescription="Посмотреть фото" on:click={ (form_photo_type === 'old' || form_photo_type === 'new') ? mark_photo_as_main : null}>
     <div class='image_wrapper'>
-        <img {src} class="photo-card" class:marked={ old_photo_name && old_photo_name === pic || form_photo_type === 'new' && main_photo === index } {width} {height} {alt} style="--width: {width || 300}px">
+        <img {src} class="photo-card {add_class}" class:marked={ old_photo_name && old_photo_name === pic || form_photo_type === 'new' && main_photo === index } {width} {height} {alt} style="--width: {width || 300}px">
 
         {#if type === 'ready' || status === 'quarantine'}
         <span class="status {status}"></span>
@@ -85,6 +86,14 @@
         object-fit: contain;
         pointer-events: none;
         user-select: none;
+    }
+
+    .photo-card.product {
+        object-fit: cover;
+    }
+
+    .product.banned {
+        outline: red solid 4px;
     }
 
     :global(.uploaded_files .photo-card) {

@@ -51,6 +51,11 @@
 				type: 'select',
 				required: true,
 			},
+			{
+				label: 'Запрещено',
+				name: 'is_banned',
+				type: 'checkbox',
+			},
 		],
 		files: {
 			file_input: true,
