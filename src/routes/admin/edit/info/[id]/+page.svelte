@@ -23,6 +23,11 @@
 				field.value = product[field.name] ?? (product.info[field.name] ?? '');
 			}
 		}
+
+		// if product is marked as banned
+		if (product.is_banned) {
+			form.querySelector('input[type=checkbox]').checked = true;
+		}
 	});
 
 	const title = "Редактировать карточку " + product.title;

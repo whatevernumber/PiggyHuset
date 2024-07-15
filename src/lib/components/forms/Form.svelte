@@ -221,6 +221,13 @@
                             <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
                             <SelectInput css_class="form-input-field" type={field.name} options="{field.options}" grouped="{field.grouped}" group_by="{field.group_column}" />
                         </div>
+                    {:else if field.type === 'checkbox'}
+                        <div class='checkbox_wrapper'>
+                            <label class="form-label checkbox" for="{field.name}">{field.label}
+                                <input name="{field.name}" type="checkbox" value="1" id="{field.name}">
+                                <span class="checkbox_box"></span>
+                            </label>
+                        </div>
                     {:else}
                 <div class="form-item">
                     <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
@@ -464,6 +471,59 @@
 
     .full-width .form-input-field {
         max-width: 400px;
+    }
+
+    .checkbox {
+        position: relative;
+        margin-left: 10px;
+        padding-left: 25px;
+        cursor: pointer;
+    }
+
+    .checkbox input[type='checkbox'] {
+        display: none;
+    }
+
+    .checkbox span::before {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        margin-right: 10px;
+        left: -10px;
+        border: 1px solid #d97544;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    .checkbox:hover span::before {
+        border: 2px solid #d97544;
+    }
+
+    /*.checkbox:hover span::after {*/
+    /*    content: '';*/
+    /*    position: absolute;*/
+    /*    width: 6px;*/
+    /*    height: 11px;*/
+    /*    border: solid #88aa4d;*/
+    /*    border-width: 0 3px 3px 0;*/
+    /*    transform: rotate(45deg);*/
+    /*    top: 10%;*/
+    /*    left: -2px;*/
+    /*    opacity: 0.5;*/
+    /*}*/
+
+    input[type='checkbox']:checked + span::after {
+        opacity: 1;
+    }
+
+    input[type="checkbox"]:checked + span:before {
+        background-color: rgba(255, 85, 22, 0.87);
+    }
+
+    .checkbox_wrapper {
+        align-self: end;
     }
 
     @media (max-width: 1001px) {
