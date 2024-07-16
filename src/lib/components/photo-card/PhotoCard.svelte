@@ -57,7 +57,7 @@
     <div class='image_wrapper'>
         <img {src} class="photo-card {add_class}" class:marked={ old_photo_name && old_photo_name === pic || form_photo_type === 'new' && main_photo === index } {width} {height} {alt} style="--width: {width || 300}px">
 
-        {#if type === 'ready' || status === 'quarantine'}
+        {#if type === 'ready' || status === 'quarantine' || status === 'banned'}
         <span class="status {status}"></span>
         {/if}
 
@@ -149,6 +149,14 @@
         right: -5%;
         bottom: -10%;
         background-image: url("/src/lib/img/quarantine.png");
+    }
+
+    .status.banned {
+        width: 120px;
+        height: 120px;
+        right: -5%;
+        bottom: -10%;
+        background-image: url("/src/lib/img/restricted.png");
     }
 
     .marked {

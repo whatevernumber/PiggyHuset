@@ -135,7 +135,7 @@
 
 <article class:rounded id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     {#if type === 'info'}
-        <PhotoCard pic={image} type='food' {status} add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
+        <PhotoCard pic={image} type='food' status="{article.is_banned ? 'banned' : ''}" add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
                    alt='Изображение продукта' />
         {:else}
         <LinkWithReferrer {href} css_class="card-container">
