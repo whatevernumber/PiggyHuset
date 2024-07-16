@@ -135,7 +135,7 @@
 
 <article class:rounded id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     {#if type === 'info'}
-        <PhotoCard pic={image} type='food' status="{article.is_banned ? 'banned' : ''}" add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
+        <PhotoCard pic={image} type='food' add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
                    alt='Изображение продукта' />
         {:else}
         <LinkWithReferrer {href} css_class="card-container">
@@ -144,7 +144,7 @@
         </LinkWithReferrer>
     {/if}
 
-    <div class="wrapper">
+    <div class="wrapper {article?.is_banned ? 'banned_wrapper' : ''}">
         <div class='header_wrapper'>
             {#if type === 'info'}
                 <h3>{article.title}</h3>
@@ -170,8 +170,13 @@
              {#if city}
         <p><b>Город:</b> {city}</p>
              {/if}
+        {#if !article?.is_banned}
         <p class="card-description" bind:this={card}>{article.description || ''}</p>
+        {/if}
         {#if type === 'info'}
+            {#if article.is_banned}
+                <p class='banned_text'>Запрещено давать морским свинкам</p>
+            {:else}
             <div class="card-notices">
                 {#if article.info.restrictions}
                     <p>
@@ -192,6 +197,7 @@
                     </p>
                 {/if}
             </div>
+            {/if}
         {:else}
             <div class="bottom-line">
                 <p class="datetime">
@@ -200,7 +206,7 @@
                 <SmolButton title={button_text} {href} />
             </div>
         {/if}
-        {#if article.info?.doses}
+        {#if article.info?.doses && !article?.is_banned}
             <p class="datetime">
                 <span class='details doses'>Дозировка: </span>
                 {article.info?.doses}
@@ -232,6 +238,10 @@
         flex-grow: 1;
         justify-content: space-around;
         row-gap: 10px;
+    }
+
+    .banned_wrapper {
+        justify-content: start;
     }
 
     img {
@@ -324,6 +334,13 @@
         column-gap: 5px;
     }
 
+    .banned_text {
+        margin-top: 12%;
+        align-self: center;
+        font-size: 24px;
+        color: #EF8653;
+    }
+
     @media (max-width: 1001px) {
         article {
             flex-direction: column;
@@ -345,6 +362,10 @@
         .datetime {
             order: 15;
             text-align: right;
+        }
+
+        .banned_text {
+            margin-top: 10px;
         }
     }
 </style>

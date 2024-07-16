@@ -152,10 +152,10 @@
     }
 
     .status.banned {
-        width: 120px;
-        height: 120px;
-        right: -5%;
-        bottom: -10%;
+        width: 60px;
+        height: 60px;
+        right: 5%;
+        top: 5%;
         background-image: url("/src/lib/img/restricted.png");
     }
 
