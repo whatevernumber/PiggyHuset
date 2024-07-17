@@ -180,13 +180,13 @@
             <div class="card-notices">
                 {#if article.info.restrictions}
                     <p>
-                        <span class='details restricted'> Ограничения: </span>
+                        <span class='details restricted'> Запрещено: </span>
                         {article.info.restrictions}
                     </p>
                 {/if}
                 {#if article.info.allowed}
                     <p>
-                        <span class='details allowed'> Допустимо: </span>
+                        <span class='details allowed'> Разрешено: </span>
                         {article.info.allowed}
                     </p>
                 {/if}
