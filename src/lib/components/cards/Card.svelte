@@ -170,26 +170,35 @@
              {#if city}
         <p><b>Город:</b> {city}</p>
              {/if}
+        {#if type === 'info'}
+            <div class='card-notices'>
+            {#if article.info.allowed}
+                <p>
+                    <span class='details allowed'> Разрешено: </span>
+                    {article.info.allowed}
+                </p>
+            {/if}
+            {#if article.info.restrictions}
+                <p>
+                    <span class='details restricted'> Запрещено: </span>
+                    {article.info.restrictions}
+                </p>
+            {/if}
+            </div>
+        {/if}
         {#if !article?.is_banned}
-        <p class="card-description" bind:this={card}>{article.description || ''}</p>
+        <p class="card-description" bind:this={card}>
+            {#if type === 'info'}
+                <span class='desc'>Описание:</span>
+            {/if}
+            {article.description || ''}
+        </p>
         {/if}
         {#if type === 'info'}
             {#if article.is_banned}
                 <p class='banned_text'>Запрещено давать морским свинкам</p>
             {:else}
             <div class="card-notices">
-                {#if article.info.restrictions}
-                    <p>
-                        <span class='details restricted'> Запрещено: </span>
-                        {article.info.restrictions}
-                    </p>
-                {/if}
-                {#if article.info.allowed}
-                    <p>
-                        <span class='details allowed'> Разрешено: </span>
-                        {article.info.allowed}
-                    </p>
-                {/if}
                 {#if article.info.notes}
                     <p>
                         <span class='details note'>Примечание: </span>
@@ -207,7 +216,7 @@
             </div>
         {/if}
         {#if article.info?.doses && !article?.is_banned}
-            <p class="datetime">
+            <p>
                 <span class='details doses'>Дозировка: </span>
                 {article.info?.doses}
             </p>
@@ -300,6 +309,14 @@
         display: flex;
         justify-content: space-between;
         column-gap: 5px;
+    }
+
+    .desc {
+        font-weight: bold;
+    }
+
+    .doses {
+        color: #f5b193;
     }
 
     @media(max-width: 1179px) {
