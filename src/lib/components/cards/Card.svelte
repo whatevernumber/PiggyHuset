@@ -173,10 +173,9 @@
         {/if}
 
         {#if !article?.is_banned}
-        <p class="card-description" bind:this={card}>
-            <span class="desc">Описание: </span>
-            {article.description || ''}
-        </p>
+            <p class="card-description" bind:this={card}>
+                {article.description || ''}
+            </p>
         {/if}
 
         {#if type === 'info'}
