@@ -13,6 +13,7 @@
 	export let pig;
 
 	export let author;
+	export let source;
 	export let admin;
 	export let is_article = false;
 	export let type;
@@ -67,18 +68,18 @@
 	{/key}
 	<div class="bio_wrapper">
 		{#if (admin && !is_article)}
-		<div class='radio_group'>
+		<div class="radio_group">
 			{#each status_list as status}
-			<label class='graduated_radio'>
-				<input type='radio' name='graduated' value={status.id} on:click={click_handler}>
-				<span class='radio_value'>
+			<label class="graduated_radio">
+				<input type="radio" name="graduated" value={status.id} on:click={click_handler}>
+				<span class="radio_value">
 					{status.text}
 				</span>
 			</label>
 			{/each}
 		</div>
 		{/if}
-		<div class='bio'>
+		<div class="bio">
 			{#if !is_article}
 				{#if pig_status_id === 6}
 				<p class="quarantine-notice">
@@ -105,6 +106,9 @@
 			{#if author}
 				<p class="article_author"><b>Автор статьи:</b> <i style="color: forestgreen">{author}</i></p>
 			{/if}
+			{#if source}
+				<p class="article_source"><b>Источник:</b> <i style="color: forestgreen">{source}</i></p>
+            {/if}
 		</div>
 	</div>
 </div>

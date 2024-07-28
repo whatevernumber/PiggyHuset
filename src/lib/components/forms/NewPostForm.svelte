@@ -22,14 +22,14 @@
             {
                 label: 'Текст публикации',
                 name: 'text',
-                type: 'textarea',
+                type: 'wysiwyg',
                 required: true,
                 placeholder: 'Расскажите новость',
                 emoji: true
             }
         ],
         files: {
-            file_input: true,
+            file_input: false,
             multiple: true
         }
     }

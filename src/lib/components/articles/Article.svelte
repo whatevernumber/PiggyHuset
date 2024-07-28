@@ -36,7 +36,7 @@
 <div class="article_wrapper">
 	<article class="article {class_name}" in:transition={{x: '200vw', y: 0, duration: 400, delay: 0, amount: 3}}>
 		<slot />
-		<ArticleText {text} />
+		<ArticleText {text} {type} />
 	{#if pig_name && (pig_status && pig_status === 'в поисках дома')}
 		<PigNotification {pig_name} />
 	{/if}
@@ -91,7 +91,8 @@
         justify-content: normal;
     }
 
-    .article_author {
+    .article_author,
+	.article_source {
         text-align: right;
     }
 

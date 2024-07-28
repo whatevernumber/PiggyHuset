@@ -17,7 +17,6 @@
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
     import {onMount} from "svelte";
-    import { redirect } from '$lib/components/utils/func.js';
     import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 
     export let admin;
@@ -78,7 +77,7 @@
         article.description = text;
 
     // реактивное изменение картинки карточки
-    $: image = article.main_photo ?? (article.image ?? null);
+    $: image = article.main_photo || (article.image ?? null);
 
     let window_width = 0;
     let date_prefix = '';
@@ -108,25 +107,9 @@
         desc = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие необратимо`;
     }
 
-    const redirect_to_edit = () => {
-
-        // для получения id-значения конкретной карточки
-        id = article.id;
-
-        if (type === 'ready') {
-            type = 'pig';
-        } else if (type === 'news') {
-            type = 'article';
-        }
-
-        redirect('/admin/edit/' + type + '/' + id, 100);
-    }
-
     // подстановка [обрезанной] разметки из Quill в текст карточки
     onMount(() => {
-        if (type === 'article') {
-            innerHtml !== undefined ? card.innerHTML = innerHtml : null;
-        }
+        if (innerHtml) card.innerHTML = innerHtml;
     });
 
 </script>
@@ -135,7 +118,7 @@
 
 <article class:rounded id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     {#if type === 'info'}
-        <PhotoCard pic={image} type='food' add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
+        <PhotoCard pic={image} type="food" add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
                    alt='Изображение продукта' />
         {:else}
         <LinkWithReferrer {href} css_class="card-container">
@@ -145,7 +128,7 @@
     {/if}
 
     <div class="wrapper {article?.is_banned ? 'banned_wrapper' : ''}">
-        <div class='header_wrapper'>
+        <div class="header_wrapper">
             {#if type === 'info'}
                 <h3>{article.title}</h3>
             {:else }
@@ -156,74 +139,78 @@
         {#if admin}
             <div class="button_wrapper">
                 <LinkWithReferrer href="{'/admin/edit/' + (type === 'news' ? 'article' : type) + '/' + article.id}">
-                    <EditButton button_name='edit' />
+                    <EditButton button_name="edit" />
                 </LinkWithReferrer>
                 {#if !(/looking-for-home|graduates/.test(category))}
-                <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
+                <EditButton button_name="delete" click_handler={delete_handler} message_handler={show_delete_message}/>
                 {/if}
             </div>
         {/if}
         </div>
-            {#if pig_sex}
-        <p><b>Пол:</b> {pig_sex}</p>
-             {/if}
-             {#if city}
-        <p><b>Город:</b> {city}</p>
-             {/if}
+
+        {#if pig_sex}
+            <p><b>Пол:</b> {pig_sex}</p>
+         {/if}
+         {#if city}
+            <p><b>Город:</b> {city}</p>
+         {/if}
+
         {#if type === 'info'}
-            <div class='card-notices'>
+            <div class="card-notices">
             {#if article.info.allowed}
                 <p>
-                    <span class='details allowed'> Разрешено: </span>
+                    <span class="details allowed"> Разрешено: </span>
                     {article.info.allowed}
                 </p>
             {/if}
             {#if article.info.restrictions}
                 <p>
-                    <span class='details restricted'> Запрещено: </span>
+                    <span class="details restricted"> Запрещено: </span>
                     {article.info.restrictions}
                 </p>
             {/if}
             </div>
         {/if}
+
         {#if !article?.is_banned}
         <p class="card-description" bind:this={card}>
-            {#if type === 'info'}
-                <span class='desc'>Описание:</span>
-            {/if}
+            <span class="desc">Описание: </span>
             {article.description || ''}
         </p>
         {/if}
+
         {#if type === 'info'}
             {#if article.is_banned}
-                <p class='banned_text'>Запрещено давать морским свинкам</p>
+                <p class="banned_text">Запрещено давать морским свинкам</p>
             {:else}
             <div class="card-notices">
                 {#if article.info.notes}
                     <p>
-                        <span class='details note'>Примечание: </span>
+                        <span class="details note">Примечание: </span>
                         {article.info.notes}
                     </p>
                 {/if}
             </div>
             {/if}
+
         {:else}
             <div class="bottom-line">
                 <p class="datetime">
-                    <span class='date_word'>{date_prefix} </span>
+                    <span class="date_word">{date_prefix} </span>
                     <Time relative="{type === 'news'}" format="D MMM YYYYг." live={type === 'news'} timestamp={datetime} /></p>
                 <SmolButton title={button_text} {href} />
             </div>
         {/if}
         {#if article.info?.doses && !article?.is_banned}
             <p>
-                <span class='details doses'>Дозировка: </span>
+                <span class="details doses">Дозировка: </span>
                 {article.info?.doses}
             </p>
         {/if}
     </div>
 </article>
-<div class='hidden overlay'></div>
+
+<div class="hidden overlay"></div>
 
 <style>
     article {

@@ -180,7 +180,7 @@
                     {#if field !== textarea && field !== select}
                         {@const required = field.required}
                 <div class="form-item">
-                    <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                    <label class="form-label" for="{field.name}">{field.label}</label>
                     <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
                     <span class="input-error-label"></span>
                 </div>
@@ -218,7 +218,7 @@
                     {@const required = field.required}
                     {#if field.type === 'select'}
                         <div class="select_wrapper form-item">
-                            <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                            <label class="form-label" for="{field.name}">{field.label}</label>
                             <SelectInput css_class="form-input-field" type={field.name} options="{field.options}" grouped="{field.grouped}" group_by="{field.group_column}" />
                         </div>
                     {:else if field.type === 'checkbox'}
@@ -231,7 +231,7 @@
                         </div>
                     {:else}
                 <div class="form-item">
-                    <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                    <label class="form-label" for="{field.name}">{field.label}</label>
                     <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
                     <span class="input-error-label"></span>
                 </div>

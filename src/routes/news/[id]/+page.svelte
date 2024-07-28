@@ -72,23 +72,18 @@
 	<title>{header}</title>
 </svelte:head>
 
-<Article class_name='article_news' {date} text="{text}" type="news">
-	<div class="wrapper">
-		<div>
-			<PhotoCard pic={news.main_photo} type="article" />
-			{#if admin}
-				<div class="profile_buttons">
-					<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
-					<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
-				</div>
-			{/if}
+<Article class_name="article_news" {date} text="{text}" type="news">
+
+	{#if admin}
+		<div class="profile_buttons">
+			<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
+			<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
 		</div>
+	{/if}
+
+	<div class="wrapper">
 		<CardMainContent is_article {header} {text} />
 	</div>
-
-	{#if news.photos.length > 1}
-	<PhotoList photos={news.photos} />
-	{/if}
 </Article>
 
 {#if modal_opened}
@@ -105,13 +100,6 @@
     .wrapper {
         display: flex;
         column-gap: 15px;
-    }
-
-    .profile_buttons {
-        display: flex;
-        max-width: 200px;
-        margin-top: 5px;
-        justify-content: space-between;
     }
 
     .modal {
