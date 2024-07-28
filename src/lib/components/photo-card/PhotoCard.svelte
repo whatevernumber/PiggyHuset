@@ -2,6 +2,7 @@
     import {_REMOTE_SERVER} from "$env/static/public";
     import {randomize} from "$lib/components/utils/func.js";
     import CloseButton from "$lib/components/misc/button/CloseButton.svelte";
+    import { lazyLoad } from '$lib/lazy.js';
 
     export let alt = 'Изображение';
     export let type = 'pig';
@@ -55,7 +56,7 @@
 
 <div class="wrapper" aria-roledescription="Посмотреть фото" on:click={ (form_photo_type === 'old' || form_photo_type === 'new') ? mark_photo_as_main : null}>
     <div class="image_wrapper">
-        <img loading="lazy" {src}
+        <img loading="lazy" use:lazyLoad={src}
              class="photo-card {add_class}"
              class:marked={ old_photo_name && old_photo_name === pic || form_photo_type === 'new' && main_photo === index }
              {width} {height} {alt} style="--width: {width || 300}px"
