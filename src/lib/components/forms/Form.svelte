@@ -493,13 +493,13 @@
         height: 22px;
         margin-right: 10px;
         left: -10px;
-        border: 1px solid #d97544;
+        border: 1px solid #88aa4d;
         vertical-align: middle;
         cursor: pointer;
     }
 
     .checkbox:hover span::before {
-        border: 2px solid #d97544;
+        border-color: #D97544;
     }
 
     /*.checkbox:hover span::after {*/
