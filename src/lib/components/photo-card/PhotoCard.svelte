@@ -54,11 +54,15 @@
 </script>
 
 <div class="wrapper" aria-roledescription="Посмотреть фото" on:click={ (form_photo_type === 'old' || form_photo_type === 'new') ? mark_photo_as_main : null}>
-    <div class='image_wrapper'>
-        <img {src} class="photo-card {add_class}" class:marked={ old_photo_name && old_photo_name === pic || form_photo_type === 'new' && main_photo === index } {width} {height} {alt} style="--width: {width || 300}px">
+    <div class="image_wrapper">
+        <img loading="lazy" {src}
+             class="photo-card {add_class}"
+             class:marked={ old_photo_name && old_photo_name === pic || form_photo_type === 'new' && main_photo === index }
+             {width} {height} {alt} style="--width: {width || 300}px"
+        >
 
         {#if type === 'ready' || status === 'quarantine' || status === 'banned'}
-        <span class="status {status}"></span>
+            <span class="status {status}"></span>
         {/if}
 
         {#if is_form}
