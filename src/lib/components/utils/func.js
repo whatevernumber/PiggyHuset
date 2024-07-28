@@ -208,11 +208,11 @@ export const check_link_external = function (url) {
  */
 export const resize = async function(file, new_container) {
 
-    const blobURL = URL.createObjectURL(file);
+    const blob_URL = URL.createObjectURL(file);
     const img = new Image();
 
     return await (new Promise(resolve => {
-        img.src = blobURL;
+        img.src = blob_URL;
         img.onload = function() {
             URL.revokeObjectURL(this.src);
             const mime_type = "image/jpeg";
@@ -223,8 +223,8 @@ export const resize = async function(file, new_container) {
             ctx.drawImage(img, 0, 0, img.width, img.height);
 
             canvas.toBlob(blob => {
-                let localfile = new File([blob], file.name, { type: "image/jpeg" });
-                new_container.items.add(localfile);
+                let local_file = new File([blob], file.name, { type: "image/jpeg" });
+                new_container.items.add(local_file);
                 resolve(blob);
             }, mime_type, 0.5)
         }
