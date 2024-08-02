@@ -4,6 +4,7 @@
 
 	export let data;
 	const pigs = data.pigs;
+	const count = data.count;
 </script>
 
 <svelte:head>
@@ -11,5 +12,5 @@
 	<title>Ищут дом</title>
 </svelte:head>
 
-<CatalogPage category="looking-for-home" page_title="Ищут дом" data="{pigs}" type="pig" />
+<CatalogPage category="looking-for-home" page_title="Ищут дом" data={pigs} {count} type="pig" />
 <VKCommunityMessages />

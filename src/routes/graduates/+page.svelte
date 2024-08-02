@@ -4,6 +4,7 @@
 	export let data;
 
 	const graduates = data.graduates;
+	const count = data.count;
 </script>
 
 <svelte:head>
@@ -11,4 +12,4 @@
 	<title>Выпускники Домика</title>
 </svelte:head>
 
-<CatalogPage category="graduates" page_title="Выпускники Домика" data="{graduates}" type="ready" />
+<CatalogPage category="graduates" page_title="Выпускники Домика" data="{graduates}" {count} type="ready" />

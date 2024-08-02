@@ -10,6 +10,7 @@
     import SortButton from "$lib/components/misc/button/SortButton.svelte";
     import FilterList from "$lib/components/lists/FilterList.svelte";
     import {browser} from "$app/environment";
+    import { page } from '$app/stores';
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -18,6 +19,7 @@
     export let page_title = ''; // Заголовок страницы каталога
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let modal_opened; // Флаг для открытия оверлея
+    export let count = null;
 
     let data_array = data.payload;
     let action_id;
@@ -241,6 +243,30 @@
 
             <BigHeader text_content="{page_title}" position="left"/>
 
+            {#if !is_article && $page.url.pathname && !$page.url.pathname.includes('overview')}
+                <div class="additional_description">
+                    {#if is_homeless}
+                        <p> Вы можете взять у нас морскую свинку бесплатно в добрые руки.
+                            Посмотрите на наших чудесных подопечных, которые ищут себе новый дом и новых хозяев.
+                        </p>
+                        <p class="pigs_homeless">Носиков в поисках дома:
+                            <span class="pigs_count">{count}</span>
+                        </p>
+                        <a class='article_link' href="/articles/1">Подробнее о том, как приютить свинку</a>
+                    {:else}
+                        <p class="found_home">
+                            Носиков нашли дом:
+                            <span class="pigs_count">{count}</span>
+                        </p>
+                        <p>
+                            С 2021 мы помогаем морским свинкам находить новый дом.
+                            С хозяевами мы остаёмся на связи,
+                            а от многих выпускников получаем фото- и видео-приветы, которые выкладываем на стене <a class="link" href="https://vk.com/domiksvinok" rel="nofollow">нашей группы</a>.
+                        </p>
+                    {/if}
+                </div>
+            {/if}
+
             <div class="sorting">
             {#each sort_options as sort_option}
                 <SortButton class_name="{sort_option.param === sort_config.param ? (sort_config.direction === 'desc' ? 'down' : 'up') : ''} {sort_option.param}" title="{sort_option.label}" click_handler={() => sort_by(sort_option)} />
@@ -283,6 +309,16 @@
         position: relative;
     }
 
+    .additional_description {
+        padding: 0 15px;
+        margin-bottom: 25px;
+    }
+
+    .article_link {
+        color: #d97544;
+        text-decoration: underline;
+    }
+
     :global(li.filtered) {
         display: none;
     }
@@ -321,6 +357,18 @@
 
     .hidden {
         display: none;
+    }
+
+    .pigs_count {
+        color: #88aa4d;
+    }
+
+    .found_home {
+        font-size: 20px;
+    }
+
+    .link {
+        color: #f6b5d3;
     }
 
     @media (max-width: 1001px) {
