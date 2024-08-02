@@ -118,7 +118,7 @@
 	}
 
 	.source {
-		order: 999;
+		order: 10;
 		margin-bottom: 25px;
 	}
 
