@@ -7,6 +7,7 @@
 </script>
 
 <svelte:head>
+	<meta name="description" content="Морские свинки из Домика для бездомных поросят ищут дом" />
 	<title>Ищут дом</title>
 </svelte:head>
 

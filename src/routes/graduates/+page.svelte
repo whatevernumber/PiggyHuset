@@ -7,6 +7,7 @@
 </script>
 
 <svelte:head>
+	<meta name="description" content="Список всех свинок, прошедших через Домик для бездомных поросят" />
 	<title>Выпускники Домика</title>
 </svelte:head>
 

@@ -69,6 +69,7 @@
 </script>
 
 <svelte:head>
+	<meta name="description" content={header + " - Новости от Домик для бездомных поросят"} />
 	<title>{header}</title>
 </svelte:head>
 
