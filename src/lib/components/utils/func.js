@@ -89,7 +89,7 @@ async function removeData(category, id) {
         {
             method: 'DELETE',
         }).then((response) => {
-        success = response.ok;
+        success = response.status === 204;
         });
 
     return success;
@@ -199,6 +199,36 @@ export const wrap_element = function (element, tag = 'div', class_name = '') {
  */
 export const check_link_external = function (url) {
     return new URL(url).origin !== location.origin;
+}
+/**
+ * Lowers the quality of the given image
+ * @param file
+ * @param new_container
+ * @returns {Promise<unknown>}
+ */
+export const resize = async function(file, new_container) {
+
+    const blob_URL = URL.createObjectURL(file);
+    const img = new Image();
+
+    return await (new Promise(resolve => {
+        img.src = blob_URL;
+        img.onload = function() {
+            URL.revokeObjectURL(this.src);
+            const mime_type = "image/jpeg";
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+
+            canvas.toBlob(blob => {
+                let local_file = new File([blob], file.name, { type: "image/jpeg" });
+                new_container.items.add(local_file);
+                resolve(blob);
+            }, mime_type, 0.5)
+        }
+    }));
 }
 
 export const debounce = function (callback, wait) {
