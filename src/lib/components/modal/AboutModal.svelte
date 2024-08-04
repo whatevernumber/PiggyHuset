@@ -9,7 +9,6 @@
 
     if (cities && cities.length) {
         cities = cities.map((city) => city.city_name);
-
         cities = cities.filter((el) =>
             el !== 'Москва'
         );

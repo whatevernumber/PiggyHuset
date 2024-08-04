@@ -133,7 +133,7 @@
                 <h3>{article.title}</h3>
             {:else }
             <LinkWithReferrer {href}>
-                <h3 class="card-title">{article.name ?? article.title}</h3>
+                <h3 class="card-title">{(article.name ?? article.title) + (article?.status_id === 5 ? ' в резерве' : '')}</h3>
             </LinkWithReferrer>
             {/if}
         {#if admin}
