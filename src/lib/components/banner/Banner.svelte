@@ -19,13 +19,12 @@
 </div>
 
 <style>
-
     .promo-container {
         width: 100%;
         height: 600px;
         position: relative;
         display: flex;
-        background: #F9EEE1 url('/src/lib/img/svg/banner_background_3.svg') no-repeat;
+        background: #F9EEE1 url('/src/lib/img/svg/banner_background.svg') no-repeat;
         background-size: contain;
     }
 

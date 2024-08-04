@@ -8,10 +8,13 @@
     let list = '';
 
     if (cities && cities.length) {
-        cities = cities.filter((city) =>
-            city.city_name !== 'Москва'
+        cities = cities.map((city) => city.city_name);
+
+        cities = cities.filter((el) =>
+            el !== 'Москва'
         );
-        list = cities.map((city) => city.city_name).join(', ');
+
+        list = cities.join(', ');
     }
 </script>
 

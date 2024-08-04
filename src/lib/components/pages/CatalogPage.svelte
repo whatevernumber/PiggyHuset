@@ -252,7 +252,7 @@
                         <p class="pigs_homeless">Носиков в поисках дома:
                             <span class="pigs_count">{count}</span>
                         </p>
-                        <a class='article_link' href="/articles/1">Подробнее о том, как приютить свинку</a>
+                        <a class="article_link" href="/articles/1">Подробнее о том, как приютить свинку</a>
                     {:else}
                         <p class="found_home">
                             Носиков нашли дом:
