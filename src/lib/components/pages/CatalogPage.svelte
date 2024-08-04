@@ -142,15 +142,21 @@
         data_array = data_array.sort_by_status();
     }
 
-    const add_to_filter = function (evt) {
+    const add_to_filter = function (evt, old_value) {
         const label = evt.target.parentElement;
         label.classList.toggle('checked');
 
-        // убрать из массива фильтров, если он уже там
-        if (active_filters.includes(evt.target.value)) {
-            active_filters.splice(active_filters.indexOf(evt.target.value), 1)
-        } else {
-            active_filters.push(evt.target.value);
+        if (old_value) {
+            active_filters = active_filters.filter(el => el !== old_value);
+        }
+
+        if (evt.target.value) {
+            // убрать из массива фильтров, если он уже там
+            if (active_filters.includes(evt.target.value)) {
+                active_filters.splice(active_filters.indexOf(evt.target.value), 1)
+            } else {
+                active_filters.push(evt.target.value);
+            }
         }
 
         // запустить фильтрацию
@@ -167,22 +173,40 @@
         data_array = await load_all(category);
 
         document.removeEventListener('scroll', load_on_scroll);
+        console.log(active_filters)
 
         data_array.map(
             (el) => {
-
                 // если чекнули хотя бы один фильтр
                 if (active_filters.length) {
+                    const sex_match = active_filters.includes(el.sex);
                     const city_match = active_filters.includes(el.city.city_name);
                     const overseer_match = active_filters.includes(el.overseer?.overseer_name);
                     const filter_by_overseer = active_filters.some(f => f.includes('Домик') || f.includes('Куратор'));
-                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор'));
+                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор') && !f.includes('F') && !f.includes('M'));
+                    const filter_by_sex = active_filters.some(f => f.includes('M') || f.includes('F'));
 
-                    // если чекнуты город и куратор / куратор без города / город без куратора
-                    el.hidden = !(filter_by_overseer && ((city_match && overseer_match)
-                            || (!filter_by_city && overseer_match))
-                        || !filter_by_overseer && (city_match || overseer_match));
-                    data_array = data_array;
+                    let matches = false; // флаг для скрытия карточки
+
+                    // фильтр по куратору, городу и полу
+                    if (filter_by_overseer && filter_by_city && filter_by_sex) {
+                        matches = overseer_match && city_match && sex_match;
+                    } else if (filter_by_city && filter_by_overseer) {
+                        // фильтр по городу и куратору
+                        matches = city_match && overseer_match;
+                    } else if (filter_by_city && filter_by_sex) {
+                        // фильтр по городу и полу
+                        matches = city_match && sex_match;
+                    } else if (filter_by_overseer && filter_by_sex) {
+                        // фильтр по куратору и полу
+                        matches = overseer_match && sex_match;
+                    } else {
+                        // в ином случае проверить совпадение одиночного фильтра
+                        matches = (sex_match || city_match || overseer_match);
+                    }
+
+                    el.hidden = !matches;
+
                 } else {
                     // если все фильтры сняты, отобразить все элементы
                     el.hidden = false;

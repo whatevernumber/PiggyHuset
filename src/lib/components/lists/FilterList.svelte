@@ -1,12 +1,12 @@
 <script>
     import {onMount} from "svelte";
-    import {_REMOTE_SERVER} from "$env/static/public";
 
     export let filter_handler;
     export let active_only = false; // только кураторы с подопечными
 
     let overseers = [];
     let cities = [];
+    let current_sex = null;
 
     onMount(async () => {
         const city_list = await fetch('/api/cities');
@@ -26,7 +26,13 @@
         if (get_overseers.ok) {
             overseers = await get_overseers.json();
         }
-    })
+    });
+
+    const toggleRadio = (evt) => {
+        filter_handler(evt, current_sex);
+        current_sex = evt.target.value;
+    }
+
 </script>
 
 <h3>Выбрать из списка:</h3>
@@ -43,6 +49,29 @@
                     </label>
                 </li>
             {/each}
+        </ul>
+    </li>
+    <li>
+        <h4>По полу</h4>
+        <ul class="sex_list">
+            <li>
+                <label class="radio_label">
+                    <input name="sex" type="radio" value="F" on:change={(evt) => toggleRadio(evt)}>
+                    <span>Самка</span>
+                </label>
+            </li>
+            <li>
+                <label class="radio_label">
+                    <input name="sex" type="radio" value="M" on:change={(evt) => toggleRadio(evt)}>
+                    <span>Самец</span>
+                </label>
+            </li>
+            <li>
+                <label class="radio_label">
+                    <input name="sex" type="radio" value='' checked on:change={(evt) => toggleRadio(evt)}>
+                    <span>Все</span>
+                </label>
+            </li>
         </ul>
     </li>
     <li>
@@ -126,7 +155,8 @@
     }
 
     ul.cities-list,
-    ul.overseers-list {
+    ul.overseers-list,
+    ul.sex_list {
         padding: 10px;
         width: 95%;
         font-size: 15px;
@@ -136,6 +166,10 @@
 
     .filter-list ul input[type="checkbox"] {
         display: none;
+    }
+
+    .filter-list ul input[type="radio"] {
+        cursor: pointer;
     }
 
     .filter-list-label {
@@ -166,6 +200,38 @@
         grid-template-columns: 7vw 7vw;
         align-items: center;
         column-gap: 5px;
+    }
+
+    .radio_label {
+        display: flex;
+        position: relative;
+    }
+
+    .radio_label input[type='radio'] {
+        display: none;
+    }
+
+    .radio_label span::before {
+        content: '';
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        margin-right: 10px;
+        border: 1px solid #88aa4d;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    .radio_label:hover span::before {
+        border-color: #D97544;
+    }
+
+    input[type='radio']:checked + span::after {
+        opacity: 1;
+    }
+
+    input[type="radio"]:checked + span:before {
+        background-color: rgba(197, 205, 158, 0.57);
     }
 
     @media (min-width: 1001px) and (max-width: 1441px) {
