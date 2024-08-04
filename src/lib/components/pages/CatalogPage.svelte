@@ -11,6 +11,7 @@
     import FilterList from "$lib/components/lists/FilterList.svelte";
     import {browser} from "$app/environment";
     import { page } from '$app/stores';
+    import Loader from '$lib/components/misc/loading/Loader.svelte';
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -27,6 +28,7 @@
     let success;
     let active_filters = [];
     let desc = ''; // для показа сведений об удаляемой записи внутри модального окна
+    let onload = false; // флаг для показа индикатора загрузки
 
     const is_article = (type === 'article' || type === 'news');
     const is_homeless = type === 'pig';
@@ -198,6 +200,7 @@
     }
 
     async function get_new_batch () {
+        onload = true;
         let new_batch = await load_more(data, category);
 
         const ids = data_array.map(el => el.id);
@@ -211,6 +214,7 @@
             ];
         }
 
+        onload = false;
         setTimeout(() => {
             if (active_filters.length) filter();
         }, 200);
@@ -287,6 +291,11 @@
                     </li>
                     {/key}
                 {/each}
+                {#if onload}
+                    <div class="loader_wrapper">
+                        <Loader />
+                    </div>
+                {/if}
             </CardList>
         </div>
     </section>
@@ -369,6 +378,10 @@
 
     .link {
         color: #f6b5d3;
+    }
+
+    .loader_wrapper {
+        margin: auto;
     }
 
     @media (max-width: 1001px) {
