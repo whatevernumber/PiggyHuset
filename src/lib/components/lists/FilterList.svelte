@@ -57,13 +57,13 @@
             <li>
                 <label class="radio_label">
                     <input name="sex" type="radio" value="F" on:change={(evt) => toggleRadio(evt)}>
-                    <span>Самка</span>
+                    <span>Девочка</span>
                 </label>
             </li>
             <li>
                 <label class="radio_label">
                     <input name="sex" type="radio" value="M" on:change={(evt) => toggleRadio(evt)}>
-                    <span>Самец</span>
+                    <span>Мальчик</span>
                 </label>
             </li>
             <li>

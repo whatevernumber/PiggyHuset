@@ -173,7 +173,6 @@
         data_array = await load_all(category);
 
         document.removeEventListener('scroll', load_on_scroll);
-        console.log(active_filters)
 
         data_array.map(
             (el) => {
