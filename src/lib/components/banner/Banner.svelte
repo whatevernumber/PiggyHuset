@@ -10,22 +10,22 @@
     </div>
     <ul class="option-list">
         <ItemLink text="Ищут дом" href="/looking-for-home" icon="list-icon-light-blue.png" data-sveltekit-preload-data/>
+        <ItemLink href="/articles/1" text="Как взять у нас свинку"/>
+        <ItemLink text="Полезные статьи" href="/articles" icon="list-icon-grey.png" data-sveltekit-preload-data/>
+        <ItemLink text="Что едят свинки?" href="/info" icon="list_pig_info.jpg" data-sveltekit-preload-data/>
         <ItemLink text="Новости" href="/news" icon="list-icon-light-brown.png" data-sveltekit-preload-data/>
         <ItemLink text="Выпускники" href="/graduates" icon="list-icon-green.png" data-sveltekit-preload-data/>
-        <ItemLink text="Полезные статьи" href="/articles" icon="list-icon-grey.png" data-sveltekit-preload-data/>
-        <ItemLink href="/articles/1" text="Как взять у нас свинку"/>
-        <ItemLink text="Что едят свинки?" href="/info" icon="list_pig_info.jpg" data-sveltekit-preload-data/>
     </ul>
 </div>
 
 <style>
-
     .promo-container {
         width: 100%;
         height: 600px;
         position: relative;
         display: flex;
         background: #F9EEE1 url('/src/lib/img/svg/banner_background.svg') no-repeat;
+        background-size: contain;
     }
 
     .option-list {

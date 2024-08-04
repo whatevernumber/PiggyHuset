@@ -68,23 +68,30 @@
 </script>
 
 <svelte:head>
-	<title>{header}</title>
+	<meta name="description" content={header + '. Всё, что вы хотели знать о морских свинках, можно узнать в нашей статье'} />
+	<title>{header} - Статьи от Домик для бездомных поросят</title>
 </svelte:head>
 
 <svelte:window bind:innerWidth={window_width} />
 
 <Article date="{article.datetime}" {text}>
 
-		{#if admin}
-			<div class="profile_buttons">
-				<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
-				<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
-			</div>
-		{/if}
-
-		<div class="wrapper">
-			<CardMainContent is_article {header} {author} {source} type="{article.type_id}" {admin} />
+	{#if admin}
+		<div class="profile_buttons">
+			<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
+			<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
 		</div>
+	{/if}
+
+	<div class="wrapper">
+		<CardMainContent is_article {header} {author} type="{article.type_id}" {admin} />
+	</div>
+
+	{#if source}
+		<div class="source">
+		<p class="article_source"><b>Источник:</b> <i style="color: forestgreen">{source}</i></p>
+		</div>
+	{/if}
 </Article>
 
 {#if modal_opened}
@@ -108,6 +115,11 @@
 		top: 35%;
 		left: 30%;
 		z-index: 10;
+	}
+
+	.source {
+		order: 10;
+		margin-bottom: 25px;
 	}
 
 	.photo-card-wrapper {

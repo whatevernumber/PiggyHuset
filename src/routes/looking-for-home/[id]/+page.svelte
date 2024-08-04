@@ -84,6 +84,7 @@
 </script>
 
 <svelte:head>
+	<meta name="description" content={(pig.name ?? 'Свинка') + ' ищет новый дом'} />
 	<title>{pig.name ?? 'Свинка'}</title>
 </svelte:head>
 

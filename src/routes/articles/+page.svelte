@@ -31,6 +31,7 @@
 </script>
 
 <svelte:head>
+	<meta name="description" content="Список полезных статей о морских свинках от Домик для бездомных поросят" />
 	<title>Статьи Домика</title>
 </svelte:head>
 

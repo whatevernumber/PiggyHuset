@@ -27,7 +27,6 @@
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let delete_handler;
     export let id;
-    export let action;
     export let desc; // для показа текста модального окна при удалении
     export let rounded = false;
 
@@ -116,7 +115,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article class:rounded id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
+<article class:rounded class:unavailable={article?.status_id === 5 || article?.status_id === 6} id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     {#if type === 'info'}
         <PhotoCard pic={image} type="food" add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
                    alt='Изображение продукта' />
@@ -133,7 +132,7 @@
                 <h3>{article.title}</h3>
             {:else }
             <LinkWithReferrer {href}>
-                <h3 class="card-title">{article.name ?? article.title}</h3>
+                <h3 class="card-title">{(article.name ?? article.title) + (article?.status_id === 5 ? ' в резерве' : '')}</h3>
             </LinkWithReferrer>
             {/if}
         {#if admin}
@@ -241,6 +240,10 @@
 
     img {
         object-fit: cover;
+    }
+
+    .unavailable {
+        opacity: 50%;
     }
 
     .card-title {

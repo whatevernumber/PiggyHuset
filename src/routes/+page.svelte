@@ -8,11 +8,14 @@
 	import {fly} from "svelte/transition";
 	import VKCommunityMessages from "$lib/components/widgets/VKCommunityMessages.svelte";
 
+	export let data;
+
 	let modal_opened = false; // флаг для оверлея
 </script>
 
 <svelte:head>
-	<title>ДОМИК для бездомных поросят</title>
+	<meta name="description" content="У нас вы можете взять морскую свинку бесплатно в добрые руки. Или отдать из-за развившейся аллергии или по иным причинам" />
+	<title>ДОМИК для бездомных поросят – проект помощи морским свинкам</title>
 </svelte:head>
 
 <main in:fly={{y: 1000, duration: 500, delay: 0}}>
@@ -26,7 +29,7 @@
 
 <VKCommunityMessages />
 
-<AboutModal />
+<AboutModal cities={data?.cities} />
 
 {#if modal_opened}
 	<Overlay />

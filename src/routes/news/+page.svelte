@@ -6,6 +6,7 @@
 </script>
 
 <svelte:head>
+	<meta name="description" content="Новости Домика для бездомных поросят" />
 	<title>Новости</title>
 </svelte:head>
 
