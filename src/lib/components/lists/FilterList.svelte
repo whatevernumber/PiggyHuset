@@ -56,6 +56,12 @@
         <ul class="sex_list">
             <li>
                 <label class="radio_label">
+                    <input name="sex" type="radio" value='' checked on:change={(evt) => toggleRadio(evt)}>
+                    <span>Все</span>
+                </label>
+            </li>
+            <li>
+                <label class="radio_label">
                     <input name="sex" type="radio" value="F" on:change={(evt) => toggleRadio(evt)}>
                     <span>Девочка</span>
                 </label>
@@ -64,12 +70,6 @@
                 <label class="radio_label">
                     <input name="sex" type="radio" value="M" on:change={(evt) => toggleRadio(evt)}>
                     <span>Мальчик</span>
-                </label>
-            </li>
-            <li>
-                <label class="radio_label">
-                    <input name="sex" type="radio" value='' checked on:change={(evt) => toggleRadio(evt)}>
-                    <span>Все</span>
                 </label>
             </li>
         </ul>
@@ -200,6 +200,11 @@
         grid-template-columns: 7vw 7vw;
         align-items: center;
         column-gap: 5px;
+    }
+
+    ul.sex_list {
+        flex-direction: row;
+        column-gap: 10px
     }
 
     .radio_label {
