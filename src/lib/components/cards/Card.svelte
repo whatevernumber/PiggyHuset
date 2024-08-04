@@ -116,7 +116,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article class:rounded class="{article?.status_id === 5 || article?.status_id === 6 ? 'unavailable' : ''}" id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
+<article class:rounded class:unavailable={article?.status_id === 5 || article?.status_id === 6} id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     {#if type === 'info'}
         <PhotoCard pic={image} type="food" add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
                    alt='Изображение продукта' />
