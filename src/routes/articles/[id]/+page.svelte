@@ -68,7 +68,7 @@
 </script>
 
 <svelte:head>
-	<meta name="description" content="{header + '. Всё, что вы хотели знать о морских свинках, можно узнать в нашей статье'}" />
+	<meta name="description" content={header + '. Всё, что вы хотели знать о морских свинках, можно узнать в нашей статье'} />
 	<title>{header} - Статьи от Домик для бездомных поросят</title>
 </svelte:head>
 
