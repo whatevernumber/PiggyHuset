@@ -3,13 +3,13 @@ import { json, error } from '@sveltejs/kit';
 
 export async function GET({url}) {
 
-	const id = url.searchParams.get('id');
+	const tag = url.searchParams.get('tag');
 
-	if (!id) {
+	if (!tag) {
 		throw error(404);
 	}
 
-	const res = await fetch(`${REMOTE_SERVER}/articles/${id}?expand=photos,tags`, {
+	const res = await fetch(`${REMOTE_SERVER}/articles/tag/${tag}?expand=tags`, {
 		headers: {
 			accept: 'application/json'
 		},

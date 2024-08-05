@@ -75,6 +75,14 @@
         </ul>
     </li>
     <li>
+        <h4>Доставка</h4>
+        <label class="filter-list-label overseer-label">
+            Есть
+            <input type="checkbox" value="delivery"
+                   on:change={(evt) => filter_handler(evt)}>
+        </label>
+    </li>
+    <li>
         <h4>По кураторам</h4>
         <ul class="overseers-list">
             {#if active_only}
@@ -164,11 +172,11 @@
         background-color: aliceblue;
     }
 
-    .filter-list ul input[type="checkbox"] {
+    .filter-list input[type="checkbox"] {
         display: none;
     }
 
-    .filter-list ul input[type="radio"] {
+    .filter-list input[type="radio"] {
         cursor: pointer;
     }
 

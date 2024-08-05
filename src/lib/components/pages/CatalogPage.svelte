@@ -182,8 +182,9 @@
                     const city_match = active_filters.includes(el.city.city_name);
                     const overseer_match = active_filters.includes(el.overseer?.overseer_name);
                     const filter_by_overseer = active_filters.some(f => f.includes('Домик') || f.includes('Куратор'));
-                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор') && !f.includes('F') && !f.includes('M'));
+                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор') && !f.includes('F') && !f.includes('M') && !f.includes('delivery'));
                     const filter_by_sex = active_filters.some(f => f.includes('M') || f.includes('F'));
+                    const filter_by_delivery = active_filters.some(f => f.includes('delivery'));
 
                     let matches = false; // флаг для скрытия карточки
 
@@ -202,6 +203,14 @@
                     } else {
                         // в ином случае проверить совпадение одиночного фильтра
                         matches = (sex_match || city_match || overseer_match);
+                    }
+
+                    if (filter_by_delivery) {
+                        if (el.delivery && (active_filters.length === 1 || matches)) {
+                            matches = true;
+                        } else {
+                            matches = false;
+                        }
                     }
 
                     el.hidden = !matches;
@@ -259,6 +268,16 @@
 
     afterNavigate(() => sessionStorage.removeItem('referrer'));
 
+    const fetchArticlesByTag = async (value) => {
+        const res = await fetch(`/api/articles/tag?tag=${value}`);
+        let result = [];
+        if (res.ok) {
+            result = await res.json();
+        }
+
+        data_array = result;
+    }
+
     // реактивное обновление списка
     $: data_array = data_array;
 
@@ -310,7 +329,7 @@
                 {#each data_array as article (article.id)}
                     {#key data_array}
                     <li class:filtered={article.hidden}>
-                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc />
+                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc tagAction={fetchArticlesByTag} />
                     </li>
                     {/key}
                 {/each}

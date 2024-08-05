@@ -26,6 +26,10 @@
                 required: true,
                 placeholder: 'Расскажите новость',
                 emoji: true
+            },
+            {
+                label: 'Теги',
+                name: 'hashtags',
             }
         ],
         files: {

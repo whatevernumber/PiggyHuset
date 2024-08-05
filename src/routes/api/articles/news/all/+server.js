@@ -7,10 +7,10 @@ export async function GET({url}) {
 	let query = '';
 
 	if (page) {
-		query = '?page=' + page
+		query = '&page=' + page
 	}
 
-	const res = await fetch(`${REMOTE_SERVER}/articles/type/2${query}`, {
+	const res = await fetch(`${REMOTE_SERVER}/articles/type/2?expand=tags${query}`, {
 		headers: {
 			accept: 'application/json'
 		},
