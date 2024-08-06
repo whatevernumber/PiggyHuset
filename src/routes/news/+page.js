@@ -3,8 +3,6 @@ export async function load({ fetch, url }) {
     const tag = url.searchParams.get('tag') ?? null;
     let res;
 
-    console.log(tag);
-
     if (tag) {
         res = await fetch('/api/articles/tag?tag=' + tag);
     } else {

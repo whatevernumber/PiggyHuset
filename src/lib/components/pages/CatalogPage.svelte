@@ -339,11 +339,13 @@
                 </div>
             {/if}
 
+            {#if !tag}
             <div class="sorting">
             {#each sort_options as sort_option}
                 <SortButton class_name="{sort_option.param === sort_config.param ? (sort_config.direction === 'desc' ? 'down' : 'up') : ''} {sort_option.param}" title="{sort_option.label}" click_handler={() => sort_by(sort_option)} />
             {/each}
             </div>
+            {/if}
 
             {#if !is_article}
             <div class="filtering">
