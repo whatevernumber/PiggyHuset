@@ -21,6 +21,7 @@
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let modal_opened; // Флаг для открытия оверлея
     export let count = null;
+    export let tag; // для поиска по тегу
 
     let data_array = data.payload;
     let action_id;
@@ -254,7 +255,7 @@
 
     const load_on_scroll = async function () {
         const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
-        if (bottom_reached) {
+        if (bottom_reached && !tag) {
             await get_new_batch();
         }
     };
@@ -269,13 +270,38 @@
     afterNavigate(() => sessionStorage.removeItem('referrer'));
 
     const fetchArticlesByTag = async (value) => {
+        data_array = [];
+        onload = true;
+
         const res = await fetch(`/api/articles/tag?tag=${value}`);
         let result = [];
+
         if (res.ok) {
             result = await res.json();
         }
 
-        data_array = result;
+        data_array = result.payload;
+        tag = value;
+        onload = false;
+    }
+
+    const resetTag = async () => {
+        data_array = [];
+        tag = null;
+        onload = true;
+
+        let res;
+
+        if (type === 'article') {
+            res = await fetch('/api/articles/all');
+        } else {
+            res = await fetch('/api/articles/news/all');
+        }
+
+        let result = await res.json();
+        data = result;
+        // data_array = result.payload;
+        onload = false;
     }
 
     // реактивное обновление списка
@@ -323,6 +349,13 @@
             <div class="filtering">
                 <FilterList data="{data_array}" filter_handler="{add_to_filter}" active_only="{is_homeless}" />
             </div>
+            {/if}
+
+            {#if tag}
+                <div class="tag_search">
+                    <p>Поиск по тегу <span class="tag">#{tag}</span></p>
+                    <span class="reset_tag" on:click={resetTag} role="button">Сбросить</span>
+                </div>
             {/if}
 
             <CardList>
@@ -424,6 +457,29 @@
 
     .loader_wrapper {
         margin: auto;
+    }
+
+    .tag_search {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        column-gap: 10px;
+    }
+
+    .tag {
+        cursor: pointer;
+        color: rgba(197, 205, 158, 0.87);
+        font-style: italic;
+        text-transform: lowercase;
+    }
+
+    .reset_tag {
+        cursor: pointer;
+        color: #EF8653;
+    }
+
+    .reset_tag:hover {
+        color: #d97544;
     }
 
     @media (max-width: 1001px) {

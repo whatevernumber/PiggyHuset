@@ -214,7 +214,7 @@
             <ul class="tag_list">
                 {#each article.tags as tag}
                     <li>
-                        <span on:click={() => tagAction(tag.tag_value)}>
+                        <span on:click={() => tagAction(tag.tag_value)} role="button">
                             #{tag.tag_value}
                         </span>
                     </li>
