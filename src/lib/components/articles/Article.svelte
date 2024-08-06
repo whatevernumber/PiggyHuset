@@ -17,6 +17,7 @@
 	export let text;
 	export let pig_name;
 	export let pig_status = null;
+	export let pig_delivery;
 	export let photos;
 
 	let date_prefix;
@@ -38,7 +39,7 @@
 		<slot />
 		<ArticleText {text} {type} />
 	{#if pig_name && (pig_status && pig_status === 'в поисках дома')}
-		<PigNotification {pig_name} />
+		<PigNotification {pig_name} delivery={pig_delivery} />
 	{/if}
 	{#if photos && photos.length > 1}
 		<PhotoList photos={photos} />

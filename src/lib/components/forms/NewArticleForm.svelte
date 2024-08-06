@@ -33,6 +33,10 @@
                 label: 'Источник',
                 name: 'origin_link',
             },
+			{
+				label: 'Теги',
+				name: 'hashtags',
+			}
         ],
         files: {
             file_input: false

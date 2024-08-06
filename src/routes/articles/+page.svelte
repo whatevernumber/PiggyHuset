@@ -27,6 +27,7 @@
 
 	export let data;
 	let articles = data.articles;
+	let tag = data.tag;
 
 </script>
 
@@ -35,4 +36,4 @@
 	<title>Статьи Домика</title>
 </svelte:head>
 
-<CatalogPage data="{articles}" type="article" category="articles" page_title="Полезные статьи" button_text="Читать материал" />
+<CatalogPage data="{articles}" type="article" category="articles" page_title="Полезные статьи" button_text="Читать материал" {tag} />

@@ -8,6 +8,7 @@
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let data;
 
@@ -66,6 +67,9 @@
 		}
 	}
 
+	const redirect_to_list = (tag) => {
+		goto('/news?tag=' + tag);
+	}
 </script>
 
 <svelte:head>
@@ -85,6 +89,18 @@
 	<div class="wrapper">
 		<CardMainContent is_article {header} {text} />
 	</div>
+
+	{#if news?.tags}
+		<ul class="tag_list">
+			{#each news.tags as tag}
+				<li>
+					<span on:click={() => redirect_to_list(tag.tag_value)} role="button">
+						#{tag.tag_value}
+					</span>
+				</li>
+			{/each}
+		</ul>
+	{/if}
 </Article>
 
 {#if modal_opened}
@@ -108,6 +124,23 @@
         top: 35%;
         left: 30%;
         z-index: 10;
+    }
+
+    .tag_list {
+        display: flex;
+        column-gap: 5px;
+        cursor: pointer;
+        list-style: none;
+		order: 4;
+    }
+
+    .tag_list span {
+        text-transform: lowercase;
+        color: rgba(197, 205, 158, 0.87);
+    }
+
+    .tag_list span:hover {
+        color: #EF8653;
     }
 
 	@media (max-width: 1001px) {

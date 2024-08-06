@@ -23,6 +23,10 @@
 			}
 		}
 
+		if (pig.delivery) {
+			form.querySelector('input[type=checkbox]').checked = true;
+		}
+
 		document.getElementById('id').disabled = true;
 	});
 
