@@ -29,7 +29,7 @@
     let success;
     let active_filters = [];
     let desc = ''; // для показа сведений об удаляемой записи внутри модального окна
-    let onload = false; // флаг для показа индикатора загрузки
+    $: onload = false; // флаг для показа индикатора загрузки
 
     const is_article = (type === 'article' || type === 'news');
     const is_homeless = type === 'pig';
@@ -300,7 +300,6 @@
 
         let result = await res.json();
         data = result;
-        // data_array = result.payload;
         onload = false;
     }
 
@@ -368,7 +367,7 @@
                     </li>
                     {/key}
                 {/each}
-                {#if true}
+                {#if onload}
                     <div class="loader_wrapper">
                         <Loader />
                     </div>
