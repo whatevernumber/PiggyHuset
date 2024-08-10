@@ -136,6 +136,17 @@
             <LinkWithReferrer {href}>
                 <h3 class="card-title">{(article.name ?? article.title) + (article?.status_id === 5 ? ' в резерве' : '')}</h3>
             </LinkWithReferrer>
+                {#if article?.tags}
+                    <ul class="tag_list">
+                        {#each article.tags as tag}
+                            <li>
+                        <span on:click={() => tagAction(tag.tag_value)} role="button">
+                            #{tag.tag_value}
+                        </span>
+                            </li>
+                        {/each}
+                    </ul>
+                {/if}
             {/if}
         {#if admin}
             <div class="button_wrapper">
@@ -209,17 +220,6 @@
                 <span class="details doses">Дозировка: </span>
                 {article.info?.doses}
             </p>
-        {/if}
-        {#if article?.tags}
-            <ul class="tag_list">
-                {#each article.tags as tag}
-                    <li>
-                        <span on:click={() => tagAction(tag.tag_value)} role="button">
-                            #{tag.tag_value}
-                        </span>
-                    </li>
-                {/each}
-            </ul>
         {/if}
     </div>
 </article>
@@ -329,6 +329,8 @@
         column-gap: 5px;
         cursor: pointer;
         list-style: none;
+        padding-left: 15px;
+        flex-wrap: wrap;
     }
 
     .tag_list span {
@@ -362,6 +364,7 @@
 
     .header_wrapper {
         display: flex;
+        flex-direction: column;
         margin-bottom: 10px;
     }
 
