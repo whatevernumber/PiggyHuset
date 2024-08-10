@@ -224,7 +224,6 @@
                     {:else if field.type === 'checkbox'}
                         <div class='checkbox_wrapper'>
                             <label class="form-label checkbox" for="{field.name}">{field.label}
-                                <input type='hidden' value='0' name="{field.name}">
                                 <input name="{field.name}" type="checkbox" value="1" id="{field.name}">
                                 <span class="checkbox_box"></span>
                             </label>
