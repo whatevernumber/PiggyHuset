@@ -57,7 +57,7 @@
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
 
     let select_style;
-    select_style = select ? 'select_group' : '';
+    select_style = select.length ? 'select_group' : '';
 
     const handle = () => {
 
@@ -181,7 +181,7 @@
                         {@const required = field.required}
                 <div class="form-item">
                     <label class="form-label" for="{field.name}">{field.label}</label>
-                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.placeholder || (field.required ? ' ' : '(необязательно)')}">
                     <span class="input-error-label"></span>
                 </div>
                     {/if}
@@ -231,7 +231,7 @@
                     {:else}
                 <div class="form-item">
                     <label class="form-label" for="{field.name}">{field.label}</label>
-                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.placeholder || (field.required ? ' ' : '(необязательно)')}">
                     <span class="input-error-label"></span>
                 </div>
                     {/if}

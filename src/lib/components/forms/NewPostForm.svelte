@@ -30,8 +30,8 @@
             {
                 label: 'Теги',
                 name: 'hashtags',
-                placeholder: 'Укажите теги через пробел',
-            }
+                placeholder: 'Укажите через пробел',
+            },
         ],
         files: {
             file_input: false,
