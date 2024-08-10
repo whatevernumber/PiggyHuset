@@ -103,8 +103,6 @@
         } else {
             errors = await res.json();
 
-            console.log(errors);
-
             for (const prop in errors) {
                 let files;
                 if (prop === 'files') {

@@ -21,7 +21,7 @@
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let modal_opened; // Флаг для открытия оверлея
     export let count = null;
-    export let tag; // для поиска по тегу
+    export let tag = null; // для поиска по тегу
 
     let data_array = data.payload;
     let action_id;
@@ -368,7 +368,7 @@
                     </li>
                     {/key}
                 {/each}
-                {#if onload}
+                {#if true}
                     <div class="loader_wrapper">
                         <Loader />
                     </div>
