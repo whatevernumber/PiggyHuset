@@ -14,13 +14,19 @@
 
 	onMount(() =>
 	{
-		let article_title = document.querySelector("input[name = 'title']");
+		let article_title = document.querySelector("input[name='title']");
+		let article_tags = document.querySelector("input[name='hashtags']");
+
+
+		if (article?.tags) {
+			article_tags.value = article.tags.map((el) => el.tag_value).join(' ');
+		}
 
 		article_title.value = article.title;
 
 			if (type === 1) {
-				let article_author = document.querySelector("input[name = 'author']");
-				let article_link = document.querySelector("[name = 'origin_link']");
+				let article_author = document.querySelector("input[name='author']");
+				let article_link = document.querySelector("[name='origin_link']");
 
 				article_author.value = article.author;
 				article_link.value = article.origin_link;

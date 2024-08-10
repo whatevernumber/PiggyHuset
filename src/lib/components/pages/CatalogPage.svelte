@@ -21,6 +21,7 @@
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let modal_opened; // Флаг для открытия оверлея
     export let count = null;
+    export let tag = null; // для поиска по тегу
 
     let data_array = data.payload;
     let action_id;
@@ -28,7 +29,7 @@
     let success;
     let active_filters = [];
     let desc = ''; // для показа сведений об удаляемой записи внутри модального окна
-    let onload = false; // флаг для показа индикатора загрузки
+    $: onload = false; // флаг для показа индикатора загрузки
 
     const is_article = (type === 'article' || type === 'news');
     const is_homeless = type === 'pig';
@@ -182,8 +183,9 @@
                     const city_match = active_filters.includes(el.city.city_name);
                     const overseer_match = active_filters.includes(el.overseer?.overseer_name);
                     const filter_by_overseer = active_filters.some(f => f.includes('Домик') || f.includes('Куратор'));
-                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор') && !f.includes('F') && !f.includes('M'));
+                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор') && !f.includes('F') && !f.includes('M') && !f.includes('delivery'));
                     const filter_by_sex = active_filters.some(f => f.includes('M') || f.includes('F'));
+                    const filter_by_delivery = active_filters.some(f => f.includes('delivery'));
 
                     let matches = false; // флаг для скрытия карточки
 
@@ -202,6 +204,14 @@
                     } else {
                         // в ином случае проверить совпадение одиночного фильтра
                         matches = (sex_match || city_match || overseer_match);
+                    }
+
+                    if (filter_by_delivery) {
+                        if (el.delivery && (active_filters.length === 1 || matches)) {
+                            matches = true;
+                        } else {
+                            matches = false;
+                        }
                     }
 
                     el.hidden = !matches;
@@ -245,7 +255,7 @@
 
     const load_on_scroll = async function () {
         const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
-        if (bottom_reached) {
+        if (bottom_reached && !tag) {
             await get_new_batch();
         }
     };
@@ -258,6 +268,40 @@
     );
 
     afterNavigate(() => sessionStorage.removeItem('referrer'));
+
+    const fetchArticlesByTag = async (value) => {
+        data_array = [];
+        onload = true;
+
+        const res = await fetch(`/api/articles/tag?tag=${value}`);
+        let result = [];
+
+        if (res.ok) {
+            result = await res.json();
+        }
+
+        data_array = result.payload;
+        tag = value;
+        onload = false;
+    }
+
+    const resetTag = async () => {
+        data_array = [];
+        tag = null;
+        onload = true;
+
+        let res;
+
+        if (type === 'article') {
+            res = await fetch('/api/articles/all');
+        } else {
+            res = await fetch('/api/articles/news/all');
+        }
+
+        let result = await res.json();
+        data = result;
+        onload = false;
+    }
 
     // реактивное обновление списка
     $: data_array = data_array;
@@ -294,11 +338,13 @@
                 </div>
             {/if}
 
+            {#if !tag}
             <div class="sorting">
             {#each sort_options as sort_option}
                 <SortButton class_name="{sort_option.param === sort_config.param ? (sort_config.direction === 'desc' ? 'down' : 'up') : ''} {sort_option.param}" title="{sort_option.label}" click_handler={() => sort_by(sort_option)} />
             {/each}
             </div>
+            {/if}
 
             {#if !is_article}
             <div class="filtering">
@@ -306,11 +352,18 @@
             </div>
             {/if}
 
+            {#if tag}
+                <div class="tag_search">
+                    <p>Поиск по тегу <span class="tag">#{tag}</span></p>
+                    <span class="reset_tag" on:click={resetTag} role="button">Сбросить</span>
+                </div>
+            {/if}
+
             <CardList>
                 {#each data_array as article (article.id)}
                     {#key data_array}
                     <li class:filtered={article.hidden}>
-                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc />
+                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc tagAction={fetchArticlesByTag} />
                     </li>
                     {/key}
                 {/each}
@@ -405,6 +458,29 @@
 
     .loader_wrapper {
         margin: auto;
+    }
+
+    .tag_search {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        column-gap: 10px;
+    }
+
+    .tag {
+        cursor: pointer;
+        color: rgba(197, 205, 158, 0.87);
+        font-style: italic;
+        text-transform: lowercase;
+    }
+
+    .reset_tag {
+        cursor: pointer;
+        color: #EF8653;
+    }
+
+    .reset_tag:hover {
+        color: #d97544;
     }
 
     @media (max-width: 1001px) {

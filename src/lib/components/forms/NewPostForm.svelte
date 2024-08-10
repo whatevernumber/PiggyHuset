@@ -26,7 +26,12 @@
                 required: true,
                 placeholder: 'Расскажите новость',
                 emoji: true
-            }
+            },
+            {
+                label: 'Теги',
+                name: 'hashtags',
+                placeholder: 'Укажите через пробел',
+            },
         ],
         files: {
             file_input: false,

@@ -29,6 +29,7 @@
     export let id;
     export let desc; // для показа текста модального окна при удалении
     export let rounded = false;
+    export let tagAction;
 
     let date = article.graduation_date ? article.graduation_date : article.datetime;
     const datetime = dayjs.utc(date).tz(timezone);
@@ -36,6 +37,7 @@
     let status; // для отображения иконки статуса выпусника.
     let city = article.city ? article.city.city_name : null;
     let pig_sex = article.sex ? article.sex : null;
+    let pig_age = article.age ? article.age : null
 
     if (pig_sex) {
         pig_sex = (pig_sex === 'F') ? 'Девочка' : 'Мальчик';
@@ -134,6 +136,17 @@
             <LinkWithReferrer {href}>
                 <h3 class="card-title">{(article.name ?? article.title) + (article?.status_id === 5 ? ' в резерве' : '')}</h3>
             </LinkWithReferrer>
+                {#if article?.tags}
+                    <ul class="tag_list">
+                        {#each article.tags as tag}
+                            <li>
+                        <span on:click={() => tagAction(tag.tag_value)} role="button">
+                            #{tag.tag_value}
+                        </span>
+                            </li>
+                        {/each}
+                    </ul>
+                {/if}
             {/if}
         {#if admin}
             <div class="button_wrapper">
@@ -153,6 +166,9 @@
          {#if city}
             <p><b>Город:</b> {city}</p>
          {/if}
+        {#if pig_age}
+            <p><b>Поступил в возрасте:</b> {pig_age}</p>
+        {/if}
 
         {#if type === 'info'}
             <div class="card-notices">
@@ -308,6 +324,24 @@
         color: #f5b193;
     }
 
+    .tag_list {
+        display: flex;
+        column-gap: 5px;
+        cursor: pointer;
+        list-style: none;
+        padding-left: 15px;
+        flex-wrap: wrap;
+    }
+
+    .tag_list span {
+        text-transform: lowercase;
+        color: rgba(197, 205, 158, 0.87);
+    }
+
+    .tag_list span:hover {
+        color: #EF8653;
+    }
+
     @media(max-width: 1179px) {
         .bottom-line {
             flex-wrap: wrap;
@@ -330,6 +364,7 @@
 
     .header_wrapper {
         display: flex;
+        flex-direction: column;
         margin-bottom: 10px;
     }
 
