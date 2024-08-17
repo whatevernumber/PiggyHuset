@@ -27,7 +27,9 @@
 	<BigHeader text_content={type_id === 1 ? 'Статьи' : 'Последние новости'} />
 
 	{#await request}
-		<Loader />
+		<div class="loader_wrapper">
+			<Loader />
+		</div>
 	{:then _}
 		<div class="article_section">
 			{#each articles as article}
@@ -50,8 +52,12 @@
         margin-bottom: 40px;
     }
 
-    @media (max-width: 1001px) {
+	.loader_wrapper {
+		width: 40px;
+		margin: auto;
+	}
 
+    @media (max-width: 1001px) {
         .landing_article_wrapper {
             max-width: 400px;
             padding: 0;

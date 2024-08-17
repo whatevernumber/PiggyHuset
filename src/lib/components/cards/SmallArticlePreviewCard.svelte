@@ -50,6 +50,7 @@
 
 	.article_date {
 		opacity: 0.7;
+		font-size: 14px;
 		font-style: italic;
         color: #adadad;
 	}
