@@ -26,10 +26,10 @@
 	<LinkWithReferrer href={link}>
 		<img class="preview_image" {src} width="248" height="261" alt="Обложка статьи">
 	</LinkWithReferrer>
-	<a href={link}>
+	<a class="link_header" href={link}>
 		<h3 class="title">{article.title}</h3>
 	</a>
-	<p class="date">
+	<p class="article_date">
 		<Time timestamp={article.datetime} format="DD MMMM YYYY г." />
 	</p>
 </div>
@@ -48,12 +48,17 @@
         align-self: flex-start;
     }
 
-	.date {
-		margin-top: auto;
+	.article_date {
+		opacity: 0.7;
 		font-style: italic;
+        color: #adadad;
 	}
 
 	.preview_image {
 		object-fit: cover;
+	}
+
+	.link_header {
+        order: 2;
 	}
 </style>
