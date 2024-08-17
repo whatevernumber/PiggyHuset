@@ -63,6 +63,7 @@
             padding: 0;
             margin-left: auto;
             margin-right: auto;
+			margin-bottom: 40px;
         }
 
         .article_section {
