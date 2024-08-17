@@ -7,6 +7,7 @@
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import {fly} from "svelte/transition";
 	import VKCommunityMessages from "$lib/components/widgets/VKCommunityMessages.svelte";
+	import LandingArticles from '$lib/components/misc/landing-articles/LandingArticles.svelte';
 
 	export let data;
 
@@ -23,6 +24,8 @@
 	<div class="landing_main_wrapper main_wrapper">
 		<About bind:modal_opened={modal_opened} />
 		<LookingForHouse />
+		<LandingArticles type_id={1} />
+		<LandingArticles type_id={2} />
 		<Graduated />
 	</div>
 </main>

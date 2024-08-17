@@ -46,7 +46,7 @@
 
 <style>
     .graduated {
-        margin-bottom: 40px;
+        margin-bottom: 2%;
         padding: 0 80px;
     }
 
@@ -63,11 +63,13 @@
             padding: 0;
             margin-left: auto;
             margin-right: auto;
+            margin-bottom: 40px;
         }
 
         .graduated_cards_wrapper {
             flex-wrap: wrap;
             justify-content: center;
+            row-gap: 15px;
         }
     }
 </style>
