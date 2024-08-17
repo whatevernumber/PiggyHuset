@@ -46,7 +46,7 @@
 
 <style>
     .graduated {
-        margin-bottom: 40px;
+        margin-bottom: 2%;
         padding: 0 80px;
     }
 

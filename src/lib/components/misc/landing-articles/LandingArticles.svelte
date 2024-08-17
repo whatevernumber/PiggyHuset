@@ -18,14 +18,13 @@
 				}
 			}).then((json) => {
 				articles = json.payload;
-				console.log(articles);
 			}).catch((any) => {});
 	});
 
 </script>
 
 <section class="landing_article_wrapper">
-	<BigHeader text_content={type_id === 2 ? 'Последние новости' : 'Статьи'} />
+	<BigHeader text_content={type_id === 1 ? 'Статьи' : 'Последние новости'} />
 
 	{#await request}
 		<Loader />
@@ -36,12 +35,12 @@
 			{/each}
 		</div>
 	{/await}
-	<Button href={type_id === 1 ? '/articles' : 'news'} title="Посмотреть" background_color="#D97544" text_color="#FFFFFF" />
+	<Button href={type_id === 1 ? '/articles' : '/news'} title="Посмотреть" background_color="#D97544" text_color="#FFFFFF" />
 </section>
 
 <style>
 	.landing_article_wrapper {
-        margin-bottom: 40px;
+        margin-bottom: 2%;
         padding: 0 80px;
 	}
 

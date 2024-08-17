@@ -24,9 +24,9 @@
 	<div class="landing_main_wrapper main_wrapper">
 		<About bind:modal_opened={modal_opened} />
 		<LookingForHouse />
+		<LandingArticles type_id={1} />
 		<LandingArticles type_id={2} />
 		<Graduated />
-		<LandingArticles type_id={1} />
 	</div>
 </main>
 

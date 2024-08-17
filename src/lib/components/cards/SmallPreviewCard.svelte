@@ -13,18 +13,20 @@
 	export let article;
 	export let type_id;
 
-	let type = type_id === 2 ? 'news' : 'article';
+	let type = type_id === 1 ? 'article' : 'news';
 	export let placeholder_picture = `${type}-${randomize(1, 3)}`;
 	let src = article.main_photo ? `${_REMOTE_SERVER}/img/${article.main_photo}` :
 	`/img/placeholder/${placeholder_picture}.png`;
+
+	let link = '/' + (type === 'news' ? type : 'articles') + '/' + article.id;
 </script>
 
 
 <div class="article_card">
-	<LinkWithReferrer href="{'/' + type === 'news' ? type : 'articles' + '/' + article.id}">
-		<img {src} width="248" height="261" alt="Обложка статьи">
+	<LinkWithReferrer href={link}>
+		<img class="preview_image" {src} width="248" height="261" alt="Обложка статьи">
 	</LinkWithReferrer>
-	<a href="{'/' + type + '/' + article.id}">
+	<a href={link}>
 		<h3 class="title">{article.title}</h3>
 	</a>
 	<p class="date">
@@ -47,5 +49,9 @@
 	.date {
 		margin-top: auto;
 		font-style: italic;
+	}
+
+	.preview_image {
+		object-fit: cover;
 	}
 </style>
