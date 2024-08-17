@@ -16,7 +16,7 @@
 	let type = type_id === 1 ? 'article' : 'news';
 	export let placeholder_picture = `${type}-${randomize(1, 3)}`;
 	let src = article.main_photo ? `${_REMOTE_SERVER}/img/${article.main_photo}` :
-	`/img/placeholder/${placeholder_picture}.png`;
+		`/img/placeholder/${placeholder_picture}.png`;
 
 	let link = '/' + (type === 'news' ? type : 'articles') + '/' + article.id;
 </script>
