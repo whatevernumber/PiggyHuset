@@ -44,6 +44,8 @@
         display: flex;
         flex-direction: column;
         row-gap: 10px;
+        order: 0;
+        align-self: flex-start;
     }
 
 	.date {

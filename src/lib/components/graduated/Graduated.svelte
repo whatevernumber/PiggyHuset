@@ -68,6 +68,7 @@
         .graduated_cards_wrapper {
             flex-wrap: wrap;
             justify-content: center;
+            row-gap: 15px;
         }
     }
 </style>

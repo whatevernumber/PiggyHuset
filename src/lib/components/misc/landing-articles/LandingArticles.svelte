@@ -4,7 +4,7 @@
 	import '@splidejs/svelte-splide/css/splide.min.css';
 	import {onMount} from "svelte";
 	import Loader from '$lib/components/misc/loading/Loader.svelte';
-	import SmallPreviewCard from '$lib/components/cards/SmallPreviewCard.svelte';
+	import SmallArticlePreviewCard from '$lib/components/cards/SmallArticlePreviewCard.svelte';
 
 	export let type_id;
 	let articles = [];
@@ -31,7 +31,7 @@
 	{:then _}
 		<div class="article_section">
 			{#each articles as article}
-			<SmallPreviewCard {article} {type_id}/>
+			<SmallArticlePreviewCard {article} {type_id}/>
 			{/each}
 		</div>
 	{/await}
@@ -62,6 +62,7 @@
         .article_section {
             flex-wrap: wrap;
             justify-content: center;
+            row-gap: 15px;
         }
     }
 </style>
