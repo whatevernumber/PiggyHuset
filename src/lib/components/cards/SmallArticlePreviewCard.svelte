@@ -37,7 +37,7 @@
 
 <style>
     .article_card {
-        min-height: 290px;
+        min-height: 405px;
         width: 254px;
         padding: 20px;
         border: 1px solid rgba(0, 0, 0, 0.10);
