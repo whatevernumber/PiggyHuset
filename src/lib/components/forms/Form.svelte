@@ -88,14 +88,17 @@
         // changes the quality of given files
         const file_input = document.querySelector('input[type="file"]');
 
-        let new_container = new DataTransfer();
-        for (const file of file_input.files) {
-            if (file.type.startsWith('image') && file.size > MAX_FILE_SIZE) {
-                await resize(file, new_container);
-            }
-        }
+        if (file_input) {
 
-        file_input.files = new_container.files;
+            let new_container = new DataTransfer();
+            for (const file of file_input.files) {
+                if (file.type.startsWith('image') && file.size > MAX_FILE_SIZE) {
+                    await resize(file, new_container);
+                }
+            }
+
+            file_input.files = new_container.files;
+        }
 
         const formData = new FormData(form);
 
@@ -279,6 +282,7 @@
             </div>
         {/if}
         {#if photos.length}
+            <h3 class="form-header">Загруженные фотографии:</h3>
             <UploadedFiles handler={delete_handler} bind:photos bind:old_photo_name={main_photo_name} bind:main_photo={main_photo_index} />
         {/if}
         {#if product && product.main_photo && !image_upload_preview.length}
