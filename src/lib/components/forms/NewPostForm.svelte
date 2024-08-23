@@ -35,7 +35,7 @@
         ],
         files: {
             file_input: false,
-            multiple: true
+            multiple: false
         }
     }
 </script>
