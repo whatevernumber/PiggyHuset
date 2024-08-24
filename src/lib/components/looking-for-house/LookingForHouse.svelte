@@ -40,7 +40,7 @@
     <PhotoList photos="{Array(4).fill({image: '200w.gif'})}" local autoplay="{true}" no_border />
     {:then _}
         {#if showPhotos}
-    <PhotoList first_slide="/img/looking-for-home.png" {photos} autoplay="{true}" no_border linked />
+    <PhotoList last_slide="/img/looking-for-home.png" {photos} autoplay="{true}" no_border linked />
         {:else}
     <PhotoList photos="{Array(4).fill({image: '200w.gif'})}" local autoplay="{true}" no_border />
         {/if}
