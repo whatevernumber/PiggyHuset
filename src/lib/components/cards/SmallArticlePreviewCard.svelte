@@ -9,6 +9,8 @@
 	import {randomize} from "$lib/components/utils/func.js";
 	import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 	import Time from 'svelte-time';
+	import { onMount } from 'svelte';
+	import { addParallaxEffect } from '$lib/parallax.js';
 
 	export let article;
 	export let type_id;
@@ -19,6 +21,12 @@
 		`/img/placeholder/${placeholder_picture}.png`;
 
 	let link = '/' + (type === 'news' ? type : 'articles') + '/' + article.id;
+
+	//
+
+	onMount(() => {
+		addParallaxEffect('.article_card');
+	});
 </script>
 
 
@@ -40,12 +48,13 @@
         min-height: 405px;
         width: 254px;
         padding: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.10);
         display: flex;
         flex-direction: column;
         row-gap: 10px;
         order: 0;
         align-self: flex-start;
+		box-shadow: 1px 1px 10px 2px lightblue;
+        transform-style: preserve-3d;
     }
 
 	.article_date {

@@ -4,6 +4,7 @@
     import Button from '$lib/components/misc/button/Button.svelte';
     import {randomElements} from "$lib/components/utils/func.js";
     import { onMount } from 'svelte';
+    import { addParallaxEffect } from '$lib/parallax.js';
 
     let graduates = [];
     let show_number = 3; // необходимое количество свинок для получения;
@@ -20,6 +21,8 @@
                 graduates = randomElements(json.payload, 3)
             })
             .catch((any) => {});
+
+        setTimeout(() => addParallaxEffect('.graduated_card', 0.25), 500);
     });
 </script>
 
