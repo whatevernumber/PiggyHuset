@@ -75,7 +75,7 @@
         </ul>
     </li>
     <li>
-        <h4>Доставка</h4>
+        <h4>Доставка по РФ</h4>
         <label class="filter-list-label overseer-label">
             Есть
             <input type="checkbox" value="delivery"

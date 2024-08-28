@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 
 export async function load({ fetch, params }) {
 
@@ -9,6 +9,10 @@ export async function load({ fetch, params }) {
 	}
 
 	const data = await res.json();
+
+	if (data.type_id !== 1) {
+		throw redirect(303, `/news/${params.id}`);
+	}
 
 	return {
 		article: data,

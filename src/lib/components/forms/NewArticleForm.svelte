@@ -40,7 +40,8 @@
 			}
         ],
         files: {
-            file_input: false
+            file_input: false,
+			multiple: false,
         }
     };
 </script>

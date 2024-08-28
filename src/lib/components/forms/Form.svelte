@@ -2,7 +2,7 @@
 	import PhotoCard from "$lib/components/photo-card/PhotoCard.svelte";
 	import SubmitButton from "$lib/components/misc/form-elements/SubmitButton.svelte";
 	import FileInput from "$lib/components/misc/form-elements/FileInput.svelte";
-    import {redirect} from "$lib/components/utils/func.js";
+    import {redirect, resize} from "$lib/components/utils/func.js";
 	import Emoji from '$lib/components/misc/emoji/Emoji.svelte';
     import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
     import TextEditor from "$lib/components/misc/form-elements/TextEditor.svelte";
@@ -53,6 +53,8 @@
     const wysiwyg = scheme.fields.filter(field => field.type === 'wysiwyg');
     const fields = scheme.fields.filter(field => !textarea.includes(field) && !wysiwyg.includes(field));
 
+    const MAX_FILE_SIZE = 8e5;
+
     const top_fields = fields.slice(0, 2);
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
 
@@ -78,8 +80,24 @@
         const form = document.querySelector('form');
 
         const wysiwig = form.querySelector('#wysiwyg');
+
         if (wysiwig) {
             form.querySelector('input[type="hidden"]').value;
+        }
+
+        // changes the quality of given files
+        const file_input = document.querySelector('input[type="file"]');
+
+        if (file_input) {
+
+            let new_container = new DataTransfer();
+            for (const file of file_input.files) {
+                if (file.type.startsWith('image') && file.size > MAX_FILE_SIZE) {
+                    await resize(file, new_container);
+                }
+            }
+
+            file_input.files = new_container.files;
         }
 
         const formData = new FormData(form);
@@ -264,6 +282,7 @@
             </div>
         {/if}
         {#if photos.length}
+            <h3 class="form-header">Загруженные фотографии:</h3>
             <UploadedFiles handler={delete_handler} bind:photos bind:old_photo_name={main_photo_name} bind:main_photo={main_photo_index} />
         {/if}
         {#if product && product.main_photo && !image_upload_preview.length}

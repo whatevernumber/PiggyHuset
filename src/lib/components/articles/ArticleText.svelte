@@ -123,6 +123,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: zoom-in;
     }
 
     .article-figure.captioned {
@@ -134,6 +135,7 @@
         margin: 15% auto;
         padding: 1%;
         background-color: #e1edce;
+        cursor: zoom-out;
     }
 
     .article-figure.active.captioned {
