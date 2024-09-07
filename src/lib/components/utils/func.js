@@ -1,4 +1,5 @@
 import {goto} from "$app/navigation";
+import { _ADDRESS_ORIGIN } from '$env/static/public';
 
 /**
  * Закрытие модального окна
@@ -257,5 +258,16 @@ Array.prototype.sort_by_string = function (param) {
 Array.prototype.sort_by_status = function () {
     return this.sort((a, b) =>  a.status_id - b.status_id)
 };
+
+/**
+ * Возвращает строку для sitemap
+ * @param entry
+ * @returns {string}
+ */
+export function create_sitemap_entry(entry) {
+    return `<url>
+    <loc>${new URL(entry, _ADDRESS_ORIGIN).href}</loc>
+  </url>`;
+}
 
 export { closeModal, showModal, randomElements, removeData };
