@@ -355,7 +355,9 @@
             {#if tag}
                 <div class="tag_search">
                     <p>Поиск по тегу <span class="tag">#{tag}</span></p>
-                    <span class="reset_tag" on:click={resetTag} role="button">Сбросить</span>
+                    <div>
+                        <span class="reset_tag" on:click={resetTag} role="button" tabindex="0">Сбросить</span>
+                    </div>
                 </div>
             {/if}
 
