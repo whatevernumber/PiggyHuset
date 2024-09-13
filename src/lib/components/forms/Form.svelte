@@ -53,7 +53,7 @@
     const wysiwyg = scheme.fields.filter(field => field.type === 'wysiwyg');
     const fields = scheme.fields.filter(field => !textarea.includes(field) && !wysiwyg.includes(field));
 
-    const MAX_FILE_SIZE = 8e5;
+    const MAX_FILE_SIZE = 8e5; // 800kb
 
     const top_fields = fields.slice(0, 2);
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
@@ -260,7 +260,7 @@
             {/if}
             <fieldset class="label-group file-fieldset">
             {#if scheme.files.file_input}
-                <FileInput class_name="form-input-field" name="{scheme.files.multiple ? 'files[]' : 'file'}" multiple={scheme.files.multiple} onchange="{preview}" />
+                <FileInput class_name="form-input-field" name="{scheme.files.multiple ? 'files[]' : 'files'}" multiple={scheme.files.multiple} onchange="{preview}" />
             {/if}
                 <div class="form-item button">
                     <SubmitButton on_click="{ sendForm }" />
