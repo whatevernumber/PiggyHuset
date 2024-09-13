@@ -22,15 +22,20 @@
             {
                 label: 'Текст публикации',
                 name: 'text',
-                type: 'textarea',
+                type: 'wysiwyg',
                 required: true,
                 placeholder: 'Расскажите новость',
                 emoji: true
-            }
+            },
+            {
+                label: 'Теги',
+                name: 'hashtags',
+                placeholder: 'Укажите через пробел',
+            },
         ],
         files: {
-            file_input: true,
-            multiple: true
+            file_input: false,
+            multiple: false
         }
     }
 </script>

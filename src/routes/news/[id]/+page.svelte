@@ -8,6 +8,7 @@
 	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let data;
 
@@ -66,28 +67,39 @@
 		}
 	}
 
+	const redirect_to_list = (tag) => {
+		goto('/news?tag=' + tag);
+	}
 </script>
 
 <svelte:head>
+	<meta name="description" content={header + ' - Новости от Домик для бездомных поросят'} />
 	<title>{header}</title>
 </svelte:head>
 
-<Article class_name='article_news' {date} text="{text}" type="news">
-	<div class="wrapper">
-		<div>
-			<PhotoCard pic={news.main_photo} type="article" />
-			{#if admin}
-				<div class="profile_buttons">
-					<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
-					<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
-				</div>
-			{/if}
+<Article class_name="article_news" {date} text="{text}" type="news">
+
+	{#if admin}
+		<div class="profile_buttons">
+			<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
+			<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
 		</div>
+	{/if}
+
+	<div class="wrapper">
 		<CardMainContent is_article {header} {text} />
 	</div>
 
-	{#if news.photos.length > 1}
-	<PhotoList photos={news.photos} />
+	{#if news?.tags}
+		<ul class="tag_list">
+			{#each news.tags as tag}
+				<li>
+					<span on:click={() => redirect_to_list(tag.tag_value)} role="button">
+						#{tag.tag_value}
+					</span>
+				</li>
+			{/each}
+		</ul>
 	{/if}
 </Article>
 
@@ -107,18 +119,28 @@
         column-gap: 15px;
     }
 
-    .profile_buttons {
-        display: flex;
-        max-width: 200px;
-        margin-top: 5px;
-        justify-content: space-between;
-    }
-
     .modal {
         position: absolute;
         top: 35%;
         left: 30%;
         z-index: 10;
+    }
+
+    .tag_list {
+        display: flex;
+        column-gap: 5px;
+        cursor: pointer;
+        list-style: none;
+		order: 4;
+    }
+
+    .tag_list span {
+        text-transform: lowercase;
+        color: rgba(197, 205, 158, 0.87);
+    }
+
+    .tag_list span:hover {
+        color: #EF8653;
     }
 
 	@media (max-width: 1001px) {

@@ -88,11 +88,12 @@ async function remove () {
 <svelte:window bind:innerWidth={screen_width} />
 
 <svelte:head>
-	<title>Что едят свинки?</title>
+	<meta name="description" content="Здесь вы можете узнать, чем питаются морские свинки" />
+	<title>Что едят морские свинки?</title>
 </svelte:head>
 
 <div class="wrapper">
-	<BigHeader text_content="ЧТО ЕДЯТ СВИНКИ" class_name="smaller-margin" />
+	<BigHeader text_content="ЧТО ЕДЯТ МОРСКИЕ СВИНКИ" class_name="smaller-margin" />
 	<Search bind:searchWord onclick={searchData} rounded />
 	<div class="query_wrapper">
 		{#if resultWord}

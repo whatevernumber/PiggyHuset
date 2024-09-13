@@ -10,6 +10,8 @@
     import SortButton from "$lib/components/misc/button/SortButton.svelte";
     import FilterList from "$lib/components/lists/FilterList.svelte";
     import {browser} from "$app/environment";
+    import { page } from '$app/stores';
+    import Loader from '$lib/components/misc/loading/Loader.svelte';
 
     export let admin;
     export let button_text; // Текст кнопки
@@ -18,6 +20,8 @@
     export let page_title = ''; // Заголовок страницы каталога
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let modal_opened; // Флаг для открытия оверлея
+    export let count = null;
+    export let tag = null; // для поиска по тегу
 
     let data_array = data.payload;
     let action_id;
@@ -25,6 +29,7 @@
     let success;
     let active_filters = [];
     let desc = ''; // для показа сведений об удаляемой записи внутри модального окна
+    $: onload = false; // флаг для показа индикатора загрузки
 
     const is_article = (type === 'article' || type === 'news');
     const is_homeless = type === 'pig';
@@ -138,15 +143,21 @@
         data_array = data_array.sort_by_status();
     }
 
-    const add_to_filter = function (evt) {
+    const add_to_filter = function (evt, old_value) {
         const label = evt.target.parentElement;
         label.classList.toggle('checked');
 
-        // убрать из массива фильтров, если он уже там
-        if (active_filters.includes(evt.target.value)) {
-            active_filters.splice(active_filters.indexOf(evt.target.value), 1)
-        } else {
-            active_filters.push(evt.target.value);
+        if (old_value) {
+            active_filters = active_filters.filter(el => el !== old_value);
+        }
+
+        if (evt.target.value) {
+            // убрать из массива фильтров, если он уже там
+            if (active_filters.includes(evt.target.value)) {
+                active_filters.splice(active_filters.indexOf(evt.target.value), 1)
+            } else {
+                active_filters.push(evt.target.value);
+            }
         }
 
         // запустить фильтрацию
@@ -166,19 +177,45 @@
 
         data_array.map(
             (el) => {
-
                 // если чекнули хотя бы один фильтр
                 if (active_filters.length) {
+                    const sex_match = active_filters.includes(el.sex);
                     const city_match = active_filters.includes(el.city.city_name);
                     const overseer_match = active_filters.includes(el.overseer?.overseer_name);
                     const filter_by_overseer = active_filters.some(f => f.includes('Домик') || f.includes('Куратор'));
-                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор'));
+                    const filter_by_city = active_filters.some(f => !f.includes('Домик') && !f.includes('Куратор') && !f.includes('F') && !f.includes('M') && !f.includes('delivery'));
+                    const filter_by_sex = active_filters.some(f => f.includes('M') || f.includes('F'));
+                    const filter_by_delivery = active_filters.some(f => f.includes('delivery'));
 
-                    // если чекнуты город и куратор / куратор без города / город без куратора
-                    el.hidden = !(filter_by_overseer && ((city_match && overseer_match)
-                            || (!filter_by_city && overseer_match))
-                        || !filter_by_overseer && (city_match || overseer_match));
-                    data_array = data_array;
+                    let matches = false; // флаг для скрытия карточки
+
+                    // фильтр по куратору, городу и полу
+                    if (filter_by_overseer && filter_by_city && filter_by_sex) {
+                        matches = overseer_match && city_match && sex_match;
+                    } else if (filter_by_city && filter_by_overseer) {
+                        // фильтр по городу и куратору
+                        matches = city_match && overseer_match;
+                    } else if (filter_by_city && filter_by_sex) {
+                        // фильтр по городу и полу
+                        matches = city_match && sex_match;
+                    } else if (filter_by_overseer && filter_by_sex) {
+                        // фильтр по куратору и полу
+                        matches = overseer_match && sex_match;
+                    } else {
+                        // в ином случае проверить совпадение одиночного фильтра
+                        matches = (sex_match || city_match || overseer_match);
+                    }
+
+                    if (filter_by_delivery) {
+                        if (el.delivery && (active_filters.length === 1 || matches)) {
+                            matches = true;
+                        } else {
+                            matches = false;
+                        }
+                    }
+
+                    el.hidden = !matches;
+
                 } else {
                     // если все фильтры сняты, отобразить все элементы
                     el.hidden = false;
@@ -196,6 +233,7 @@
     }
 
     async function get_new_batch () {
+        onload = true;
         let new_batch = await load_more(data, category);
 
         const ids = data_array.map(el => el.id);
@@ -209,6 +247,7 @@
             ];
         }
 
+        onload = false;
         setTimeout(() => {
             if (active_filters.length) filter();
         }, 200);
@@ -216,7 +255,7 @@
 
     const load_on_scroll = async function () {
         const bottom_reached = window.scrollY + window.innerHeight >= (document.body.scrollHeight - 5);
-        if (bottom_reached) {
+        if (bottom_reached && !tag) {
             await get_new_batch();
         }
     };
@@ -230,6 +269,40 @@
 
     afterNavigate(() => sessionStorage.removeItem('referrer'));
 
+    const fetchArticlesByTag = async (value) => {
+        data_array = [];
+        onload = true;
+
+        const res = await fetch(`/api/articles/tag?tag=${value}`);
+        let result = [];
+
+        if (res.ok) {
+            result = await res.json();
+        }
+
+        data_array = result.payload;
+        tag = value;
+        onload = false;
+    }
+
+    const resetTag = async () => {
+        data_array = [];
+        tag = null;
+        onload = true;
+
+        let res;
+
+        if (type === 'article') {
+            res = await fetch('/api/articles/all');
+        } else {
+            res = await fetch('/api/articles/news/all');
+        }
+
+        let result = await res.json();
+        data = result;
+        onload = false;
+    }
+
     // реактивное обновление списка
     $: data_array = data_array;
 
@@ -241,11 +314,37 @@
 
             <BigHeader text_content="{page_title}" position="left"/>
 
+            {#if !is_article && $page.url.pathname && !$page.url.pathname.includes('overview')}
+                <div class="additional_description">
+                    {#if is_homeless}
+                        <p> Вы можете взять у нас морскую свинку бесплатно в добрые руки.
+                            Посмотрите на наших чудесных подопечных, которые ищут себе новый дом и новых хозяев.
+                        </p>
+                        <p class="pigs_homeless">Носиков в поисках дома:
+                            <span class="pigs_count">{count}</span>
+                        </p>
+                        <a class="article_link" href="/articles/1">Подробнее о том, как приютить свинку</a>
+                    {:else}
+                        <p class="found_home">
+                            Носиков нашли дом:
+                            <span class="pigs_count">{count}</span>
+                        </p>
+                        <p>
+                            С 2021 мы помогаем морским свинкам находить новый дом.
+                            С хозяевами мы остаёмся на связи,
+                            а от многих выпускников получаем фото- и видео-приветы, которые выкладываем на стене <a class="link" href="https://vk.com/domiksvinok" rel="nofollow">нашей группы</a>.
+                        </p>
+                    {/if}
+                </div>
+            {/if}
+
+            {#if !tag}
             <div class="sorting">
             {#each sort_options as sort_option}
                 <SortButton class_name="{sort_option.param === sort_config.param ? (sort_config.direction === 'desc' ? 'down' : 'up') : ''} {sort_option.param}" title="{sort_option.label}" click_handler={() => sort_by(sort_option)} />
             {/each}
             </div>
+            {/if}
 
             {#if !is_article}
             <div class="filtering">
@@ -253,14 +352,26 @@
             </div>
             {/if}
 
+            {#if tag}
+                <div class="tag_search">
+                    <p>Поиск по тегу <span class="tag">#{tag}</span></p>
+                    <span class="reset_tag" on:click={resetTag} role="button">Сбросить</span>
+                </div>
+            {/if}
+
             <CardList>
                 {#each data_array as article (article.id)}
                     {#key data_array}
                     <li class:filtered={article.hidden}>
-                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc />
+                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc tagAction={fetchArticlesByTag} />
                     </li>
                     {/key}
                 {/each}
+                {#if onload}
+                    <div class="loader_wrapper">
+                        <Loader />
+                    </div>
+                {/if}
             </CardList>
         </div>
     </section>
@@ -281,6 +392,16 @@
         min-height: 100%;
         padding: 40px 5%;
         position: relative;
+    }
+
+    .additional_description {
+        padding: 0 15px;
+        margin-bottom: 25px;
+    }
+
+    .article_link {
+        color: #d97544;
+        text-decoration: underline;
     }
 
     :global(li.filtered) {
@@ -321,6 +442,45 @@
 
     .hidden {
         display: none;
+    }
+
+    .pigs_count {
+        color: #88aa4d;
+    }
+
+    .found_home {
+        font-size: 20px;
+    }
+
+    .link {
+        color: #f6b5d3;
+    }
+
+    .loader_wrapper {
+        margin: auto;
+    }
+
+    .tag_search {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        column-gap: 10px;
+    }
+
+    .tag {
+        cursor: pointer;
+        color: rgba(197, 205, 158, 0.87);
+        font-style: italic;
+        text-transform: lowercase;
+    }
+
+    .reset_tag {
+        cursor: pointer;
+        color: #EF8653;
+    }
+
+    .reset_tag:hover {
+        color: #d97544;
     }
 
     @media (max-width: 1001px) {

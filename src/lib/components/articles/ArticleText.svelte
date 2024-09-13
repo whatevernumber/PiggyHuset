@@ -4,6 +4,7 @@
     import {check_link_external, wrap_element} from "$lib/components/utils/func.js";
 
 	export let text;
+    export let type = 'article';
 
     let window_width;
 
@@ -28,17 +29,6 @@
                         p.removeAttribute('target');
                     }
                 }
-
-                // добавление отступа абзацам, идущим до перехода от картинки к полной ширине
-                if (['P', 'BLOCKQUOTE', 'LI', 'H1', 'H2'].includes(p.tagName)) {
-                    const offset = window.scrollY + p.getBoundingClientRect().top;
-                    const limit = window.scrollY + article.getBoundingClientRect().top + 30;
-                    if (offset < limit) {
-                        p.classList.add('float-right');
-                    } else {
-                        break;
-                    }
-                }
             }
         }
 
@@ -52,12 +42,11 @@
             img = wrap_element(img, 'figure', 'article-figure');
             let caption = img.parentElement.parentElement.tagName === 'SPAN' ? img.parentElement.parentElement.parentElement.nextSibling : img.parentElement.parentElement.nextSibling;
 
-            if (caption && caption.textContent) {
-                caption.classList.contains('float-right') ? caption.classList.remove('float-right') : '';
+            if (type === 'article' && caption && caption.textContent) {
                 img.parentNode.appendChild(caption);
                 caption = wrap_element(caption, 'figcaption', 'article-figure-caption');
                 img.parentNode.classList.add('captioned');
-            } else if (window_width > 1000) {
+            } else if (window_width > 1000 && type === 'article') {
                 img.addEventListener('click', zoom_image);
             }
         }
@@ -134,6 +123,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: zoom-in;
     }
 
     .article-figure.captioned {
@@ -145,6 +135,7 @@
         margin: 15% auto;
         padding: 1%;
         background-color: #e1edce;
+        cursor: zoom-out;
     }
 
     .article-figure.active.captioned {

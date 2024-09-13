@@ -84,6 +84,11 @@
                 type: 'date',
                 required: true,
             },
+            {
+                label: 'Доставка',
+                name: 'delivery',
+                type: 'checkbox',
+            },
 		],
 		files: {
 			file_input: true,

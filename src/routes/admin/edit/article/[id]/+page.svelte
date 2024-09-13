@@ -14,29 +14,33 @@
 
 	onMount(() =>
 	{
-		let article_title = document.querySelector("input[name = 'title']");
-		let article_text = document.querySelector("[name = 'text']");
+		let article_title = document.querySelector("input[name='title']");
+		let article_tags = document.querySelector("input[name='hashtags']");
+
+
+		if (article?.tags) {
+			article_tags.value = article.tags.map((el) => el.tag_value).join(' ');
+		}
+
+		article_title.value = article.title;
 
 			if (type === 1) {
-				let article_author = document.querySelector("[name = 'author']");
-				let article_link = document.querySelector("[name = 'origin_link']");
+				let article_author = document.querySelector("input[name='author']");
+				let article_link = document.querySelector("[name='origin_link']");
 
 				article_author.value = article.author;
 				article_link.value = article.origin_link;
-
-				let editor = document.querySelector('.ql-editor');
-				editor.innerHTML = article.text;
-
-				// правильное отображение картинок с сервера в редакторе
-				for (const img of editor.getElementsByTagName('img')) {
-					if ((img.src.includes('domik-article'))) {
-						img.src = `${_REMOTE_SERVER}/img/${img.src.slice(img.src.lastIndexOf('/') + 1)}`;
-					}
-				}
 			}
 
-			article_title.value = article.title;
-			article_text.value = article.text;
+		let editor = document.querySelector('.ql-editor');
+		editor.innerHTML = article.text;
+
+		// правильное отображение картинок с сервера в редакторе
+		for (const img of editor.getElementsByTagName('img')) {
+			if ((img.src.includes('domik-article'))) {
+				img.src = `${_REMOTE_SERVER}/img/${img.src.slice(img.src.lastIndexOf('/') + 1)}`;
+			}
+		}
 		});
 
 	const title = "Редактировать публикацию";
@@ -49,7 +53,5 @@
 {#if type === 1}
 <NewArticleForm {title} {method} {endpoint} is_editing />
 {:else}
-<NewPostForm {title} {method} {endpoint} {article} is_editing>
-
-</NewPostForm>
+<NewPostForm {title} {method} {endpoint} is_editing />
 {/if}

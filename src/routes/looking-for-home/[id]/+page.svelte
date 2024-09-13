@@ -84,11 +84,12 @@
 </script>
 
 <svelte:head>
+	<meta name="description" content={(pig.name ?? 'Свинка') + ' ищет новый дом'} />
 	<title>{pig.name ?? 'Свинка'}</title>
 </svelte:head>
 
 {#key pig_status_id}
-<Article date={pig.datetime} text={pig.description} type="pig" photos="{pig.photos}" pig_name="{pig.name}" {pig_status}>
+<Article date={pig.datetime} text={pig.description} type="pig" photos={pig.photos} pig_name={pig.name} pig_delivery={pig.delivery} {pig_status}>
 	<PigProfile {pig} {pig_status_id} status={status_picture} {pig_status} {redirect_to_edit} {admin} bind:modal_opened={modal_opened}
 				bind:status_value={status_value} bind:action={action}/>
 </Article>

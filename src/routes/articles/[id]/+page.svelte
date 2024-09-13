@@ -1,21 +1,20 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
 	import CardMainContent from '$lib/components/cards/CardMainContent.svelte';
-	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
-	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import { showModal, removeData, closeModal, redirect } from '$lib/components/utils/func.js';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let data;
 
 	const article = data.article;
-	const pic = article.main_photo;
 	const header = article.title;
 	const text = article.text;
 	const author = article.author;
+	const source = article.origin_link;
 
 	let window_width;
 	let action;
@@ -67,39 +66,56 @@
 			desc = 'Произошла ошибка. Попробуйте повторить позднее.';
 		}
 	}
+
+	const redirect_to_list = (tag) => {
+		goto('/articles?tag=' + tag);
+	}
 </script>
 
 <svelte:head>
-	<title>{header}</title>
+	<meta name="description" content={header + '. Всё, что вы хотели знать о морских свинках, можно узнать в нашей статье'} />
+	<title>{header} - Статьи от Домик для бездомных поросят</title>
 </svelte:head>
 
 <svelte:window bind:innerWidth={window_width} />
 
 <Article date="{article.datetime}" {text}>
-		<div class="wrapper">
-			<div class="photo-card-wrapper" class:absolute={article.type_id === 1}>
-				{#if (window_width > 1000)}
-					<PhotoCard {pic} width="200" type="article" />
-				{/if}
-				{#if admin}
-				<div class="profile_buttons">
-					<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
-					<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
-				</div>
-				{/if}
-			</div>
-			<CardMainContent is_article {header} {author} type="{article.type_id}" />
+
+	{#if admin}
+		<div class="profile_buttons">
+			<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
+			<SmolButton class_name="super-smol-button" title="Удалить" click_handler={show_delete} />
 		</div>
-		{#if article.photos.length > 1 && article.type_id !== 1}
-			<PhotoList photos={article.photos} />
-		{/if}
+	{/if}
+
+	<div class="wrapper">
+		<CardMainContent is_article {header} {author} type="{article.type_id}" {admin} />
+	</div>
+
+	{#if source}
+		<div class="source">
+		<p class="article_source"><b>Источник:</b> <i style="color: forestgreen">{source}</i></p>
+		</div>
+	{/if}
+
+	{#if article?.tags}
+		<ul class="tag_list">
+			{#each article.tags as tag}
+				<li>
+					<span on:click={() => redirect_to_list(tag.tag_value)} role="button">
+						#{tag.tag_value}
+					</span>
+				</li>
+			{/each}
+		</ul>
+	{/if}
 </Article>
 
 {#if modal_opened}
 	<Overlay />
 {/if}
 
-<div class='modal modal_closed'>
+<div class="modal modal_closed">
 	<ModalOkay {action} action_handler={remove} {success} {handle_cancel} redirect={redirect_after_success} bind:modal_opened={modal_opened}
 			   {desc}
 	/>
@@ -111,18 +127,16 @@
 		column-gap: 15px;
 	}
 
-    .profile_buttons {
-        display: flex;
-        max-width: 200px;
-		margin-top: 5px;
-        justify-content: space-between;
-    }
-
 	.modal {
 		position: absolute;
 		top: 35%;
 		left: 30%;
 		z-index: 10;
+	}
+
+	.source {
+		order: 10;
+		margin-bottom: 25px;
 	}
 
 	.photo-card-wrapper {
@@ -132,6 +146,23 @@
 	.photo-card-wrapper .absolute {
         position: absolute;
 	}
+
+    .tag_list {
+        display: flex;
+        column-gap: 5px;
+        cursor: pointer;
+        list-style: none;
+        order: 4;
+    }
+
+    .tag_list span {
+        text-transform: lowercase;
+        color: rgba(197, 205, 158, 0.87);
+    }
+
+    .tag_list span:hover {
+        color: #EF8653;
+    }
 
     @media (max-width: 1001px) {
         .wrapper {

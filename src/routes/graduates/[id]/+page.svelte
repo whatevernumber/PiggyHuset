@@ -101,6 +101,7 @@
 </script>
 
 <svelte:head>
+	<meta name="description" content={pig.name + " - выпускник Домик для бездомных поросят"} />
 	<title>{pig.name ? pig.name + ' ' + pig_status : 'Свинка'}</title>
 </svelte:head>
 

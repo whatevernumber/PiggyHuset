@@ -2,6 +2,19 @@
     import ButtonWithIcons from "$lib/components/misc/button/ButtonWithIcons.svelte";
     import {closeModal} from "$lib/components/utils/func.js";
     import CloseButton from "$lib/components/misc/button/CloseButton.svelte";
+
+    export let cities;
+
+    let list = '';
+
+    if (cities && cities.length) {
+        cities = cities.map((city) => city.city_name);
+        cities = cities.filter((el) =>
+            el !== 'Москва'
+        );
+
+        list = cities.join(', ');
+    }
 </script>
 
 <section class="about_modal modal modal_closed">
@@ -23,7 +36,7 @@
                 найдём для неё новый дом.
             </p>
             <p class="modal_text">
-                Основной центр <span class="house_name">"ДОМИКА"</span> – в Москве, филиалы – Санкт-Петербург и Сочи.
+                Основной центр <span class="house_name">"ДОМИКА"</span> находится в Москве, а филиалы в следующих городах: {list ?? 'Санкт-Петербург'}.
             </p>
             <p class="about_text">В разделе <a class='articles-link' href="/articles"><i>статьи</i></a> нашего сайта Вы сможете узнать о правильном содержании, уходе и кормлении морских свинок.</p>
         </div>

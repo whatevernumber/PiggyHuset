@@ -33,9 +33,15 @@
                 label: 'Источник',
                 name: 'origin_link',
             },
+			{
+				label: 'Теги',
+				name: 'hashtags',
+				placeholder: 'Укажите теги через пробел',
+			}
         ],
         files: {
-            file_input: false
+            file_input: false,
+			multiple: false,
         }
     };
 </script>

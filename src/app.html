@@ -14,7 +14,6 @@
 
 		<meta charset="utf-8" />
 		<meta name="author" content="the_nepodarok" />
-		<meta name="description" content="Проект помощи морским свинкам, попавшим в беду">
 		<meta name="keywords" content="морские свинки, домик, помощь животным, волонтёрский проект">
 		<meta name="viewport" content="width=device-width" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
@@ -24,6 +23,9 @@
 		<meta name="msapplication-TileColor" content="#ffc40d">
 		<meta name="theme-color" content="#ffffff">
 		%sveltekit.head%
+
+		<!-- Yandex Webmaster verification-->
+		<meta name="yandex-verification" content="79b077899ac5f47e" />
 
 		<!-- Yandex.Metrika counter -->
 		<script nonce="%sveltekit.nonce%" type="text/javascript" >
@@ -126,6 +128,15 @@
 	.main-container:has(.modal_opened) section > div:not(.modal) {
 		filter: blur(10px);
 	}
+
+    .profile_buttons {
+        display: flex;
+        max-width: 200px;
+        width: 100%;
+        margin-top: 5px;
+        justify-content: space-between;
+        align-self: center;
+    }
 
 	.modal.modal_closed {
 		display: none;

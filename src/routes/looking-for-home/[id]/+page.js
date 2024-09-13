@@ -1,4 +1,3 @@
-import {_REMOTE_SERVER} from "$env/static/public";
 import {error, redirect} from "@sveltejs/kit";
 
 export async function load({ fetch, params }) {

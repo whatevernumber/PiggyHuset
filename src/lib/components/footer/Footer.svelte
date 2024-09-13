@@ -8,10 +8,10 @@
             </a>, <a class="github-link_tn" href="https://github.com/the-nepodarok" target="_blank" rel="external">the_nepodarok</a>
         </span>
     <div class='links'>
-        <a class="link vk-link" href="https://vk.com/domiksvinok" target="_blank" rel="external">
+        <a class="link vk-link" rel="nofollow" href="https://vk.com/domiksvinok" target="_blank">
             <img class="vk-link-image" src="/img/svg/icon-vk.svg" alt="Иконка социальной сети Вконтакте" width="50" height="50">
         </a>
-        <a class="link telegram-link" href="https://t.me/domiksvinok" target="_blank" rel="external">
+        <a class="link telegram-link" rel="nofollow" href="https://t.me/domiksvinok" target="_blank">
             <img class="telegram-link-image" src="/img/svg/icon-telegram.svg" alt="Иконка социальной сети Вконтакте" width="50" height="50">
         </a>
     </div>
@@ -32,7 +32,7 @@
         display: flex;
         justify-content: space-between;
         margin-left: auto;
-        margin-right: 20px;
+        margin-right: 20%;
         column-gap: 10px;
     }
 
@@ -64,6 +64,10 @@
 
         .link {
             position: static;
+        }
+
+        .links {
+            margin-right: 0;
         }
 
         .promo {

@@ -10,6 +10,7 @@
 
 	export let autoplay = false;
 	export let first_slide = false;
+	export let last_slide = false;
 	export let linked = false;
 	export let photos;
 	export let local = false;
@@ -84,6 +85,11 @@
 				{/if}
 			</SplideSlide>
 		{/each}
+		{#if (last_slide)}
+			<SplideSlide>
+				<PhotoView src="{last_slide}" no_border no_shadow />
+			</SplideSlide>
+		{/if}
 	</Splide>
 
 	<Splide id="thumb-splide" options="{thumb_options}" bind:this={slider}>
@@ -97,5 +103,10 @@
 				<PhotoCard pic={item.image} src={temp_address + item.image} />
 			</SplideSlide>
 		{/each}
+		{#if (last_slide)}
+			<SplideSlide>
+				<img src="{last_slide}" width="200" height="200" />
+			</SplideSlide>
+		{/if}
 	</Splide>
 </div>

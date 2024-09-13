@@ -88,17 +88,17 @@
         // changes the quality of given files
         const file_input = document.querySelector('input[type="file"]');
 
-        let new_container = new DataTransfer();
-        for (const file of file_input.files) {
+        if (file_input) {
 
-            console.log(file.size);
-
-            if (file.type.startsWith('image') && file.size > MAX_FILE_SIZE) {
-                await resize(file, new_container);
+            let new_container = new DataTransfer();
+            for (const file of file_input.files) {
+                if (file.type.startsWith('image') && file.size > MAX_FILE_SIZE) {
+                    await resize(file, new_container);
+                }
             }
-        }
 
-        file_input.files = new_container.files;
+            file_input.files = new_container.files;
+        }
 
         const formData = new FormData(form);
 
@@ -198,8 +198,8 @@
                     {#if field !== textarea && field !== select}
                         {@const required = field.required}
                 <div class="form-item">
-                    <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                    <label class="form-label" for="{field.name}">{field.label}</label>
+                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.placeholder || (field.required ? ' ' : '(необязательно)')}">
                     <span class="input-error-label"></span>
                 </div>
                     {/if}
@@ -236,21 +236,20 @@
                     {@const required = field.required}
                     {#if field.type === 'select'}
                         <div class="select_wrapper form-item">
-                            <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
+                            <label class="form-label" for="{field.name}">{field.label}</label>
                             <SelectInput css_class="form-input-field" type={field.name} options="{field.options}" grouped="{field.grouped}" group_by="{field.group_column}" />
                         </div>
                     {:else if field.type === 'checkbox'}
                         <div class='checkbox_wrapper'>
                             <label class="form-label checkbox" for="{field.name}">{field.label}
-                                <input type='hidden' value='0' name="{field.name}">
                                 <input name="{field.name}" type="checkbox" value="1" id="{field.name}">
                                 <span class="checkbox_box"></span>
                             </label>
                         </div>
                     {:else}
                 <div class="form-item">
-                    <label class="form-label label-pig-name" for="{field.name}">{field.label}</label>
-                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.required ? (field.placeholder ?? ' ') : '(необязательно)'}">
+                    <label class="form-label" for="{field.name}">{field.label}</label>
+                    <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.placeholder || (field.required ? ' ' : '(необязательно)')}">
                     <span class="input-error-label"></span>
                 </div>
                     {/if}
@@ -283,6 +282,7 @@
             </div>
         {/if}
         {#if photos.length}
+            <h3 class="form-header">Загруженные фотографии:</h3>
             <UploadedFiles handler={delete_handler} bind:photos bind:old_photo_name={main_photo_name} bind:main_photo={main_photo_index} />
         {/if}
         {#if product && product.main_photo && !image_upload_preview.length}
@@ -511,13 +511,13 @@
         height: 22px;
         margin-right: 10px;
         left: -10px;
-        border: 1px solid #d97544;
+        border: 1px solid #88aa4d;
         vertical-align: middle;
         cursor: pointer;
     }
 
     .checkbox:hover span::before {
-        border: 2px solid #d97544;
+        border-color: #D97544;
     }
 
     /*.checkbox:hover span::after {*/

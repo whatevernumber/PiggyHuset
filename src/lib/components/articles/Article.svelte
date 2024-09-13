@@ -17,6 +17,7 @@
 	export let text;
 	export let pig_name;
 	export let pig_status = null;
+	export let pig_delivery;
 	export let photos;
 
 	let date_prefix;
@@ -36,9 +37,9 @@
 <div class="article_wrapper">
 	<article class="article {class_name}" in:transition={{x: '200vw', y: 0, duration: 400, delay: 0, amount: 3}}>
 		<slot />
-		<ArticleText {text} />
+		<ArticleText {text} {type} />
 	{#if pig_name && (pig_status && pig_status === 'в поисках дома')}
-		<PigNotification {pig_name} />
+		<PigNotification {pig_name} delivery={pig_delivery} />
 	{/if}
 	{#if photos && photos.length > 1}
 		<PhotoList photos={photos} />
@@ -91,7 +92,8 @@
         justify-content: normal;
     }
 
-    .article_author {
+    .article_author,
+	.article_source {
         text-align: right;
     }
 

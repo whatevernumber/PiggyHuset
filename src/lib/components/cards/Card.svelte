@@ -17,7 +17,6 @@
     import EditButton from "$lib/components/misc/button/EditButton.svelte";
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
     import {onMount} from "svelte";
-    import { redirect } from '$lib/components/utils/func.js';
     import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 
     export let admin;
@@ -28,9 +27,9 @@
     export let type; // Тип карточки для автоматической подстановки плейсхолдер-картинки
     export let delete_handler;
     export let id;
-    export let action;
     export let desc; // для показа текста модального окна при удалении
     export let rounded = false;
+    export let tagAction;
 
     let date = article.graduation_date ? article.graduation_date : article.datetime;
     const datetime = dayjs.utc(date).tz(timezone);
@@ -38,6 +37,7 @@
     let status; // для отображения иконки статуса выпусника.
     let city = article.city ? article.city.city_name : null;
     let pig_sex = article.sex ? article.sex : null;
+    let pig_age = article.age ? article.age : null
 
     if (pig_sex) {
         pig_sex = (pig_sex === 'F') ? 'Девочка' : 'Мальчик';
@@ -78,7 +78,7 @@
         article.description = text;
 
     // реактивное изменение картинки карточки
-    $: image = article.main_photo ?? (article.image ?? null);
+    $: image = article.main_photo || (article.image ?? null);
 
     let window_width = 0;
     let date_prefix = '';
@@ -108,34 +108,18 @@
         desc = `Вы собираетесь удалить запись "${(article.name ?? article.title)}". Это действие необратимо`;
     }
 
-    const redirect_to_edit = () => {
-
-        // для получения id-значения конкретной карточки
-        id = article.id;
-
-        if (type === 'ready') {
-            type = 'pig';
-        } else if (type === 'news') {
-            type = 'article';
-        }
-
-        redirect('/admin/edit/' + type + '/' + id, 100);
-    }
-
     // подстановка [обрезанной] разметки из Quill в текст карточки
     onMount(() => {
-        if (type === 'article') {
-            innerHtml !== undefined ? card.innerHTML = innerHtml : null;
-        }
+        if (innerHtml) card.innerHTML = innerHtml;
     });
 
 </script>
 
 <svelte:window bind:innerWidth={window_width} />
 
-<article class:rounded id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
+<article class:rounded class:unavailable={article?.status_id === 5 || article?.status_id === 6} id="{article.id}" data-sveltekit-preload-data="{type === 'article' ? 'hover' : 'tap'}">
     {#if type === 'info'}
-        <PhotoCard pic={image} type='food' add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
+        <PhotoCard pic={image} type="food" add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
                    alt='Изображение продукта' />
         {:else}
         <LinkWithReferrer {href} css_class="card-container">
@@ -145,85 +129,102 @@
     {/if}
 
     <div class="wrapper {article?.is_banned ? 'banned_wrapper' : ''}">
-        <div class='header_wrapper'>
+        <div class="header_wrapper">
             {#if type === 'info'}
                 <h3>{article.title}</h3>
             {:else }
             <LinkWithReferrer {href}>
-                <h3 class="card-title">{article.name ?? article.title}</h3>
+                <h3 class="card-title">{(article.name ?? article.title) + (article?.status_id === 5 ? ' в резерве' : '')}</h3>
             </LinkWithReferrer>
+                {#if article?.tags}
+                    <ul class="tag_list">
+                        {#each article.tags as tag}
+                            <li>
+                        <span on:click={() => tagAction(tag.tag_value)} role="button">
+                            #{tag.tag_value}
+                        </span>
+                            </li>
+                        {/each}
+                    </ul>
+                {/if}
             {/if}
         {#if admin}
             <div class="button_wrapper">
                 <LinkWithReferrer href="{'/admin/edit/' + (type === 'news' ? 'article' : type) + '/' + article.id}">
-                    <EditButton button_name='edit' />
+                    <EditButton button_name="edit" />
                 </LinkWithReferrer>
                 {#if !(/looking-for-home|graduates/.test(category))}
-                <EditButton button_name='delete' click_handler={delete_handler} message_handler={show_delete_message}/>
+                <EditButton button_name="delete" click_handler={delete_handler} message_handler={show_delete_message}/>
                 {/if}
             </div>
         {/if}
         </div>
-            {#if pig_sex}
-        <p><b>Пол:</b> {pig_sex}</p>
-             {/if}
-             {#if city}
-        <p><b>Город:</b> {city}</p>
-             {/if}
+
+        {#if pig_sex}
+            <p><b>Пол:</b> {pig_sex}</p>
+         {/if}
+         {#if city}
+            <p><b>Город:</b> {city}</p>
+         {/if}
+        {#if pig_age}
+            <p><b>Поступил в возрасте:</b> {pig_age}</p>
+        {/if}
+
         {#if type === 'info'}
-            <div class='card-notices'>
+            <div class="card-notices">
             {#if article.info.allowed}
                 <p>
-                    <span class='details allowed'> Разрешено: </span>
+                    <span class="details allowed"> Разрешено: </span>
                     {article.info.allowed}
                 </p>
             {/if}
             {#if article.info.restrictions}
                 <p>
-                    <span class='details restricted'> Запрещено: </span>
+                    <span class="details restricted"> Запрещено: </span>
                     {article.info.restrictions}
                 </p>
             {/if}
             </div>
         {/if}
+
         {#if !article?.is_banned}
-        <p class="card-description" bind:this={card}>
-            {#if type === 'info'}
-                <span class='desc'>Описание:</span>
-            {/if}
-            {article.description || ''}
-        </p>
+            <p class="card-description" bind:this={card}>
+                {article.description || ''}
+            </p>
         {/if}
+
         {#if type === 'info'}
             {#if article.is_banned}
-                <p class='banned_text'>Запрещено давать морским свинкам</p>
+                <p class="banned_text">Запрещено давать морским свинкам</p>
             {:else}
             <div class="card-notices">
                 {#if article.info.notes}
                     <p>
-                        <span class='details note'>Примечание: </span>
+                        <span class="details note">Примечание: </span>
                         {article.info.notes}
                     </p>
                 {/if}
             </div>
             {/if}
+
         {:else}
             <div class="bottom-line">
                 <p class="datetime">
-                    <span class='date_word'>{date_prefix} </span>
+                    <span class="date_word">{date_prefix} </span>
                     <Time relative="{type === 'news'}" format="D MMM YYYYг." live={type === 'news'} timestamp={datetime} /></p>
                 <SmolButton title={button_text} {href} />
             </div>
         {/if}
         {#if article.info?.doses && !article?.is_banned}
             <p>
-                <span class='details doses'>Дозировка: </span>
+                <span class="details doses">Дозировка: </span>
                 {article.info?.doses}
             </p>
         {/if}
     </div>
 </article>
-<div class='hidden overlay'></div>
+
+<div class="hidden overlay"></div>
 
 <style>
     article {
@@ -255,6 +256,10 @@
 
     img {
         object-fit: cover;
+    }
+
+    .unavailable {
+        opacity: 50%;
     }
 
     .card-title {
@@ -319,6 +324,24 @@
         color: #f5b193;
     }
 
+    .tag_list {
+        display: flex;
+        column-gap: 5px;
+        cursor: pointer;
+        list-style: none;
+        padding-left: 15px;
+        flex-wrap: wrap;
+    }
+
+    .tag_list span {
+        text-transform: lowercase;
+        color: rgba(197, 205, 158, 0.87);
+    }
+
+    .tag_list span:hover {
+        color: #EF8653;
+    }
+
     @media(max-width: 1179px) {
         .bottom-line {
             flex-wrap: wrap;
@@ -341,6 +364,7 @@
 
     .header_wrapper {
         display: flex;
+        flex-direction: column;
         margin-bottom: 10px;
     }
 
