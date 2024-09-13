@@ -59,7 +59,7 @@
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
 
     let select_style;
-    select_style = select ? 'select_group' : '';
+    select_style = select.length ? 'select_group' : '';
 
     const handle = () => {
 
