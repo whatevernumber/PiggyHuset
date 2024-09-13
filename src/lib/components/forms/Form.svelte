@@ -94,6 +94,8 @@
             for (const file of file_input.files) {
                 if (file.type.startsWith('image') && file.size > MAX_FILE_SIZE) {
                     await resize(file, new_container);
+                } else {
+                    new_container.items.add(file);
                 }
             }
 

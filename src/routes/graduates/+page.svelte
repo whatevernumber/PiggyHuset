@@ -8,8 +8,8 @@
 </script>
 
 <svelte:head>
-	<meta name="description" content="Список всех свинок, прошедших через Домик для бездомных поросят" />
-	<title>Выпускники Домика</title>
+	<meta name="description" content="С 2021 года наши волонтеры помогли {count} морским свинкам найти новые дома по всей России" />
+	<title>Выпускники Домика для бездомных поросят domiksvinok.ru</title>
 </svelte:head>
 
 <CatalogPage category="graduates" page_title="Выпускники Домика" data="{graduates}" {count} type="ready" />

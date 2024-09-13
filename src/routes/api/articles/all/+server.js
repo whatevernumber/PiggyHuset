@@ -5,6 +5,11 @@ export async function GET({url}) {
 
 	const page = url.searchParams.get('page');
 	let query = '';
+	const queryAll = url.searchParams.get('all');
+
+	if (queryAll) {
+		query += '&all=1&'
+	}
 
 	if (page) {
 		query = '&page=' + page
