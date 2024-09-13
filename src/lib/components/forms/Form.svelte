@@ -260,7 +260,7 @@
             {/if}
             <fieldset class="label-group file-fieldset">
             {#if scheme.files.file_input}
-                <FileInput class_name="form-input-field" name="{scheme.files.multiple ? 'files[]' : 'file'}" multiple={scheme.files.multiple} onchange="{preview}" />
+                <FileInput class_name="form-input-field" name="{scheme.files.multiple ? 'files[]' : 'files'}" multiple={scheme.files.multiple} onchange="{preview}" />
             {/if}
                 <div class="form-item button">
                     <SubmitButton on_click="{ sendForm }" />
