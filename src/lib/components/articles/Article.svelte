@@ -19,6 +19,7 @@
 	export let pig_status = null;
 	export let pig_delivery;
 	export let photos;
+	export let article_photos;
 
 	let date_prefix;
 
@@ -37,7 +38,7 @@
 <div class="article_wrapper">
 	<article class="article {class_name}" in:transition={{x: '200vw', y: 0, duration: 400, delay: 0, amount: 3}}>
 		<slot />
-		<ArticleText {text} {type} />
+		<ArticleText {text} {type} {article_photos} />
 	{#if pig_name && (pig_status && pig_status === 'в поисках дома')}
 		<PigNotification {pig_name} delivery={pig_delivery} />
 	{/if}

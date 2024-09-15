@@ -15,6 +15,7 @@
 	const text = article.text;
 	const author = article.author;
 	const source = article.origin_link;
+	const photos = article.photos;
 
 	let window_width;
 	let action;
@@ -79,7 +80,7 @@
 
 <svelte:window bind:innerWidth={window_width} />
 
-<Article date="{article.datetime}" {text}>
+<Article date="{article.datetime}" {text} article_photos={photos}>
 
 	{#if admin}
 		<div class="profile_buttons">

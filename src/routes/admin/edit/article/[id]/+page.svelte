@@ -2,7 +2,7 @@
 	import NewArticleForm from "$lib/components/forms/NewArticleForm.svelte";
 	import NewPostForm from '$lib/components/forms/NewPostForm.svelte';
 	import { onMount } from 'svelte';
-	import {_REMOTE_SERVER} from "$env/static/public";
+	import { _CLOUD_SERVER } from '$env/static/public';
 
 	export let data;
 
@@ -38,7 +38,9 @@
 		// правильное отображение картинок с сервера в редакторе
 		for (const img of editor.getElementsByTagName('img')) {
 			if ((img.src.includes('domik-article'))) {
-				img.src = `${_REMOTE_SERVER}/img/${img.src.slice(img.src.lastIndexOf('/') + 1)}`;
+				let image_name = img.src.slice(img.src.lastIndexOf('/') + 1);
+				let image = article.photos.find((el) => el.image === image_name);
+				img.src = `${_CLOUD_SERVER}/${image.cloud}`;
 			}
 		}
 		});

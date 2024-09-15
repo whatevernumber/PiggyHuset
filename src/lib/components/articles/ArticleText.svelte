@@ -1,10 +1,11 @@
 <script>
 	import {onMount} from "svelte";
-    import {_REMOTE_SERVER} from "$env/static/public";
+    import { _CLOUD_SERVER } from '$env/static/public';
     import {check_link_external, wrap_element} from "$lib/components/utils/func.js";
 
 	export let text;
     export let type = 'article';
+    export let article_photos;
 
     let window_width;
 
@@ -36,7 +37,9 @@
 
         for (let img of images) {
             if (img.src.includes('domik-article')) {
-                img.src = `${_REMOTE_SERVER}/img/${img.src.slice(img.src.lastIndexOf('/') + 1)}`;
+                let image_name = img.src.slice(img.src.lastIndexOf('/') + 1);
+                let image = article_photos.find((el) => el.image === image_name);
+                img.src = `${_CLOUD_SERVER}/${image.cloud}`;
             }
 
             img = wrap_element(img, 'figure', 'article-figure');

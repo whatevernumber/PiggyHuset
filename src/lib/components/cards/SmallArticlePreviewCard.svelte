@@ -5,7 +5,7 @@
 </script>
 
 <script>
-	import {_REMOTE_SERVER} from "$env/static/public";
+	import { _CLOUD_SERVER } from '$env/static/public';
 	import {randomize} from "$lib/components/utils/func.js";
 	import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 	import Time from 'svelte-time';
@@ -17,7 +17,7 @@
 
 	let type = type_id === 1 ? 'article' : 'news';
 	export let placeholder_picture = `${type}-${randomize(1, 3)}`;
-	let src = article.main_photo ? `${_REMOTE_SERVER}/img/${article.main_photo}` :
+	let src = article.main_photo ? `${_CLOUD_SERVER}/${article.main_photo}` :
 		`/img/placeholder/${placeholder_picture}.png`;
 
 	let link = '/' + (type === 'news' ? type : 'articles') + '/' + article.id;
