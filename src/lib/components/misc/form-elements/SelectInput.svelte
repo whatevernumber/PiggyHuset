@@ -1,5 +1,4 @@
 <script>
-	import { _REMOTE_SERVER } from '$env/static/public';
 	import { onMount } from 'svelte';
 
 	export let type;

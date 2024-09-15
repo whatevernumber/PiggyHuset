@@ -5,7 +5,7 @@
 	import {Splide, SplideSlide} from "@splidejs/svelte-splide";
 	import '@splidejs/svelte-splide/css/splide.min.css';
 	import {fade} from "svelte/transition";
-	import {_REMOTE_SERVER} from "$env/static/public";
+	import { _CLOUD_SERVER } from '$env/static/public';
 	import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 
 	export let autoplay = false;
@@ -16,14 +16,14 @@
 	export let local = false;
 	export let no_border = false;
 
-	let temp_address = local ? '/img/' : _REMOTE_SERVER + '/img/';
+	let temp_address = local ? '/img/' : _CLOUD_SERVER;
 	let window_width = 0;
 
 	let splide = Splide;
 	let slider = SplideSlide;
 
 	if (!photos) {
-		photos = [{ image: '../static/img/pig-in-a-hat.jpeg' }];
+		photos = [{ cloud: '../static/img/pig-in-a-hat.jpeg' }];
 	}
 
 	let main_options = {
@@ -78,10 +78,10 @@
 			<SplideSlide>
 				{#if linked}
 				<LinkWithReferrer href="/looking-for-home/{item.id}">
-					<PhotoView src={temp_address + item.image} {no_border} {linked} />
+					<PhotoView src={temp_address + item.cloud} {no_border} {linked} />
 				</LinkWithReferrer>
 				{:else}
-				<PhotoView src={temp_address + item.image} {no_border} {linked} />
+				<PhotoView src={temp_address + item.cloud} {no_border} {linked} />
 				{/if}
 			</SplideSlide>
 		{/each}
@@ -100,7 +100,7 @@
 			{/if}
 		{#each photos as item}
 			<SplideSlide>
-				<PhotoCard pic={item.image} src={temp_address + item.image} />
+				<PhotoCard pic={item.cloud} src={temp_address + item.cloud} />
 			</SplideSlide>
 		{/each}
 		{#if (last_slide)}

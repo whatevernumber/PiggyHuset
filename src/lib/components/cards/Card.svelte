@@ -78,7 +78,7 @@
         article.description = text;
 
     // реактивное изменение картинки карточки
-    $: image = article.main_photo || (article.image ?? null);
+    $: image = article.main_photo || (article.cloud ?? null);
 
     let window_width = 0;
     let date_prefix = '';

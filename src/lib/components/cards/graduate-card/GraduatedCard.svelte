@@ -1,12 +1,12 @@
 <script>
-    import {_REMOTE_SERVER} from "$env/static/public";
+    import { _CLOUD_SERVER } from '$env/static/public';
     import {randomize} from "$lib/components/utils/func.js";
     import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
 
     export let name;
     export let placeholder_picture = `vdomike-${randomize(1,3)}`;
     export let img;
-    export let src = img ? `${_REMOTE_SERVER}/img/${img}` : `/img/placeholder/graduated/${placeholder_picture}.png`;
+    export let src = img ? `${_CLOUD_SERVER}/${img}` : `/img/placeholder/graduated/${placeholder_picture}.png`;
     export let id = null;
 </script>
 

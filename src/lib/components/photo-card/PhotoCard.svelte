@@ -1,5 +1,5 @@
 <script>
-    import {_REMOTE_SERVER} from "$env/static/public";
+    import { _CLOUD_SERVER } from '$env/static/public';
     import {randomize} from "$lib/components/utils/func.js";
     import CloseButton from "$lib/components/misc/button/CloseButton.svelte";
 
@@ -21,7 +21,7 @@
     export let form_photo_type; // тип превью фотографий для формы (новый\старые)
 
     if (pic) {
-        src = `${_REMOTE_SERVER}/img/` + (type === 'food' ? `/info/${pic}` : `${pic}`);
+        src = `${_CLOUD_SERVER}/` + (type === 'food' ? `/info/${pic}` : `${pic}`);
     }
 
     const delete_handler = () => {
