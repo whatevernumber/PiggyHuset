@@ -14,6 +14,7 @@
 	let header = news.title;
 	let text = news.text;
 	let date = news.datetime;
+	const photos = news.photos;
 
 	let action;
 	let success;
@@ -75,7 +76,7 @@
 	<title>{header}</title>
 </svelte:head>
 
-<Article class_name="article_news" {date} text="{text}" type="news">
+<Article class_name="article_news" {date} text="{text}" article_photos={photos} type="news">
 
 	{#if admin}
 		<div class="profile_buttons">
