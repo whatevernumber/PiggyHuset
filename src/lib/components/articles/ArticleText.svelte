@@ -13,9 +13,15 @@
         evt.target.parentNode.classList.toggle('active');
     };
 
+    // force re-render when navigating a link inside article
     beforeNavigate(
         function({ to }) {
-            window.location.href = to.url.href;
+            if (to.url.href.includes('articles/')) {
+                window.location.replace(to.url.href);
+
+                // return back to list and not previous article
+                sessionStorage.setItem('referrer', '/articles');
+            }
         }
     );
 
@@ -130,11 +136,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        cursor: zoom-in;
     }
 
     .article-figure.captioned {
         background-color: aliceblue;
+    }
+
+    .article-figure:not(.captioned) {
+        cursor: zoom-in;
     }
 
     .article-figure.active {
