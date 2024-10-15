@@ -45,6 +45,11 @@
     .photo_main {
         object-fit: cover;
         object-position: center;
+        cursor: grab;
+    }
+
+    .photo_main:active {
+        cursor: grabbing;
     }
 
     @media (min-width: 1001px) {
