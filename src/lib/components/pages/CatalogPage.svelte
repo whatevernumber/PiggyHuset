@@ -355,18 +355,57 @@
             {#if tag}
                 <div class="tag_search">
                     <p>Поиск по тегу <span class="tag">#{tag}</span></p>
-                    <span class="reset_tag" on:click={resetTag} role="button">Сбросить</span>
+                    <div>
+                        <span class="reset_tag" on:click={resetTag} role="button" tabindex="0">Сбросить</span>
+                    </div>
                 </div>
             {/if}
 
             <CardList>
-                {#each data_array as article (article.id)}
-                    {#key data_array}
-                    <li class:filtered={article.hidden}>
-                        <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc tagAction={fetchArticlesByTag} />
-                    </li>
-                    {/key}
-                {/each}
+                {#if !is_article && is_homeless}
+                    {#each data_array as article (article.id)}
+                        {#key data_array}
+                            {#if article.status_id !== 5 && article.status_id !== 6}
+                            <li class:filtered={article.hidden}>
+                                <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc tagAction={fetchArticlesByTag} />
+                            </li>
+                            {/if}
+                        {/key}
+                    {/each}
+                        {#if data_array.find((el) => el.status_id === 5)}
+                    <h3>В резерве</h3>
+                        {/if}
+                    {#each data_array as article (article.id)}
+                        {#key data_array}
+                            {#if article.status_id === 5}
+                                <li class:filtered={article.hidden}>
+                                    <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc tagAction={fetchArticlesByTag} />
+                                </li>
+                            {/if}
+                        {/key}
+                    {/each}
+                    {#if data_array.find((el) => el.status_id === 6)}
+                        <h3>На карантине</h3>
+                    {/if}
+                    {#each data_array as article (article.id)}
+                        {#key data_array}
+                            {#if article.status_id === 6}
+                                <li class:filtered={article.hidden}>
+                                    <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc tagAction={fetchArticlesByTag} />
+                                </li>
+                            {/if}
+                        {/key}
+                    {/each}
+                {:else}
+                    {#each data_array as article (article.id)}
+                        {#key data_array}
+                            <li class:filtered={article.hidden}>
+                                <Card {article} {type} {category} {button_text} {admin} delete_handler={show_delete} bind:id={action_id} bind:desc tagAction={fetchArticlesByTag} />
+                            </li>
+                        {/key}
+                    {/each}
+                {/if}
+
                 {#if onload}
                     <div class="loader_wrapper">
                         <Loader />
