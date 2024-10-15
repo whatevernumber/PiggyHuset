@@ -2,6 +2,7 @@
 	import {onMount} from "svelte";
     import {_REMOTE_SERVER} from "$env/static/public";
     import {check_link_external, wrap_element} from "$lib/components/utils/func.js";
+    import { beforeNavigate } from '$app/navigation';
 
 	export let text;
     export let type = 'article';
@@ -11,6 +12,12 @@
     const zoom_image = function (evt) {
         evt.target.parentNode.classList.toggle('active');
     };
+
+    beforeNavigate(
+        function({ to }) {
+            window.location.href = to.url.href;
+        }
+    );
 
 	onMount(() => {
 		const article = document.querySelector('.article_text');
@@ -50,7 +57,7 @@
                 img.addEventListener('click', zoom_image);
             }
         }
-	})
+    });
 </script>
 
 <svelte:window bind:innerWidth={window_width} />
