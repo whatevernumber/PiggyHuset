@@ -52,7 +52,7 @@
     const wysiwyg = scheme.fields.filter(field => field.type === 'wysiwyg');
     const fields = scheme.fields.filter(field => !textarea.includes(field) && !wysiwyg.includes(field));
 
-    const MAX_FILE_SIZE = 8e5;
+    const MAX_FILE_SIZE = 8e5; // 800kb
 
     const top_fields = fields.slice(0, 2);
     const bottom_fields = fields.filter(field => !top_fields.includes(field));
