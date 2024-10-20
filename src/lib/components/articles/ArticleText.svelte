@@ -2,6 +2,7 @@
 	import {onMount} from "svelte";
     import {_REMOTE_SERVER} from "$env/static/public";
     import {check_link_external, wrap_element} from "$lib/components/utils/func.js";
+    import { beforeNavigate } from '$app/navigation';
 
 	export let text;
     export let type = 'article';
@@ -11,6 +12,18 @@
     const zoom_image = function (evt) {
         evt.target.parentNode.classList.toggle('active');
     };
+
+    // force re-render when navigating a link inside article
+    beforeNavigate(
+        function({ to }) {
+            if (to.url.href.includes('articles/')) {
+                window.location.replace(to.url.href);
+
+                // return back to list and not previous article
+                sessionStorage.setItem('referrer', '/articles');
+            }
+        }
+    );
 
 	onMount(() => {
 		const article = document.querySelector('.article_text');
@@ -50,7 +63,7 @@
                 img.addEventListener('click', zoom_image);
             }
         }
-	})
+    });
 </script>
 
 <svelte:window bind:innerWidth={window_width} />
@@ -123,11 +136,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        cursor: zoom-in;
     }
 
     .article-figure.captioned {
         background-color: aliceblue;
+    }
+
+    .article-figure:not(.captioned) {
+        cursor: zoom-in;
     }
 
     .article-figure.active {
