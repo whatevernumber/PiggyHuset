@@ -1,6 +1,5 @@
 <script>
 	import Article from '$lib/components/articles/Article.svelte';
-	import PhotoList from '$lib/components/photo-list/PhotoList.svelte';
 	import ModalOkay from '$lib/components/misc/modal/ModalOkay.svelte';
 	import { showModal, removeData, closeModal, redirect } from '$lib/components/utils/func.js';
 	import CardMainContent from '$lib/components/cards/CardMainContent.svelte';
@@ -78,7 +77,9 @@
 </svelte:head>
 
 <Article class_name="article_news" {date} text="{text}" type="news">
-
+	{#if news.main_photo}
+		<PhotoCard type="article" pic={news.main_photo} />
+	{/if}
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
