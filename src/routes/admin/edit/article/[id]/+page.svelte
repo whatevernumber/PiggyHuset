@@ -51,7 +51,7 @@
 </svelte:head>
 
 {#if type === 1}
-<NewArticleForm {title} {method} {endpoint} is_editing />
+<NewArticleForm {title} {method} {endpoint} {article} is_editing />
 {:else}
-<NewPostForm {title} {method} {endpoint} is_editing />
+<NewPostForm {title} {method} {endpoint} {article} is_editing />
 {/if}

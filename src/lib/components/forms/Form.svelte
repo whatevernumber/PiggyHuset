@@ -25,7 +25,6 @@
     let photos = [];
 
     pig ? photos = pig.photos.map(({ image }) => image) : null;
-    article ? photos = article.photos.map(({ image }) => image) : null;
 
     // Уже имеющиеся в БД фотографии для отображения и отправки в скрытом поле
     $: old_photos = JSON.stringify(photos);
@@ -260,7 +259,7 @@
             {/if}
             <fieldset class="label-group file-fieldset">
             {#if scheme.files.file_input}
-                <FileInput class_name="form-input-field" name="{scheme.files.multiple ? 'files[]' : 'files'}" multiple={scheme.files.multiple} onchange="{preview}" />
+                <FileInput class_name="form-input-field" name="files[]" multiple={scheme.files.multiple} onchange="{preview}" />
             {/if}
                 <div class="form-item button">
                     <SubmitButton on_click="{ sendForm }" />
@@ -289,6 +288,9 @@
         {/if}
         {#if product && product.main_photo && !image_upload_preview.length}
             <PhotoCard pic={product.main_photo} type="food" width="80px" height="80px" />
+        {/if}
+        {#if article && article.main_photo && !image_upload_preview.length}
+            <PhotoCard pic={article.main_photo} type="article_old_cover" width="80px" height="80px" />
         {/if}
     </section>
     <slot />

@@ -2,6 +2,7 @@
     import Form from "$lib/components/forms/Form.svelte";
     import TextEditorInstructions from "$lib/components/misc/form-elements/TextEditorInstructions.svelte";
 
+	export let article;
     export let title;
 	export let method;
 	export let endpoint = 'articles/add';
@@ -37,14 +38,14 @@
 				label: 'Теги',
 				name: 'hashtags',
 				placeholder: 'Укажите теги через пробел',
-			}
+			},
         ],
         files: {
-            file_input: false,
+            file_input: true,
 			multiple: false,
         }
     };
 </script>
 
-<Form {scheme} {modal_message} {method} {is_editing} {old_photos} redirect_location="articles" />
+<Form {scheme} {modal_message} {method} {is_editing} {old_photos} {article} redirect_location="articles" />
 <TextEditorInstructions />

@@ -34,7 +34,7 @@
             },
         ],
         files: {
-            file_input: false,
+            file_input: true,
             multiple: false
         }
     }
