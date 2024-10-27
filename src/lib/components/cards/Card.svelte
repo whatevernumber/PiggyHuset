@@ -72,7 +72,7 @@
     let innerHtml;
 
     // отображать ли содержимое как разметку из Quill или как текст
-    if (text && text.includes('<p>'))
+    if (text && text.includes('<'))
         innerHtml = text;
     else
         article.description = text;
@@ -110,7 +110,7 @@
 
     // подстановка [обрезанной] разметки из Quill в текст карточки
     onMount(() => {
-        if (innerHtml) card.innerHTML = innerHtml;
+        if (innerHtml) card.innerHTML = innerHtml.slice(0, 297) + '...';
     });
 
 </script>
