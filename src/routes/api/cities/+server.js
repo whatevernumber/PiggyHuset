@@ -1,9 +1,11 @@
 import {REMOTE_SERVER} from "$env/static/private";
 import { json, error } from '@sveltejs/kit';
 
-export async function GET() {
+export async function GET({url}) {
 
-	const res = await fetch(`${REMOTE_SERVER}/cities`, {
+	const active = url.searchParams.get('active');
+
+	const res = await fetch(`${REMOTE_SERVER}/cities` + (active ? '/active' : ''), {
 		headers: {
 			accept: 'application/json'
 		},
