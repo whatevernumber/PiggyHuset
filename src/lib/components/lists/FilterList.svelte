@@ -2,14 +2,14 @@
     import {onMount} from "svelte";
 
     export let filter_handler;
-    export let active_only = false; // только кураторы с подопечными
+    export let active_only = false; // только города и кураторы с подопечными
 
     let overseers = [];
     let cities = [];
     let current_sex = null;
 
     onMount(async () => {
-        const city_list = await fetch('/api/cities');
+        const city_list = await fetch('/api/cities' + (active_only ? '?active=1' : ''));
 
         if (city_list.ok) {
             cities = await city_list.json();
