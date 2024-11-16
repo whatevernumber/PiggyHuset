@@ -107,6 +107,11 @@
         margin: 0.35em 0;
     }
 
+    .article_news .article_text p {
+        max-width: 400px;
+        justify-self: center;
+    }
+
     .article_text p:has(figure) {
         max-width: 85%;
         place-self: center;
