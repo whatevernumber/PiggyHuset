@@ -53,7 +53,8 @@
         row-gap: 10px;
         order: 0;
         align-self: flex-start;
-		box-shadow: 1px 1px 10px 2px lightblue;
+        background: #FFFFFF;
+		/*box-shadow: 1px 1px 10px 2px lightblue;*/
         transform-style: preserve-3d;
     }
 
