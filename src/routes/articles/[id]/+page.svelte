@@ -7,7 +7,6 @@
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 
 	export let data;
 
@@ -81,9 +80,6 @@
 <svelte:window bind:innerWidth={window_width} />
 
 <Article date="{article.datetime}" {text}>
-	{#if article.main_photo}
-		<PhotoCard type="article" pic={article.main_photo} />
-	{/if}
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />

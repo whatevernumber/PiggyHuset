@@ -4,7 +4,6 @@
 	import { showModal, removeData, closeModal, redirect } from '$lib/components/utils/func.js';
 	import CardMainContent from '$lib/components/cards/CardMainContent.svelte';
 	import SmolButton from '$lib/components/misc/button/SmolButton.svelte';
-	import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
 	import Overlay from '$lib/components/misc/overlay/Overlay.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -77,9 +76,6 @@
 </svelte:head>
 
 <Article class_name="article_news" {date} text="{text}" type="news">
-	{#if news.main_photo}
-		<PhotoCard type="article" pic={news.main_photo} />
-	{/if}
 	{#if admin}
 		<div class="profile_buttons">
 			<SmolButton class_name="super-smol-button" title="Изменить" click_handler={redirect_to_edit} />
