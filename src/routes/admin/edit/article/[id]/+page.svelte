@@ -17,7 +17,6 @@
 		let article_title = document.querySelector("input[name='title']");
 		let article_tags = document.querySelector("input[name='hashtags']");
 
-
 		if (article?.tags) {
 			article_tags.value = article.tags.map((el) => el.tag_value).join(' ');
 		}
