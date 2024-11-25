@@ -9,7 +9,7 @@
 	};
 </script>
 
-<div class="cookies_block">
+<div class="message_block">
 	<img src="/img/cookies.png" alt="Свинка с печенькой" class="image" width="100" height="100">
 	<div>
 		<h3 class="header">У нас свои печеньки!</h3>
@@ -20,7 +20,7 @@
 </div>
 
 <style>
-	.cookies_block {
+	.message_block {
         display: flex;
         min-width: 25vw;
         max-width: 30vw;
@@ -45,7 +45,7 @@
         z-index: 10;
 	}
 
-    .cookies_block:hover {
+    .message_block:hover {
         opacity: 1;
         background-color: #FFFFFF;
 		box-shadow: 1px 1px 15px #adadad;
@@ -69,7 +69,7 @@
 	}
 
     @media (max-width: 1001px) {
-		.cookies_block {
+		.message_block {
             bottom: 5px;
             max-width: 95vw;
 			padding: 5px;
