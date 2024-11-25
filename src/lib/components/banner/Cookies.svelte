@@ -9,18 +9,18 @@
 	};
 </script>
 
-<div class="cookies">
-	<img src="/img/cookies.png" alt="Свинка с печенькой" class="cookies-image" width="100" height="100">
+<div class="cookies_block">
+	<img src="/img/cookies.png" alt="Свинка с печенькой" class="image" width="100" height="100">
 	<div>
-		<h3 class="cookies-header">У нас свои печеньки!</h3>
-		<p class="cookies-text">Мы тоже используем cookies.</p>
-		<p class="cookies-text">Они помогают нам анализировать работу сайта и улучшать ваш опыт.</p>
+		<h3 class="header">У нас свои печеньки!</h3>
+		<p class="text">Мы тоже используем cookies.</p>
+		<p class="text">Они помогают нам анализировать работу сайта и улучшать ваш опыт.</p>
 	</div>
-	<button class="cookies-close-button" on:click={hideCookies}></button>
+	<button class="close-button" on:click={hideCookies}></button>
 </div>
 
 <style>
-	.cookies {
+	.cookies_block {
         display: flex;
         min-width: 25vw;
         max-width: 30vw;
@@ -45,14 +45,14 @@
         z-index: 10;
 	}
 
-	.cookies:hover {
+    .cookies_block:hover {
         opacity: 1;
         background-color: #FFFFFF;
 		box-shadow: 1px 1px 15px #adadad;
         transition-duration: 0.15s;
     }
 
-	.cookies-close-button {
+	.close-button {
         width: 40px;
 		height: 30px;
 		position: absolute;
@@ -63,13 +63,13 @@
 		cursor: pointer;
 	}
 
-	.cookies-close-button:hover {
+	.close-button:hover {
 		background-image: url("/img/svg/ok.svg");
         /*border: 1px solid #e1edce;*/
 	}
 
     @media (max-width: 1001px) {
-		.cookies {
+		.cookies_block {
             bottom: 5px;
             max-width: 95vw;
 			padding: 5px;
