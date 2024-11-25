@@ -4,7 +4,7 @@
 	const hideCookies = function() {
 		if (browser) {
 			localStorage.setItem('hide-cookies', '1');
-			document.querySelector('.cookies').remove();
+			document.querySelector('.message_block').remove();
 		}
 	};
 </script>
