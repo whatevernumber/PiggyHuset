@@ -43,7 +43,7 @@
 
     /* Переопределяет slider-овские настройки для главного слайда */
     .photo_main {
-        object-fit: cover;
+        object-fit: contain;
         object-position: center;
         cursor: grab;
     }
@@ -63,10 +63,6 @@
         .photo-wrapper {
             height: 300px;
             border: none;
-        }
-
-        .photo_main {
-            object-fit: contain;
         }
     }
 </style>
