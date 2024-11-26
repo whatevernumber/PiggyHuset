@@ -63,6 +63,12 @@
 		thumb_options.fixedWidth = 250;
 	}
 
+	$: if (window_width) {
+		if (slider && splide) {
+			splide.sync(slider.splide);
+		}
+	}
+
 </script>
 
 <svelte:window bind:innerWidth={window_width} />
