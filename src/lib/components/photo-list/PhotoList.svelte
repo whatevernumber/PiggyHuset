@@ -63,50 +63,58 @@
 		thumb_options.fixedWidth = 250;
 	}
 
+	$: if (window_width) {
+		if (slider && splide) {
+			splide.sync(slider.splide);
+		}
+	}
+
 </script>
 
 <svelte:window bind:innerWidth={window_width} />
 
-<div class="splide-wrapper" transition:fade>
-	<Splide id="main-carousel" options="{main_options}" bind:this={splide}>
-		{#if (first_slide)}
-			<SplideSlide>
-				<PhotoView src="{first_slide}" no_border no_shadow />
-			</SplideSlide>
-		{/if}
-		{#each photos as item}
-			<SplideSlide>
-				{#if linked}
-				<LinkWithReferrer href="/looking-for-home/{item.id}">
-					<PhotoView src={temp_address + item.image} {no_border} {linked} />
-				</LinkWithReferrer>
-				{:else}
-				<PhotoView src={temp_address + item.image} {no_border} {linked} />
-				{/if}
-			</SplideSlide>
-		{/each}
-		{#if (last_slide)}
-			<SplideSlide>
-				<PhotoView src="{last_slide}" no_border no_shadow />
-			</SplideSlide>
-		{/if}
-	</Splide>
-
-	<Splide id="thumb-splide" options="{thumb_options}" bind:this={slider}>
+{#key window_width}
+	<div class="splide-wrapper" transition:fade>
+		<Splide id="main-carousel" options="{main_options}" bind:this={splide}>
 			{#if (first_slide)}
 				<SplideSlide>
-					<img src="{first_slide}" width="200" height="200">
+					<PhotoView src="{first_slide}" no_border no_shadow />
 				</SplideSlide>
 			{/if}
-		{#each photos as item}
-			<SplideSlide>
-				<PhotoCard pic={item.image} src={temp_address + item.image} />
-			</SplideSlide>
-		{/each}
-		{#if (last_slide)}
-			<SplideSlide>
-				<img src="{last_slide}" width="200" height="200" />
-			</SplideSlide>
-		{/if}
-	</Splide>
-</div>
+			{#each photos as item}
+				<SplideSlide>
+					{#if linked}
+					<LinkWithReferrer href="/looking-for-home/{item.id}">
+						<PhotoView src={temp_address + item.image} {no_border} {linked} />
+					</LinkWithReferrer>
+					{:else}
+					<PhotoView src={temp_address + item.image} {no_border} {linked} />
+					{/if}
+				</SplideSlide>
+			{/each}
+			{#if (last_slide)}
+				<SplideSlide>
+					<PhotoView src="{last_slide}" no_border no_shadow />
+				</SplideSlide>
+			{/if}
+		</Splide>
+
+		<Splide id="thumb-splide" options="{thumb_options}" bind:this={slider}>
+				{#if (first_slide)}
+					<SplideSlide>
+						<img src="{first_slide}" width="200" height="200" alt="Заглавный слайд">
+					</SplideSlide>
+				{/if}
+			{#each photos as item}
+				<SplideSlide>
+					<PhotoCard pic={item.image} src={temp_address + item.image} />
+				</SplideSlide>
+			{/each}
+			{#if (last_slide)}
+				<SplideSlide>
+					<img src="{last_slide}" width="200" height="200" alt="Слайд" />
+				</SplideSlide>
+			{/if}
+		</Splide>
+	</div>
+{/key}
