@@ -39,6 +39,14 @@
 				name: 'hashtags',
 				placeholder: 'Укажите теги через пробел',
 			},
+			{
+				label: 'Meta-title',
+				name: 'meta_title',
+			},
+			{
+				label: 'Meta-desc',
+				name: 'meta_description',
+			},
         ],
         files: {
             file_input: true,

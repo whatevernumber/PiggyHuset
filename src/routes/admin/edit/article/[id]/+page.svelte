@@ -17,11 +17,16 @@
 		let article_title = document.querySelector("input[name='title']");
 		let article_tags = document.querySelector("input[name='hashtags']");
 
+		let article_meta_title = document.querySelector("input[name='meta_title']");
+		let article_meta_desc = document.querySelector("input[name='meta_description']");
+
 		if (article?.tags) {
 			article_tags.value = article.tags.map((el) => el.tag_value).join(' ');
 		}
 
 		article_title.value = article.title;
+		article_meta_title.value = article.meta_title;
+		article_meta_desc.value = article.meta_description;
 
 			if (type === 1) {
 				let article_author = document.querySelector("input[name='author']");

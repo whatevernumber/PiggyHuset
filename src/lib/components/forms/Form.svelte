@@ -248,7 +248,7 @@
                             </label>
                         </div>
                     {:else}
-                <div class="form-item">
+                <div class="form-item {article ? 'article-bottom' : ''}">
                     <label class="form-label" for="{field.name}">{field.label}</label>
                     <input class="form-input-field" type="{field.type ?? 'text'}" id="{field.name}" name="{field.name}" {required} placeholder="{field.placeholder || (field.required ? ' ' : '(необязательно)')}">
                     <span class="input-error-label"></span>
@@ -421,6 +421,10 @@
 
     .form-input-field {
         width: 75%;
+    }
+
+    .article-bottom .form-label {
+        flex-basis: 100px;
     }
 
     .select_group {
