@@ -70,11 +70,14 @@
 	const redirect_to_list = (tag) => {
 		goto('/articles?tag=' + tag);
 	}
+
+	const base_meta_title = header + ' - Статьи от Домик для бездомных поросят';
+	const base_meta_description = header + '. Всё, что вы хотели знать о морских свинках, можно узнать в нашей статье';
 </script>
 
 <svelte:head>
-	<meta name="description" content={header + '. Всё, что вы хотели знать о морских свинках, можно узнать в нашей статье'} />
-	<title>{header} - Статьи от Домик для бездомных поросят</title>
+	<meta name="description" content={article.meta_description && article.meta_description.length ? article.meta_description : base_meta_description} />
+	<title>{article.meta_title && article.meta_title.length ? article.meta_title : base_meta_title}</title>
 </svelte:head>
 
 <svelte:window bind:innerWidth={window_width} />

@@ -68,11 +68,13 @@
 	const redirect_to_list = (tag) => {
 		goto('/news?tag=' + tag);
 	}
+
+	const base_meta_description = header + ' - Новости от Домик для бездомных поросят';
 </script>
 
 <svelte:head>
-	<meta name="description" content={header + ' - Новости от Домик для бездомных поросят'} />
-	<title>{header}</title>
+	<meta name="description" content={news.meta_description && news.meta_description.length ? news.meta_description : base_meta_description} />
+	<title>{news.meta_title && news.meta_title.length ? news.meta_title : header}</title>
 </svelte:head>
 
 <Article class_name="article_news" {date} text="{text}" type="news">
