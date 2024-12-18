@@ -187,11 +187,9 @@
             </div>
         {/if}
 
-        {#if !article?.is_banned}
-            <p class="card-description" bind:this={card}>
-                {article.description || ''}
-            </p>
-        {/if}
+        <p class="card-description" bind:this={card}>
+            {article.description || ''}
+        </p>
 
         {#if type === 'info'}
             {#if article.is_banned}
