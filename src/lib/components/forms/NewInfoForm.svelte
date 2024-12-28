@@ -7,9 +7,15 @@
 	export let is_editing;
 	export let endpoint = 'info/add';
 	export let product;
+	export let options;
 
 	let redirect_location = "info";
 	let modal_message = 'Запись опубликована';
+
+	let selected = product ?
+		product.categories.map((cat) => {
+			return cat.id.toString();
+		}) : null;
 
 	const scheme = {
 		title: title,
@@ -47,8 +53,11 @@
 			},
 			{
 				label: 'Тип',
-				name: 'food',
-				type: 'select',
+				name: 'types',
+				type: 'choices',
+				options: options,
+				selected: selected,
+				multiple: true,
 				required: true,
 			},
 			{
