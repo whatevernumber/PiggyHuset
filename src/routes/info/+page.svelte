@@ -143,7 +143,7 @@ async function remove () {
 				</CardList>
 			</div>
 		{:else}
-			<div class="result-wrapper">
+			<div class="result-wrapper not-found_wrapper">
 				<img src="/img/await-search.png" width="150px" height="150px" alt="Свинка ищет слово"/>
 				<p class="not-found">Мы искали, но ничего не нашли :c</p>
 			</div>
@@ -239,6 +239,10 @@ async function remove () {
             width: 90vw;
             margin-left: 5vw;
         }
+
+		.not-found_wrapper {
+			margin: auto;
+		}
     }
 
     .modal {
