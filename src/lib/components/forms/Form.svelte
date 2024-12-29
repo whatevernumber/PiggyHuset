@@ -12,6 +12,7 @@
     import {page} from "$app/stores";
     import SelectInput from '../misc/form-elements/SelectInput.svelte';
     import UploadedFiles from '$lib/components/misc/form-elements/UploadedFiles.svelte';
+    import ChoicesSelect from '$lib/components/misc/form-elements/ChoicesSelect.svelte';
 
 	export let scheme = {};
 	export let redirect_location;
@@ -235,7 +236,12 @@
             <fieldset class="bottom-fields {select_style} {redirect_location === 'info' ? 'full-width' : ''}">
                 {#each bottom_fields as field}
                     {@const required = field.required}
-                    {#if field.type === 'select'}
+                    {#if field.type === "choices"}
+                        <div class="select_wrapper form-item">
+                            <label class="form-label choices-label" for="{field.name}">{field.label}</label>
+                            <ChoicesSelect fieldName="{field.name}" options="{field.options}" multiple="{field.multiple}" selected="{field.selected}"/>
+                        </div>
+                    {:else if field.type === 'select'}
                         <div class="select_wrapper form-item">
                             <label class="form-label" for="{field.name}">{field.label}</label>
                             <SelectInput css_class="form-input-field" type={field.name} options="{field.options}" grouped="{field.grouped}" group_by="{field.group_column}" />
@@ -425,6 +431,10 @@
 
     .article-bottom .form-label {
         flex-basis: 100px;
+    }
+
+    .form-label.choices-label {
+        align-self: flex-start;
     }
 
     .select_group {
