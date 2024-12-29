@@ -1,5 +1,5 @@
 <script>
-	import "/choices.js/public/assets/styles/choices.css";
+	import "choices.js/public/assets/styles/choices.css";
 	import { onMount } from 'svelte';
 
 	export let fieldName = 'select';
