@@ -155,6 +155,7 @@
         cursor: pointer;
         list-style: none;
         order: 4;
+		flex-wrap: wrap;
     }
 
     .tag_list span {
