@@ -24,6 +24,7 @@ const config = {
 					'https://*.googletagmanager.com',
 					'https://mc.yandex.ru',
 					'https://*.userapi.com',
+					'https://*.vkuserphoto.ru',
 				],
 				'script-src': [
 					'strict-dynamic',
