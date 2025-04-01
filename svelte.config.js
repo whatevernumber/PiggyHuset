@@ -32,6 +32,7 @@ const config = {
 					'unsafe-eval',
 					'http://vk.com',
 					'https://vk.com',
+					'https://login.vk.com/',
 				],
 				'connect-src': [
 					'self',
@@ -49,7 +50,8 @@ const config = {
 				'frame-src': [
 					'blob: https://mc.yandex.ru/',
 					'blob: https://mc.yandex.md/',
-					'blob: https://vk.com/'
+					'blob: https://vk.com/',
+					'blob: https://login.vk.com/',
 				]
 			}
 		},
