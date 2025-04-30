@@ -68,7 +68,7 @@
 				pig_status = 'на радуге';
 			} else if (pig_status_id === 4) {
 				status_picture = 'taken'
-				pig_status = 'зажаблено';
+				pig_status = 'остаётся в Домике';
 			} else if (pig_status_id === 2) {
 				status_picture = 'graduated'
 				pig_status = 'в новом доме';

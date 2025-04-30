@@ -140,11 +140,11 @@
     }
 
     .status.taken {
-        width: 200px;
-        height: 200px;
-        right: -15%;
-        bottom: -15%;
-        background-image: url("/src/lib/img/taken.png");
+        width: 150px;
+        height: 150px;
+        right: -5%;
+        bottom: -5%;
+        background-image: url("/src/lib/img/taken_new.png");
     }
 
     .status.quarantine {
