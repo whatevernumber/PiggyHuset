@@ -25,6 +25,7 @@ const config = {
 					'https://mc.yandex.ru',
 					'https://*.userapi.com',
 					'https://*.vkuserphoto.ru',
+					'https://c.tile.openstreetmap.fr'
 				],
 				'script-src': [
 					'strict-dynamic',
