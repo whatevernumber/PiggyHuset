@@ -41,13 +41,6 @@
 			55.755878, 37.639778
 		];
 
-		navigator.geolocation.getCurrentPosition((data) => {
-			if (data.coords.latitude && data.coords.longitude) {
-				initialCords = [data.coords.latitude, data.coords.longitude];
-			}
-			// createMap(initialCords);
-		});
-
 		createMap(initialCords);
 	};
 
