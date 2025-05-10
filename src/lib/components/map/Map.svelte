@@ -89,7 +89,13 @@
 		let list = '';
 
 		clinic.vets.forEach((vet) => {
-			list += '<li class="vet">' + vet.name + '</li>';
+			let vetStatusClass = '';
+
+			if (vet.feedback_status_id) {
+				vetStatusClass += 'vet_feedback_status ' + pickColor(vet.feedback_status_id).class;
+			}
+
+			list += '<li class="vet">' + '<span class="' + vetStatusClass + '">' + vet.name + '</span>' + '</li>';
 		});
 
 		if (list.length) {
@@ -205,6 +211,21 @@
         background-size: cover;
     }
 
+    :global(.vet_feedback_status) {
+        position: relative;
+    }
+
+	:global(.vet_feedback_status:after) {
+		content: '';
+		position: absolute;
+		top: 5px;
+		right: -20px;
+        width: 10px;
+        height: 10px;
+        border: 1px solid #c7cfdc;
+        border-radius: 50%;
+	}
+
     :global(.status) {
         width: 25px;
         height: 25px;
@@ -212,23 +233,23 @@
         border-radius: 50%;
     }
 
-    :global(.status.white) {
+    :global(.status.white, .vet_feedback_status.white:after) {
         background-color: #f4f4f4;
     }
 
-    :global(.status.yellow) {
+    :global(.status.yellow, .vet_feedback_status.yellow:after) {
         background-color: #fff100;
     }
 
-    :global(.status.orange) {
+    :global(.status.orange, .vet_feedback_status.orange:after) {
         background-color: #f8792e;
     }
 
-    :global(.status.red) {
+    :global(.status.red, .vet_feedback_status.red:after) {
         background-color: #eb3443;
     }
 
-    :global(.status.green) {
+    :global(.status.green, .vet_feedback_status.green:after) {
         background-color: #37ce2e;
     }
 
