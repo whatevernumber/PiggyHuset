@@ -68,4 +68,10 @@
     .button .active:focus {
         border-color: #f6b5d3;
     }
+
+    @media (max-width: 1001px) {
+        .button {
+            border-radius: 15px;
+        }
+    }
 </style>

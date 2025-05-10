@@ -8,9 +8,9 @@
 </script>
 
 <a class="option-item-link" {href} target="{external ? '_blank' : ''}">
-    <li class="option-item" style="--background_url: {background_icon_url}">
+    <div class="option-item" style="--background_url: {background_icon_url}">
         {text}
-    </li>
+    </div>
 </a>
 
 <style>
