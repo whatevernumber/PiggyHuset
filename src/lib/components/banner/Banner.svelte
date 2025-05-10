@@ -9,19 +9,35 @@
         <img src='/img/big-svinik.png' width='54' height='54' class='mobile-banner-icon mobile-banner-icon-right' alt='Маленькая морская свинка'>
     </div>
     <ul class="option-list">
-        <ItemLink text="Ищут дом" href="/looking-for-home" icon="list-icon-light-blue.png" data-sveltekit-preload-data/>
-        <ItemLink href="/articles/1" text="Как взять у нас свинку"/>
-        <ItemLink text="Полезные статьи" href="/articles" icon="list-icon-grey.png" data-sveltekit-preload-data/>
-        <ItemLink text="Что едят свинки?" href="/info" icon="list_pig_info.jpg" data-sveltekit-preload-data/>
-        <ItemLink text="Новости" href="/news" icon="list-icon-light-brown.png" data-sveltekit-preload-data/>
-        <ItemLink text="Выпускники" href="/graduates" icon="list-icon-green.png" data-sveltekit-preload-data/>
+        <li class="option-item">
+            <ItemLink text="Ищут дом" href="/looking-for-home" icon="list-icon-light-blue.png"
+                      data-sveltekit-preload-data />
+        </li>
+        <li class="option-item">
+            <ItemLink href="/articles/1" text="Как взять у нас свинку" />
+        </li>
+        <li class="option-item">
+            <ItemLink text="Полезные статьи" href="/articles" icon="list-icon-grey.png" data-sveltekit-preload-data />
+        </li>
+        <li class="option-item">
+            <ItemLink text="Одобренные клиники" href="/map" icon="list-icon-map.jpg" data-sveltekit-preload-data />
+        </li>
+        <li class="option-item">
+            <ItemLink text="Что едят свинки?" href="/info" icon="list-icon-food.jpg" data-sveltekit-preload-data />
+        </li>
+        <li class="option-item">
+            <ItemLink text="Новости" href="/news" icon="list-icon-light-brown.png" data-sveltekit-preload-data />
+        </li>
+        <li class="option-item">
+            <ItemLink text="Выпускники" href="/graduates" icon="list-icon-green.png" data-sveltekit-preload-data />
+        </li>
     </ul>
 </div>
 
 <style>
     .promo-container {
         width: 100%;
-        height: 600px;
+        height: 625px;
         position: relative;
         display: flex;
         background: #F9EEE1 url('/src/lib/img/svg/banner_background.svg') no-repeat;
@@ -35,7 +51,7 @@
         align-self: center;
         display: flex;
         flex-direction: column;
-        row-gap: 30px;
+        row-gap: 25px;
     }
 
     .mobile-icon_wrapper {
@@ -45,7 +61,7 @@
     @media (max-width: 1001px) {
         .promo-container {
             flex-direction: column;
-            height: 650px;
+            height: 710px;
             background: #F9EEE1 none no-repeat;
             background-size: contain;
         }
@@ -53,6 +69,11 @@
         .option-list {
             padding-top: 5px;
             margin: 0 auto;
+        }
+
+        .option-item {
+            border-radius: 15px;
+            overflow: clip;
         }
 
         .mobile-icon_wrapper {
