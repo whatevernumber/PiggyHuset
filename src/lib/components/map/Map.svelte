@@ -126,22 +126,25 @@
 <style>
     #map {
         height: 500px;
+		border: 4px solid white;
     }
 
     .legend_list {
-        padding: 0;
+        padding: 25px;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-between;
         column-gap: 15px;
-        row-gap: 10px;
+        row-gap: 15px;
         list-style: none;
+        background: #FFFFFF;
+		font-size: medium;
     }
 
     .legend_list_element {
         display: flex;
         align-items: center;
-        column-gap: 5px;
+        column-gap: 15px;
     }
 
     :global(.normal_icon svg) {
@@ -260,7 +263,14 @@
 
         .legend_list {
             justify-content: left;
+			flex-direction: column;
         }
+	}
+
+	@media (min-width: 712px) and (max-width: 1320px) {
+		.legend_list {
+			justify-content: center;
+		}
 	}
 
 </style>

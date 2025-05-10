@@ -16,8 +16,8 @@
 </script>
 
 <svelte:head>
-	<meta name="description" content="Здесь вы можете узнать, в какие клиники можно обратиться с морскими свинками" />
-	<title>Карта врачей и клиник для морских свинок</title>
+	<meta name="description" content="Рейтинг ветеринарных клиник для грызунов. Есть ли ратолог в моем городе? Куда можно обратиться с морской свинкой?" />
+	<title>Карта клиник и ратологов по городам</title>
 </svelte:head>
 
 <div class="map_wrapper">
@@ -30,12 +30,13 @@
 <style>
 	.map_wrapper {
 		margin-top: auto;
-		padding: 0 50px;
+		padding: 0 5vw;
 	}
 
 	h1 {
 		text-transform: uppercase;
 		padding: 5px;
 		text-align: center;
+		margin: 0 0 25px;
 	}
 </style>
