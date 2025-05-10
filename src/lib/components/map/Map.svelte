@@ -48,7 +48,7 @@
 		let map = L.map('map', { attributionControl: false }).setView(initialCords, 13);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-			maxZoom: 20,
+			maxZoom: 25,
 			attribution: ''
 		}).addTo(map);
 
