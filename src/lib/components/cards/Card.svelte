@@ -18,6 +18,7 @@
     import PhotoCard from '$lib/components/photo-card/PhotoCard.svelte';
     import {onMount} from "svelte";
     import LinkWithReferrer from "$lib/components/misc/links/LinkWithReferrer.svelte";
+    import Checkmark from '$lib/components/misc/Checkmark.svelte';
 
     export let admin;
     export let article = {}; // Данные для показа в карточке
@@ -121,7 +122,7 @@
     {#if type === 'info'}
         <PhotoCard pic={image} type="food" add_class="product {article.is_banned ? 'banned' : ''}" width="300" height="300"
                    alt='Изображение продукта' />
-        {:else}
+    {:else}
         <LinkWithReferrer {href} css_class="card-container">
             <PhotoCard pic={image} {type} {status} width="300" height="300"
                        alt={type === 'pig' || type === 'ready' ? 'Фотография свинки' : 'Обложка поста'} />
@@ -131,7 +132,12 @@
     <div class="wrapper {article?.is_banned ? 'banned_wrapper' : ''}">
         <div class="header_wrapper">
             {#if type === 'info'}
-                <h3>{article.title}</h3>
+                <h3>
+                    {article.title}
+                    {#if !article?.is_banned}
+                        <Checkmark color="#88aa4d" />
+                    {/if}
+                </h3>
             {:else }
             <LinkWithReferrer {href}>
                 <h3 class="card-title">{(article.name ?? article.title) + (article?.status_id === 5 ? ' в резерве' : '')}</h3>
@@ -234,6 +240,11 @@
         box-shadow: 3px 8px 8px 2px rgba(0, 0, 0, 0.1);
     }
 
+    article:has(.banned_wrapper) {
+        background-color: rgba(162, 10, 51, 0.92);
+        color: white;
+    }
+
     @media (min-width: 1001px) and (max-width: 1441px) {
         article {
             width: 60vw;
@@ -294,6 +305,15 @@
 
     .restricted {
         color: rgba(162, 10, 51, 0.92);
+    }
+
+    article:has(.banned_wrapper) .restricted {
+        display: none;
+    }
+
+    article:has(.banned_wrapper) .card-description {
+        color: white;
+        order: 2;
     }
 
     .note {
@@ -374,10 +394,9 @@
     }
 
     .banned_text {
-        margin-top: 12%;
+        order: 1;
         align-self: center;
         font-size: 24px;
-        color: #EF8653;
     }
 
     @media (max-width: 1001px) {

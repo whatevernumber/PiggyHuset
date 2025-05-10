@@ -97,7 +97,7 @@
     }
 
     .product.banned {
-        outline: red solid 4px;
+        outline: white solid 4px;
     }
 
     :global(.uploaded_files .photo-card) {

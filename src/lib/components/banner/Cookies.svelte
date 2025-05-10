@@ -14,7 +14,7 @@
 	<div>
 		<h3 class="header">У нас свои печеньки!</h3>
 		<p class="text">Мы тоже используем cookies.</p>
-		<p class="text">Они помогают нам анализировать работу сайта и улучшать ваш опыт.</p>
+		<p class="text">Они помогают нам анализировать работу сайта и делать его более полезным.</p>
 	</div>
 	<button class="close-button" on:click={hideCookies}></button>
 </div>
