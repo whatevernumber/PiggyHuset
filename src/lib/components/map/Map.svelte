@@ -37,23 +37,23 @@
 	});
 
 	const initialize = () => {
-		let initialCords = [
+		let initialCoords = [
 			55.755878, 37.639778
 		];
 
 		let savedCoords = JSON.parse(localStorage.getItem('coords'));
 
 		if (savedCoords) {
-			initialCords = [
+			initialCoords = [
 				savedCoords.lat, savedCoords.lng
 			];
 		}
 
-		createMap(initialCords);
+		createMap(initialCoords);
 	};
 
-	const createMap = (initialCords) => {
-		let map = L.map('map', { attributionControl: false }).setView(initialCords, 13);
+	const createMap = (initialCoords) => {
+		let map = L.map('map', { attributionControl: false }).setView(initialCoords, 13);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 			maxZoom: 25,
