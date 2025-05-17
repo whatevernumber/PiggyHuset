@@ -37,15 +37,23 @@
 	});
 
 	const initialize = () => {
-		let initialCords = [
+		let initialCoords = [
 			55.755878, 37.639778
 		];
 
-		createMap(initialCords);
+		let savedCoords = JSON.parse(localStorage.getItem('coords'));
+
+		if (savedCoords) {
+			initialCoords = [
+				savedCoords.lat, savedCoords.lng
+			];
+		}
+
+		createMap(initialCoords);
 	};
 
-	const createMap = (initialCords) => {
-		let map = L.map('map', { attributionControl: false }).setView(initialCords, 13);
+	const createMap = (initialCoords) => {
+		let map = L.map('map', { attributionControl: false }).setView(initialCoords, 13);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 			maxZoom: 25,
@@ -57,6 +65,11 @@
 				handleDetails(clinic, map);
 			});
 		}
+
+		map.on('move', () => {
+			let coords = map.getCenter();
+			localStorage.setItem('coords', JSON.stringify({ lat: coords.lat, lng: coords.lng }));
+		})
 	};
 
 	const handleDetails = (clinic, map) => {
