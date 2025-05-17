@@ -41,6 +41,15 @@
 			55.755878, 37.639778
 		];
 
+		let savedLat = localStorage.getItem('lat');
+		let savedLng = localStorage.getItem('lng');
+
+		if (savedLat && savedLng) {
+			initialCords = [
+				savedLat, savedLng
+			];
+		}
+
 		createMap(initialCords);
 	};
 
@@ -57,6 +66,12 @@
 				handleDetails(clinic, map);
 			});
 		}
+
+		map.on('move', () => {
+			let cords = map.getCenter();
+			localStorage.setItem('lat', cords.lat);
+			localStorage.setItem('lng', cords.lng);
+		})
 	};
 
 	const handleDetails = (clinic, map) => {
