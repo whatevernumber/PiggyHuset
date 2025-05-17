@@ -97,7 +97,7 @@
 
 	const buildDetails = (clinic, color) => {
 
-		let address = `<div class="clinic_wrapper"><div class="status ${color.class}"></div><div class="clinic_title"><p>${clinic.title}</p></div></div><p class="clinic_address">${clinic.address}</p>`;
+		let address = `<div class="clinic_wrapper"><div class="feedback_status ${color.class}"></div><div class="clinic_title"><p>${clinic.title}</p></div></div><p class="clinic_address">${clinic.address}</p>`;
 
 		let list = '';
 
@@ -126,7 +126,7 @@
 		<ul class="legend_list">
 			{#each Object.entries(statusColors) as [key, status]}
 				<li class="legend_list_element">
-					<div class="status {status.class}"></div>
+					<div class="feedback_status {status.class}"></div>
 					<div>
 						{status.type}
 					</div>
@@ -242,30 +242,30 @@
         border-radius: 50%;
 	}
 
-    :global(.status) {
+    :global(.feedback_status) {
         width: 25px;
         height: 25px;
         border: 1px solid #c7cfdc;
         border-radius: 50%;
     }
 
-    :global(.status.white, .vet_feedback_status.white:after) {
+    :global(.feedback_status.white, .vet_feedback_status.white:after) {
         background-color: #f4f4f4;
     }
 
-    :global(.status.yellow, .vet_feedback_status.yellow:after) {
+    :global(.feedback_status.yellow, .vet_feedback_status.yellow:after) {
         background-color: #fff100;
     }
 
-    :global(.status.orange, .vet_feedback_status.orange:after) {
+    :global(.feedback_status.orange, .vet_feedback_status.orange:after) {
         background-color: #f8792e;
     }
 
-    :global(.status.red, .vet_feedback_status.red:after) {
+    :global(.feedback_status.red, .vet_feedback_status.red:after) {
         background-color: #eb3443;
     }
 
-    :global(.status.green, .vet_feedback_status.green:after) {
+    :global(.feedback_status.green, .vet_feedback_status.green:after) {
         background-color: #37ce2e;
     }
 
@@ -285,5 +285,4 @@
 			justify-content: center;
 		}
 	}
-
 </style>
