@@ -41,12 +41,11 @@
 			55.755878, 37.639778
 		];
 
-		let savedLat = localStorage.getItem('lat');
-		let savedLng = localStorage.getItem('lng');
+		let savedCoords = JSON.parse(localStorage.getItem('coords'));
 
-		if (savedLat && savedLng) {
+		if (savedCoords) {
 			initialCords = [
-				savedLat, savedLng
+				savedCoords.lat, savedCoords.lng
 			];
 		}
 
@@ -68,9 +67,8 @@
 		}
 
 		map.on('move', () => {
-			let cords = map.getCenter();
-			localStorage.setItem('lat', cords.lat);
-			localStorage.setItem('lng', cords.lng);
+			let coords = map.getCenter();
+			localStorage.setItem('coords', JSON.stringify({ lat: coords.lat, lng: coords.lng }));
 		})
 	};
 
