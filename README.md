@@ -7,4 +7,4 @@
 ## Stack
 Svelte.js
 
-Разработан совмеместно [whatevernumber](https://github.com/whatevernumber) и [the_nepodarok](https://github.com/the-nepodarok)
+Разработан совместно [whatevernumber](https://github.com/whatevernumber) и [the_nepodarok](https://github.com/the-nepodarok)
