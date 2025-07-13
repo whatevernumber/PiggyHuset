@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -19,9 +19,7 @@ const config = {
 				'img-src': [
 					'self',
 					'blob: self',
-					'https://domik-svinok.ru/api/',
-					'https://*.google-analytics.com',
-					'https://*.googletagmanager.com',
+					'https://*.domik-svinok.ru/api/',
 					'https://mc.yandex.ru',
 					'https://*.userapi.com',
 					'https://*.vkuserphoto.ru',
@@ -30,7 +28,6 @@ const config = {
 				],
 				'script-src': [
 					'strict-dynamic',
-					'https://*.googletagmanager.com',
 					'unsafe-eval',
 					'http://vk.com',
 					'https://vk.com',
@@ -39,9 +36,6 @@ const config = {
 				'connect-src': [
 					'self',
 					'https://mc.yandex.ru',
-					'https://*.google-analytics.com',
-					'https://*.analytics.google.com',
-					'https://*.googletagmanager.com',
 					'https://domik-svinok.ru/api/',
 					'https://cdn.jsdelivr.net/npm/',
 					'self',
