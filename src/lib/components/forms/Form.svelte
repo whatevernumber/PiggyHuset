@@ -88,8 +88,7 @@
         // changes the quality of given files
         const file_input = document.querySelector('input[type="file"]');
 
-        if (file_input) {
-
+        if (file_input && file_input.files.length) {
             let new_container = new DataTransfer();
             for (const file of file_input.files) {
                 if (file.type.startsWith('image') && file.size > MAX_FILE_SIZE) {
